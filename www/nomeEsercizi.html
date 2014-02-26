@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.1.min.css" />
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="js/jquery.mobile-1.4.1.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	
+	<title>Ricerca Negozio</title>
+</head>
+<body>
+
+<!-- Start of page: #nomeEsercizi -->
+<div data-role="page" id="nomeEsercizi">
+
+	<div data-role="header">
+		<h1>Ricerca Negozio</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content" >
+		
+	<ul id="cerca_negozio" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Cerca..." data-filter-theme="a">
+	</ul>
+	
+	<script type="text/javascript" charset="utf-8">
+	
+	$( document ).on( "pageinit", "#nomeEsercizi", function() {
+	
+	document.addEventListener("backbutton", function(e){
+    
+		navigator.app.backHistory()
+		
+	}, false);
+	
+	//CARICA JSON CATEGORIE
+	var path = window.localStorage.getItem("pathSD");
+	var jsonPath = path + "/nomeEsercizi.js";
+	
+		$( "#cerca_negozio" ).on( "filterablebeforefilter", function ( e, data ) {
+			var $ul = $( this ),
+				$input = $( data.input ),
+				value = $input.val(),
+				html = "";
+			$ul.html( "" );
+			if ( value && value.length > 1 ) {
+				$ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
+				$ul.listview( "refresh" );
+				
+				var re = $input.val();
+				var matcher = new RegExp( "^" + re, "i" );
+				
+				$.getJSON(jsonPath, function( data ) {
+		
+				json_filter = $.grep(data, function(item){
+				return matcher.test(item.nomeEsercizio); 
+				}) 
+			
+				$.each( json_filter, function (index, info) {
+					 html += "<li><a href='#vetrinaEsercizio' class='esercizio' id='" + info.idEsercizio + "' data-transition='slide' >" + info.nomeEsercizio + "</a></li>";
+				});
+				
+				$ul.html( html );
+				$ul.listview( "refresh" );
+				$ul.trigger( "updatelayout");
+				
+				});
+			}
+		});
+	});
+	</script>
+		
+		
+	</div><!-- /content -->
+
+	<div data-role="footer" data-theme="a">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page nomeEsercizi -->
+
+</body>
+</html>

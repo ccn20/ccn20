@@ -1,0 +1,31 @@
+
+
+
+a{
+text-decoration:none;
+}
+
+/* MAPPA */
+
+#map {
+height: 200px;
+width: 100%;
+}
+
+/* NOME */
+
+#box-nomeEsercizio{
+margin: 10px 0 10px 0;
+background: #DDDDDD;
+padding: 10px 10px 5px 10px;
+min-height: 30px;
+}
+
+/* DESCRIZIONE */
+
+#box-descrizioneEsercizio{
+margin: 10px 0 0 0;
+background: #DDDDDD;
+padding: 10px 10px 5px 10px;
+min-height: 100px;
+}

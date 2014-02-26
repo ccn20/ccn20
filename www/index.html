@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+	<title>Page Title</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.1.min.css" />
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="js/jquery.mobile-1.4.1.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="facebook-js-sdk.js"></script>
+	<script type="text/javascript" src="cdv-plugin-fb-connect.js"></script>
+	<script type="text/javascript" src="js/function_checkConnection.js"></script>
+</head>
+<body>
+
+<!-- PAGE #index -->
+<div data-role="page" id="index">
+
+	<!-- /HEADER -->
+	<div data-role="header">
+		<h1>Index</h1>
+	</div>
+	<!-- /HEADER -->
+	
+	<!-- CONTENT -->
+	<div role="main" class="ui-content" >
+	
+	<script>   
+	$( "#index" ).on( "pagebeforeshow", function() {	
+	
+	document.addEventListener("backbutton", function(e){
+    
+		if($.mobile.activePage.is('#index')){
+        e.preventDefault();
+        return false;
+		}
+		else {
+        navigator.app.backHistory()
+		}
+	}, false);
+	
+	var lingua = window.localStorage.getItem("lingua");
+	
+	if (lingua == null) {
+	
+	//var connection = checkConnection();
+	
+		//if (connection != "No_network") {
+		document.location.href="#setup";
+		//}
+		//else {
+		//alert("devi essere connesso");
+		//}
+	}
+		
+	});
+	</script>
+	
+	<h1>INDEX</h1>
+	<ul data-role="listview">
+	<li><a href="categorie.html" rel="external">Ricerca per Categoria</a></li>
+	<li><a href="nomeEsercizi.html" rel="external">Ricerca per Nome</a></li>
+	<li><a href="brandEsercizi.html" rel="external">Ricerca per Brand</a></li>
+	<li><a href="vetrinaEsercizio_JSONinPAGINA.html" rel="external">Vetrina</a></li>
+	</ul>
+	
+	</div>
+	<!-- /CONTENT -->
+
+	<!-- FOOTER -->
+	<div data-role="footer" data-theme="a" data-position="fixed">
+		<h4>Page Footer</h4>
+	</div>
+	<!-- /FOOTER -->
+	
+
+</div><!-- /PAGE #index -->
+
+
+
+<!-- PAGE #setup -->
+<div data-role="page" id="setup">
+
+	<!-- /HEADER -->
+	<div data-role="header">
+		<h1>Setup</h1>
+	</div>
+	<!-- /HEADER -->
+	
+	<!-- CONTENT -->
+	<div role="main" class="ui-content" >
+	
+	<script>   
+	$( "#setup" ).on( "pagebeforeshow", function() {	
+	
+	var lingue = {
+    "italiano": {
+		"idLingua": "1",
+		"codiceLingua": "it",
+		"nomeLingua": "Italiano",
+        "Categorie": "Categorie",
+		"filtra": "filtra",
+		"indietro": "indietro",
+		"ordina": "ordina",
+		"salta": "salta"
+    },
+	"inglese": {
+		"idLingua": "2",
+		"codiceLingua": "en",
+        "nomeLingua": "English",
+		"Categorie": "Categories",
+		"filtra": "filter",
+		"indietro": "back",
+		"ordina": "sort",
+		"salta": "skip"
+		
+    },
+	"francese": {
+		"idLingua": "3",
+		"codiceLingua": "fr",
+        "nomeLingua": "Francaise",
+		"Categorie": "Categorìes",
+		"filtra": "filtre",
+		"indietro": "arriere",
+		"ordina": "sortre"
+		
+    }
+	};
+
+	//LISTA LINGUE
+	$("ul#listaLingue").html("");
+		
+	$.each(lingue, function(index, info) {
+	$("ul#listaLingue").append($("<li></li>",{"html":"<a href='#' class='lingua' id='" + info.idLingua + "' codiceLingua='"+info.codiceLingua+"' nomeLingua='"+index+"' data-transition='slide' >" + info.nomeLingua + "" }));
+	});
+	
+	$("ul#listaLingue").listview("refresh");
+	
+	}); //ON "pagebeforeshow"
+	
+	$(document).on("click", 'a.lingua', function(){
+	
+	var lingue = {
+    "italiano": {
+		"idLingua": "1",
+		"codiceLingua": "it",
+		"nomeLingua": "Italiano",
+        "Categorie": "Categorie",
+		"filtra": "filtra",
+		"indietro": "indietro",
+		"ordina": "ordina",
+		"salta": "salta"
+    },
+	"inglese": {
+		"idLingua": "2",
+		"codiceLingua": "en",
+        "nomeLingua": "English",
+		"Categorie": "Categories",
+		"filtra": "filter",
+		"indietro": "back",
+		"ordina": "sort",
+		"salta": "skip"
+		
+    },
+	"francese": {
+		"idLingua": "3",
+		"codiceLingua": "fr",
+        "nomeLingua": "Francaise",
+		"Categorie": "Categorìes",
+		"filtra": "filtre",
+		"indietro": "arriere",
+		"ordina": "sortre"
+		
+    }
+	};
+	
+	idLingua = $(this).attr('id');
+	lingua = $(this).attr('nomeLingua');
+	codLingua = $(this).attr('codiceLingua');
+	
+	window.localStorage.setItem("lingua", lingua);
+	window.localStorage.setItem("idLingua", idLingua);
+	window.localStorage.setItem("codLingua", codLingua);
+	
+	var urlCategorie = encodeURI("http://www.wificomo.com/ccn20/JSONcategorie.php?language="+codLingua+"");	
+	var fileNameCategorie = "categorie.js";
+		
+		var fileTransfer = new FileTransfer();
+			
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+			
+			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
+			
+				dirEntry.getFile(fileNameCategorie, {create: true, exclusive: false}, function(fileEntry) {
+										
+					var localPath = fileEntry.fullPath;
+
+					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
+							localPath = localPath.substring(7);
+					}
+
+					fileTransfer.download(
+						urlCategorie,
+						localPath,
+						function(entry) {
+						
+							console.log("download complete: " + entry.fullPath);
+							
+							//MEMORIZZA PATH
+								var directory = dirEntry.fullPath;
+								var indexPath = directory.lastIndexOf("/");
+								var pathSD = directory.substr(7, indexPath-7);
+								pathSD = pathSD+"/ccn";
+								window.localStorage.setItem('pathSD', pathSD);
+								
+								getSottocategorie();
+						},
+						function(error) {
+							console.log("download error source " + error.source);
+							console.log("download error target " + error.target);
+						},
+						false,
+						{
+							headers: {
+								"Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+							}
+						}
+				
+					); // end of fileTransfer.download
+				}); // end of dirEntry.getFile
+			
+			}); // fileSystem.root.getDirectory
+			
+		}); // end of window.requestFileSystem
+		
+		
+
+  
+	function getSottocategorie()
+	{
+		var codlingua = window.localStorage.getItem('codLingua');
+		var path = window.localStorage.getItem('pathSD');
+		var pathCategorie = path+"/categorie.js";
+		$.getJSON(pathCategorie, function( data ) {
+		$.each(data, function(index, info) {
+		
+		var urlSottocategorie = encodeURI("http://www.wificomo.com/ccn20/JSONsottocategorieNegozi.php?idCategoria="+info.idCategoria+"&language="+codLingua+"");	
+		var fileNameSottocategorie = info.jsonName+".js";
+		
+		var fileTransfer = new FileTransfer();
+			
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+			
+			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
+			
+				dirEntry.getFile(fileNameSottocategorie, {create: true, exclusive: false}, function(fileEntry) {
+										
+					var localPath = fileEntry.fullPath;
+
+					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
+							localPath = localPath.substring(7);
+					}
+
+					fileTransfer.download(
+						urlSottocategorie,
+						localPath,
+						function(entry) {
+						
+							console.log("download complete: " + entry.fullPath);
+							
+						},
+						function(error) {
+							console.log("download error source " + error.source);
+							console.log("download error target " + error.target);
+						},
+						false,
+						{
+							headers: {
+								"Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+							}
+						}
+				
+					); // end of fileTransfer.download
+				}); // end of dirEntry.getFile
+			
+			}); // fileSystem.root.getDirectory
+			
+		}); // end of window.requestFileSystem
+		
+		});
+	
+		});
+		
+		} //FUNCTION
+		
+	//JSON RICERCA PER NOME
+	var urlnomeEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONnomeEsercizi.php");	
+	var fileNamenomeEsercizi = "nomeEsercizi.js";
+		
+		var fileTransfer = new FileTransfer();
+			
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+			
+			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
+			
+				dirEntry.getFile(fileNamenomeEsercizi, {create: true, exclusive: false}, function(fileEntry) {
+										
+					var localPath = fileEntry.fullPath;
+
+					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
+							localPath = localPath.substring(7);
+					}
+
+					fileTransfer.download(
+						urlnomeEsercizi,
+						localPath,
+						function(entry) {
+							console.log("download complete: " + entry.fullPath);
+						},
+						function(error) {
+							console.log("download error source " + error.source);
+							console.log("download error target " + error.target);
+						},
+						false,
+						{
+							headers: {
+							"Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+							}
+						}
+				
+					); // end of fileTransfer.download
+				}); // end of dirEntry.getFile
+			
+			}); // fileSystem.root.getDirectory
+			
+		}); // end of window.requestFileSystem
+		
+		
+	//JSON RICERCA PER BRAND
+	var urlbrand = encodeURI("http://www.wificomo.com/ccn20/JSONbrand.php?language="+codLingua+"");
+	var fileNamebrand = "brand.js";
+		
+		var fileTransfer = new FileTransfer();
+			
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+			
+			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
+			
+				dirEntry.getFile(fileNamebrand, {create: true, exclusive: false}, function(fileEntry) {
+										
+					var localPath = fileEntry.fullPath;
+
+					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
+							localPath = localPath.substring(7);
+					}
+
+					fileTransfer.download(
+						urlbrand,
+						localPath,
+						function(entry) {
+							console.log("download complete: " + entry.fullPath);
+						},
+						function(error) {
+							console.log("download error source " + error.source);
+							console.log("download error target " + error.target);
+						},
+						false,
+						{
+							headers: {
+							"Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+							}
+						}
+				
+					); // end of fileTransfer.download
+				}); // end of dirEntry.getFile
+			
+			}); // fileSystem.root.getDirectory
+			
+		}); // end of window.requestFileSystem
+		
+	//JSON BRAND ESERCIZI
+	var urlbrandEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONbrandEsercizi.php");
+	var fileNamebrandEsercizi = "brandEsercizi.js";
+		
+		var fileTransfer = new FileTransfer();
+			
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+			
+			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
+			
+				dirEntry.getFile(fileNamebrandEsercizi, {create: true, exclusive: false}, function(fileEntry) {
+										
+					var localPath = fileEntry.fullPath;
+
+					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
+							localPath = localPath.substring(7);
+					}
+
+					fileTransfer.download(
+						urlbrandEsercizi,
+						localPath,
+						function(entry) {
+							console.log("download complete: " + entry.fullPath);
+						},
+						function(error) {
+							console.log("download error source " + error.source);
+							console.log("download error target " + error.target);
+						},
+						false,
+						{
+							headers: {
+							"Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+							}
+						}
+				
+					); // end of fileTransfer.download
+				}); // end of dirEntry.getFile
+			
+			}); // fileSystem.root.getDirectory
+			
+		}); // end of window.requestFileSystem
+		
+		//JSON VETRINE
+		var conteggioEsercizi = 0;
+		
+		$.ajax({
+		url: "http://www.wificomo.com/ccn20/JSONidEsercizi.php",
+		dataType: 'json',
+		async: false,
+		success: function(data) {
+		
+		var totaleEsercizi = data.length;
+		
+		$.each(data, function(index, info) {
+		
+		var urlEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONvetrinaEsercizio.php?language="+codLingua+"&idEsercizio="+info.idEsercizio+"");	
+		var fileNameEsercizi = info.idEsercizio+".js";
+		
+		var fileTransfer = new FileTransfer();
+			
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+			
+			fileSystem.root.getDirectory("ccn/esercizi", {create: true, exclusive: false}, function(dirEntry) {
+			
+				dirEntry.getFile(fileNameEsercizi, {create: true, exclusive: false}, function(fileEntry) {
+										
+					var localPath = fileEntry.fullPath;
+
+					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
+							localPath = localPath.substring(7);
+					}
+
+					fileTransfer.download(
+						urlEsercizi,
+						localPath,
+						function(entry) {
+						
+							conteggioEsercizi = parseInt(conteggioEsercizi)+1;
+								
+								if(conteggioEsercizi == totaleEsercizi) {
+								//alert("scaricati "+conteggioEsercizi+" esercizi");
+								sessionStorage.setItem("downloadEsercizi", "ok");
+								}
+								
+							console.log("download complete: " + entry.fullPath);
+							
+							
+						},
+						function(error) {
+							console.log("download error source " + error.source);
+							console.log("download error target " + error.target);
+						},
+						false,
+						{
+							headers: {
+								"Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+							}
+						}
+				
+					); // end of fileTransfer.download
+				}); // end of dirEntry.getFile
+			
+			}); // fileSystem.root.getDirectory
+			
+		}); // end of window.requestFileSystem
+		
+		});
+		
+		}
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+		
+	
+	// TRADUZIONI------------------------------------------------------------------------------
+	
+	// T.Indietro
+	window.localStorage.setItem("indietro", lingue[lingua].indietro);
+	// T.Categories
+	window.localStorage.setItem("Categorie", lingue[lingua].Categorie);
+	// T.filtra
+	window.localStorage.setItem("filtra", lingue[lingua].filtra);
+	// T.ordina
+	window.localStorage.setItem("ordina", lingue[lingua].ordina);
+	// T.salta
+	window.localStorage.setItem("salta", lingue[lingua].salta);
+	
+	// /TRADUZIONI----------------------------------------------------------------------------
+	
+	//DOWNLOAD JSON!!!!
+	//ATTESA COMPLETAMENTO DOWNLOAD JSON
+	
+	document.location.href="#facebook";
+	});
+	</script>
+	
+	<ul id="listaLingue" data-role="listview">
+	</ul>
+	
+	</div>
+	<!-- CONTENT -->
+
+	<!-- FOOTER -->
+	<div data-role="footer" data-theme="a" data-position="fixed">
+		<h4>Setup</h4>
+	</div>
+	<!-- /FOOTER -->
+
+</div><!-- /PAGE #setup -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- PAGE #facebook -->
+<div data-role="page" id="facebook">
+
+	<!-- /HEADER -->
+	<div data-role="header">
+		<h1>Facebook</h1>
+	</div>
+	<!-- /HEADER -->
+	
+	<!-- CONTENT -->
+	<div role="main" class="ui-content" >
+	
+	<div id="fb-root"></div>
+	<script type="text/javascript" src="facebook-js-sdk.js"></script>
+	<script type="text/javascript" src="cdv-plugin-fb-connect.js"></script>
+	
+	<script>   
+	
+	$( "#facebook" ).on( "pagebeforeshow", function() {	
+	
+	FB.init({ 
+		appId: "565128173502375", 
+		nativeInterface: CDV.FB,
+		status: true,
+		useCachedDialogs: false 
+	});
+				
+	function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Good to see you, ' + response.name + '.');
+    });
+  }
+	
+	});
+	
+	</script>
+	
+	</script>
+	
+	<h1>FACEBOOK</h1>
+
+	<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
+	
+	<button id="facebook" class="ui-btn ui-shadow">Button</button>
+	<a href="#foursquare" id="salta" data-transition="slide">Salta</a>
+	
+
+	
+	</div>
+	<!-- CONTENT -->
+
+	<!-- FOOTER -->
+	<div data-role="footer" data-theme="a" data-position="fixed">
+		<h4>Page Footer</h4>
+	</div>
+	<!-- /FOOTER -->
+
+</div><!-- /PAGE #facebook -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- PAGE #foursquare -->
+<div data-role="page" id="foursquare">
+
+	<!-- /HEADER -->
+	<div data-role="header">
+		<h1>Foursquare</h1>
+	</div>
+	<!-- /HEADER -->
+	
+	<!-- CONTENT -->
+	<div role="main" class="ui-content" >
+	
+	<script>   
+	$( "#foursquare" ).on( "pagebeforeshow", function() {	
+	
+	}); //ON "pagebeforeshow"
+	
+	//DOWNLOAD JSON!!!!
+	//ATTESA COMPLETAMENTO DOWNLOAD JSON
+	
+	</script>
+	
+	<h1>Foursquare</h1>
+	<a href="#twitter" data-transition="slide">Salta</a>
+	
+	</div>
+	<!-- CONTENT -->
+
+	<!-- FOOTER -->
+	<div data-role="footer" data-theme="a" data-position="fixed">
+		<h4>Page Footer</h4>
+	</div>
+	<!-- /FOOTER -->
+
+</div><!-- /PAGE #foursquare -->
+
+<!-- PAGE #twitter -->
+<div data-role="page" id="twitter">
+
+	<!-- /HEADER -->
+	<div data-role="header">
+		<h1>Twitter</h1>
+	</div>
+	<!-- /HEADER -->
+	
+	<!-- CONTENT -->
+	<div role="main" class="ui-content" >
+	
+	<script>   
+	$( "#twitter" ).on( "pagebeforeshow", function() {	
+	
+	}); //ON "pagebeforeshow"
+	
+	//DOWNLOAD JSON!!!!
+	//ATTESA COMPLETAMENTO DOWNLOAD JSON
+	
+	</script>
+	
+	<h1>Twitter</h1>
+	<a href="#index" data-transition="slide">Salta</a>
+	
+	</div>
+	<!-- CONTENT -->
+
+	<!-- FOOTER -->
+	<div data-role="footer" data-theme="a" data-position="fixed">
+		<h4>Page Footer</h4>
+	</div>
+	<!-- /FOOTER -->
+
+</div><!-- /PAGE #twitter -->
+
+</body>
+</html>

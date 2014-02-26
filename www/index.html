@@ -178,6 +178,10 @@
 	lingua = $(this).attr('nomeLingua');
 	codLingua = $(this).attr('codiceLingua');
 	
+	console.log("idLingua: "+idLingua);
+	console.log("lingua: "+lingua);
+	console.log("codLingua: "+codLingua);
+	
 	window.localStorage.setItem("lingua", lingua);
 	window.localStorage.setItem("idLingua", idLingua);
 	window.localStorage.setItem("codLingua", codLingua);
@@ -194,9 +198,12 @@
 				dirEntry.getFile(fileNameCategorie, {create: true, exclusive: false}, function(fileEntry) {
 										
 					var localPath = fileEntry.fullPath;
+					
+					console.log("localPath: "+localPath);
 
 					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
 							localPath = localPath.substring(7);
+							console.log("localPath: "+localPath);
 					}
 
 					fileTransfer.download(
@@ -235,7 +242,7 @@
 		
 		
 
-  
+	/*
 	function getSottocategorie()
 	{
 		var codlingua = window.localStorage.getItem('codLingua');
@@ -423,6 +430,7 @@
 		//JSON VETRINE
 		var conteggioEsercizi = 0;
 		
+		
 		$.ajax({
 		url: "http://www.wificomo.com/ccn20/JSONidEsercizi.php",
 		dataType: 'json',
@@ -489,7 +497,7 @@
 		}
 		});
 		
-		
+		*/
 		
 		
 		
@@ -568,19 +576,10 @@
 	<!-- CONTENT -->
 	<div role="main" class="ui-content" >
 	
-	<div id="fb-root"></div>
-	<script type="text/javascript" src="facebook-js-sdk.js"></script>
-	<script type="text/javascript" src="cdv-plugin-fb-connect.js"></script>
-	
 	<h1>FACEBOOK</h1>
 
-	<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
-	
-	<button id="facebook" class="ui-btn ui-shadow">Button</button>
 	<a href="#foursquare" id="salta" data-transition="slide">Salta</a>
-	
-
-	
+		
 	</div>
 	<!-- CONTENT -->
 

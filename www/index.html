@@ -209,6 +209,8 @@
 					fileTransfer.download(
 						urlCategorie,
 						localPath,
+						console.log("localPathFT: "+localPath);
+						console.log("urlCategorieFT: "+urlCategorie);
 						function(entry) {
 						
 							console.log("download complete: " + entry.fullPath);

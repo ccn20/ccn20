@@ -205,12 +205,14 @@
 							localPath = localPath.substring(7);
 							console.log("localPath: "+localPath);
 					}
-
+					
+					console.log("localPathFT: "+localPath);
+					console.log("urlCategorieFT: "+urlCategorie);
+					
 					fileTransfer.download(
 						urlCategorie,
 						localPath,
-						console.log("localPathFT: "+localPath);
-						console.log("urlCategorieFT: "+urlCategorie);
+						
 						function(entry) {
 						
 							console.log("download complete: " + entry.fullPath);
@@ -227,7 +229,7 @@
 						function(error) {
 							console.log("download error source " + error.source);
 							console.log("download error target " + error.target);
-							//console.log("download error code " + error.code);
+							console.log("download error code " + error.code);
 						},
 						false,
 						{

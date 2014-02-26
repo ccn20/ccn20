@@ -574,30 +574,6 @@
 	<script type="text/javascript" src="facebook-js-sdk.js"></script>
 	<script type="text/javascript" src="cdv-plugin-fb-connect.js"></script>
 	
-	<script>   
-	
-	$( "#facebook" ).on( "pagebeforeshow", function() {	
-	
-	FB.init({ 
-		appId: "565128173502375", 
-		nativeInterface: CDV.FB,
-		status: true,
-		useCachedDialogs: false 
-	});
-				
-	function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      console.log('Good to see you, ' + response.name + '.');
-    });
-  }
-	
-	});
-	
-	</script>
-	
-	</script>
-	
 	<h1>FACEBOOK</h1>
 
 	<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>

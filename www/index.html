@@ -570,7 +570,9 @@
 	<div id="fb-root"></div>
 	<script>
   
-		/*
+	$( "#facebook" ).on( "pagebeforeshow", function() {	
+	
+	/*
 		FB.init({
 			appId      : '{your-app-id}',
 			status     : true, // check login status
@@ -598,6 +600,8 @@
     console.log('Good to see you, ' + response.name + '.');
     });
 	}
+	
+	}); //ON "pagebeforeshow"
 	
 </script>
 	

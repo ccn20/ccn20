@@ -27,26 +27,39 @@
 	<!-- CONTENT -->
 	<div role="main" class="ui-content" >
 	
-	<button onclick="login()">Login</button>
-		<button onclick="me()">Me</button>
-		<!--<button onclick="getSession()">Get session</button>-->
-		<button onclick="getLoginStatus()">Get login</button>
-		<button onclick="logout()">Logout</button>
-		<button onclick="facebookWallPost()">facebookWallPost</button>
-		<button onclick="publishStoryFriend()">friendstory</button>
-		
-		 <div id="data">loading ...</div>
-	
 	<div id="fb-root"></div>
 	<script>
   
-	$( "#facebook" ).on( "pageshow", function() {	
+	$( "#facebook" ).on( "pagebeforeshow", function() {	
 	
 	FB.init({
     appId      : '565128173502375',
     status     : true, // check login status
     cookie     : true, // enable cookies to allow the server to access the session
     xfbml      : true  // parse XFBML
+	});
+	
+	FB.getLoginStatus(function(response) {
+  
+	if (response.status === 'connected') {
+    // the user is logged in and has authenticated your
+    // app, and response.authResponse supplies
+    // the user's ID, a valid access token, a signed
+    // request, and the time the access token 
+    // and signed request each expire
+	alert("connected");
+    var uid = response.authResponse.userID;
+    var accessToken = response.authResponse.accessToken;
+	} 
+	else if (response.status === 'not_authorized') {
+    alert("app not authenticated");
+	// the user is logged in to Facebook, 
+    // but has not authenticated your app
+	} 
+	else {
+    // the user isn't logged in to Facebook.
+	alert("not connected");
+	}
 	});
 	
 	

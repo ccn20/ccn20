@@ -30,6 +30,8 @@
 		<button onclick="logout()">Logout</button>
 		<button onclick="facebookWallPost()">facebookWallPost</button>
 		<button onclick="publishStoryFriend()">friendstory</button>
+		
+		 <div id="data">loading ...</div>
 	
 	<div id="fb-root"></div>
 	<script>
@@ -157,7 +159,7 @@
             document.addEventListener('deviceready', function() {
                                       try {
                                       alert('Device is ready! Make sure you set your app_id below this alert.');
-                                      FB.init({ appId: "appid", nativeInterface: CDV.FB, useCachedDialogs: false });
+                                      FB.init({ appId: "565128173502375", nativeInterface: CDV.FB, useCachedDialogs: false });
                                       document.getElementById('data').innerHTML = "";
                                       } catch (e) {
                                       alert(e);

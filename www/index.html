@@ -62,6 +62,7 @@
 	<li><a href="nomeEsercizi.html" rel="external">Ricerca per Nome</a></li>
 	<li><a href="brandEsercizi.html" rel="external">Ricerca per Brand</a></li>
 	<li><a href="vetrinaEsercizio_JSONinPAGINA.html" rel="external">Vetrina</a></li>
+	<li><a href="facebook.html" rel="external">Facebook</a></li>
 	</ul>
 	
 	</div>
@@ -571,30 +572,6 @@
 	<script>
   
 	$( "#facebook" ).on( "pageshow", function() {	
-	
-
-	
-	FB.init({
-			appId      : '565128173502375',
-			status     : true, // check login status
-			cookie     : true, // enable cookies to allow the server to access the session
-			xfbml      : true  // parse XFBML
-		});
-
-		FB.Event.subscribe('auth.authResponseChange', function(response) {
-
-			if (response.status === 'connected') {
-				console.log("connected");
-			} 
-			else if (response.status === 'not_authorized') {
-			FB.login();
-			} 
-			else {
-			FB.login();
-			}
-		});
-
-	
 	
 	}); //ON "pagebeforeshow"
 	

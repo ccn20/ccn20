@@ -32,13 +32,8 @@
   
 	$( "#facebook" ).on( "pageshow", function() {	
 	
-	FB.init({
-    appId      : '565128173502375',
-    status     : true, // check login status
-    cookie     : true, // enable cookies to allow the server to access the session
-    xfbml      : true  // parse XFBML
-	});
-	
+	FB.init({ appId: "565128173502375", nativeInterface: CDV.FB, useCachedDialogs: false });
+		
 	FB.getLoginStatus(function(response) {
   
 	if (response.status === 'connected') {

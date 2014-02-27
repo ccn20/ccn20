@@ -6,6 +6,10 @@
 	<script src="js/jquery-1.11.0.min.js"></script>
 	<script src="js/jquery.mobile-1.4.1.min.js"></script>
 	<script type="text/javascript" src="phonegap.js"></script>
+	<!-- cordova facebook plugin -->
+	<script src="cdv-plugin-fb-connect.js"></script>
+	<!-- facebook js sdk -->
+	<script src="facebook-js-sdk.js"></script>
 	
 	<title>Ricerca Brand</title>
 </head>
@@ -36,7 +40,7 @@
 	<div id="fb-root"></div>
 	<script>
   
-	$( "#facebook" ).on( "pageshow", function() {	
+	//$( "#facebook" ).on( "pageshow", function() {	
 	
 	if ((typeof cordova == 'undefined') && (typeof Cordova == 'undefined')) alert('Cordova variable does not exist. Check that you have included cordova.js correctly');
             if (typeof CDV == 'undefined') alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly');
@@ -166,7 +170,7 @@
                                       }
                                       }, false);
 	
-	}); //ON "pagebeforeshow"
+	//}); //ON "pagebeforeshow"
 	
 </script>
 	

@@ -178,10 +178,6 @@
 	lingua = $(this).attr('nomeLingua');
 	codLingua = $(this).attr('codiceLingua');
 	
-	console.log("idLingua: "+idLingua);
-	console.log("lingua: "+lingua);
-	console.log("codLingua: "+codLingua);
-	
 	window.localStorage.setItem("lingua", lingua);
 	window.localStorage.setItem("idLingua", idLingua);
 	window.localStorage.setItem("codLingua", codLingua);
@@ -198,16 +194,10 @@
 				dirEntry.getFile(fileNameCategorie, {create: true, exclusive: false}, function(fileEntry) {
 										
 					var localPath = fileEntry.fullPath;
-					
-					console.log("localPath: "+localPath);
 
 					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
-							localPath = localPath.substring(7);
-							console.log("localPath: "+localPath);
+						localPath = localPath.substring(7);
 					}
-					
-					console.log("localPathFT: "+localPath);
-					console.log("urlCategorieFT: "+urlCategorie);
 					
 					fileTransfer.download(
 						urlCategorie,
@@ -246,8 +236,6 @@
 		}); // end of window.requestFileSystem
 		
 		
-
-	/*
 	function getSottocategorie()
 	{
 		var codlingua = window.localStorage.getItem('codLingua');
@@ -349,7 +337,7 @@
 		
 		
 	//JSON RICERCA PER BRAND
-	var urlbrand = encodeURI("http://www.wificomo.com/ccn20/JSONbrand.php?language="+codLingua+"");
+	var urlbrand = encodeURI("http://www.wificomo.com/ccn20/JSONbrand.php");
 	var fileNamebrand = "brand.js";
 		
 		var fileTransfer = new FileTransfer();
@@ -502,8 +490,6 @@
 		}
 		});
 		
-		*/
-		
 		
 		
 		
@@ -580,6 +566,40 @@
 	
 	<!-- CONTENT -->
 	<div role="main" class="ui-content" >
+	
+	<div id="fb-root"></div>
+	<script>
+  
+		/*
+		FB.init({
+			appId      : '{your-app-id}',
+			status     : true, // check login status
+			cookie     : true, // enable cookies to allow the server to access the session
+			xfbml      : true  // parse XFBML
+		});
+		*/
+
+		FB.Event.subscribe('auth.authResponseChange', function(response) {
+
+			if (response.status === 'connected') {
+				testAPI();
+			} 
+			else if (response.status === 'not_authorized') {
+			FB.login();
+			} 
+			else {
+			FB.login();
+			}
+		});
+
+	function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+    console.log('Good to see you, ' + response.name + '.');
+    });
+	}
+	
+</script>
 	
 	<h1>FACEBOOK</h1>
 

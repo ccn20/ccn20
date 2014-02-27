@@ -572,8 +572,8 @@
   
 	$( "#facebook" ).on( "pagebeforeshow", function() {	
 	
-	console.log("test");
-	/*	
+
+	
 	FB.init({
 			appId      : '565128173502375',
 			status     : true, // check login status
@@ -584,7 +584,7 @@
 		FB.Event.subscribe('auth.authResponseChange', function(response) {
 
 			if (response.status === 'connected') {
-				testAPI();
+				console.log("connected");
 			} 
 			else if (response.status === 'not_authorized') {
 			FB.login();
@@ -594,13 +594,7 @@
 			}
 		});
 
-	function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-    console.log('Good to see you, ' + response.name + '.');
-    });
-	}
-	*/
+	
 	
 	}); //ON "pagebeforeshow"
 	

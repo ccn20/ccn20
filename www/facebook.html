@@ -228,9 +228,7 @@
 	
 	$(document).on("click", 'button.facebook', function(){
 	
-	FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false });
-	
-	FB.login(function(response) {
+		FB.login(function(response) {
 			if (response.authResponse) {
 			console.log('Welcome!  Fetching your information.... ');
 				
@@ -242,7 +240,6 @@
 			console.log('User cancelled login or did not fully authorize.');
 			}
 		});
-		*/
 		
 	}); // ON CLICK
 	

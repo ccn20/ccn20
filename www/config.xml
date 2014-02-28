@@ -8,7 +8,7 @@
         PhoneGap Team
     </author>
 	<gap:plugin name="com.phonegap.plugins.facebookconnect">
-    <param name="APP_ID" value="605669602841102" />
+    <param name="APP_ID" value="1448410138727682" />
     <param name="APP_NAME" value="ccn20" />
 	</gap:plugin>
 	<gap:plugin name="org.apache.cordova.file" />

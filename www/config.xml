@@ -8,8 +8,8 @@
         PhoneGap Team
     </author>
 	<gap:plugin name="com.phonegap.plugins.facebookconnect">
-    <param name="APP_ID" value="565128173502375" />
-    <param name="APP_NAME" value="PozzApp" />
+    <param name="APP_ID" value="672768282769344" />
+    <param name="APP_NAME" value="ccn20" />
 	</gap:plugin>
 	<gap:plugin name="org.apache.cordova.file" />
 	<gap:plugin name="org.apache.cordova.file-transfer" />

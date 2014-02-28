@@ -200,9 +200,11 @@
 		
 	}, true);
 	
-	function login() {
-    
-		FB.login(function(response) {
+	}); //ON "pagebeforeshow"
+	
+	$(document).on("click", 'button.facebook', function(){
+	
+	FB.login(function(response) {
             
 			if (response.session) {
             
@@ -218,9 +220,11 @@
         },
         { scope: "email" }
         );
-    }
 	
-	}); //ON "pagebeforeshow"
+	});
+	
+	
+	
 	
 </script>
 	

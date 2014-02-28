@@ -195,6 +195,7 @@
 	<!-- /HEADER -->
 	<div data-role="header">
 		<h1>Facebook</h1>
+		<a href="index.html" data-rel="back" rel="external" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
 	</div>
 	<!-- /HEADER -->
 	
@@ -208,31 +209,26 @@
 	
 	FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false });
 	
+	//GET LOGIN STATUS
 	FB.getLoginStatus(function(response) {
 	
 		if (response.status === 'connected') {
-    
-		alert("connesso");
-	
-		var uid = response.authResponse.userID;
-		var accessToken = response.authResponse.accessToken;
+		$("p.facebook").html('account facebook collegato');
 		}
 		else if (response.status === 'not_authorized') {
-    
-		alert("not authorized");
-	
+		$("p.facebook").html('<button class="ui-btn ui-shadow">Button</button>');
 		} 
 		else {
-		alert("not logged");
+		$("p.facebook").html('<button class="ui-btn ui-shadow">Button</button>');
 		}
-	});
+	}, true);
 	
 	}); //ON "pagebeforeshow"
 	
 </script>
 	
 	<h1>FACEBOOK</h1>
-
+	<p class="facebook"></p>
 	<a href="#foursquare" id="salta" data-transition="slide">Salta</a>
 		
 	</div>

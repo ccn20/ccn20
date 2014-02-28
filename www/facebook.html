@@ -216,33 +216,30 @@
 		$("p.facebook").html('account facebook collegato');
 		}
 		else if (response.status === 'not_authorized') {
-		$("p.facebook").html('<button class="ui-btn ui-shadow">Button</button>');
+		$("p.facebook").html('<button class="ui-btn ui-shadow" onclick="login()">Button</button>');
 		} 
 		else {
-		$("p.facebook").html('<button class="facebook ui-btn ui-shadow">Button</button>');
+		$("p.facebook").html('<button class="facebook ui-btn ui-shadow" onclick="login()">Button</button>');
 		}
 		
 	}, true);
 	
+	function login() {
+    
+		FB.login(function(response) {
+            
+			if (response.session) {
+            alert('logged in');
+            } 
+			else {
+            alert('not logged in');
+            }
+        },
+        { scope: "email" }
+        );
+    }
+	
 	}); //ON "pagebeforeshow"
-	
-	$(document).on("click", 'button.facebook', function(){
-	
-		FB.login(
-                         function(response) {
-                         if (response.session) {
-                         alert('logged in');
-                         } else {
-                         alert('not logged in');
-                         }
-                         },
-                         { scope: "email" }
-                         );
-		});
-		
-	}); // ON CLICK
-	
-	
 	
 </script>
 	

@@ -219,11 +219,31 @@
 		$("p.facebook").html('<button class="ui-btn ui-shadow">Button</button>');
 		} 
 		else {
-		$("p.facebook").html('<button class="ui-btn ui-shadow">Button</button>');
+		$("p.facebook").html('<button class="facebook ui-btn ui-shadow">Button</button>');
 		}
+		
 	}, true);
 	
 	}); //ON "pagebeforeshow"
+	
+	$(document).on("click", 'button.facebook', function(){
+		
+		FB.login(function(response) {
+			if (response.authResponse) {
+			console.log('Welcome!  Fetching your information.... ');
+				
+				FB.api('/me', function(response) {
+				$("p.facebook").html('Good to see you, ' + response.name + '.');
+				});
+			} 
+			else {
+			console.log('User cancelled login or did not fully authorize.');
+			}
+		});
+		
+	}); // ON CLICK
+	
+	
 	
 </script>
 	

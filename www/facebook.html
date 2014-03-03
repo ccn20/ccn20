@@ -179,24 +179,34 @@
 	<div role="main" class="ui-content" >
 	
 	<div id="fb-root"></div>
-	<script type="text/javascript" charset="utf-8">
-
-    // Wait for device API libraries to load
-    //
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    // device APIs are available
-    //
-    function onDeviceReady() {
-         alert("ready");
-		 var ref = window.open('http://apache.org', '_blank', 'location=yes');
-         // close InAppBrowser after 5 seconds
-         setTimeout(function() {
-             ref.close();
-         }, 5000);
-    }
-
-    </script>
+	<script>
+  
+	$( "#facebook_app" ).on( "pagebeforeshow", function() {	
+	
+	alert("test");
+	
+	}); //ON "pagebeforeshow"
+	
+	$(document).on("click", 'button.facebook', function(){
+	
+	FB.login(function(response) {
+            
+		if (response.authResponse) {
+			
+			FB.api('/me', function(response) {
+			$("p.facebook").html('Good to see you, ' + response.name + '.');
+			});
+		}
+		else {
+            alert('not logged in');
+        }
+    },
+	{ scope: "email" }
+    );
+	
+	}); //ON CLICK
+	
+	</script>
 	
 	<h1>FACEBOOK</h1>
 	<p class="facebook"></p>

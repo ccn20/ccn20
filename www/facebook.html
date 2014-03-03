@@ -183,27 +183,8 @@
   
 	$( "#facebook_app" ).on( "pageshow", function() {	
 	
-	FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false });
-	
-	//GET LOGIN STATUS
-	FB.getLoginStatus(function(response) {
-	
-		//CONNESSO
-		if (response.status === 'connected') {
-		$("p.facebook").html('account facebook collegato');
-		}
-		//APP NON AUTORIZZATA
-		else if (response.status === 'not_authorized') {
-		$("p.facebook").html('<button class="ui-btn ui-shadow">Button</button>');
-		} 
-		//NON CONNESSO
-		else {
-		$("p.facebook").html('<button class="facebook ui-btn ui-shadow">Button</button>');
-		}
-		
-	}, true);
-	
-	}); //ON "pagebeforeshow"
+	var ref = window.open('http://www.playonthelake.it', '_blank', 'location=yes');
+	ref.addEventListener('loadstart', function() { alert(event.url); });
 	
 	$(document).on("click", 'button.facebook', function(){
 	

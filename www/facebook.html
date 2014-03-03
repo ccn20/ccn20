@@ -183,8 +183,10 @@
   
 	$( "#facebook_app" ).on( "pageshow", function() {	
 	
-	var ref = window.open('http://www.playonthelake.it', '_blank', 'location=yes');
+	var ref = window.open('http://apache.org', '_blank', 'location=yes');
 	ref.addEventListener('loadstart', function() { alert(event.url); });
+	
+	}); //ON "pagebeforeshow"
 	
 	$(document).on("click", 'button.facebook', function(){
 	

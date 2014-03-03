@@ -16,6 +16,7 @@
 	<gap:plugin name="org.apache.cordova.geolocation" />
 	<gap:plugin name="org.apache.cordova.network-information" />
 	<gap:plugin name="org.apache.cordova.device" />
+	<gap:plugin name="org.apache.cordova.inappbrowser" />
 	<gap:plugin name="dk.interface.cordova.plugin.googlenavigate" />
 	<gap:plugin name="com.phonegap.plugins.barcodescanner" />
     <feature name="http://api.phonegap.com/1.0/device" />

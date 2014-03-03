@@ -179,21 +179,24 @@
 	<div role="main" class="ui-content" >
 	
 	<div id="fb-root"></div>
-	<script type="text/javascript" charset="utf-8">
-
-    // Wait for device API libraries to load
-    //
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    // device APIs are available
-    //
-    function onDeviceReady() {
-         var ref = window.open('http://apache.org', '_blank', 'location=yes');
-         ref.addEventListener('loadstart', function(event) { alert('start: ' + event.url); });
-         ref.addEventListener('loadstop', function(event) { alert('stop: ' + event.url); });
-         ref.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
-         ref.addEventListener('exit', function(event) { alert(event.type); });
-    }
+	<script>
+  
+	$( "#facebook_app" ).on( "pageshow", function() {	
+	
+	alert("test");
+	
+	}); //ON "pagebeforeshow"
+	
+	$(document).on("click", 'button.facebook', function(){
+	
+	alert("test");
+	
+	var ref = window.open('http://google.com', '_blank');
+	ref.addEventListener('loadstart', function(event) { alert(event.type + ' - ' + event.url); } );
+	ref.addEventListener('loadstop', function(event) { alert(event.type + ' - ' + event.url); } );
+	ref.addEventListener('exit', function(event) { alert(event.type); } );
+	
+	}); //ON CLICK
 	
 	</script>
 	

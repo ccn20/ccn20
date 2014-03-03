@@ -14,14 +14,12 @@
     // device APIs are available
     //
     function onDeviceReady() {
-	
-	alert("troia");
     
-	var ref = window.open('http://apache.org', '_blank', 'location=yes');
-         ref.addEventListener('loadstart', function(event) { alert('start: ' + event.url); });
-         ref.addEventListener('loadstop', function(event) { alert('stop: ' + event.url); });
-         ref.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
-         ref.addEventListener('exit', function(event) { alert(event.type); });
+	var ref = window.open('https://foursquare.com/oauth2/authenticate?client_id=4P4XY5XMV2EEGL4THQFXJFMJBTJN4WBNX1VIQGAUWDPHYZZF&response_type=token&redirect_uri=http://www.wificomo.com', '_blank', 'location=yes');
+         //ref.addEventListener('loadstart', function(event) { alert('start: ' + event.url); });
+         //ref.addEventListener('loadstop', function(event) { alert('stop: ' + event.url); });
+         //ref.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
+         //ref.addEventListener('exit', function(event) { alert(event.type); });
     }
 
     </script>

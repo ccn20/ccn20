@@ -188,14 +188,17 @@
 	//GET LOGIN STATUS
 	FB.getLoginStatus(function(response) {
 	
+		//CONNESSO
 		if (response.status === 'connected') {
 		$("p.facebook").html('account facebook collegato');
 		}
+		//APP NON AUTORIZZATA
 		else if (response.status === 'not_authorized') {
-		$("p.facebook").html('<button class="ui-btn ui-shadow" onclick="login()">Button</button>');
+		$("p.facebook").html('<button class="ui-btn ui-shadow">Button</button>');
 		} 
+		//NON CONNESSO
 		else {
-		$("p.facebook").html('<button class="facebook ui-btn ui-shadow" onclick="login()">Button</button>');
+		$("p.facebook").html('<button class="facebook ui-btn ui-shadow">Button</button>');
 		}
 		
 	}, true);
@@ -206,25 +209,22 @@
 	
 	FB.login(function(response) {
             
-			if (response.authResponse) {
-					FB.api('/me', function(response) {
-			alert('Good to see you, ' + response.name + '.');
+		if (response.authResponse) {
+			
+			FB.api('/me', function(response) {
 			$("p.facebook").html('Good to see you, ' + response.name + '.');
 			});
-			}
-			else {
+		}
+		else {
             alert('not logged in');
-            }
-        },
-        { scope: "email" }
-        );
+        }
+    },
+	{ scope: "email" }
+    );
 	
-	});
+	}); //ON PAGEBEFORESHOW
 	
-	
-	
-	
-</script>
+	</script>
 	
 	<h1>FACEBOOK</h1>
 	<p class="facebook"></p>

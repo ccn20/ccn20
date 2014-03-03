@@ -181,45 +181,20 @@
 	<div id="fb-root"></div>
 	<script>
   
-	$( "#facebook_app" ).on( "pagebeforeshow", function() {	
+	$( "#facebook_app" ).on( "pageshow", function() {	
 	
-	 // Wait for Cordova to load
-    //
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    // Global InAppBrowser reference
-    var iabRef = null;
-
-    function iabLoadStart(event) {
-        alert(event.type + ' - ' + event.url);
-    }
-
-    function iabLoadStop(event) {
-        alert(event.type + ' - ' + event.url);
-    }
-
-    function iabClose(event) {
-         alert(event.type);
-         iabRef.removeEventListener('loadstart', iabLoadStart);
-         iabRef.removeEventListener('loadstop', iabLoadStop);
-         iabRef.removeEventListener('exit', iabClose);
-    }
-
-    // Cordova is ready
-    //
-    function onDeviceReady() {
-         alert('Device is ready!');
-         //iabRef = window.open('http://apache.org', '_blank', 'location=yes');
-         //iabRef.addEventListener('loadstart', iabLoadStart);
-         //iabRef.addEventListener('loadstop', iabLoadStop);
-         //iabRef.addEventListener('exit', iabClose);
-    }
+	alert("test");
 	
 	}); //ON "pagebeforeshow"
 	
 	$(document).on("click", 'button.facebook', function(){
 	
-	ref = window.open('http://www.google.de', '_blank', 'location=yes');
+	alert("test");
+	
+	var ref = window.open('http://google.com', '_blank');
+	ref.addEventListener('loadstart', function(event) { alert(event.type + ' - ' + event.url); } );
+	ref.addEventListener('loadstop', function(event) { alert(event.type + ' - ' + event.url); } );
+	ref.addEventListener('exit', function(event) { alert(event.type); } );
 	
 	}); //ON CLICK
 	
@@ -227,19 +202,8 @@
 	
 	<h1>FACEBOOK</h1>
 	<button class="facebook">foursquare</button>
-	<a href="#" onclick="window.open('http://www.playonthelake.it','_blank','location=yes');">open</a>
 	<a href="#foursquare" id="salta" data-transition="slide">Salta</a>
-	
-	<p>link test<br /><br />
-  <a href="#" onclick="window.open('http://www.wikipedia.org','_self','location=yes')">Wikipedia (webview)</a><br /><br />
-  <a href="#" onclick="window.open('http://www.wikipedia.org','_blank','location=yes')">Wikipedia (inAppBrowser)</a><br /><br />
-  <a href="#" onclick="window.open('http://www.wikipedia.org','_system','location=yes')">Wikipedia (mobile browser)</a><br /><br />
-  </p>
-  <p>button test<br /><br />
-  <button type="button" onclick="window.open('http://www.wikipedia.org','_self','location=yes')">Wikipedia (webview)</button><br /><br />
-  <button type="button" onclick="window.open('http://www.wikipedia.org','_blank','location=yes')">Wikipedia (inAppBrowser)</button><br /><br />
-  <button type="button" onclick="window.open('http://www.wikipedia.org','_system','location=yes')">Wikipedia (mobile browser)</button><br /><br />  
-  </p>
+		
 	</div>
 	<!-- CONTENT -->
 

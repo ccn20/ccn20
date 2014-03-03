@@ -10,6 +10,10 @@
 	<script src="js/jquery.mobile-1.4.1.min.js"></script>
 	<script type="text/javascript" src="phonegap.js"></script>
 	<script type="text/javascript" src="js/function_checkConnection.js"></script>
+	<!-- cordova facebook plugin -->
+	<script src="cdv-plugin-fb-connect.js"></script>
+	<!-- facebook js sdk -->
+	<script src="facebook-js-sdk.js"></script>
 </head>
 <body>
 
@@ -571,7 +575,7 @@
 	<div id="fb-root"></div>
 	<script>
   
-	$( "#facebook" ).on( "pageshow", function() {	
+	$( "#facebook" ).on( "pagebeforeshow", function() {	
 	
 	FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false });
 	

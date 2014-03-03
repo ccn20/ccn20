@@ -183,26 +183,14 @@
   
 	$( "#facebook_app" ).on( "pagebeforeshow", function() {	
 	
-	window.open('http://apache.org', '_blank', 'location=yes');
+	
 	
 	}); //ON "pagebeforeshow"
 	
 	$(document).on("click", 'button.facebook', function(){
 	
-	FB.login(function(response) {
-            
-		if (response.authResponse) {
-			
-			FB.api('/me', function(response) {
-			$("p.facebook").html('Good to see you, ' + response.name + '.');
-			});
-		}
-		else {
-            alert('not logged in');
-        }
-    },
-	{ scope: "email" }
-    );
+	alert("click");
+	window.open('http://apache.org', '_blank', 'location=yes');
 	
 	}); //ON CLICK
 	

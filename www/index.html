@@ -694,7 +694,7 @@
 	
 	$(document).on("click", 'button.foursquare', function(){
 	
-	var ref = window.open('https://foursquare.com/oauth2/authenticate?client_id=4P4XY5XMV2EEGL4THQFXJFMJBTJN4WBNX1VIQGAUWDPHYZZF&response_type=token&redirect_uri=http://www.wificomo.com/ccn20/closeFoursquare.html', '_blank', 'location=yes');
+	var ref = window.open('https://foursquare.com/oauth2/authenticate?client_id=4P4XY5XMV2EEGL4THQFXJFMJBTJN4WBNX1VIQGAUWDPHYZZF&response_type=token&redirect_uri=http://www.wificomo.com/ccn20/closeFoursquare.html', '_blank', 'location=no');
 	
 	ref.addEventListener('loadstart', function(event) {
     closeFoursquare(event.url,ref);
@@ -760,14 +760,14 @@
 	$( "#twitter" ).on( "pagebeforeshow", function() {	
 	
 	var twitterToken = window.localStorage.getItem("twitterToken");
-	alert(twitterToken);	
+	
 		if(twitterToken == null) {
 		$("p.twitter").html('<button class="twitter ui-btn ui-shadow">Button</button>');
 		}
 		else {
 		
 		var twitterName = window.localStorage.getItem("twitterName");
-		alert(twitterName);
+		
 		$("p.twitter").html('Good to see you, ' + twitterName + '.');
 		}
 	
@@ -793,7 +793,9 @@
 		window.localStorage.setItem("twitterToken", twitterToken);
 		window.localStorage.setItem("twitterVerifier", twitterVerifier);
 		window.localStorage.setItem("twitterName", twitterName);
-   
+		
+		$("p.twitter").html('Good to see you, ' + twitterName + '.');
+		
 		ref.close();
 		}
 	}

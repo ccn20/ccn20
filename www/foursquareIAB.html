@@ -6,18 +6,22 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script>
 
-    // Wait for device API libraries to load
+	document.addEventListener("deviceready", onDeviceReady, false);
+
+    // device APIs are available
     //
-    document.addEventListener("deviceready", onDeviceReady, false);
-		
-	var ref = window.open('https://foursquare.com/oauth2/authenticate?client_id=4P4XY5XMV2EEGL4THQFXJFMJBTJN4WBNX1VIQGAUWDPHYZZF&response_type=token&redirect_uri=http://www.wificomo.com/ccn20/closeFoursquare.html', '_blank', 'location=yes');
+    function onDeviceReady() {
 	
-	ref.addEventListener('loadstop', function(event) {        
+        var ref = window.open('https://foursquare.com/oauth2/authenticate?client_id=4P4XY5XMV2EEGL4THQFXJFMJBTJN4WBNX1VIQGAUWDPHYZZF&response_type=token&redirect_uri=http://www.wificomo.com/ccn20/closeFoursquare.html', '_blank', 'location=yes');
+	
+		ref.addEventListener('loadstop', function(event) {        
 		
 		if (event.url.match("mobile/close")) {
         ref.close();
 		}
 	});
+    
+	}
 
     </script>
   </head>

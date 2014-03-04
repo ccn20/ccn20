@@ -9,18 +9,15 @@
     // Wait for device API libraries to load
     //
     document.addEventListener("deviceready", onDeviceReady, false);
+		
+	var ref = window.open('https://foursquare.com/oauth2/authenticate?client_id=4P4XY5XMV2EEGL4THQFXJFMJBTJN4WBNX1VIQGAUWDPHYZZF&response_type=token&redirect_uri=http://www.wificomo.com/ccn20/closeFoursquare.html', '_blank', 'location=yes');
 	
-	
-    // device APIs are available
-    //
-    function onDeviceReady() {
-    
-	var ref = window.open('https://foursquare.com/oauth2/authenticate?client_id=4P4XY5XMV2EEGL4THQFXJFMJBTJN4WBNX1VIQGAUWDPHYZZF&response_type=token&redirect_uri=http://www.wificomo.com', '_blank', 'location=yes');
-         //ref.addEventListener('loadstart', function(event) { alert('start: ' + event.url); });
-         //ref.addEventListener('loadstop', function(event) { alert('stop: ' + event.url); });
-         //ref.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
-         //ref.addEventListener('exit', function(event) { alert(event.type); });
-    }
+	ref.addEventListener('loadstop', function(event) {        
+		
+		if (event.url.match("mobile/close")) {
+        ref.close();
+		}
+	});
 
     </script>
   </head>

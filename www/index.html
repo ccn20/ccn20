@@ -677,7 +677,6 @@
 	$( "#foursquare" ).on( "pagebeforeshow", function() {	
 	
 	var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
-	alert(tokenFoursquare);
 	
 		if(tokenFoursquare == null) {
 		$("p.foursquare").html('<button class="foursquare ui-btn ui-shadow">Button</button>');
@@ -709,7 +708,7 @@
 		
 		$.getJSON('https://api.foursquare.com/v2/users/self?oauth_token='+tokenFoursquare+'&v=20140304', function(data){
 		var user = data['response']['user']['firstName'];
-		$("p.foursquare").html('Good to see you, ' + user + '.')
+		$("p.foursquare").html('Good to see you, ' + user + '.');
 		});
 		
 		ref.close();
@@ -760,14 +759,51 @@
 	<script>   
 	$( "#twitter" ).on( "pagebeforeshow", function() {	
 	
+	var twitterToken = window.localStorage.getItem("twitterToken");
+		
+		if(twitterToken == null) {
+		$("p.twitter").html('<button class="twitter ui-btn ui-shadow">Button</button>');
+		}
+		else {
+		
+		var twitterName = window.localStorage.getItem("twitterName");
+		
+		$("p.twitter").html('Good to see you, ' + twitterName + '.');
+		}
+	
 	}); //ON "pagebeforeshow"
 	
-	//DOWNLOAD JSON!!!!
-	//ATTESA COMPLETAMENTO DOWNLOAD JSON
+	
+	$(document).on("click", 'button.twitter', function(){
+	
+	var ref = window.open('http://www.wificomo.com/twitter/twitterConnect.php', '_blank', 'location=no');
+		
+		ref.addEventListener('loadstart', function(event) {
+        closeTwitter(event.url,ref);
+		});  
+	
+	function closeTwitter(loc,ref) {
+   
+		if (loc.indexOf("www.wificomo.com/twitter/twitterTokens.php?") > -1){
+		
+		var twitterToken = loc.substring(loc.indexOf("oauth_token=")+12, loc.indexOf("&"));
+		var twitterVerifier = loc.substring(loc.indexOf("oauth_verifier=")+15, loc.indexOf("&t"));
+		var twitterName = loc.substring(loc.indexOf("twitterName=")+12);
+		
+		window.localStorage.setItem("twitterToken", twitterToken);
+		window.localStorage.setItem("twitterVerifier", twitterVerifier);
+		window.localStorage.setItem("twitterName", twitterName);
+   
+		ref.close();
+		}
+	}
+	
+	}); //ON "click"
 	
 	</script>
 	
 	<h1>Twitter</h1>
+	<p class="foursquare"></p>
 	<a href="#index" data-transition="slide">Salta</a>
 	
 	</div>

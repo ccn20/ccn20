@@ -12,7 +12,7 @@
     //
     function onDeviceReady() {
 	
-        var ref = window.open('http://www.wificomo.com/twitter/connect.php', '_blank', 'location=yes');
+        var ref = window.open('http://www.wificomo.com/twitter/twitterConnect.php', '_blank', 'location=no');
 		
 		ref.addEventListener('loadstart', function(event) {
         closeFoursquare(event.url,ref);
@@ -24,7 +24,7 @@ function closeFoursquare(loc,ref) {
    
    if (loc.indexOf("www.wificomo.com/ccn20/closeFoursquare.html?") > -1){
    alert(loc);
-   var token = loc.substring(loc.indexOf("auth_token=")+11, loc.indexOf("&")-1);
+   var token = loc.substring(loc.indexOf("oauth_token=")+12, loc.indexOf("&")-1);
    alert(token);
    ref.close();
    }

@@ -789,6 +789,7 @@
 		var twitterToken = loc.substring(loc.indexOf("oauth_token=")+12, loc.indexOf("&"));
 		var twitterVerifier = loc.substring(loc.indexOf("oauth_verifier=")+15, loc.indexOf("&t"));
 		var twitterName = loc.substring(loc.indexOf("twitterName=")+12);
+		twitterName = decodeURIComponent(twitterName);
 		
 		window.localStorage.setItem("twitterToken", twitterToken);
 		window.localStorage.setItem("twitterVerifier", twitterVerifier);

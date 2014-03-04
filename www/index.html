@@ -760,14 +760,14 @@
 	$( "#twitter" ).on( "pagebeforeshow", function() {	
 	
 	var twitterToken = window.localStorage.getItem("twitterToken");
-		
+	alert(twitterToken);	
 		if(twitterToken == null) {
 		$("p.twitter").html('<button class="twitter ui-btn ui-shadow">Button</button>');
 		}
 		else {
 		
 		var twitterName = window.localStorage.getItem("twitterName");
-		
+		alert(twitterName);
 		$("p.twitter").html('Good to see you, ' + twitterName + '.');
 		}
 	

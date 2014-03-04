@@ -677,14 +677,61 @@
 	<script>   
 	$( "#foursquare" ).on( "pagebeforeshow", function() {	
 	
+	var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
+	
+		if(tokenFoursquare != null) {
+		$("p.foursquare").html('<button class="foursquare ui-btn ui-shadow">Button</button>');
+		}
+		else {
+		$.getJSON('https://api.foursquare.com/v2/users/self?oauth_token='+tokenFoursquare+'&v=20140304', function(data){
+		var user = data['response']['user']['firstName'];
+		
+		$("p.foursquare").html('Good to see you, ' + user + '.')
+		});
+		
+		}
+	
 	}); //ON "pagebeforeshow"
 	
-	//DOWNLOAD JSON!!!!
-	//ATTESA COMPLETAMENTO DOWNLOAD JSON
+	$(document).on("click", 'button.foursquare', function(){
+	
+	var ref = window.open('https://foursquare.com/oauth2/authenticate?client_id=4P4XY5XMV2EEGL4THQFXJFMJBTJN4WBNX1VIQGAUWDPHYZZF&response_type=token&redirect_uri=http://www.wificomo.com/ccn20/closeFoursquare.html', '_blank', 'location=yes');
+	
+	ref.addEventListener('loadstart', function(event) {
+    closeFoursquare(event.url,ref);
+	}); 
+	
+	function closeFoursquare(loc,ref) {
+   
+		if (loc.indexOf("www.wificomo.com/ccn20/closeFoursquare.html#") > -1){
+		var tokenFoursquare = loc.substring(loc.indexOf("=")+1);
+		window.localStorage.setItem("tokenFoursquare", tokenFoursquare);
+		
+		$.getJSON('https://api.foursquare.com/v2/users/self?oauth_token='+tokenFoursquare+'&v=20140304', function(data){
+		var user = data['response']['user']['firstName'];
+		$("p.foursquare").html('Good to see you, ' + user + '.')
+		});
+		
+		ref.close();
+		}
+	}
+	
+	
+	}); //ON "click"
+	
+	
+        
+		
+		 
+    
+
+	
+
 	
 	</script>
 	
 	<h1>Foursquare</h1>
+	<p class="foursquare"></p>
 	<a href="#twitter" data-transition="slide">Salta</a>
 	
 	</div>

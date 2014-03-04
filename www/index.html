@@ -678,8 +678,9 @@
 	$( "#foursquare" ).on( "pagebeforeshow", function() {	
 	
 	var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
+	alert(tokenFoursquare);
 	
-		if(tokenFoursquare != null) {
+		if(tokenFoursquare == null) {
 		$("p.foursquare").html('<button class="foursquare ui-btn ui-shadow">Button</button>');
 		}
 		else {

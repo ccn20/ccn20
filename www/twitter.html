@@ -24,7 +24,7 @@ function closeFoursquare(loc,ref) {
    
    if (loc.indexOf("www.wificomo.com/ccn20/closeFoursquare.html?") > -1){
    alert(loc);
-   var token = loc.substring(loc.indexOf("auth_token=")+1);
+   var token = loc.substring(loc.indexOf("auth_token=")+11, loc.indexOf("&")-1);
    alert(token);
    ref.close();
    }

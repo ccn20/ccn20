@@ -25,7 +25,7 @@ function closeFoursquare(loc,ref) {
    if (loc.indexOf("www.wificomo.com/twitter/twitterTokens.php?") > -1){
    alert(loc);
    var tokenTwitter = loc.substring(loc.indexOf("oauth_token=")+12, loc.indexOf("&"));
-   var verifierTwitter = loc.substring(loc.indexOf("oauth_verifier=")+15, loc.indexOf("&"));
+   var verifierTwitter = loc.substring(loc.indexOf("oauth_verifier=")+15, loc.indexOf("&t"));
    var twitterName = loc.substring(loc.indexOf("twitterName=")+12);
    alert(tokenTwitter);
    alert(verifierTwitter);

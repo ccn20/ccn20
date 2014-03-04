@@ -22,9 +22,11 @@
 	
 function closeFoursquare(loc,ref) {
    
-   if (loc.indexOf("www.wificomo.com/ccn20/closeFoursquare.html") > -1){
-         alert(loc.indexOf("www.wificomo.com/ccn20/closeFoursquare.html"));
-         ref.close();
+   if (loc.indexOf("www.wificomo.com/ccn20/closeFoursquare.html#") > -1){
+   alert(loc);
+   var token = loc.substring(loc.indexOf("=")+1);
+   alert(token);
+   ref.close();
    }
 }
 

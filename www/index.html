@@ -65,8 +65,6 @@
 	<li><a href="categorie.html" rel="external">Ricerca per Categoria</a></li>
 	<li><a href="nomeEsercizi.html" rel="external">Ricerca per Nome</a></li>
 	<li><a href="brandEsercizi.html" rel="external">Ricerca per Brand</a></li>
-	<li><a href="vetrinaEsercizio_JSONinPAGINA.html" rel="external">Vetrina</a></li>
-	<li><a href="twitter.html" rel="external">Twitter</a></li>
 	</ul>
 	
 	</div>
@@ -588,11 +586,11 @@
 		}
 		//APP NON AUTORIZZATA
 		else if (response.status === 'not_authorized') {
-		$("p.facebook").html('<button class="ui-btn ui-shadow">Button</button>');
+		$("p.facebook").html('<button class="ui-btn ui-shadow">Collega Account</button>');
 		} 
 		//NON CONNESSO
 		else {
-		$("p.facebook").html('<button class="facebook ui-btn ui-shadow">Button</button>');
+		$("p.facebook").html('<button class="facebook ui-btn ui-shadow">Collega Account</button>');
 		}
 		
 	}, true);
@@ -606,7 +604,8 @@
 		if (response.authResponse) {
 			
 			FB.api('/me', function(response) {
-			$("p.facebook").html('Good to see you, ' + response.name + '.');
+			$("p.facebook").html('Benvenuto, ' + response.name + '.');
+			$("a#saltaAFoursquare").html('Avanti');
 			});
 		}
 		else {
@@ -623,7 +622,7 @@
 	<h1>FACEBOOK</h1>
 
 	<p class="facebook"></p>
-	<a href="#foursquare" id="salta" data-transition="slide">Salta</a>
+	<a href="#foursquare" id="saltaAFoursquare" data-transition="slide">Salta</a>
 		
 	</div>
 	<!-- CONTENT -->
@@ -679,13 +678,14 @@
 	var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
 	
 		if(tokenFoursquare == null) {
-		$("p.foursquare").html('<button class="foursquare ui-btn ui-shadow">Button</button>');
+		$("p.foursquare").html('<button class="foursquare ui-btn ui-shadow">Collega Account</button>');
 		}
 		else {
 		$.getJSON('https://api.foursquare.com/v2/users/self?oauth_token='+tokenFoursquare+'&v=20140304', function(data){
 		var user = data['response']['user']['firstName'];
 		
-		$("p.foursquare").html('Good to see you, ' + user + '.')
+		$("p.foursquare").html('Benvenuto, ' + user + '.');
+		$("a#saltaATwitter").html('Avanti');
 		});
 		
 		}
@@ -708,7 +708,8 @@
 		
 		$.getJSON('https://api.foursquare.com/v2/users/self?oauth_token='+tokenFoursquare+'&v=20140304', function(data){
 		var user = data['response']['user']['firstName'];
-		$("p.foursquare").html('Good to see you, ' + user + '.');
+		$("p.foursquare").html('Benvenuto, ' + user + '.');
+		$("a#saltaATwitter").html('Avanti');
 		});
 		
 		ref.close();
@@ -731,7 +732,7 @@
 	
 	<h1>Foursquare</h1>
 	<p class="foursquare"></p>
-	<a href="#twitter" data-transition="slide">Salta</a>
+	<a href="#twitter" id="saltaATwitter" data-transition="slide">Salta</a>
 	
 	</div>
 	<!-- CONTENT -->
@@ -762,13 +763,14 @@
 	var twitterToken = window.localStorage.getItem("twitterToken");
 	
 		if(twitterToken == null) {
-		$("p.twitter").html('<button class="twitter ui-btn ui-shadow">Button</button>');
+		$("p.twitter").html('<button class="twitter ui-btn ui-shadow">Collega Account</button>');
 		}
 		else {
 		
 		var twitterName = window.localStorage.getItem("twitterName");
 		
-		$("p.twitter").html('Good to see you, ' + twitterName + '.');
+		$("p.twitter").html('Benvenuto, ' + twitterName + '.');
+		$("a#saltaAIndex").html('Avanti');
 		}
 	
 	}); //ON "pagebeforeshow"
@@ -795,7 +797,8 @@
 		window.localStorage.setItem("twitterVerifier", twitterVerifier);
 		window.localStorage.setItem("twitterName", twitterName);
 		
-		$("p.twitter").html('Good to see you, ' + twitterName + '.');
+		$("p.twitter").html('Benvenuto, ' + twitterName + '.');
+		$("a#saltaAIndex").html('Avanti');
 		
 		ref.close();
 		}
@@ -807,7 +810,7 @@
 	
 	<h1>Twitter</h1>
 	<p class="twitter"></p>
-	<a href="#index" data-transition="slide">Salta</a>
+	<a href="#index" id="saltaAIndex" data-transition="slide">Salta</a>
 	
 	</div>
 	<!-- CONTENT -->

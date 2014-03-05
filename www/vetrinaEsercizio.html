@@ -104,11 +104,17 @@
 	
 	var map = new L.Map('map');
 	
+	var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 	
+	L.tileLayer(osmUrl, {
+		maxZoom: 18
+	}).addTo(map);
 	
+	/*
 	L.tileLayer('map/{z}/{x}/{y}.png', {
 		maxZoom: 18
 	}).addTo(map);
+	*/
 	
 	var markerUtente;
 	var group;

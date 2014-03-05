@@ -6,12 +6,13 @@
 	<script src="js/jquery-1.11.0.min.js"></script>
 	<script src="js/jquery.mobile-1.4.1.min.js"></script>
 	
-	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="js/highcharts.js"></script>
 	<link rel="stylesheet" href="css/leaflet.css" />
+	<link rel="stylesheet" href="css/leaflet.usermarker.css" />
 	<link rel="stylesheet" href="css/vetrina.css" />
 	<script src="js/leaflet.js"></script>
+	<script src="js/leaflet.usermarker.js"></script>
 	<script src="js/function_checkConnection.js"></script>
-		
 	<script type="text/javascript" src="cordova.js"></script>
 	
 	
@@ -34,12 +35,41 @@
 	
 	$( document ).on( "pageshow", "#vetrinaMappa", function() {
 	
-	//CARICA JSON ESERCIZIO
-	var path = window.localStorage.getItem("pathSD");
-	var jsonPath = path + "/esercizi/16.js";
-	
-	$.getJSON(jsonPath, function( data ) {
-	
+	var json = [
+    {
+    "idEsercizio": "16",
+    "NomeEsercizio": "Mitchumm",
+    "Descrizione": "ITA",
+    "Indirizzo": "via Milano 11",
+    "Citta": "Como",
+    "Cap": "22100",
+    "Latitudine": "45.805650500000",
+    "Longitudine": "9.085535300000",
+    "Orario": {
+        "lunedi": "10.00-17.00",
+        "giovedi": "11.00-16.00",
+        "domenica": "chiuso",
+        "martedi": "chiuso",
+        "mercoledi": "chiuso",
+        "venerdi": "chiuso",
+        "sabato": "chiuso"
+    },
+    "Website": "www.negozio1.it",
+    "Telefono": "3334554456",
+    "Email": "info@negozio.it",
+    "Facebook": "https://www.facebook.com/MitchummIndustries",
+    "Twitter": "https://twitter.com/MITCHUMM",
+    "Foursquare": "https://it.foursquare.com/v/mitchumm-store/4fbbba82e4b0182c68e66fe1",
+    "Logo": "09.jpg",
+    "Parcheggio": {
+        "idParcheggio": "8",
+        "nomeParcheggio": "Autosilo 1",
+        "indirizzoParcheggio": "viale Lecco 9",
+        "latitudineParcheggio": "45.810391500000",
+        "longitudineParcheggio": "9.086423300000"
+    }
+	}	
+	];
 	
 	// NOME ESERCIZIO + INDIRIZZO + DESCRIZIONE
 	
@@ -50,7 +80,7 @@
 	var parcheggioLongitude;
 	var nomeEsercizioMappa;
 	
-		$.each(data, function(index, info) {
+		$.each(json, function(index, info) {
 				
 				$("h3.nomeEsercizio").html(info.NomeEsercizio);
 				$(".indirizzoEsercizio").html(info.Indirizzo+" "+info.Citta);
@@ -71,15 +101,20 @@
 	
 	// MAPPA + POSIZIONE UTENTE
 	
+	
 	var map = new L.Map('map');
 	
-	L.tileLayer('img/como/{z}/{x}/{y}.png', {
+	
+	
+	L.tileLayer('map/{z}/{x}/{y}.png', {
 		maxZoom: 18
 	}).addTo(map);
 	
+	var markerUtente;
+	var group;
 	var watchID = null;
 	var options = { maximumAge: 5000, timeout: 30000, enableHighAccuracy: true };
-        
+      
 	watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
 	
 	var parkingIcon = L.icon({
@@ -94,31 +129,30 @@
 		popupAnchor:  [0, -20] // point from which the popup should open relative to the iconAnchor
 	});
 		
+	
 	var markerEsercizio = L.marker([esercizioLatitude, esercizioLongitude], {icon: markerIcon}).addTo(map).bindPopup(nomeEsercizioMappa);
 	//var markerParcheggio = L.marker([esercizioLatitude, esercizioLongitude], {icon: parkingIcon}).addTo(map).bindPopup(nomeParcheggioMappa);
 	
-	function onSuccess(position) {
 	
-			  		
+	function onSuccess(position) {
+	 		
 	var userLatitude = position.coords.latitude;
 	var userLongitude = position.coords.longitude;
+	var userAccuracy = position.coords.accuracy 
 
-	var markerUtente = L.marker([userLatitude, userLongitude], {icon: markerIcon}).addTo(map).bindPopup("Sei qui.");
+	if (!markerUtente) {
+	markerUtente = L.userMarker([userLatitude, userLongitude],{pulsing:true}).bindPopup("Sei qui.").addTo(map);
+	markerUtente.setAccuracy(userAccuracy);
+	group = new L.featureGroup([markerEsercizio, markerUtente]);
+	}
+	markerUtente.setLatLng([userLatitude, userLongitude],{pulsing:true}).update();
 		
-	var group = new L.featureGroup([markerEsercizio, markerUtente]);
+	//map.setView(new L.LatLng(userLatitude, userLongitude),16);
+	
+	group = new L.featureGroup([markerEsercizio, markerUtente]);
 
 	map.fitBounds(group.getBounds().pad(0.25));
 	
-	
-
-	/*
-	map.on('moveend', function() {
-		console.log("map was panned!");
-		console.log("zoom: " + map.getZoom());    // prints out zoom level
-		console.log("center: " + map.getCenter());    // prints out map center
-		//console.log(map.getBounds());    // throws error
-	});
-	*/
 	} // FINE ON SUCCESS
 	
 	function onError(error) {
@@ -129,10 +163,9 @@
 
 		
 	// /MAPPA + POSIZIONE UTENTE
-	
 	directions(esercizioLatitude, esercizioLongitude);
-	}); //GET JSON
-	}); // /PAGESHOW
+	});
+	// /PAGESHOW
 	
 	// FUNZIONE DIRECTIONS
 	
@@ -163,6 +196,7 @@
 	<!-- MAPPA + INDIRIZZO + DIRECTIONS + PANORAMICA + DISTANZA -->
 	<div id="map"></div>
 		<!-- /grid-c -->
+		<div class="ui-grid-c center">
 			<div class="ui-block-a"><div class="ui-bar ui-bar-b indirizzoEsercizio"></div></div>
 			<div class="ui-block-b"><a href="#" class="directions"><div class="ui-bar ui-bar-b">Navigazione</div></a></div>
 			<div class="ui-block-c"><div class="ui-bar ui-bar-b">-</div></div>
@@ -175,6 +209,7 @@
 	
 	<div id="box-descrizioneEsercizio">
 	<p class="descrizioneEsercizio"></p>
+	<p class="parcheggioVicino"></p>
 	</div>
 	<!-- /DESCRIZIONE ESERCIZIO -->
 		
@@ -207,17 +242,47 @@
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaOrari", function() {
 	
-	//CARICA JSON ESERCIZIO
-	var path = window.localStorage.getItem("pathSD");
-	var jsonPath = path + "/esercizi/16.js";
-	
-	$.getJSON(jsonPath, function( data ) {
+	var json = [
+    {
+    "idEsercizio": "16",
+    "NomeEsercizio": "Mitchumm",
+    "Descrizione": "ITA",
+    "Indirizzo": "via Milano 11",
+    "Citta": "Como",
+    "Cap": "22100",
+    "Latitudine": "45.805650500000",
+    "Longitudine": "9.085535300000",
+    "Orario": {
+        "lunedi": "10.00-17.00",
+        "giovedi": "11.00-16.00",
+        "domenica": "chiuso",
+        "martedi": "chiuso",
+        "mercoledi": "chiuso",
+        "venerdi": "chiuso",
+        "sabato": "chiuso"
+    },
+    "Website": "www.negozio1.it",
+    "Telefono": "3334554456",
+    "Email": "info@negozio.it",
+    "Facebook": "https://www.facebook.com/MitchummIndustries",
+    "Twitter": "https://twitter.com/MITCHUMM",
+    "Foursquare": "https://it.foursquare.com/v/mitchumm-store/4fbbba82e4b0182c68e66fe1",
+    "Logo": "09.jpg",
+    "Parcheggio": {
+        "idParcheggio": "8",
+        "nomeParcheggio": "Autosilo 1",
+        "indirizzoParcheggio": "viale Lecco 9",
+        "latitudineParcheggio": "45.810391500000",
+        "longitudineParcheggio": "9.086423300000"
+    }
+	}	
+	];
 	
 	// NOME ESERCIZIO + ORARI ESERCIZIO
 	
 	$("ul#orariEsercizio").html("");
 	
-	$.each(data, function(index, info) {
+	$.each(json, function(index, info) {
 				
 		$("h3.nomeEsercizio").html(info.NomeEsercizio);
 		$("ul#orariEsercizio").append($("<li data-role='list-divider'>Orari di Apertura</li>"));
@@ -235,9 +300,8 @@
 		
 	// /NOME ESERCIZIO + ORARI ESERCIZIO
 	
-	}); // /GET JSON
-	
-	});// /PAGEBEFORESHOW
+	});
+	// /PAGEBEFORESHOW
 	
 	
 	</script>
@@ -284,17 +348,47 @@
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaContatti", function() {
 	
-	//CARICA JSON ESERCIZIO
-	var path = window.localStorage.getItem("pathSD");
-	var jsonPath = path + "/esercizi/16.js";
-	
-	$.getJSON(jsonPath, function( data ) {
+var json = [
+    {
+    "idEsercizio": "16",
+    "NomeEsercizio": "Mitchumm",
+    "Descrizione": "ITA",
+    "Indirizzo": "via Milano 11",
+    "Citta": "Como",
+    "Cap": "22100",
+    "Latitudine": "45.805650500000",
+    "Longitudine": "9.085535300000",
+    "Orario": {
+        "lunedi": "10.00-17.00",
+        "giovedi": "11.00-16.00",
+        "domenica": "chiuso",
+        "martedi": "chiuso",
+        "mercoledi": "chiuso",
+        "venerdi": "chiuso",
+        "sabato": "chiuso"
+    },
+    "Website": "www.negozio1.it",
+    "Telefono": "3334554456",
+    "Email": "info@negozio.it",
+    "Facebook": "https://www.facebook.com/MitchummIndustries",
+    "Twitter": "https://twitter.com/MITCHUMM",
+    "Foursquare": "https://it.foursquare.com/v/mitchumm-store/4fbbba82e4b0182c68e66fe1",
+    "Logo": "09.jpg",
+    "Parcheggio": {
+        "idParcheggio": "8",
+        "nomeParcheggio": "Autosilo 1",
+        "indirizzoParcheggio": "viale Lecco 9",
+        "latitudineParcheggio": "45.810391500000",
+        "longitudineParcheggio": "9.086423300000"
+    }
+	}	
+	];
 	
 	// NOME ESERCIZIO + CONTATTI ESERCIZIO
 	
 	$("ul#contattiEsercizio").html("");
 	
-	$.each(data, function(index, info) {
+	$.each(json, function(index, info) {
 				
 		$("h3.nomeEsercizio").html(info.NomeEsercizio);
 		$("ul#contattiEsercizio").append($("<li data-role='list-divider'>Contatti</li>"));
@@ -311,10 +405,8 @@
 		
 		
 	// /NOME ESERCIZIO + CONTATTI ESERCIZIO
-	
-	});// /GET JSON
-	
-	});// /PAGEBEFORESHOW
+	});
+	// /PAGEBEFORESHOW
 	
 	
 	
@@ -364,18 +456,49 @@
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaStatistiche", function() {
 	
-	//CARICA JSON ESERCIZIO
-	var path = window.localStorage.getItem("pathSD");
-	var jsonPath = path + "/esercizi/16.js";
-	
-	$.getJSON(jsonPath, function( data ) {
+	var json = [
+    {
+    "idEsercizio": "16",
+    "NomeEsercizio": "Mitchumm",
+    "Descrizione": "ITA",
+    "Indirizzo": "via Milano 11",
+    "Citta": "Como",
+    "Cap": "22100",
+    "Latitudine": "45.805650500000",
+    "Longitudine": "9.085535300000",
+    "Orario": {
+        "lunedi": "10.00-17.00",
+        "giovedi": "11.00-16.00",
+        "domenica": "chiuso",
+        "martedi": "chiuso",
+        "mercoledi": "chiuso",
+        "venerdi": "chiuso",
+        "sabato": "chiuso"
+    },
+    "Website": "www.negozio1.it",
+    "Telefono": "3334554456",
+    "Email": "info@negozio.it",
+    "Facebook": "https://www.facebook.com/MitchummIndustries",
+    "Twitter": "https://twitter.com/MITCHUMM",
+    "Foursquare": "https://it.foursquare.com/v/mitchumm-store/4fbbba82e4b0182c68e66fe1",
+    "Logo": "09.jpg",
+    "Parcheggio": {
+        "idParcheggio": "8",
+        "nomeParcheggio": "Autosilo 1",
+        "indirizzoParcheggio": "viale Lecco 9",
+        "latitudineParcheggio": "45.810391500000",
+        "longitudineParcheggio": "9.086423300000"
+    },
+    "Statistiche": "si"
+	}
+	];
 	
 	// NOME ESERCIZIO + STATISTICHE
 	
 	var checkStatistiche;
 	var idEsercizio;
 	
-		$.each(data, function(index, info) {
+		$.each(json, function(index, info) {
 				
 			$("h3.nomeEsercizio").html(info.NomeEsercizio);
 			idEsercizio = info.idEsercizio;
@@ -386,9 +509,9 @@
 	
 	if(checkStatistiche == "si"){
 	
-		var checkConnection = checkConnection();
-		if (checkConnection =! "No_network")
-		{
+		//var checkConnection = checkConnection();
+		//if (checkConnection =! "No_network")
+		//{
 			$(function () {
 			var chart;
 			var perShapeGradient = {
@@ -584,10 +707,10 @@
 		
 			});
 		
-		}
-		else{
-		$("#checkStatistiche").html("Questa funzionalità è disponibile solo se collegati alla rete 3G o WiFi");
-		}
+		//}
+		//else{
+		//$("#checkStatistiche").html("Questa funzionalità è disponibile solo se collegati alla rete 3G o WiFi");
+		//}
 	
 	}
 	else{
@@ -596,9 +719,8 @@
 		
 	// /NOME ESERCIZIO + STATISTICHE
 	
-	}); // /GET JSON
-	
-	}); // /PAGEBEFORESHOW
+	});
+	// /PAGEBEFORESHOW
 
 	</script>
 	

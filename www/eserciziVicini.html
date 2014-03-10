@@ -20,13 +20,17 @@
 	<title>Ricerca Brand</title>
 	
 	<style>
-	#quadrati {
-	position: absolute;
-	top: -25px;
-	right: 0;
+	#quadrati{
+    position:absolute;
 	z-index: 1000 !important;
-	background: url('img/quadrati.png') no-repeat;
-	width: 5em;
+    top: 0;
+	right: -20%;
+    width: 30%;
+    display: block;
+	}
+	#imgQuadrati{
+    width: 30%;
+	margin: auto;
 	}
 	
 	.ui-listview li { 
@@ -46,18 +50,10 @@
 <!-- Start of page: #eserciziViciniMappa -->
 <div data-role="page" id="eserciziViciniMappa">
 
-<div id="quadrati"></div>
+<div id="quadrati"><img src="img/quadrati.png" id="imgQuadrati"></div>
 
 	<div data-role="header">
-		<img src="img/shopincomo_orizzontale.png" style="height:2em; font-size: 1em;
-	text-align: center;
-	display: block;
-	margin: 0 30%;
-	padding: 0;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-	outline: 0 !important;">
+		<h1><img src="img/shopincomo_orizzontale.png" style="height:1.2em"></h1>
 		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse" style="vertical-align: middle; margin: 0.5em; ">indietro</a>
 	</div><!-- /header -->
 

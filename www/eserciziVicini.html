@@ -7,6 +7,9 @@
 	<script src="js/jquery.mobile-1.4.1.min.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
 	
+	<link rel="stylesheet" href="css/themes/ccn20.min.css" />
+	<link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+	
 	<link rel="stylesheet" href="css/leaflet.css" />
 	<link rel="stylesheet" href="css/leaflet.usermarker.css" />
 	<link rel="stylesheet" href="css/eserciziVicini.css" />
@@ -15,6 +18,20 @@
 	<script src="js/function_checkConnection.js"></script>
 	
 	<title>Ricerca Brand</title>
+	
+	<style>
+	
+	.ui-listview li { 
+    margin: 2px;
+	}
+
+	.ui-listview {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+	}
+	</style>
+	
 </head>
 <body>
 
@@ -22,8 +39,8 @@
 <div data-role="page" id="eserciziViciniMappa">
 
 	<div data-role="header">
-		<h1>Ricerca Brand</h1>
-		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
+		<h1><img src="img/shopincomo.png" style="height:2em"></h1>
+		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse" style="vertical-align: middle; margin: 0.5em; ">indietro</a>
 	</div><!-- /header -->
 
 	<div role="main" id="map" class="ui-content" >
@@ -183,7 +200,7 @@
 	</div><!-- /content -->
 
 	<!-- FOOTER -->
-	<div data-role="footer" data-theme="a" data-position="fixed">
+	<div data-role="footer" data-theme="a" data-position="fixed" data-tap-toggle="false">
 	<!-- NAVBAR -->
 		<div data-role="navbar">
 			<ul>

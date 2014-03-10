@@ -20,6 +20,15 @@
 	<title>Ricerca Brand</title>
 	
 	<style>
+	#quadrati {
+	position: absolute;
+	top: -25px;
+	right: 0;
+	z-index: 1000 !important;
+	background: url('img/quadrati.png') no-repeat;
+	width: 13em;
+	height: 13em;
+	}
 	
 	.ui-listview li { 
     margin: 2px;
@@ -38,8 +47,10 @@
 <!-- Start of page: #eserciziViciniMappa -->
 <div data-role="page" id="eserciziViciniMappa">
 
+<div id="quadrati"></div>
+
 	<div data-role="header">
-		<h1><img src="img/shopincomo.png" style="height:2em"></h1>
+		<h1><img src="img/shopincomo_orizzontale.png" style="height:2.5em"></h1>
 		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse" style="vertical-align: middle; margin: 0.5em; ">indietro</a>
 	</div><!-- /header -->
 
@@ -217,8 +228,10 @@
 <!-- Start of page: #eserciziViciniLista -->
 <div data-role="page" id="eserciziViciniLista">
 
+	<div id="quadrati"></div>
+
 	<div data-role="header">
-		<h1>Ricerca Brand</h1>
+		<h1><img src="img/shopincomo_orizzontale.png" style="height:2.5em"></h1>
 		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
 

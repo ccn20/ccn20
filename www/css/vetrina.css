@@ -8,8 +8,8 @@ text-decoration:none;
 /* MAPPA */
 
 #map {
-height: 200px;
-width: 100%;
+height: auto;
+width: auto;
 }
 
 /* NOME */

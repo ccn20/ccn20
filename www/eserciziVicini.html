@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.1.min.css" />
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="js/jquery.mobile-1.4.1.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	
+	<link rel="stylesheet" href="css/leaflet.css" />
+	<link rel="stylesheet" href="css/leaflet.usermarker.css" />
+	<link rel="stylesheet" href="css/eserciziVicini.css" />
+	<script src="js/leaflet.js"></script>
+	<script src="js/leaflet.usermarker.js"></script>
+	<script src="js/function_checkConnection.js"></script>
+	
+	<title>Ricerca Brand</title>
+</head>
+<body>
+
+<!-- Start of page: #eserciziViciniMappa -->
+<div data-role="page" id="eserciziViciniMappa">
+
+	<div data-role="header">
+		<h1>Ricerca Brand</h1>
+		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
+	</div><!-- /header -->
+
+	<div role="main" id="map" class="ui-content" >
+		
+	<script type="text/javascript" charset="utf-8">
+	
+	$( document ).on( "pageshow", "#eserciziViciniMappa", function() {
+	
+	var height = $('[data-role="content"]').height(getRealContentHeight());
+	
+	var actualHeight = height.context.activeElement.clientHeight;
+	
+    $('#map').css('height', actualHeight);
+	
+	
+	
+	var jsonPosition = [{"idEsercizio":"36","nomeEsercizio":"Ferri","latEsercizio":"45.772392400000","lonEsercizio":"9.092593700000","idCategoria":"24"},{"idEsercizio":"18","nomeEsercizio":"Tessabit","latEsercizio":"45.804029000000","lonEsercizio":"9.086120300000","idCategoria":"24"},{"idEsercizio":"154","nomeEsercizio":"Bar Gelateria Tentazioni","latEsercizio":"45.804836600000","lonEsercizio":"9.084450400000","idCategoria":"46"},{"idEsercizio":"16","nomeEsercizio":"Mitchumm","latEsercizio":"45.805650500000","lonEsercizio":"9.085535300000","idCategoria":"55"},{"idEsercizio":"155","nomeEsercizio":"Vago","latEsercizio":"45.807986000000","lonEsercizio":"9.077710300000","idCategoria":"46"},{"idEsercizio":"148","nomeEsercizio":"New Shop","latEsercizio":"45.808038800000","lonEsercizio":"9.084161300000","idCategoria":"25"},{"idEsercizio":"17","nomeEsercizio":"Tea World","latEsercizio":"45.808059700000","lonEsercizio":"9.085176500000","idCategoria":"25"},{"idEsercizio":"19","nomeEsercizio":"Abbigliamento Elisa","latEsercizio":"45.808059700000","lonEsercizio":"9.085176500000","idCategoria":"24"},{"idEsercizio":"20","nomeEsercizio":"Elite","latEsercizio":"45.808059700000","lonEsercizio":"9.085176500000","idCategoria":"56"},{"idEsercizio":"21","nomeEsercizio":"Tezenis","latEsercizio":"45.808059700000","lonEsercizio":"9.085176500000","idCategoria":"24"},{"idEsercizio":"152","nomeEsercizio":"Filippo Caimi","latEsercizio":"45.808923600000","lonEsercizio":"9.083702000000","idCategoria":"25"},{"idEsercizio":"153","nomeEsercizio":"Gloook","latEsercizio":"45.809418500000","lonEsercizio":"9.084146800000","idCategoria":"24"},{"idEsercizio":"34","nomeEsercizio":"Moglia","latEsercizio":"45.809712400000","lonEsercizio":"9.084049100000","idCategoria":"24"},{"idEsercizio":"151","nomeEsercizio":"Hops!","latEsercizio":"45.809847200000","lonEsercizio":"9.083713500000","idCategoria":"25"},{"idEsercizio":"157","nomeEsercizio":"Enoteca da Gigi","latEsercizio":"45.809857200000","lonEsercizio":"9.083437300000","idCategoria":"46"},{"idEsercizio":"150","nomeEsercizio":"A.B.","latEsercizio":"45.809874100000","lonEsercizio":"9.080933700000","idCategoria":"25"},{"idEsercizio":"147","nomeEsercizio":"Viamaestra","latEsercizio":"45.810083600000","lonEsercizio":"9.083251500000","idCategoria":"25"},{"idEsercizio":"149","nomeEsercizio":"Di che piede 6?","latEsercizio":"45.810436600000","lonEsercizio":"9.080352600000","idCategoria":"25"},{"idEsercizio":"35","nomeEsercizio":"Seveso","latEsercizio":"45.810719200000","lonEsercizio":"9.082563100000","idCategoria":"51"},{"idEsercizio":"156","nomeEsercizio":"Luisita","latEsercizio":"45.811529800000","lonEsercizio":"9.081873500000","idCategoria":"46"}];
+	
+	var userLatitude = 45.803979;
+	var userLongitude = 9.086079;
+	
+	var eserciziVicini = [];
+	
+		//NEAREST NODE
+		$.each(jsonPosition, function(index, info) {
+		
+		var currentDistance;
+		var currentEsercizio;
+		
+		currentDistance = getDistanceFromLatLonInKm(userLatitude, userLongitude, info.latEsercizio, info.lonEsercizio);
+		currentEsercizio = info.idEsercizio;
+		
+			if(currentDistance < 500) {
+			
+			var time = Math.round(parseInt(currentDistance)/(1.4)/60);
+			
+			eserciziVicini.push({
+			idEsercizio: info.idEsercizio,
+			nomeEsercizio: info.nomeEsercizio,
+			latEsercizio: info.latEsercizio,
+			lonEsercizio: info.lonEsercizio,
+			idCategoria: info.idCategoria,
+			distance: currentDistance,
+			time: time
+			});
+			}
+		});
+		
+		var eserciziSort = eserciziVicini.sort(function(a,b) { return parseInt(a.distance) - parseInt(b.distance) } );
+	
+	//INIZIALIZZA MAPPA
+	var map = new L.Map('map');
+	
+	/*
+	var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+	
+		L.tileLayer(osmUrl, {
+		maxZoom: 18
+	}).addTo(map);
+	*/
+	
+	L.tileLayer('map/{z}/{x}/{y}.jpg', {
+		maxZoom: 18
+	}).addTo(map);
+	
+	
+	var markerUtente;
+	var group;
+	//var watchID = null;
+	//var options = { maximumAge: 5000, timeout: 30000, enableHighAccuracy: true };
+      
+	//watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+	
+	//SET ICONA ESERCIZIO
+	var markerIcon = L.icon({
+		iconUrl: 'img/marker-icon.png',
+		iconSize:     [25, 41], // size of the icon
+		popupAnchor:  [0, -20] // point from which the popup should open relative to the iconAnchor
+	});
+		
+	var markerEsercizio;
+	
+	$.each(eserciziSort, function(index, info) {
+
+	markerEsercizio = L.marker([info.latEsercizio, info.lonEsercizio], {icon: markerIcon}).addTo(map).bindPopup(info.nomeEsercizio);
+	
+	});
+	
+	//function onSuccess(position) {
+	 		
+	//var userLatitude = position.coords.latitude;
+	//var userLongitude = position.coords.longitude;
+	//var userAccuracy = position.coords.accuracy 
+
+	//SET ICONA UTENTE
+	if (!markerUtente) {
+	markerUtente = L.userMarker([userLatitude, userLongitude],{pulsing:true}).bindPopup("Sei qui.").addTo(map);
+	//markerUtente.setAccuracy(userAccuracy);
+	
+	//ADATTA LA MAPPA
+	group = new L.featureGroup([markerEsercizio, markerUtente]);
+	}
+	
+	//UPDATE POSIZIONE UTENTE
+	markerUtente.setLatLng([userLatitude, userLongitude],{pulsing:true}).update();
+	
+	//RAGGRUPPA MARKER
+	group = new L.featureGroup([markerEsercizio, markerUtente]);
+	map.fitBounds(group.getBounds().pad(0.25));
+	
+	//} // FINE ON SUCCESS
+	
+	function onError(error) {
+        //alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
+	}
+	
+	});
+	
+	function getRealContentHeight() {
+    var header = $.mobile.activePage.find("div[data-role='header']:visible");
+    var footer = $.mobile.activePage.find("div[data-role='footer']:visible");
+    var content = $.mobile.activePage.find("div[data-role='content']:visible:visible");
+    var viewport_height = $(window).height();
+
+    var content_height = viewport_height - header.outerHeight() - footer.outerHeight();
+    if((content.outerHeight() - header.outerHeight() - footer.outerHeight()) <= viewport_height) {
+        content_height -= (content.outerHeight() - content.height());
+    } 
+    return content_height;
+	}
+	
+	function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+  
+		var R = 6371; // Radius of the earth in km
+  
+		var dLat = deg2rad(lat2-lat1);  // deg2rad below
+		var dLon = deg2rad(lon2-lon1); 
+  
+		var a = 
+		Math.sin(dLat/2) * Math.sin(dLat/2) +
+		Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+		Math.sin(dLon/2) * Math.sin(dLon/2)
+		; 
+  
+		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+		var d = R * c * 1000; // Distance in km
+		return Math.round(d);
+	}
+
+	function deg2rad(deg) {
+	
+	return deg * (Math.PI/180)
+	}
+	
+	</script>
+	
+	</div><!-- /content -->
+
+	<!-- FOOTER -->
+	<div data-role="footer" data-theme="a" data-position="fixed">
+	<!-- NAVBAR -->
+		<div data-role="navbar">
+			<ul>
+			<li><a href="#" data-icon="gear" class="ui-btn-active ui-state-persist">Mappa</a></li>
+			<li><a href="#eserciziViciniLista" data-transition="slideup" data-icon="gear">Lista</a></li>
+		</ul>
+		</div>
+	<!-- /NAVBAR -->
+	</div>
+	<!-- /FOOTER -->
+	
+</div><!-- /page eserciziViciniMappa -->
+
+<!-- Start of page: #eserciziViciniLista -->
+<div data-role="page" id="eserciziViciniLista">
+
+	<div data-role="header">
+		<h1>Ricerca Brand</h1>
+		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content" >
+	
+	<script>
+	
+	$( document ).on( "pageshow", "#eserciziViciniLista", function() {
+		
+	var jsonPosition = [{"idEsercizio":"36","nomeEsercizio":"Ferri","latEsercizio":"45.772392400000","lonEsercizio":"9.092593700000","idCategoria":"24"},{"idEsercizio":"18","nomeEsercizio":"Tessabit","latEsercizio":"45.804029000000","lonEsercizio":"9.086120300000","idCategoria":"24"},{"idEsercizio":"154","nomeEsercizio":"Bar Gelateria Tentazioni","latEsercizio":"45.804836600000","lonEsercizio":"9.084450400000","idCategoria":"46"},{"idEsercizio":"16","nomeEsercizio":"Mitchumm","latEsercizio":"45.805650500000","lonEsercizio":"9.085535300000","idCategoria":"55"},{"idEsercizio":"155","nomeEsercizio":"Vago","latEsercizio":"45.807986000000","lonEsercizio":"9.077710300000","idCategoria":"46"},{"idEsercizio":"148","nomeEsercizio":"New Shop","latEsercizio":"45.808038800000","lonEsercizio":"9.084161300000","idCategoria":"25"},{"idEsercizio":"17","nomeEsercizio":"Tea World","latEsercizio":"45.808059700000","lonEsercizio":"9.085176500000","idCategoria":"25"},{"idEsercizio":"19","nomeEsercizio":"Abbigliamento Elisa","latEsercizio":"45.808059700000","lonEsercizio":"9.085176500000","idCategoria":"24"},{"idEsercizio":"20","nomeEsercizio":"Elite","latEsercizio":"45.808059700000","lonEsercizio":"9.085176500000","idCategoria":"56"},{"idEsercizio":"21","nomeEsercizio":"Tezenis","latEsercizio":"45.808059700000","lonEsercizio":"9.085176500000","idCategoria":"24"},{"idEsercizio":"152","nomeEsercizio":"Filippo Caimi","latEsercizio":"45.808923600000","lonEsercizio":"9.083702000000","idCategoria":"25"},{"idEsercizio":"153","nomeEsercizio":"Gloook","latEsercizio":"45.809418500000","lonEsercizio":"9.084146800000","idCategoria":"24"},{"idEsercizio":"34","nomeEsercizio":"Moglia","latEsercizio":"45.809712400000","lonEsercizio":"9.084049100000","idCategoria":"24"},{"idEsercizio":"151","nomeEsercizio":"Hops!","latEsercizio":"45.809847200000","lonEsercizio":"9.083713500000","idCategoria":"25"},{"idEsercizio":"157","nomeEsercizio":"Enoteca da Gigi","latEsercizio":"45.809857200000","lonEsercizio":"9.083437300000","idCategoria":"46"},{"idEsercizio":"150","nomeEsercizio":"A.B.","latEsercizio":"45.809874100000","lonEsercizio":"9.080933700000","idCategoria":"25"},{"idEsercizio":"147","nomeEsercizio":"Viamaestra","latEsercizio":"45.810083600000","lonEsercizio":"9.083251500000","idCategoria":"25"},{"idEsercizio":"149","nomeEsercizio":"Di che piede 6?","latEsercizio":"45.810436600000","lonEsercizio":"9.080352600000","idCategoria":"25"},{"idEsercizio":"35","nomeEsercizio":"Seveso","latEsercizio":"45.810719200000","lonEsercizio":"9.082563100000","idCategoria":"51"},{"idEsercizio":"156","nomeEsercizio":"Luisita","latEsercizio":"45.811529800000","lonEsercizio":"9.081873500000","idCategoria":"46"}];
+	
+	var latUser = 45.803979;
+	var lonUser = 9.086079;
+	
+	var eserciziVicini = [];
+	
+		//NEAREST NODE
+		$.each(jsonPosition, function(index, info) {
+		
+		var currentDistance;
+		var currentEsercizio;
+		
+		currentDistance = getDistanceFromLatLonInKm(latUser, lonUser, info.latEsercizio, info.lonEsercizio);
+		currentEsercizio = info.idEsercizio;
+		
+			if(currentDistance < 500) {
+			
+			var time = Math.round(parseInt(currentDistance)/(1.4)/60);
+			
+			eserciziVicini.push({
+			idEsercizio: info.idEsercizio,
+			nomeEsercizio: info.nomeEsercizio,
+			idCategoria: info.idCategoria,
+			distance: currentDistance,
+			time: time
+			});
+			}
+		});
+		
+		var eserciziSort = eserciziVicini.sort(function(a,b) { return parseInt(a.distance) - parseInt(b.distance) } );
+		
+		$("ul#listaEsercizi").html("");
+		
+		$.each(eserciziSort, function(index, info) {
+		$("ul#listaEsercizi").append($("<li></li>",{"html":'<a href="#"><img src="../_assets/img/album-p.jpg"><h2>'+info.nomeEsercizio+'</h2><p>'+info.time+'</p></a>' }));
+		});
+		
+		$("ul#listaEsercizi").listview().listview('refresh');
+	
+	});
+	
+	function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+  
+		var R = 6371; // Radius of the earth in km
+  
+		var dLat = deg2rad(lat2-lat1);  // deg2rad below
+		var dLon = deg2rad(lon2-lon1); 
+  
+		var a = 
+		Math.sin(dLat/2) * Math.sin(dLat/2) +
+		Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+		Math.sin(dLon/2) * Math.sin(dLon/2)
+		; 
+  
+		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+		var d = R * c * 1000; // Distance in km
+		return Math.round(d);
+	}
+
+	function deg2rad(deg) {
+	
+	return deg * (Math.PI/180)
+	}
+	
+	</script>
+		
+	<ul data-role="listview" id="listaEsercizi" data-inset="true">
+	</ul>
+	
+	</div><!-- /content -->
+
+	<!-- FOOTER -->
+	<div data-role="footer" data-theme="a" data-position="fixed">
+	<!-- NAVBAR -->
+		<div data-role="navbar">
+			<ul>
+			<li><a href="#eserciziViciniMappa" data-transition="slidedown" data-icon="gear" >Mappa</a></li>
+			<li><a href="#"  data-icon="gear" class="ui-btn-active ui-state-persist">Lista</a></li>
+		</ul>
+		</div>
+	<!-- /NAVBAR -->
+	</div>
+	<!-- /FOOTER -->
+</div><!-- /page eserciziViciniLista -->
+
+</body>
+</html>

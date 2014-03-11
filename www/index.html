@@ -425,30 +425,41 @@
 			
 		}); // end of window.requestFileSystem
 		
-		//JSON VETRINE
-		var conteggioEsercizi = 0;
 		
+		
+		//JSON VETRINE
+		
+		//var conteggioEsercizi = 0;
 		
 		$.ajax({
-		url: "http://www.wificomo.com/ccn20/JSONidEsercizi.php",
-		dataType: 'json',
-		async: false,
-		success: function(data) {
+			url: "http://www.wificomo.com/ccn20/JSONidEsercizi.php",
+			dataType: 'json',
+			async: false,
+			success: function(data) {
 		
-		var totaleEsercizi = data.length;
+				var totaleEsercizi = data.length;
 		
-		$.each(data, function(index, info) {
+				$.each(data, function(index, info) {
 		
-		var urlEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONvetrinaEsercizio.php?language="+codLingua+"&idEsercizio="+info.idEsercizio+"");	
-		var fileNameEsercizi = info.idEsercizio+".js";
+					var urlEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONvetrinaEsercizio.php?language="+codLingua+"&idEsercizio="+info.idEsercizio+"");	
+					var fileNameEsercizi = info.idEsercizio+".js";	
+					var directoryEsercizi = "ccn/esercizi";
+		
+					downloadJSON(directory, fileNameEsercizi, urlEsercizi);
+				});
+			}
+		});
+		
+		
+	function downloadJSON(directory, fileName, fileURL) {
 		
 		var fileTransfer = new FileTransfer();
-			
+		
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
 			
-			fileSystem.root.getDirectory("ccn/esercizi", {create: true, exclusive: false}, function(dirEntry) {
+			fileSystem.root.getDirectory(directory, {create: true, exclusive: false}, function(dirEntry) {
 			
-				dirEntry.getFile(fileNameEsercizi, {create: true, exclusive: false}, function(fileEntry) {
+				dirEntry.getFile(fileName, {create: true, exclusive: false}, function(fileEntry) {
 										
 					var localPath = fileEntry.fullPath;
 
@@ -457,16 +468,18 @@
 					}
 
 					fileTransfer.download(
-						urlEsercizi,
+						fileURL,
 						localPath,
 						function(entry) {
 						
+							/*
 							conteggioEsercizi = parseInt(conteggioEsercizi)+1;
-								
+															
 								if(conteggioEsercizi == totaleEsercizi) {
-								//alert("scaricati "+conteggioEsercizi+" esercizi");
+								alert("scaricati "+conteggioEsercizi+" esercizi");
 								sessionStorage.setItem("downloadEsercizi", "ok");
 								}
+							*/
 								
 							console.log("download complete: " + entry.fullPath);
 							
@@ -490,13 +503,7 @@
 			
 		}); // end of window.requestFileSystem
 		
-		});
-		
-		}
-		});
-		
-		
-		
+	} //FUNCTION downloadJSON
 		
 		
 		

@@ -36,9 +36,6 @@
 	
 	$(document).on("click", 'button.download', function(){
 	
-	alert("click");
-	console.log("click");
-	
 	//JSON BRAND ESERCIZI
 	var urlbrandEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONbrandEsercizi.php");
 	var fileNamebrandEsercizi = "brandEsercizi.js";
@@ -61,7 +58,7 @@
 						urlbrandEsercizi,
 						localPath,
 						function(entry) {
-							console.log("download complete: " + entry.fullPath);
+							alert("download complete: " + entry.fullPath);
 						},
 						function(error) {
 							console.log("download error source " + error.source);

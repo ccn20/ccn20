@@ -303,119 +303,46 @@
 	//JSON RICERCA PER NOME
 	var urlnomeEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONnomeEsercizi.php");	
 	var fileNamenomeEsercizi = "nomeEsercizi.js";
-		
-		var fileTransfer = new FileTransfer();
-			
-		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-			
-			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
-			
-				dirEntry.getFile(fileNamenomeEsercizi, {create: true, exclusive: false}, function(fileEntry) {
-										
-					var localPath = fileEntry.fullPath;
-
-					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
-							localPath = localPath.substring(7);
-					}
-
-					fileTransfer.download(
-						urlnomeEsercizi,
-						localPath,
-						function(entry) {
-							console.log("download complete: " + entry.fullPath);
-						},
-						function(error) {
-							console.log("download error source " + error.source);
-							console.log("download error target " + error.target);
-						},
-						false,
-						{
-							headers: {
-							"Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
-							}
-						}
-				
-					); // end of fileTransfer.download
-				}); // end of dirEntry.getFile
-			
-			}); // fileSystem.root.getDirectory
-			
-		}); // end of window.requestFileSystem
-		
-		
-	//JSON RICERCA PER BRAND
-	var urlbrand = encodeURI("http://www.wificomo.com/ccn20/JSONbrand.php");
-	var fileNamebrand = "brand.js";
-		
-		var fileTransfer = new FileTransfer();
-			
-		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-			
-			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
-			
-				dirEntry.getFile(fileNamebrand, {create: true, exclusive: false}, function(fileEntry) {
-										
-					var localPath = fileEntry.fullPath;
-
-					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
-							localPath = localPath.substring(7);
-					}
-
-					fileTransfer.download(
-						urlbrand,
-						localPath,
-						function(entry) {
-							console.log("download complete: " + entry.fullPath);
-						},
-						function(error) {
-							console.log("download error source " + error.source);
-							console.log("download error target " + error.target);
-						},
-						false,
-						{
-							headers: {
-							"Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
-							}
-						}
-				
-					); // end of fileTransfer.download
-				}); // end of dirEntry.getFile
-			
-			}); // fileSystem.root.getDirectory
-			
-		}); // end of window.requestFileSystem
-		
+	var directory = "ccn";
+	
+	downloadJSON(directory, fileNamenomeEsercizi, urlnomeEsercizi);
+	
 	//JSON BRAND ESERCIZI
 	var urlbrandEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONbrandEsercizi.php");
 	var fileNamebrandEsercizi = "brandEsercizi.js";
 	var directory = "ccn";
 	
 	downloadJSON(directory, fileNamebrandEsercizi, urlbrandEsercizi);
+	
+	//JSON RICERCA PER BRAND
+	var urlbrand = encodeURI("http://www.wificomo.com/ccn20/JSONbrand.php");
+	var fileNamebrand = "brand.js";
+	var directory = "ccn";
+	
+	downloadJSON(directory, fileNamebrand, urlbrand);
 		
+	//JSON VETRINE
 		
+	//var conteggioEsercizi = 0;
 		
-		//JSON VETRINE
+	$.ajax({
+		url: "http://www.wificomo.com/ccn20/JSONidEsercizi.php",
+		dataType: 'json',
+		async: false,
+		success: function(data) {
 		
-		//var conteggioEsercizi = 0;
+		var totaleEsercizi = data.length;
 		
-		$.ajax({
-			url: "http://www.wificomo.com/ccn20/JSONidEsercizi.php",
-			dataType: 'json',
-			async: false,
-			success: function(data) {
+			$.each(data, function(index, info) {
 		
-				var totaleEsercizi = data.length;
+			var urlEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONvetrinaEsercizio.php?language="+codLingua+"&idEsercizio="+info.idEsercizio+"");	
+			var fileNameEsercizi = info.idEsercizio+".js";	
+			var directoryEsercizi = "ccn/esercizi";
 		
-				$.each(data, function(index, info) {
-		
-					var urlEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONvetrinaEsercizio.php?language="+codLingua+"&idEsercizio="+info.idEsercizio+"");	
-					var fileNameEsercizi = info.idEsercizio+".js";	
-					var directoryEsercizi = "ccn/esercizi";
-		
-					downloadJSON(directory, fileNameEsercizi, urlEsercizi);
-				});
-			}
-		});
+			downloadJSON(directory, fileNameEsercizi, urlEsercizi);
+			});
+		}
+	});
 		
 	
 		

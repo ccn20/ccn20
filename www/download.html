@@ -19,17 +19,17 @@
 	<div id="quadrati"></div>
 
 	<div data-role="header">
-		<h1><img src="img/shopincomo_orizzontale.png" style="height:2.5em"></h1>
+		<h1>Download</h1>
 		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content" >
 	
 	<script>
-	
-	$( document ).on( "pageshow", "#download", function() {
+	$( "#download" ).on( "pageshow", function() {	
 	
 	console.log("vaffanculo");
+	alert("vaffanculo");
 	
 	var urlCategorie = encodeURI("http://www.wificomo.com/ccn20/JSONcategorie.php?language=it");	
 	var fileNameCategorie = "categorie.js";
@@ -55,6 +55,7 @@
 						function(entry) {
 						
 							console.log("download complete: " + entry.fullPath);
+							alert("download complete: " + entry.fullPath);
 							
 							//MEMORIZZA PATH
 								var directory = dirEntry.fullPath;

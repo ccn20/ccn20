@@ -34,15 +34,12 @@
 	var fileTransfer = new FileTransfer();
 			
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-		alert("requestFileSystem");
-		
-			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
-			alert("getDirectory");
 			
-				dirEntry.getFile(fileNameCategorie, {create: true, exclusive: false}, function(fileEntry) {					
-					
+			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
+			
+				dirEntry.getFile(fileNameCategorie, {create: true, exclusive: false}, function(fileEntry) {
+										
 					var localPath = fileEntry.fullPath;
-					alert("localPath: "+localPath);
 
 					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
 						localPath = localPath.substring(7);
@@ -55,7 +52,6 @@
 						function(entry) {
 						
 							console.log("download complete: " + entry.fullPath);
-							alert("download complete: " + entry.fullPath);
 							
 							//MEMORIZZA PATH
 								var directory = dirEntry.fullPath;
@@ -67,9 +63,9 @@
 								//getSottocategorie();
 						},
 						function(error) {
-							alert("download error source " + error.source);
-							alert("download error target " + error.target);
-							alert("download error code " + error.code);
+							console.log("download error source " + error.source);
+							console.log("download error target " + error.target);
+							console.log("download error code " + error.code);
 							
 						},
 						false,

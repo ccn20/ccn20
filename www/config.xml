@@ -11,7 +11,7 @@
     <param name="APP_ID" value="1448410138727682" />
     <param name="APP_NAME" value="ccn20" />
 	</gap:plugin>
-	<gap:plugin name="org.apache.cordova.file" />
+	<gap:plugin name="org.apache.cordova.file" version="0.2.4" />
 	<gap:plugin name="org.apache.cordova.file-transfer" version="0.3.3" />
 	<gap:plugin name="org.apache.cordova.geolocation" />
 	<gap:plugin name="org.apache.cordova.network-information" />

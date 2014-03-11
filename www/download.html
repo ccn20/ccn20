@@ -119,82 +119,56 @@
 	
 	*/
 	
-	
 	//JSON RICERCA PER NOME
-	$.mobile.loading( "show", {
-            text: "download nomi...",
-            textVisible: true,
-            theme: "b",
-            textonly: false
-    });
 	
 	var urlnomeEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONnomeEsercizi.php");	
 	var fileNamenomeEsercizi = "nomeEsercizi.js";
 	var directory = "ccn";
+	var pClass = "nome";
 	
-	downloadJSON(directory, fileNamenomeEsercizi, urlnomeEsercizi);
+	downloadJSON(directory, fileNamenomeEsercizi, urlnomeEsercizi, pClass);
 	
 	//JSON BRAND ESERCIZI
-	$.mobile.loading( "show", {
-            text: "download brand esercizi...",
-            textVisible: true,
-            theme: "b",
-            textonly: false
-    });
 	
 	var urlbrandEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONbrandEsercizi.php");
 	var fileNamebrandEsercizi = "brandEsercizi.js";
 	var directory = "ccn";
+	var pClass = "brandEsercizi";
 	
-	downloadJSON(directory, fileNamebrandEsercizi, urlbrandEsercizi);
+	downloadJSON(directory, fileNamebrandEsercizi, urlbrandEsercizi, pClass);
 	
 	//JSON RICERCA PER BRAND
-	$.mobile.loading( "show", {
-            text: "download brand...",
-            textVisible: true,
-            theme: "b",
-            textonly: false
-    });
 	
 	var urlbrand = encodeURI("http://www.wificomo.com/ccn20/JSONbrand.php");
 	var fileNamebrand = "brand.js";
 	var directory = "ccn";
+	var pClass = "brand";
 	
-	downloadJSON(directory, fileNamebrand, urlbrand);
+	downloadJSON(directory, fileNamebrand, urlbrand, pClass);
 	
 	//JSON POSITION
-	$.mobile.loading( "show", {
-            text: "download position...",
-            textVisible: true,
-            theme: "b",
-            textonly: false
-    });
 	
 	var urlposition = encodeURI("http://www.wificomo.com/ccn20/JSONposition.php");
 	var filePosition = "position.js";
 	var directory = "ccn";
+	var pClass = "position";
 	
-	downloadJSON(directory, filePosition, urlposition);
+	downloadJSON(directory, filePosition, urlposition, pClass);
 	
 	//JSON DISTANCE
-	$.mobile.loading( "show", {
-            text: "download distance...",
-            textVisible: true,
-            theme: "b",
-            textonly: false
-    });
 	
 	var urldistance = encodeURI("http://www.wificomo.com/ccn20/JSONdistance.php");
 	var fileDistance = "distance.js";
 	var directory = "ccn";
+	var pClass = "distance";
 	
-	downloadJSON(directory, fileDistance, urldistance);
+	downloadJSON(directory, fileDistance, urldistance, pClass);
 	
 	});
 	
 	
 	//DOWNLOAD JSON FUNCTION
-	function downloadJSON(directory, fileName, fileURL) {
+	function downloadJSON(directory, fileName, fileURL, pClass) {
 		
 		var fileTransfer = new FileTransfer();
 		
@@ -215,7 +189,7 @@
 						localPath,
 						function(entry) {
 						
-						$.mobile.loading( "hide");
+						$("p."+pClass+"").css("color","green");
 						
 							/*
 							conteggioEsercizi = parseInt(conteggioEsercizi)+1;
@@ -249,6 +223,12 @@
 	</script>
 		
 	<button class="download">download</button>
+	
+	<p class="nome"></p>
+	<p class="brandEsercizi"></p>
+	<p class="brand"></p>
+	<p class="position"></p>
+	<p class="distance"></p>
 	
 	</div><!-- /content -->
 

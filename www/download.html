@@ -1,15 +1,38 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>InAppBrowser.addEventListener Example</title>
+<head>
+	<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.1.min.css" />
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="js/jquery.mobile-1.4.1.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/function_checkConnection.js"></script>
+	
+	<title>Ricerca Brand</title>
+	
+</head>
+<body>
 
-    <script type="text/javascript" src="cordova.js"></script>
-    <script>
+<!-- Start of page: #download -->
+<div data-role="page" id="download">
 
+	<div id="quadrati"></div>
+
+	<div data-role="header">
+		<h1><img src="img/shopincomo_orizzontale.png" style="height:2.5em"></h1>
+		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content" >
+	
+	<script>
+	
+	$( document ).on( "pageshow", "#download", function() {
+	
 	var urlCategorie = encodeURI("http://www.wificomo.com/ccn20/JSONcategorie.php?language="it"");	
 	var fileNameCategorie = "categorie.js";
 		
-		var fileTransfer = new FileTransfer();
+	var fileTransfer = new FileTransfer();
 			
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
 			
@@ -58,9 +81,20 @@
 			}); // fileSystem.root.getDirectory
 			
 		}); // end of window.requestFileSystem
+		
+	});
 	
-    </script>
-  </head>
-  <body>
-  </body>
+	</script>
+		
+	
+	
+	</div><!-- /content -->
+
+	<!-- FOOTER -->
+	<div data-role="footer" data-theme="a" data-position="fixed">
+	</div>
+	<!-- /FOOTER -->
+</div><!-- /page eserciziViciniLista -->
+
+</body>
 </html>

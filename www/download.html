@@ -52,44 +52,6 @@
 	
 	downloadJSON(directory, fileNamebrand, urlbrand);
 	
-		var fileTransfer = new FileTransfer();
-			
-		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-			
-			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
-			
-				dirEntry.getFile(fileNamebrand, {create: true, exclusive: false}, function(fileEntry) {
-										
-					var localPath = fileEntry.fullPath;
-
-					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
-							localPath = localPath.substring(7);
-					}
-
-					fileTransfer.download(
-						urlbrand,
-						localPath,
-						function(entry) {
-							console.log("download complete: " + entry.fullPath);
-						},
-						function(error) {
-							console.log("download error source " + error.source);
-							console.log("download error target " + error.target);
-						},
-						false,
-						{
-							headers: {
-							"Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
-							}
-						}
-				
-					); // end of fileTransfer.download
-				}); // end of dirEntry.getFile
-			
-			}); // fileSystem.root.getDirectory
-			
-		}); // end of window.requestFileSystem
-	
 	//DOWNLOAD JSON FUNCTION
 	function downloadJSON(directory, fileName, fileURL) {
 		
@@ -121,7 +83,7 @@
 								}
 							*/
 								
-							console.log("download complete: " + entry.fullPath);
+							alert("download complete: " + entry.fullPath);
 							
 							
 						},

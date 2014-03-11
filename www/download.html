@@ -34,11 +34,13 @@
 	var fileTransfer = new FileTransfer();
 			
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-			
+		alert("requestFileSystem");
+		
 			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
+			alert("getDirectory");
 			
-				dirEntry.getFile(fileNameCategorie, {create: true, exclusive: false}, function(fileEntry) {
-										
+				dirEntry.getFile(fileNameCategorie, {create: true, exclusive: false}, function(fileEntry) {					
+					
 					var localPath = fileEntry.fullPath;
 					alert("localPath: "+localPath);
 

@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+	<title>Page Title</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<link rel="stylesheet" href="css/jquery.mobile-1.4.1.min.css" />
 	<script src="js/jquery-1.11.0.min.js"></script>
 	<script src="js/jquery.mobile-1.4.1.min.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
 	<script type="text/javascript" src="js/function_checkConnection.js"></script>
-	
-	<title>Ricerca Brand</title>
-	
+	<!-- cordova facebook plugin -->
+	<script src="cdv-plugin-fb-connect.js"></script>
+	<!-- facebook js sdk -->
+	<script src="facebook-js-sdk.js"></script>
 </head>
 <body>
 
@@ -26,7 +30,7 @@
 	<div role="main" class="ui-content" >
 	
 	<script>
-	$( "#download" ).on( "pageshow", function() {	
+	$( "#download" ).on( "pagebeforeshow", function() {	
 	
 	});
 	

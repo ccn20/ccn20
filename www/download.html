@@ -36,6 +36,13 @@
 	
 	$(document).on("click", 'button.download', function(){
 	
+	//JSON RICERCA PER NOME
+	var urlnomeEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONnomeEsercizi.php");	
+	var fileNamenomeEsercizi = "nomeEsercizi.js";
+	var directory = "ccn";
+	
+	downloadJSON(directory, fileNamenomeEsercizi, urlnomeEsercizi);
+	
 	//JSON BRAND ESERCIZI
 	var urlbrandEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONbrandEsercizi.php");
 	var fileNamebrandEsercizi = "brandEsercizi.js";
@@ -43,14 +50,16 @@
 	
 	downloadJSON(directory, fileNamebrandEsercizi, urlbrandEsercizi);
 	
-	});
-
 	//JSON RICERCA PER BRAND
 	var urlbrand = encodeURI("http://www.wificomo.com/ccn20/JSONbrand.php");
 	var fileNamebrand = "brand.js";
 	var directory = "ccn";
 	
 	downloadJSON(directory, fileNamebrand, urlbrand);
+	
+	});
+
+	
 	
 	//DOWNLOAD JSON FUNCTION
 	function downloadJSON(directory, fileName, fileURL) {

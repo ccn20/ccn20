@@ -28,9 +28,6 @@
 	<script>
 	$( "#download" ).on( "pageshow", function() {	
 	
-	console.log("vaffanculo");
-	alert("vaffanculo");
-	
 	var urlCategorie = encodeURI("http://www.wificomo.com/ccn20/JSONcategorie.php?language=it");	
 	var fileNameCategorie = "categorie.js";
 		
@@ -43,6 +40,7 @@
 				dirEntry.getFile(fileNameCategorie, {create: true, exclusive: false}, function(fileEntry) {
 										
 					var localPath = fileEntry.fullPath;
+					alert("localPath: "+localPath);
 
 					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
 						localPath = localPath.substring(7);
@@ -67,9 +65,10 @@
 								//getSottocategorie();
 						},
 						function(error) {
-							console.log("download error source " + error.source);
-							console.log("download error target " + error.target);
-							console.log("download error code " + error.code);
+							alert("download error source " + error.source);
+							alert("download error target " + error.target);
+							alert("download error code " + error.code);
+							
 						},
 						false,
 						{

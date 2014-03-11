@@ -174,7 +174,15 @@
 					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
 							localPath = localPath.substring(7);
 					}
-
+					
+					fileTransfer.onprogress = function(progressEvent) {
+						if (progressEvent.lengthComputable) {
+						loadingStatus.setPercentage(progressEvent.loaded / progressEvent.total);
+						} else {
+						loadingStatus.increment();
+						}
+					};
+					
 					fileTransfer.download(
 						fileURL,
 						localPath,
@@ -188,10 +196,6 @@
 								sessionStorage.setItem("downloadEsercizi", "ok");
 								}
 							*/
-								
-							alert("download complete: " + entry.fullPath);
-							
-							
 						},
 						function(error) {
 							console.log("download error source " + error.source);

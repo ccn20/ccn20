@@ -36,6 +36,89 @@
 	
 	$(document).on("click", 'button.download', function(){
 	
+	//idLingua = $(this).attr('id');
+	//lingua = $(this).attr('nomeLingua');
+	codLingua = "it"; //$(this).attr('codiceLingua');
+	
+	//window.localStorage.setItem("lingua", lingua);
+	//window.localStorage.setItem("idLingua", idLingua);
+	window.localStorage.setItem("codLingua", codLingua);
+	
+	var urlCategorie = encodeURI("http://www.wificomo.com/ccn20/JSONcategorie.php?language="+codLingua+"");	
+	var fileNameCategorie = "categorie.js";
+		
+		var fileTransfer = new FileTransfer();
+			
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+			
+			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
+			
+				dirEntry.getFile(fileNameCategorie, {create: true, exclusive: false}, function(fileEntry) {
+										
+					var localPath = fileEntry.fullPath;
+
+					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
+						localPath = localPath.substring(7);
+					}
+					
+					fileTransfer.download(
+						urlCategorie,
+						localPath,
+						
+						function(entry) {
+						
+							console.log("download complete: " + entry.fullPath);
+							
+							//MEMORIZZA PATH
+								var directory = dirEntry.fullPath;
+								var indexPath = directory.lastIndexOf("/");
+								var pathSD = directory.substr(7, indexPath-7);
+								pathSD = pathSD+"/ccn";
+								window.localStorage.setItem('pathSD', pathSD);
+								
+								//getSottocategorie();
+						},
+						function(error) {
+							console.log("download error source " + error.source);
+							console.log("download error target " + error.target);
+							console.log("download error code " + error.code);
+						},
+						false,
+						{
+							headers: {
+								"Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+							}
+						}
+				
+					); // end of fileTransfer.download
+				}); // end of dirEntry.getFile
+			
+			}); // fileSystem.root.getDirectory
+			
+		}); // end of window.requestFileSystem
+		
+	
+		
+	function getSottocategorie()
+	{
+		var codlingua = window.localStorage.getItem('codLingua');
+		var path = window.localStorage.getItem('pathSD');
+		var pathCategorie = path+"/categorie.js";
+		
+		$.getJSON(pathCategorie, function( data ) {
+		
+			$.each(data, function(index, info) {
+		
+			var urlSottocategorie = encodeURI("http://www.wificomo.com/ccn20/JSONsottocategorieNegozi.php?idCategoria="+info.idCategoria+"&language="+codLingua+"");	
+			var fileNameSottocategorie = info.jsonName+".js";
+			var directory = "ccn";
+			
+			downloadJSON(directory, fileNameSottocategorie, urlSottocategorie);
+			});
+		});
+		
+	} //FUNCTION getSottocategorie()
+	
 	//JSON RICERCA PER NOME
 	var urlnomeEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONnomeEsercizi.php");	
 	var fileNamenomeEsercizi = "nomeEsercizi.js";

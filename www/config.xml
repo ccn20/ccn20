@@ -12,7 +12,7 @@
     <param name="APP_NAME" value="ccn20" />
 	</gap:plugin>
 	<gap:plugin name="org.apache.cordova.file" />
-	<gap:plugin name="org.apache.cordova.file-transfer" />
+	<gap:plugin name="org.apache.cordova.file-transfer" version="0.3.3" />
 	<gap:plugin name="org.apache.cordova.geolocation" />
 	<gap:plugin name="org.apache.cordova.network-information" />
 	<gap:plugin name="org.apache.cordova.device" />

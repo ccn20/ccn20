@@ -67,7 +67,7 @@
 						
 						function(entry) {
 						
-							console.log("download complete: " + entry.fullPath);
+							alert("download complete: " + entry.fullPath);
 							
 							//MEMORIZZA PATH
 								var directory = dirEntry.fullPath;
@@ -76,7 +76,7 @@
 								pathSD = pathSD+"/ccn";
 								window.localStorage.setItem('pathSD', pathSD);
 								
-								//getSottocategorie();
+								getSottocategorie();
 						},
 						function(error) {
 							console.log("download error source " + error.source);

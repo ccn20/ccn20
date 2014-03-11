@@ -30,8 +30,11 @@
 	<div role="main" class="ui-content" >
 	
 	<script>
-	$( "#download" ).on( "pageshow", function() {	
+	$( "#download" ).on( "pagebeforeshow", function() {	
 	
+	});
+	
+	$(document).on("click", 'button.download', function(){
 	/*
 	//idLingua = $(this).attr('id');
 	//lingua = $(this).attr('nomeLingua');
@@ -163,6 +166,7 @@
 	
 	});
 	
+	
 	//DOWNLOAD JSON FUNCTION
 	function downloadJSON(directory, fileName, fileURL, pClass) {
 		
@@ -217,6 +221,8 @@
 	} //FUNCTION downloadJSON
 	
 	</script>
+		
+	<button class="download">download</button>
 	
 	<p class="nome">nome</p>
 	<p class="brandEsercizi">brandEsercizi</p>

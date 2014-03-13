@@ -119,7 +119,7 @@
 			var fileNameSottocategorie = info.jsonName+".js";
 			var directory = "ccn";
 			
-			downloadJSONmulti(directory, fileNameSottocategorie, urlSottocategorie);
+			downloadJSONsottocategorie(directory, fileNameSottocategorie, urlSottocategorie);
 			});
 		});
 		
@@ -170,6 +170,28 @@
 	
 	downloadJSON(directory, fileDistance, urldistance, pClass);
 	
+	});
+	
+	//JSON VETRINE
+				
+	$.ajax({
+		url: "http://www.wificomo.com/ccn20/JSONidEsercizi.php",
+		dataType: 'json',
+		async: false,
+		success: function(data) {
+		
+		var numEsercizi = data.length;
+		window.sessionStorage.setItem("numEsercizi", numEsercizi);
+	
+			$.each(data, function(index, info) {
+		
+			var urlEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONvetrinaEsercizio.php?language="+codLingua+"&idEsercizio="+info.idEsercizio+"");	
+			var fileNameEsercizi = info.idEsercizio+".js";	
+			var directoryEsercizi = "ccn/esercizi";
+		
+			downloadJSONvetrineEsercizi(directory, fileNameEsercizi, urlEsercizi);
+			});
+		}
 	});
 	
 	
@@ -227,8 +249,8 @@
 		
 	} //FUNCTION downloadJSON
 	
-	//DOWNLOAD JSONmulti FUNCTION
-	function downloadJSONmulti(directory, fileName, fileURL) {
+	//DOWNLOAD JSONsottocategorie FUNCTION
+	function downloadJSONsottocategorie(directory, fileName, fileURL) {
 		
 		var fileTransfer = new FileTransfer();
 		
@@ -278,7 +300,60 @@
 			
 		}); // end of window.requestFileSystem
 		
-	} //FUNCTION downloadJSONmulti
+	} //FUNCTION downloadJSONsottocategorie
+	
+	//DOWNLOAD JSONvetrineEsercizi FUNCTION
+	function downloadJSONvetrineEsercizi(directory, fileName, fileURL) {
+		
+		var fileTransfer = new FileTransfer();
+		
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+			
+			fileSystem.root.getDirectory(directory, {create: true, exclusive: false}, function(dirEntry) {
+			
+				dirEntry.getFile(fileName, {create: true, exclusive: false}, function(fileEntry) {
+										
+					var localPath = fileEntry.fullPath;
+
+					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
+							localPath = localPath.substring(7);
+					}
+					
+					fileTransfer.download(
+						fileURL,
+						localPath,
+						function(entry) {
+						
+						numEsercizi = window.sessionStorage.getItem("numEsercizi");
+						numEsercizi = parseInt(numEsercizi)-1;
+															
+								if(numEsercizi == 0) {
+								$("li.sottocategorie").html("download vetrine <img src='img/downloadok.png'>");
+								$("li.sottocategorie").css("color","green");
+								}
+								else {
+								sessionStorage.setItem("numEsercizi", numEsercizi);
+								}
+						},
+						function(error) {
+							alert("download error source " + error.source);
+							alert("download error target " + error.target);
+						},
+						false,
+						{
+							headers: {
+								"Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+							}
+						}
+				
+					); // end of fileTransfer.download
+				}); // end of dirEntry.getFile
+			
+			}); // fileSystem.root.getDirectory
+			
+		}); // end of window.requestFileSystem
+		
+	} //FUNCTION downloadJSONsottocategorie
 	
 	</script>
 		
@@ -287,6 +362,7 @@
 	<ul style="list-style-type: none">
 	<li class="categorie">download categorie...<img src="img/download.gif"></li>
 	<li class="sottocategorie">download sottocategorie...<img src="img/download.gif"></li>
+	<li class="vetrine">download vetrine...<img src="img/download.gif"></li>
 	<li class="nome">configurazione ricerca per nome... <img src="img/download.gif"></li>
 	<li class="brandEsercizi">configurazione brand... <img src="img/download.gif"></li>
 	<li class="brand">download brand... <img src="img/download.gif"></li>

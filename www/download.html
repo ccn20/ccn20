@@ -170,16 +170,13 @@
 	
 	downloadJSON(directory, fileDistance, urldistance, pClass);
 	
-	});
-	
 	//JSON VETRINE
-				
 	$.ajax({
 		url: "http://www.wificomo.com/ccn20/JSONidEsercizi.php",
 		dataType: 'json',
 		async: false,
 		success: function(data) {
-		alert("ajax");
+		alert(codLingua);
 		var numEsercizi = data.length;
 		alert(numEsercizi);
 		window.sessionStorage.setItem("numEsercizi", numEsercizi);
@@ -196,7 +193,7 @@
 			});
 		}
 	});
-	
+	});
 	
 	//DOWNLOAD JSON FUNCTION
 	function downloadJSON(directory, fileName, fileURL, pClass) {

@@ -320,7 +320,24 @@
 	var directory = "ccn";
 	
 	downloadJSON(directory, fileNamebrand, urlbrand);
+	
+	//JSON POSITION
+	var urlposition = encodeURI("http://www.wificomo.com/ccn20/JSONposition.php");
+	var filePosition = "position.js";
+	var directory = "ccn";
+	
+	downloadJSON(directory, filePosition, urlposition);
+	
+	//JSON DISTANCE
+	var urldistance = encodeURI("http://www.wificomo.com/ccn20/JSONdistance.php");
+	var fileDistance = "distance.js";
+	var directory = "ccn";
+	
+	downloadJSON(directory, fileDistance, urldistance);
 		
+	
+	
+	
 	//JSON VETRINE
 		
 	//var conteggioEsercizi = 0;

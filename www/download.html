@@ -257,9 +257,8 @@
 								if(numElementi == 0) {
 								$("li.sottocategorie").html("download sottocategorie <img src='img/downloadok.png'>");
 								$("li.sottocategorie").css("color","green");
-								alert(sessionStorage.getItem("vetrineOK"));
+
 									if (sessionStorage.getItem("vetrineOK") == 0) {
-									alert("chiamo get vetrine");
 									getVetrine();
 									}
 								}
@@ -289,7 +288,7 @@
 	
 	function getVetrine() {
 	sessionStorage.setItem("vetrineOK", 1);
-	alert("get vetrine");
+
 	$.ajax({
 		url: "http://www.wificomo.com/ccn20/JSONidEsercizi.php",
 		dataType: 'json',
@@ -298,7 +297,8 @@
 		
 		var totaleEsercizi = data.length;
 		
-		alert(totaleEsercizi);
+		$("li.vetrine").html("download vetrine <img src='img/downloadok.png'>");
+		$("li.vetrine").css("color","green");
 		
 		/*
 			$.each(data, function(index, info) {
@@ -328,6 +328,7 @@
 	<li class="brand">download brand... <img src="img/download.gif"></li>
 	<li class="position">download posizioni esercizi... <img src="img/download.gif"></li>
 	<li class="distance">configurazione distanze... <img src="img/download.gif"></li>
+	<li class="vetrine">download vetrine...<img src="img/download.gif"></li>
 	</ul>
 	
 	</div><!-- /content -->

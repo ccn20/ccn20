@@ -251,10 +251,9 @@
 						alert("entry");
 						
 						sessionStorage.getItem("numSottocategorie");
-						alert("numSottocategorie: "+numSottocategorie);
 						numSottocategorie = parseInt(numSottocategorie)-1;
 															
-								if(numSottocategorie == 0) {
+								if(numSottocategorie == 1) {
 								$("p.sottocategorie").html("sottocategorie");
 								$("p.sottocategorie").css("color","green");
 								}

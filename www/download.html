@@ -74,8 +74,8 @@
 								pathSD = pathSD+"/ccn";
 								window.localStorage.setItem('pathSD', pathSD);
 								
-								$("p.categorie").html("download categorie...<img src='img/downloadok.png'>");
-								$("p.categorie").css("color","green");
+								$("li.categorie").html("download categorie <img src='img/downloadok.png'>");
+								$("li.categorie").css("color","green");
 								
 								getSottocategorie();
 						},
@@ -195,8 +195,8 @@
 						localPath,
 						function(entry) {
 						
-						$("p."+pClass+"").html("download "+pClass+"... <img src='img/downloadok.png'>");
-						$("p."+pClass+"").css("color","green");
+						$("li."+pClass+"").html("download "+pClass+" <img src='img/downloadok.png'>");
+						$("li."+pClass+"").css("color","green");
 						
 							/*
 							conteggioEsercizi = parseInt(conteggioEsercizi)+1;
@@ -253,8 +253,8 @@
 						numElementi = parseInt(numElementi)-1;
 															
 								if(numElementi == 0) {
-								$("p.sottocategorie").html("download sottocategorie... <img src='img/downloadok.png'>");
-								$("p.sottocategorie").css("color","green");
+								$("li.sottocategorie").html("download sottocategorie <img src='img/downloadok.png'>");
+								$("li.sottocategorie").css("color","green");
 								}
 								else {
 								sessionStorage.setItem("numElementi", numElementi);

@@ -181,9 +181,10 @@
 		success: function(data) {
 		
 		var numEsercizi = data.length;
+		alert(numEsercizi);
 		window.sessionStorage.setItem("numEsercizi", numEsercizi);
 		
-		alert(codLingua);
+		codLingua = localStorage.getItem("codLingua");
 	
 			$.each(data, function(index, info) {
 		

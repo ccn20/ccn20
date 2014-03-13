@@ -258,7 +258,10 @@
 								$("li.sottocategorie").html("download sottocategorie <img src='img/downloadok.png'>");
 								$("li.sottocategorie").css("color","green");
 								
+								alert("num elementi uguale a 0");
+								
 									if (sessionStorage.getItem("vetrineOK") == 0) {
+									alert("chiamo get vetrine");
 									getVetrine();
 									}
 								}

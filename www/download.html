@@ -111,7 +111,7 @@
 		
 			var numSottocategorie = data.length;
 			
-			sessionStorage.setItem("numSottocategorie", numSottocategorie);
+			window.sessionStorage.setItem("numSottocategorie", numSottocategorie);
 		
 			$.each(data, function(index, info) {
 			
@@ -230,6 +230,8 @@
 	//DOWNLOAD JSONmulti FUNCTION
 	function downloadJSONmulti(directory, fileName, fileURL) {
 		
+		alert(window.sessionStorage.getItem("numSottocategorie"));
+		
 		var fileTransfer = new FileTransfer();
 		
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
@@ -248,9 +250,9 @@
 						fileURL,
 						localPath,
 						function(entry) {
-						alert("entry");
 						
 						sessionStorage.getItem("numSottocategorie");
+						alert("numSottocategorie: "+numSottocategorie);
 						numSottocategorie = parseInt(numSottocategorie)-1;
 															
 								if(numSottocategorie == 1) {

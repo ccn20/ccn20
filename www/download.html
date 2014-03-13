@@ -104,15 +104,14 @@
 	{
 	
 		var codlingua = window.localStorage.getItem('codLingua');
-		alert(codlingua);
 		var path = window.localStorage.getItem('pathSD');
-		alert(path);
 		var pathCategorie = path+"/categorie.js";
-		alert(pathCategorie);
 		
 		$.getJSON(pathCategorie, function( data ) {
 		
 			var numSottocategorie = data.length;
+			
+			alert("numSottocategorie: "+numSottocategorie);
 			
 			sessionStorage.setItem("numSottocategorie", numSottocategorie);
 		

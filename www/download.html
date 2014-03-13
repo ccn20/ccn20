@@ -176,9 +176,8 @@
 		dataType: 'json',
 		async: false,
 		success: function(data) {
-		alert(codLingua);
+		
 		var numEsercizi = data.length;
-		alert(numEsercizi);
 		window.sessionStorage.setItem("numEsercizi", numEsercizi);
 		
 		codLingua = localStorage.getItem("codLingua");
@@ -189,7 +188,7 @@
 			var fileNameEsercizi = info.idEsercizio+".js";	
 			var directoryEsercizi = "ccn/esercizi";
 		
-			//downloadJSONvetrineEsercizi(directory, fileNameEsercizi, urlEsercizi);
+			downloadJSONvetrineEsercizi(directory, fileNameEsercizi, urlEsercizi);
 			});
 		}
 	});
@@ -303,7 +302,6 @@
 	} //FUNCTION downloadJSONsottocategorie
 	
 	//DOWNLOAD JSONvetrineEsercizi FUNCTION
-	/*
 	function downloadJSONvetrineEsercizi(directory, fileName, fileURL) {
 		
 		var fileTransfer = new FileTransfer();
@@ -355,7 +353,7 @@
 		}); // end of window.requestFileSystem
 		
 	} //FUNCTION downloadJSONsottocategorie
-	*/
+	
 	</script>
 		
 	<button class="download">download</button>

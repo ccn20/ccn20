@@ -195,7 +195,7 @@
 						localPath,
 						function(entry) {
 						
-						$("p."+pClass+"").html(pClass);
+						$("p."+pClass+"").html("download "+pClass+"... <img src="'downloadok.png'">");
 						$("p."+pClass+"").css("color","green");
 						
 							/*
@@ -250,11 +250,10 @@
 						function(entry) {
 						
 						var numElementi = window.sessionStorage.getItem("numElementi");
-						alert("numElementi: "+numElementi);
 						numElementi = parseInt(numElementi)-1;
 															
 								if(numElementi == 0) {
-								$("p.sottocategorie").html("sottocategorie");
+								$("p.sottocategorie").html("download sottocategorie... <img src="'downloadok.png'">");
 								$("p.sottocategorie").css("color","green");
 								}
 								else {

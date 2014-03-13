@@ -253,15 +253,17 @@
 						
 						var numElementi = window.sessionStorage.getItem("numElementi");
 						numElementi = parseInt(numElementi)-1;
-						
-						alert(numElementi);
 															
 								if(numElementi == 0) {
-								$("li.sottocategorie").html("download sottocategorie <img src='img/downloadok.png'>");
-								$("li.sottocategorie").css("color","green");
-
-									if (sessionStorage.getItem("vetrineOK") == 0) {
+							
+									if(sessionStorage.getItem("vetrineOK") == 0) {
+									$("li.sottocategorie").html("download sottocategorie <img src='img/downloadok.png'>");
+									$("li.sottocategorie").css("color","green");
 									getVetrine();
+									}
+									else if(sessionStorage.getItem("vetrineOK") == 1) {
+									$("li.vetrine").html("download vetrine <img src='img/downloadok.png'>");
+									$("li.vetrine").css("color","green");
 									}
 								}
 								else {

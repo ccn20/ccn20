@@ -116,7 +116,11 @@
 			sessionStorage.setItem("numSottocategorie", numSottocategorie);
 		
 			$.each(data, function(index, info) {
-		
+			
+			alert("codLingua :"+codlingua);
+			alert("path: "+path);
+			alert("pathCategorie: "+pathCategorie);
+			
 			var urlSottocategorie = encodeURI("http://www.wificomo.com/ccn20/JSONsottocategorieNegozi.php?idCategoria="+info.idCategoria+"&language="+codLingua+"");	
 			var fileNameSottocategorie = info.jsonName+".js";
 			var directory = "ccn";

@@ -109,9 +109,9 @@
 		
 		$.getJSON(pathCategorie, function( data ) {
 		
-			var numSottocategorie = data.length;
+			var numElementi = data.length;
 			
-			window.sessionStorage.setItem("numSottocategorie", numSottocategorie);
+			window.sessionStorage.setItem("numElementi", numElementi);
 		
 			$.each(data, function(index, info) {
 			
@@ -230,8 +230,6 @@
 	//DOWNLOAD JSONmulti FUNCTION
 	function downloadJSONmulti(directory, fileName, fileURL) {
 		
-		alert(window.sessionStorage.getItem("numSottocategorie"));
-		
 		var fileTransfer = new FileTransfer();
 		
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
@@ -251,16 +249,16 @@
 						localPath,
 						function(entry) {
 						
-						sessionStorage.getItem("numSottocategorie");
-						alert("numSottocategorie: "+numSottocategorie);
-						numSottocategorie = parseInt(numSottocategorie)-1;
+						var numElementi = window.sessionStorage.getItem("numElementi");
+						alert("numElementi: "+numElementi);
+						numElementi = parseInt(numElementi)-1;
 															
-								if(numSottocategorie == 1) {
+								if(numElementi == 0) {
 								$("p.sottocategorie").html("sottocategorie");
 								$("p.sottocategorie").css("color","green");
 								}
 								else {
-								sessionStorage.setItem("numSottocategorie", numSottocategorie);
+								sessionStorage.setItem("numElementi", numElementi);
 								}
 						},
 						function(error) {

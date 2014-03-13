@@ -44,7 +44,7 @@
 	//window.localStorage.setItem("idLingua", idLingua);
 	window.localStorage.setItem("codLingua", codLingua);
 	
-	sessionStorage.setItem("vetrineOK", 1);
+	sessionStorage.setItem("vetrineOK", 0);
 	
 	var urlCategorie = encodeURI("http://www.wificomo.com/ccn20/JSONcategorie.php?language="+codLingua+"");	
 	var fileNameCategorie = "categorie.js";
@@ -257,8 +257,6 @@
 								if(numElementi == 0) {
 								$("li.sottocategorie").html("download sottocategorie <img src='img/downloadok.png'>");
 								$("li.sottocategorie").css("color","green");
-								
-								alert("num elementi uguale a 0");
 								
 									if (sessionStorage.getItem("vetrineOK") == 0) {
 									alert("chiamo get vetrine");

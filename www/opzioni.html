@@ -38,68 +38,51 @@
   
 	$( "#opzioni" ).on( "pagebeforeshow", function() {	
 	
-	//FACEBOOK
 	FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false });
-		//GET LOGIN STATUS
-		FB.getLoginStatus(function(response) {
 	
-			//CONNESSO
-			if (response.status === 'connected') {
-			$("li.facebook").html('<button class="facebook ui-btn ui-shadow" buttonAction="logout">logout</button>');
-			}
-			//APP NON AUTORIZZATA
-			else if (response.status === 'not_authorized') {
-			$("li.facebook").html('<button class="facebook ui-btn ui-shadow" buttonAction="login">login</button>');
-			} 
-			//NON CONNESSO
-			else {
-			$("li.facebook").html('<button class="facebook ui-btn ui-shadow" buttonAction="login">login</button>');
-			}
+	//GET LOGIN STATUS
+	FB.getLoginStatus(function(response) {
+	
+		//CONNESSO
+		if (response.status === 'connected') {
+		$("p.facebook").html('account facebook collegato');
+		}
+		//APP NON AUTORIZZATA
+		else if (response.status === 'not_authorized') {
+		$("p.facebook").html('<button class="ui-btn ui-shadow">Collega Account</button>');
+		} 
+		//NON CONNESSO
+		else {
+		$("p.facebook").html('<button class="facebook ui-btn ui-shadow">Collega Account</button>');
+		}
 		
-		}, true);
-		
+	}, true);
+	
 	}); //ON "pageshow"
 	
 	$(document).on("click", 'button.facebook', function(){
 	
-	var action = $(this).attr('buttonAction');
-	alert(action);
-	
-		if(action === "login") {
-		alert("if: "+action);
-			//FACEBOOK LOGIN
-			FB.login(function(response) {
+	FB.login(function(response) {
             
-			if (response.authResponse) {
-			//$("li.facebook").html('<button class="facebook ui-btn ui-shadow" buttonAction="logout">logout</button>');
-			}
-			else {
-				alert('not logged in');
-			}
-			},
-			{ scope: "email" }
-			);
-		}
-		else if(action === "logout") {
-		alert("if: "+action);
-			//FACEBOOK LOGOUT
-			FB.logout(function(response) {
-			// user is now logged out
+		if (response.authResponse) {
+			
+			FB.api('/me', function(response) {
+			$("p.facebook").html('Benvenuto, ' + response.name + '.');
+			$("a#saltaAFoursquare").html('Avanti');
 			});
-			//$("li.facebook").html('<button class="facebook ui-btn ui-shadow" buttonAction="login">login</button>');
 		}
+		else {
+            alert('not logged in');
+        }
+    },
+	{ scope: "email" }
+    );
 	
 	}); //ON "click"
 	
 	</script>
 	
-	<h1>OPTIONS</h1>
-	<ul data-role="listview">
-		<li class="facebook"></li>
-		<li></li>
-		<li></li>
-		<li></li>
-	</ul>
+	<p class="facebook"></p>
 	
 	</div>
 	<!-- /CONTENT -->

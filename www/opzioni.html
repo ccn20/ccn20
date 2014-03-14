@@ -46,12 +46,12 @@
 	
 		//CONNESSO
 		if (response.status === 'connected') {
-		$("p.facebook").html('<button class="facebookLogout ui-btn ui-shadow">logout</button>');
+		$("p.facebook").html('<button class="facebookLogout ui-btn ui-shadow">Facebook: logout</button>');
 		}
 		//APP NON AUTORIZZATA
 		else if (response.status === 'not_authorized') {
 		alert("not authorized")
-		$("p.facebook").html('<button class="facebookLogin ui-btn ui-shadow">Collega Account</button>');
+		$("p.facebook").html('<button class="facebookLogin ui-btn ui-shadow">Facebook: Collega Account</button>');
 		} 
 		//NON CONNESSO
 		else {
@@ -65,13 +65,61 @@
 	var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
 	
 		if(tokenFoursquare == null) {
-		$("p.foursquare").html('<button class="foursquareLogin ui-btn ui-shadow">Collega Account</button>');
+		$("p.foursquare").html('<button class="foursquareLogin ui-btn ui-shadow">Foursquare: Collega Account</button>');
 		}
 		else {
-		$("p.foursquare").html('<button class="foursquareLogout ui-btn ui-shadow">logout</button>');
+		$("p.foursquare").html('<button class="foursquareLogout ui-btn ui-shadow">Foursquare: logout</button>');
 		}
-		
+	
+	//TWITTER
+	var twitterToken = window.localStorage.getItem("twitterToken");
+	
+		if(twitterToken == null) {
+		$("p.twitter").html('<button class="twitterLogin ui-btn ui-shadow">Twitter: Collega Account</button>');
+		}
+		else {
+		$("p.twitter").html('<button class="twitterLogout ui-btn ui-shadow">Twitter: logout</button>');
+		}	
+	
 	}); //ON "pagebeforeshow"
+	
+	//ON "click" button.twitterLogin
+	$(document).on("click", 'button.twitterLogin', function(){
+	
+	var ref = window.open('http://www.wificomo.com/twitter/twitterConnect.php', '_blank', 'location=no');
+		
+		ref.addEventListener('loadstart', function(event) {
+        closeTwitter(event.url,ref);
+		});  
+	
+	function closeTwitter(loc,ref) {
+   
+		if (loc.indexOf("www.wificomo.com/twitter/twitterTokens.php?") > -1){
+		
+		var twitterToken = loc.substring(loc.indexOf("oauth_token=")+12, loc.indexOf("&"));
+		var twitterVerifier = loc.substring(loc.indexOf("oauth_verifier=")+15, loc.indexOf("&t"));
+		var twitterName = loc.substring(loc.indexOf("twitterName=")+12);
+		twitterName = decodeURIComponent(twitterName);
+		
+		window.localStorage.setItem("twitterToken", twitterToken);
+		window.localStorage.setItem("twitterVerifier", twitterVerifier);
+		window.localStorage.setItem("twitterName", twitterName);
+		
+		$("p.twitter").html('<button class="twitterLogout ui-btn ui-shadow">Twitter: logout</button>');
+		
+		ref.close();
+		}
+	}
+	
+	}); //ON "click" button.twitterLogin
+	
+	//ON "click" button.twitterLogout
+	$(document).on("click", 'button.twitterLogin', function(){
+	localStorage.removeItem("twitterToken");
+	localStorage.removeItem("twitterVerifier");
+	localStorage.removeItem("twitterName");
+	$("p.twitter").html('<button class="twitterLogin ui-btn ui-shadow">Twitter: Collega Account</button>');
+	}); //ON "click" button.twitterLogout
 	
 	//ON "click" button.foursquareLogin
 	$(document).on("click", 'button.foursquareLogin', function(){
@@ -86,7 +134,7 @@
 		var tokenFoursquare = loc.substring(loc.indexOf("=")+1);
 		window.localStorage.setItem("tokenFoursquare", tokenFoursquare);
 		
-		$("p.foursquare").html('<button class="foursquareLogout ui-btn ui-shadow">logout</button>');
+		$("p.foursquare").html('<button class="foursquareLogout ui-btn ui-shadow">Foursquare: logout</button>');
 		
 		ref.close();
 		}
@@ -96,14 +144,14 @@
 	//ON "click" button.foursquareLogout
 	$(document).on("click", 'button.foursquareLogout', function(){
 	localStorage.removeItem("tokenFoursquare");
-	$("p.foursquare").html('<button class="foursquareLogin ui-btn ui-shadow">Collega Account</button>');
+	$("p.foursquare").html('<button class="foursquareLogin ui-btn ui-shadow">Foursquare: Collega Account</button>');
 	}); ////ON "click" button.foursquareLogout
 	
 	//ON "click" button.facebookLogin
 	$(document).on("click", 'button.facebookLogin', function(){
 	FB.login(function(response) {      
 		if (response.authResponse) {
-		$("p.facebook").html('<button class="facebookLogout ui-btn ui-shadow">logout</button>');
+		$("p.facebook").html('<button class="facebookLogout ui-btn ui-shadow">Facebook: logout</button>');
 		}
 		else {
         alert('not logged in');
@@ -116,7 +164,7 @@
 	//ON "click" button.facebookLogout
 	$(document).on("click", 'button.facebookLogout', function(){
 		FB.logout(function(response) {
-		$("p.facebook").html('<button class="facebookLogin ui-btn ui-shadow">Collega Account</button>');
+		$("p.facebook").html('<button class="facebookLogin ui-btn ui-shadow">Facebook: Collega Account</button>');
 		});
 	}); //ON "click" button.facebookLogout
 	

@@ -38,7 +38,7 @@
   
 	$( "#opzioni" ).on( "pagebeforeshow", function() {	
 	
-	FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false });
+	FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false, status: true });
 	
 	//GET LOGIN STATUS
 	FB.getLoginStatus(function(response) {
@@ -67,11 +67,7 @@
 	FB.login(function(response) {
             
 		if (response.authResponse) {
-			
-			FB.api('/me', function(response) {
-			$("p.facebook").html('Benvenuto, ' + response.name + '.');
-			$("a#saltaAFoursquare").html('Avanti');
-			});
+			//$("p.facebook").html('<button class="facebookLogout ui-btn ui-shadow">Collega Account</button>');
 		}
 		else {
             alert('not logged in');

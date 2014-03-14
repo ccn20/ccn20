@@ -120,15 +120,15 @@
 	
 		//CONNESSO
 		if (response.status === 'connected') {
-		$("p.facebook").html('account facebook collegato');
+		$("li.facebook").html('account facebook collegato');
 		}
 		//APP NON AUTORIZZATA
 		else if (response.status === 'not_authorized') {
-		$("p.facebook").html('<button class="ui-btn ui-shadow">Collega Account</button>');
+		$("li.facebook").html('<button class="ui-btn ui-shadow">Collega Account</button>');
 		} 
 		//NON CONNESSO
 		else {
-		$("p.facebook").html('<button class="facebook ui-btn ui-shadow">Collega Account</button>');
+		$("li.facebook").html('<button class="facebook ui-btn ui-shadow">Collega Account</button>');
 		}
 		
 	}, true);

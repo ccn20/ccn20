@@ -27,7 +27,7 @@
 	<!-- /HEADER -->
 	<div data-role="header">
 		<h1>Index</h1>
-		<a href="#opzioni" data-icon="gear" class="ui-btn-right">Options</a>
+		<a href="#opzioni" data-icon="gear" class="ui-btn-right" data-transition="slide">Options</a>
 	</div>
 	<!-- /HEADER -->
 	
@@ -99,7 +99,7 @@
 	<div role="main" class="ui-content" >
 	
 	<script>   
-	$( "#opzioni" ).on( "pagebeforeshow", function() {	
+	$( "#opzioni" ).on( "pageshow", function() {	
 	
 	document.addEventListener("backbutton", function(e){
     
@@ -112,6 +112,26 @@
 		}
 	}, false);
 	
+	//FACEBOOK
+	FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false });
+	
+		//GET LOGIN STATUS
+		FB.getLoginStatus(function(response) {
+	
+		//CONNESSO
+		if (response.status === 'connected') {
+		$("p.facebook").html('account facebook collegato');
+		}
+		//APP NON AUTORIZZATA
+		else if (response.status === 'not_authorized') {
+		$("p.facebook").html('<button class="ui-btn ui-shadow">Collega Account</button>');
+		} 
+		//NON CONNESSO
+		else {
+		$("p.facebook").html('<button class="facebook ui-btn ui-shadow">Collega Account</button>');
+		}
+		
+	}, true);
 	
 		
 	});
@@ -119,11 +139,10 @@
 	
 	<h1>INDEX</h1>
 	<ul data-role="listview">
-	<li><a href="eserciziVicini.html" rel="external" data-transition="slide">Ricerca per Distanza</a></li>
-	<li><a href="categorie.html" rel="external" data-transition="slide">Ricerca per Categoria</a></li>
-	<li><a href="nomeEsercizi.html" rel="external" data-transition="slide">Ricerca per Nome</a></li>
-	<li><a href="brandEsercizi.html" rel="external" data-transition="slide">Ricerca per Brand</a></li>
-	<li><a href="vetrinaEsercizio.html" rel="external" data-transition="slide">Vetrina</a></li>
+		<li class="facebook"></li>
+		<li></li>
+		<li></li>
+		<li></li>
 	</ul>
 	
 	</div>
@@ -134,8 +153,6 @@
 		<h4>Page Footer</h4>
 	</div>
 	<!-- /FOOTER -->
-	
-
 </div><!-- /PAGE #opzioni -->
 
 

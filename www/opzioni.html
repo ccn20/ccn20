@@ -47,11 +47,7 @@
 			FB.login(function(response) {
             
 			if (response.authResponse) {
-			
-				FB.api('/me', function(response) {
-				$("p.facebook").html('Benvenuto, ' + response.name + '.');
-				$("a#saltaAFoursquare").html('Avanti');
-				});
+			$("li.facebook").html('<button class="facebook ui-btn ui-shadow" buttonAction="logout">logout</button>');
 			}
 			else {
 				alert('not logged in');
@@ -64,6 +60,7 @@
 			//FACEBOOK LOGOUT
 			FB.logout(function(response) {
 			// user is now logged out
+			$("li.facebook").html('<button class="facebook ui-btn ui-shadow" buttonAction="login">login</button>');
 			});
 		}
 	

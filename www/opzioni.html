@@ -65,7 +65,8 @@
 	var action = $(this).attr('buttonAction');
 	alert(action);
 	
-		if(action == "login") {
+		if(action === "login") {
+		alert("if: "+action);
 			//FACEBOOK LOGIN
 			FB.login(function(response) {
             
@@ -79,7 +80,8 @@
 			{ scope: "email" }
 			);
 		}
-		else if(action == "logout") {
+		else if(action === "logout") {
+		alert("if: "+action);
 			//FACEBOOK LOGOUT
 			FB.logout(function(response) {
 			// user is now logged out

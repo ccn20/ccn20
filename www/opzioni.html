@@ -56,7 +56,7 @@
 		//NON CONNESSO
 		else {
 		alert("not connected")
-		$("p.facebook").html('<button class="facebookLogin ui-btn ui-shadow">Collega Account</button>');
+		$("p.facebook").html('<button class="facebookLogin ui-btn ui-shadow">Facebook: Collega Account</button>');
 		}
 		
 	}, true);
@@ -114,7 +114,7 @@
 	}); //ON "click" button.twitterLogin
 	
 	//ON "click" button.twitterLogout
-	$(document).on("click", 'button.twitterLogin', function(){
+	$(document).on("click", 'button.twitterLogout', function(){
 	localStorage.removeItem("twitterToken");
 	localStorage.removeItem("twitterVerifier");
 	localStorage.removeItem("twitterName");

@@ -1,0 +1,83 @@
+<!-- PAGE #opzioni -->
+<div data-role="page" id="opzioni">
+
+	<!-- /HEADER -->
+	<div data-role="header">
+		<h1>Opzioni</h1>
+	</div>
+	<!-- /HEADER -->
+	
+	<!-- CONTENT -->
+	<div role="main" class="ui-content" >
+	
+	<div id="fb-root"></div>
+	<script>
+  
+	$( "#opzioni" ).on( "pagebeforeshow", function() {	
+	
+	//FACEBOOK
+	FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false });
+		//GET LOGIN STATUS
+		FB.getLoginStatus(function(response) {
+	
+			//CONNESSO
+			if (response.status === 'connected') {
+			$("li.facebook").html('account facebook collegato');
+			}
+			//APP NON AUTORIZZATA
+			else if (response.status === 'not_authorized') {
+			$("li.facebook").html('<button class="ui-btn ui-shadow">Collega Account</button>');
+			} 
+			//NON CONNESSO
+			else {
+			$("li.facebook").html('<button class="facebook ui-btn ui-shadow">Collega Account</button>');
+			}
+		
+		}, true);
+		
+		
+		
+		
+		
+	
+	}); //ON "pageshow"
+	
+	$(document).on("click", 'button.facebook', function(){
+	
+	FB.login(function(response) {
+            
+		if (response.authResponse) {
+			
+			FB.api('/me', function(response) {
+			$("p.facebook").html('Benvenuto, ' + response.name + '.');
+			$("a#saltaAFoursquare").html('Avanti');
+			});
+		}
+		else {
+            alert('not logged in');
+        }
+    },
+	{ scope: "email" }
+    );
+	
+	}); //ON "click"
+	
+	</script>
+	
+	<h1>OPTIONS</h1>
+	<ul data-role="listview">
+		<li class="facebook"></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	
+	</div>
+	<!-- /CONTENT -->
+
+	<!-- FOOTER -->
+	<div data-role="footer" data-theme="a" data-position="fixed">
+		<h4>Page Footer</h4>
+	</div>
+	<!-- /FOOTER -->
+</div><!-- /PAGE #opzioni -->

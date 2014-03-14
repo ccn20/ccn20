@@ -27,7 +27,7 @@
 	<!-- /HEADER -->
 	<div data-role="header">
 		<h1>Index</h1>
-		<a href="#opzioni" data-icon="gear" class="ui-btn-right" data-transition="slide">Options</a>
+		<a href="opzioni.html" data-icon="gear" class="ui-btn-right" data-transition="slide">Options</a>
 	</div>
 	<!-- /HEADER -->
 	
@@ -82,79 +82,7 @@
 		<h4>Page Footer</h4>
 	</div>
 	<!-- /FOOTER -->
-	
-
 </div><!-- /PAGE #index -->
-
-<!-- PAGE #opzioni -->
-<div data-role="page" id="opzioni">
-
-	<!-- /HEADER -->
-	<div data-role="header">
-		<h1>Opzioni</h1>
-	</div>
-	<!-- /HEADER -->
-	
-	<!-- CONTENT -->
-	<div role="main" class="ui-content" >
-	
-	<script>   
-	$( "#opzioni" ).on( "pageshow", function() {	
-	
-	document.addEventListener("backbutton", function(e){
-    
-		if($.mobile.activePage.is('#index')){
-        e.preventDefault();
-        return false;
-		}
-		else {
-        navigator.app.backHistory()
-		}
-	}, false);
-	
-	//FACEBOOK
-	FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false });
-	
-		//GET LOGIN STATUS
-		FB.getLoginStatus(function(response) {
-	
-		//CONNESSO
-		if (response.status === 'connected') {
-		$("li.facebook").html('Facebook: account facebook collegato');
-		}
-		//APP NON AUTORIZZATA
-		else if (response.status === 'not_authorized') {
-		$("li.facebook").html('Facebook: <button class="ui-btn ui-shadow">Collega Account</button>');
-		} 
-		//NON CONNESSO
-		else {
-		$("li.facebook").html('Facebook: <button class="facebook ui-btn ui-shadow">Collega Account</button>');
-		}
-		
-	}, true);
-	
-		
-	});
-	</script>
-	
-	<h1>OPTIONS</h1>
-	<ul data-role="listview">
-		<li class="facebook"></li>
-		<li></li>
-		<li></li>
-		<li></li>
-	</ul>
-	
-	</div>
-	<!-- /CONTENT -->
-
-	<!-- FOOTER -->
-	<div data-role="footer" data-theme="a" data-position="fixed">
-		<h4>Page Footer</h4>
-	</div>
-	<!-- /FOOTER -->
-</div><!-- /PAGE #opzioni -->
-
 
 <!-- PAGE #lingue -->
 <div data-role="page" id="lingue">

@@ -27,6 +27,7 @@
 	<!-- /HEADER -->
 	<div data-role="header">
 		<h1>Index</h1>
+		<a href="#opzioni" data-icon="gear" class="ui-btn-right">Options</a>
 	</div>
 	<!-- /HEADER -->
 	
@@ -84,6 +85,58 @@
 	
 
 </div><!-- /PAGE #index -->
+
+<!-- PAGE #opzioni -->
+<div data-role="page" id="opzioni">
+
+	<!-- /HEADER -->
+	<div data-role="header">
+		<h1>Opzioni</h1>
+	</div>
+	<!-- /HEADER -->
+	
+	<!-- CONTENT -->
+	<div role="main" class="ui-content" >
+	
+	<script>   
+	$( "#opzioni" ).on( "pagebeforeshow", function() {	
+	
+	document.addEventListener("backbutton", function(e){
+    
+		if($.mobile.activePage.is('#index')){
+        e.preventDefault();
+        return false;
+		}
+		else {
+        navigator.app.backHistory()
+		}
+	}, false);
+	
+	
+		
+	});
+	</script>
+	
+	<h1>INDEX</h1>
+	<ul data-role="listview">
+	<li><a href="eserciziVicini.html" rel="external" data-transition="slide">Ricerca per Distanza</a></li>
+	<li><a href="categorie.html" rel="external" data-transition="slide">Ricerca per Categoria</a></li>
+	<li><a href="nomeEsercizi.html" rel="external" data-transition="slide">Ricerca per Nome</a></li>
+	<li><a href="brandEsercizi.html" rel="external" data-transition="slide">Ricerca per Brand</a></li>
+	<li><a href="vetrinaEsercizio.html" rel="external" data-transition="slide">Vetrina</a></li>
+	</ul>
+	
+	</div>
+	<!-- /CONTENT -->
+
+	<!-- FOOTER -->
+	<div data-role="footer" data-theme="a" data-position="fixed">
+		<h4>Page Footer</h4>
+	</div>
+	<!-- /FOOTER -->
+	
+
+</div><!-- /PAGE #opzioni -->
 
 
 <!-- PAGE #lingue -->

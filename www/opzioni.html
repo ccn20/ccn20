@@ -45,22 +45,22 @@
 	
 		//CONNESSO
 		if (response.status === 'connected') {
-		$("p.facebook").html('account facebook collegato');
+		$("p.facebook").html('<button class="facebookLogout ui-btn ui-shadow">logout</button>');
 		}
 		//APP NON AUTORIZZATA
 		else if (response.status === 'not_authorized') {
-		$("p.facebook").html('<button class="ui-btn ui-shadow">Collega Account</button>');
+		$("p.facebook").html('<button class="facebookLogin ui-btn ui-shadow">Collega Account</button>');
 		} 
 		//NON CONNESSO
 		else {
-		$("p.facebook").html('<button class="facebook ui-btn ui-shadow">Collega Account</button>');
+		$("p.facebook").html('<button class="facebookLogin ui-btn ui-shadow">Collega Account</button>');
 		}
 		
 	}, true);
 	
 	}); //ON "pageshow"
 	
-	$(document).on("click", 'button.facebook', function(){
+	$(document).on("click", 'button.facebookLogin', function(){
 	
 	FB.login(function(response) {
             
@@ -77,6 +77,14 @@
     },
 	{ scope: "email" }
     );
+	
+	}); //ON "click"
+	
+	$(document).on("click", 'button.facebookLogout', function(){
+	
+	FB.logout(function(response) {
+	// user is now logged out
+	});
 	
 	}); //ON "click"
 	

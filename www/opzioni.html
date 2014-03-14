@@ -49,10 +49,12 @@
 		}
 		//APP NON AUTORIZZATA
 		else if (response.status === 'not_authorized') {
+		alert("not authorized")
 		$("p.facebook").html('<button class="facebookLogin ui-btn ui-shadow">Collega Account</button>');
 		} 
 		//NON CONNESSO
 		else {
+		alert("not connected")
 		$("p.facebook").html('<button class="facebookLogin ui-btn ui-shadow">Collega Account</button>');
 		}
 		

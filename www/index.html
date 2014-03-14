@@ -50,7 +50,7 @@
 	//var connection = checkConnection();
 	
 		//if (connection != "No_network") {
-		document.location.href="#setup";
+		document.location.href="#lingue";
 		//}
 		//else {
 		//alert("devi essere connesso");
@@ -83,6 +83,99 @@
 </div><!-- /PAGE #index -->
 
 
+<!-- PAGE #lingue -->
+<div data-role="page" id="lingue">
+
+	<!-- /HEADER -->
+	<div data-role="header">
+		<h1>Lingue</h1>
+	</div>
+	<!-- /HEADER -->
+	
+	<!-- CONTENT -->
+	<div role="main" class="ui-content" >
+	
+	<div id="fb-root"></div>
+	<script>
+  
+	$( "#lingue" ).on( "pagebeforeshow", function() {	
+	
+	var lingue = [{
+    "italiano": {
+		"idLingua": "1",
+		"codiceLingua": "it",
+		"nomeLingua": "Italiano",
+        "Categorie": "Categorie",
+		"filtra": "filtra",
+		"indietro": "indietro",
+		"ordina": "ordina",
+		"salta": "salta"
+    },
+	"inglese": {
+		"idLingua": "2",
+		"codiceLingua": "en",
+        "nomeLingua": "English",
+		"Categorie": "Categories",
+		"filtra": "filter",
+		"indietro": "back",
+		"ordina": "sort",
+		"salta": "skip"
+		
+    },
+	"francese": {
+		"idLingua": "3",
+		"codiceLingua": "fr",
+        "nomeLingua": "Francaise",
+		"Categorie": "Categorìes",
+		"filtra": "filtre",
+		"indietro": "arriere",
+		"ordina": "sortre"
+		
+    }
+	}];
+
+	//LISTA LINGUE
+	$("ul#listaLingue").html("");
+		
+	$.each(lingue, function(index, info) {
+	$("ul#listaLingue").append($("<li></li>",{"html":"<a href='#setup' class='lingua' id='" + info.idLingua + "' codiceLingua='"+info.codiceLingua+"' nomeLingua='"+index+"' data-transition='slide' >" + info.nomeLingua + "" }));
+	});
+	
+	$("ul#listaLingue").listview("refresh");
+	
+	}); //ON "pagebeforeshow"
+	
+	//ON "click"
+	$(document).on("click", 'a.lingua', function(){
+	
+	idLingua = $(this).attr('id');
+	lingua = $(this).attr('nomeLingua');
+	codLingua = $(this).attr('codiceLingua');
+	
+	window.localStorage.setItem("lingua", lingua);
+	window.localStorage.setItem("idLingua", idLingua);
+	window.localStorage.setItem("codLingua", codLingua);
+	
+	}); //ON "click"
+	
+</script>
+	
+	<h1>LINGUE</h1>
+
+	<ul id="listaLingue" data-role="listview">
+	</ul>
+	
+	</div>
+	<!-- CONTENT -->
+
+	<!-- FOOTER -->
+	<div data-role="footer" data-theme="a" data-position="fixed">
+		<h4>Page Footer</h4>
+	</div>
+	<!-- /FOOTER -->
+
+</div><!-- /PAGE #lingue -->
+
 
 <!-- PAGE #setup -->
 <div data-role="page" id="setup">
@@ -98,95 +191,6 @@
 	
 	<script>   
 	$( "#setup" ).on( "pagebeforeshow", function() {	
-	
-	var lingue = {
-    "italiano": {
-		"idLingua": "1",
-		"codiceLingua": "it",
-		"nomeLingua": "Italiano",
-        "Categorie": "Categorie",
-		"filtra": "filtra",
-		"indietro": "indietro",
-		"ordina": "ordina",
-		"salta": "salta"
-    },
-	"inglese": {
-		"idLingua": "2",
-		"codiceLingua": "en",
-        "nomeLingua": "English",
-		"Categorie": "Categories",
-		"filtra": "filter",
-		"indietro": "back",
-		"ordina": "sort",
-		"salta": "skip"
-		
-    },
-	"francese": {
-		"idLingua": "3",
-		"codiceLingua": "fr",
-        "nomeLingua": "Francaise",
-		"Categorie": "Categorìes",
-		"filtra": "filtre",
-		"indietro": "arriere",
-		"ordina": "sortre"
-		
-    }
-	};
-
-	//LISTA LINGUE
-	$("ul#listaLingue").html("");
-		
-	$.each(lingue, function(index, info) {
-	$("ul#listaLingue").append($("<li></li>",{"html":"<a href='#' class='lingua' id='" + info.idLingua + "' codiceLingua='"+info.codiceLingua+"' nomeLingua='"+index+"' data-transition='slide' >" + info.nomeLingua + "" }));
-	});
-	
-	$("ul#listaLingue").listview("refresh");
-	
-	}); //ON "pagebeforeshow"
-	
-	$(document).on("click", 'a.lingua', function(){
-	
-	var lingue = {
-    "italiano": {
-		"idLingua": "1",
-		"codiceLingua": "it",
-		"nomeLingua": "Italiano",
-        "Categorie": "Categorie",
-		"filtra": "filtra",
-		"indietro": "indietro",
-		"ordina": "ordina",
-		"salta": "salta"
-    },
-	"inglese": {
-		"idLingua": "2",
-		"codiceLingua": "en",
-        "nomeLingua": "English",
-		"Categorie": "Categories",
-		"filtra": "filter",
-		"indietro": "back",
-		"ordina": "sort",
-		"salta": "skip"
-		
-    },
-	"francese": {
-		"idLingua": "3",
-		"codiceLingua": "fr",
-        "nomeLingua": "Francaise",
-		"Categorie": "Categorìes",
-		"filtra": "filtre",
-		"indietro": "arriere",
-		"ordina": "sortre"
-		
-    }
-	};
-	
-	idLingua = $(this).attr('id');
-	lingua = $(this).attr('nomeLingua');
-	codLingua = $(this).attr('codiceLingua');
-	
-	window.localStorage.setItem("lingua", lingua);
-	window.localStorage.setItem("idLingua", idLingua);
-	window.localStorage.setItem("codLingua", codLingua);
 	
 	sessionStorage.setItem("vetrineOK", 0);
 	
@@ -330,7 +334,7 @@
 	
 	// /TRADUZIONI----------------------------------------------------------------------------
 	
-	}); // ON click
+	}); // ON "pageshow"
 	
 	//DOWNLOAD JSON FUNCTION
 	function downloadJSON(directory, fileName, fileURL, pClass) {
@@ -477,9 +481,6 @@
 
 	
 	</script>
-	
-	<ul id="listaLingue" data-role="listview">
-	</ul>
 	
 	<ul style="list-style-type: none">
 	<li class="categorie">download categorie...<img src="img/download.gif"></li>

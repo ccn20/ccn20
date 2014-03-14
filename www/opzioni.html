@@ -22,43 +22,50 @@
 	
 			//CONNESSO
 			if (response.status === 'connected') {
-			$("li.facebook").html('account facebook collegato');
+			$("li.facebook").html('<button class="facebook ui-btn ui-shadow" buttonAction="logout">Collega Account</button>');
 			}
 			//APP NON AUTORIZZATA
 			else if (response.status === 'not_authorized') {
-			$("li.facebook").html('<button class="ui-btn ui-shadow">Collega Account</button>');
+			$("li.facebook").html('<button class="facebook ui-btn ui-shadow" buttonAction="login">Collega Account</button>');
 			} 
 			//NON CONNESSO
 			else {
-			$("li.facebook").html('<button class="facebook ui-btn ui-shadow">Collega Account</button>');
+			$("li.facebook").html('<button class="facebook ui-btn ui-shadow" buttonAction="login">Collega Account</button>');
 			}
 		
 		}, true);
 		
-		
-		
-		
-		
-	
 	}); //ON "pageshow"
 	
 	$(document).on("click", 'button.facebook', function(){
 	
-	FB.login(function(response) {
+	var action = $(this).attr('buttonAction');
+	alert(action);
+	
+		if(action == "login") {
+			//FACEBOOK LOGIN
+			FB.login(function(response) {
             
-		if (response.authResponse) {
+			if (response.authResponse) {
 			
-			FB.api('/me', function(response) {
-			$("p.facebook").html('Benvenuto, ' + response.name + '.');
-			$("a#saltaAFoursquare").html('Avanti');
+				FB.api('/me', function(response) {
+				$("p.facebook").html('Benvenuto, ' + response.name + '.');
+				$("a#saltaAFoursquare").html('Avanti');
+				});
+			}
+			else {
+				alert('not logged in');
+			}
+			},
+			{ scope: "email" }
+			);
+		}
+		else if(action == "login") {
+			//FACEBOOK LOGOUT
+			FB.logout(function(response) {
+			// user is now logged out
 			});
 		}
-		else {
-            alert('not logged in');
-        }
-    },
-	{ scope: "email" }
-    );
 	
 	}); //ON "click"
 	

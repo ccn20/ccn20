@@ -22,15 +22,15 @@
 	
 			//CONNESSO
 			if (response.status === 'connected') {
-			$("li.facebook").html('<button class="facebook ui-btn ui-shadow" buttonAction="logout">Collega Account</button>');
+			$("li.facebook").html('<button class="facebook ui-btn ui-shadow" buttonAction="logout">logout</button>');
 			}
 			//APP NON AUTORIZZATA
 			else if (response.status === 'not_authorized') {
-			$("li.facebook").html('<button class="facebook ui-btn ui-shadow" buttonAction="login">Collega Account</button>');
+			$("li.facebook").html('<button class="facebook ui-btn ui-shadow" buttonAction="login">login</button>');
 			} 
 			//NON CONNESSO
 			else {
-			$("li.facebook").html('<button class="facebook ui-btn ui-shadow" buttonAction="login">Collega Account</button>');
+			$("li.facebook").html('<button class="facebook ui-btn ui-shadow" buttonAction="login">login</button>');
 			}
 		
 		}, true);
@@ -60,7 +60,7 @@
 			{ scope: "email" }
 			);
 		}
-		else if(action == "login") {
+		else if(action == "logout") {
 			//FACEBOOK LOGOUT
 			FB.logout(function(response) {
 			// user is now logged out

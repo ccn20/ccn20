@@ -38,7 +38,7 @@
   
 	$( "#opzioni" ).on( "pagebeforeshow", function() {	
 	
-	FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false, status: true });
+	FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false });
 	
 	//GET LOGIN STATUS
 	FB.getLoginStatus(function(response) {
@@ -67,7 +67,7 @@
 	FB.login(function(response) {
             
 		if (response.authResponse) {
-			//$("p.facebook").html('<button class="facebookLogout ui-btn ui-shadow">Collega Account</button>');
+			$("p.facebook").html('<button class="facebookLogout ui-btn ui-shadow">Collega Account</button>');
 		}
 		else {
             alert('not logged in');
@@ -81,7 +81,7 @@
 	$(document).on("click", 'button.facebookLogout', function(){
 	
 	FB.logout(function(response) {
-	// user is now logged out
+	$("p.facebook").html('<button class="facebookLogin ui-btn ui-shadow">Collega Account</button>');
 	});
 	
 	}); //ON "click"

@@ -30,8 +30,8 @@
 		
 		<ul data-role="listview" data-inset="true">
 			<li><a href="#socialNetworks" data-transition="slide"><h2>Social Networks</h2><p>Collega/scollega account</p></a></li>
-			<li><a href="#" data-transition="slide"><h2>Lingua</h2><p>Cambia lingua</p></a></li>
-			<li><a href="#" data-transition="slide"><h2>Database</h2><p>Aggiorna il database degli esercizi</p></a></li>
+			<li><a href="#lingua" data-transition="slide"><h2>Lingua</h2><p>Cambia lingua</p></a></li>
+			<li><a href="#database" data-transition="slide"><h2>Database</h2><p>Aggiorna il database degli esercizi</p></a></li>
 		</ul>
 		
 		</div>
@@ -56,8 +56,8 @@
 		
 		<ul data-role="listview" data-inset="true">
 			<li><a href="#collegaFacebook" data-transition="slide"><img src="img/facebookList.png" alt="Facebook" class="ui-li-icon ui-corner-none">Facebook</a></li>
-			<li><a href="#collegaFoursquare" data-transition="slide"><img src="img/foursquareList.png" alt="Foursquare" class="ui-li-icon">Foursquare</a></li>
-			<li><a href="#collegaTwitter" data-transition="slide"><img src="img/twitterList.png" alt="Twitter" class="ui-li-icon">Twitter</a></li>
+			<li><a href="#collegaFoursquare" data-transition="slide"><img src="img/foursquareList.png" alt="Foursquare" class="ui-li-icon ui-corner-none">Foursquare</a></li>
+			<li><a href="#collegaTwitter" data-transition="slide"><img src="img/twitterList.png" alt="Twitter" class="ui-li-icon ui-corner-none">Twitter</a></li>
 		</ul>
 	
 		</div>
@@ -277,6 +277,61 @@
 		
 		</div>
 <!-- /PAGE #collegaTwitter -->
+
+<!-- PAGE #lingua -->
+		<div data-role="page" id="lingua">
+
+		<!-- /HEADER -->
+		<div data-role="header"><h1>Lingua</h1></div>
+		<!-- /HEADER -->
+	
+		<!-- CONTENT -->
+		<div role="main" class="ui-content" >
+	
+		<script>
+		$( "#lingua" ).on( "pagebeforeshow", function() {	
+		
+		//LISTA LINGUE
+		$("ul#listaLingue").html("");
+		
+		$.getJSON("js/lingue.js", function( data ) {
+		
+			$.each(data, function(index, info) {
+			$("ul#listaLingue").append($("<li></li>",{"html":"<a href='#' class='lingua' id='" + info.idLingua + "' codiceLingua='"+info.codiceLingua+"' nomeLingua='"+index+"' data-transition='slide' ><img src='img/lingue/"+info.codiceLingua+".png' alt='Facebook' class='ui-li-icon ui-corner-none'>" + info.nomeLingua + "</a>" }));
+			});
+	
+			$("ul#listaLingue").listview("refresh");
+		});
+		
+	}); //ON "pagebeforeshow"
+	
+	//ON "click"
+	$(document).on("click", 'a.lingua', function(){
+	
+	idLingua = $(this).attr('id');
+	lingua = $(this).attr('nomeLingua');
+	codLingua = $(this).attr('codiceLingua');
+	
+	window.localStorage.setItem("lingua", lingua);
+	window.localStorage.setItem("idLingua", idLingua);
+	window.localStorage.setItem("codLingua", codLingua);
+	
+	}); //ON "click"
+	
+		</script>
+		
+		<ul data-role="listview" id="listaLingue" data-inset="true">
+		</ul>
+	
+		</div>
+		<!-- /CONTENT -->
+
+		<!-- FOOTER -->
+		<div data-role="footer" data-theme="a" data-position="fixed"><h4>Page Footer</h4></div>
+		<!-- /FOOTER -->
+		
+		</div>
+<!-- /PAGE #lingua -->
 
 <!-- PAGE #opzioni -->
 		<div data-role="page" id="opzioni">

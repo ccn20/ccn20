@@ -22,21 +22,62 @@
 <body>
 
 <!-- PAGE #opzioni -->
-<div data-role="page" id="opzioni">
+		<div data-role="page" id="opzioni">
+
+			<!-- /HEADER --><div data-role="header"><h1>Opzioni</h1></div><!-- /HEADER -->
+	
+			<!-- CONTENT -->
+			<div role="main" class="ui-content" >
+
+			<ul data-role="listview" data-inset="true">
+				<li><a href="#social" data-transition="slide">Social Networks</a></li>
+				<li><a href="#lingua" data-transition="slide">Lingua</a></li>
+				<li><a href="#database" data-transition="slide">Aggiorna Database</a></li>
+			</ul>
+	
+			</div>
+			<!-- /CONTENT -->
+
+			<!-- FOOTER --><div data-role="footer" data-theme="a" data-position="fixed"><h4>Page Footer</h4></div><!-- /FOOTER -->
+		</div>
+<!-- /PAGE #opzioni -->
+
+<!-- PAGE #social -->
+		<div data-role="page" id="social">
+
+			<!-- /HEADER --><div data-role="header"><h1>Social</h1></div><!-- /HEADER -->
+	
+		<!-- CONTENT -->
+		<div role="main" class="ui-content" >
+	
+		<ul data-role="listview" data-inset="true">
+			<li><a href="#collegaFacebook" data-transition="slide"><img src="img/facebookList.png" alt="facebook" class="ui-li-icon ui-corner-none">Facebook</a></li>
+			<li><a href="#collegaFoursquare" data-transition="slide"><img src="img/foursquareList.png" alt="foursquare" class="ui-li-icon">Foursquare</a></li>
+			<li><a href="#collegaTwitter" data-transition="slide"><img src="img/twitterList.png" alt="twitter" class="ui-li-icon">Twitter</a></li>
+		</ul>
+	
+		</div>
+		<!-- /CONTENT -->
+
+		<!-- FOOTER --><div data-role="footer" data-theme="a" data-position="fixed"><h4>Page Footer</h4></div><!-- /FOOTER -->
+		</div>
+<!-- /PAGE #social -->
+
+<!-- PAGE #collegaFacebook -->
+<div data-role="page" id="collegaFacebook">
 
 	<!-- /HEADER -->
 	<div data-role="header">
-		<h1>Opzioni</h1>
+		<h1>Facebook</h1>
 	</div>
 	<!-- /HEADER -->
 	
 	<!-- CONTENT -->
 	<div role="main" class="ui-content" >
 	
-	<div id="fb-root"></div>
 	<script>
   
-	$( "#opzioni" ).on( "pageshow", function() {	
+	$( "#collegaFacebook" ).on( "pageshow", function() {	
 	
 	//FACEBOOK
 	FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false });
@@ -60,6 +101,59 @@
 		
 	}, true);
 	
+	//ON "click" button.facebookLogin
+	$(document).on("click", 'button.facebookLogin', function(){
+	FB.login(function(response) {      
+		if (response.authResponse) {
+		$("p.facebook").html('<button class="facebookLogout ui-btn ui-shadow">Facebook: logout</button>');
+		}
+		else {
+        alert('not logged in');
+        }
+    },
+	{ scope: "email" }
+    );
+	}); //ON "click" button.facebookLogin
+	
+	//ON "click" button.facebookLogout
+	$(document).on("click", 'button.facebookLogout', function(){
+		FB.logout(function(response) {
+		$("p.facebook").html('<button class="facebookLogin ui-btn ui-shadow">Facebook: Collega Account</button>');
+		});
+	}); //ON "click" button.facebookLogout
+	
+	});
+	
+	</script>
+	
+	<p class="facebook"></p>
+	
+	</div>
+	<!-- /CONTENT -->
+
+	<!-- FOOTER -->
+	<div data-role="footer" data-theme="a" data-position="fixed">
+		<h4>Page Footer</h4>
+	</div>
+	<!-- /FOOTER -->
+</div><!-- /PAGE #collegaFacebook -->
+
+<!-- PAGE #collegaFoursquare -->
+<div data-role="page" id="collegaFoursquare">
+
+	<!-- /HEADER -->
+	<div data-role="header">
+		<h1>Facebook</h1>
+	</div>
+	<!-- /HEADER -->
+	
+	<!-- CONTENT -->
+	<div role="main" class="ui-content" >
+	
+	<script>
+  
+	$( "#collegaFoursquare" ).on( "pageshow", function() {	
+	
 	//FOURSQUARE
 	var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
 	
@@ -70,6 +164,64 @@
 		$("p.foursquare").html('<button class="foursquareLogout ui-btn ui-shadow">Foursquare: logout</button>');
 		}
 	
+	});
+	
+	//ON "click" button.foursquareLogin
+	$(document).on("click", 'button.foursquareLogin', function(){
+	var ref = window.open('https://foursquare.com/oauth2/authenticate?client_id=4P4XY5XMV2EEGL4THQFXJFMJBTJN4WBNX1VIQGAUWDPHYZZF&response_type=token&redirect_uri=http://www.wificomo.com/ccn20/closeFoursquare.html', '_blank', 'location=no');
+	ref.addEventListener('loadstart', function(event) {
+    closeFoursquare(event.url,ref);
+	}); 
+	
+	function closeFoursquare(loc,ref) {
+   
+		if (loc.indexOf("www.wificomo.com/ccn20/closeFoursquare.html#") > -1){
+		var tokenFoursquare = loc.substring(loc.indexOf("=")+1);
+		window.localStorage.setItem("tokenFoursquare", tokenFoursquare);
+		
+		$("p.foursquare").html('<button class="foursquareLogout ui-btn ui-shadow">Foursquare: logout</button>');
+		
+		ref.close();
+		}
+	}
+	}); //ON "click" button.foursquareLogin
+	
+	//ON "click" button.foursquareLogout
+	$(document).on("click", 'button.foursquareLogout', function(){
+	localStorage.removeItem("tokenFoursquare");
+	$("p.foursquare").html('<button class="foursquareLogin ui-btn ui-shadow">Foursquare: Collega Account</button>');
+	}); ////ON "click" button.foursquareLogout
+	
+	</script>
+	
+	<p class="foursquare"></p>
+	
+	</div>
+	<!-- /CONTENT -->
+
+	<!-- FOOTER -->
+	<div data-role="footer" data-theme="a" data-position="fixed">
+		<h4>Page Footer</h4>
+	</div>
+	<!-- /FOOTER -->
+</div><!-- /PAGE #collegaFoursquare -->
+
+<!-- PAGE #collegaTwitter -->
+<div data-role="page" id="collegaTwitter">
+
+	<!-- /HEADER -->
+	<div data-role="header">
+		<h1>Facebook</h1>
+	</div>
+	<!-- /HEADER -->
+	
+	<!-- CONTENT -->
+	<div role="main" class="ui-content" >
+	
+	<script>
+  
+	$( "#collegaTwitter" ).on( "pageshow", function() {	
+	
 	//TWITTER
 	var twitterToken = window.localStorage.getItem("twitterToken");
 	
@@ -79,8 +231,8 @@
 		else {
 		$("p.twitter").html('<button class="twitterLogout ui-btn ui-shadow">Twitter: logout</button>');
 		}	
-	
-	}); //ON "pagebeforeshow"
+		
+	});
 	
 	//ON "click" button.twitterLogin
 	$(document).on("click", 'button.twitterLogin', function(){
@@ -120,57 +272,8 @@
 	$("p.twitter").html('<button class="twitterLogin ui-btn ui-shadow">Twitter: Collega Account</button>');
 	}); //ON "click" button.twitterLogout
 	
-	//ON "click" button.foursquareLogin
-	$(document).on("click", 'button.foursquareLogin', function(){
-	var ref = window.open('https://foursquare.com/oauth2/authenticate?client_id=4P4XY5XMV2EEGL4THQFXJFMJBTJN4WBNX1VIQGAUWDPHYZZF&response_type=token&redirect_uri=http://www.wificomo.com/ccn20/closeFoursquare.html', '_blank', 'location=no');
-	ref.addEventListener('loadstart', function(event) {
-    closeFoursquare(event.url,ref);
-	}); 
-	
-	function closeFoursquare(loc,ref) {
-   
-		if (loc.indexOf("www.wificomo.com/ccn20/closeFoursquare.html#") > -1){
-		var tokenFoursquare = loc.substring(loc.indexOf("=")+1);
-		window.localStorage.setItem("tokenFoursquare", tokenFoursquare);
-		
-		$("p.foursquare").html('<button class="foursquareLogout ui-btn ui-shadow">Foursquare: logout</button>');
-		
-		ref.close();
-		}
-	}
-	}); //ON "click" button.foursquareLogin
-	
-	//ON "click" button.foursquareLogout
-	$(document).on("click", 'button.foursquareLogout', function(){
-	localStorage.removeItem("tokenFoursquare");
-	$("p.foursquare").html('<button class="foursquareLogin ui-btn ui-shadow">Foursquare: Collega Account</button>');
-	}); ////ON "click" button.foursquareLogout
-	
-	//ON "click" button.facebookLogin
-	$(document).on("click", 'button.facebookLogin', function(){
-	FB.login(function(response) {      
-		if (response.authResponse) {
-		$("p.facebook").html('<button class="facebookLogout ui-btn ui-shadow">Facebook: logout</button>');
-		}
-		else {
-        alert('not logged in');
-        }
-    },
-	{ scope: "email" }
-    );
-	}); //ON "click" button.facebookLogin
-	
-	//ON "click" button.facebookLogout
-	$(document).on("click", 'button.facebookLogout', function(){
-		FB.logout(function(response) {
-		$("p.facebook").html('<button class="facebookLogin ui-btn ui-shadow">Facebook: Collega Account</button>');
-		});
-	}); //ON "click" button.facebookLogout
-	
 	</script>
 	
-	<p class="facebook"></p>
-	<p class="foursquare"></p>
 	<p class="twitter"></p>
 	
 	</div>
@@ -181,7 +284,79 @@
 		<h4>Page Footer</h4>
 	</div>
 	<!-- /FOOTER -->
-</div><!-- /PAGE #opzioni -->
+</div><!-- /PAGE #collegaTwitter -->
+
+<!-- PAGE #lingua -->
+<div data-role="page" id="lingua">
+
+	<!-- /HEADER -->
+	<div data-role="header">
+		<h1>Social</h1>
+	</div>
+	<!-- /HEADER -->
+	
+	<!-- CONTENT -->
+	<div role="main" class="ui-content" >
+	
+	<script>
+  
+	$( "#lingua" ).on( "pageshow", function() {	
+	
+	});
+	
+	</script>
+	
+	<ul data-role="listview" data-inset="true">
+		<li><a href="#"><img src="img/facebookList.png" alt="facebook" class="ui-li-icon ui-corner-none">Facebook</a></li>
+		<li><a href="#"><img src="img/foursquareList.png" alt="foursquare" class="ui-li-icon">Foursquare</a></li>
+		<li><a href="#"><img src="img/twitterList.png" alt="twitter" class="ui-li-icon">Twitter</a></li>
+	</ul>
+	
+	</div>
+	<!-- /CONTENT -->
+
+	<!-- FOOTER -->
+	<div data-role="footer" data-theme="a" data-position="fixed">
+		<h4>Page Footer</h4>
+	</div>
+	<!-- /FOOTER -->
+</div><!-- /PAGE #lingua -->
+
+<!-- PAGE #database -->
+<div data-role="page" id="database">
+
+	<!-- /HEADER -->
+	<div data-role="header">
+		<h1>Social</h1>
+	</div>
+	<!-- /HEADER -->
+	
+	<!-- CONTENT -->
+	<div role="main" class="ui-content" >
+	
+	<script>
+  
+	$( "#database" ).on( "pageshow", function() {	
+	
+	});
+	
+	</script>
+	
+	<ul data-role="listview" data-inset="true">
+		<li><a href="#"><img src="img/facebookList.png" alt="facebook" class="ui-li-icon ui-corner-none">Facebook</a></li>
+		<li><a href="#"><img src="img/foursquareList.png" alt="foursquare" class="ui-li-icon">Foursquare</a></li>
+		<li><a href="#"><img src="img/twitterList.png" alt="twitter" class="ui-li-icon">Twitter</a></li>
+	</ul>
+	
+	</div>
+	<!-- /CONTENT -->
+
+	<!-- FOOTER -->
+	<div data-role="footer" data-theme="a" data-position="fixed">
+		<h4>Page Footer</h4>
+	</div>
+	<!-- /FOOTER -->
+</div><!-- /PAGE #database -->
 
 </body>
 </html>

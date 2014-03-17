@@ -98,48 +98,17 @@
   
 	$( "#lingue" ).on( "pagebeforeshow", function() {	
 	
-	var lingue = {
-    "italiano": {
-		"idLingua": "1",
-		"codiceLingua": "it",
-		"nomeLingua": "Italiano",
-        "Categorie": "Categorie",
-		"filtra": "filtra",
-		"indietro": "indietro",
-		"ordina": "ordina",
-		"salta": "salta"
-    },
-	"inglese": {
-		"idLingua": "2",
-		"codiceLingua": "en",
-        "nomeLingua": "English",
-		"Categorie": "Categories",
-		"filtra": "filter",
-		"indietro": "back",
-		"ordina": "sort",
-		"salta": "skip"
-		
-    },
-	"francese": {
-		"idLingua": "3",
-		"codiceLingua": "fr",
-        "nomeLingua": "Francaise",
-		"Categorie": "Categorìes",
-		"filtra": "filtre",
-		"indietro": "arriere",
-		"ordina": "sortre"
-		
-    }
-	};
-
 	//LISTA LINGUE
 	$("ul#listaLingue").html("");
 		
-	$.each(lingue, function(index, info) {
-	$("ul#listaLingue").append($("<li></li>",{"html":"<a href='#setup' class='lingua' id='" + info.idLingua + "' codiceLingua='"+info.codiceLingua+"' nomeLingua='"+index+"' data-transition='slide' >" + info.nomeLingua + "" }));
-	});
+		$.getJSON("js/lingue.js", function( data ) {
+		
+			$.each(data, function(index, info) {
+			$("ul#listaLingue").append($("<li></li>",{"html":"<a href='#downloadLingua' class='lingua' id='" + info.idLingua + "' codiceLingua='"+info.codiceLingua+"' nomeLingua='"+index+"' data-transition='slide' ><img src='img/lingue/"+info.codiceLingua+".png' alt='Facebook' class='ui-li-icon ui-corner-none'>" + info.nomeLingua + "</a>" }));
+			});
 	
-	$("ul#listaLingue").listview("refresh");
+			$("ul#listaLingue").listview("refresh");
+		});
 	
 	}); //ON "pagebeforeshow"
 	
@@ -160,7 +129,7 @@
 	
 	<h1>LINGUE</h1>
 
-	<ul id="listaLingue" data-role="listview">
+	<ul data-role="listview" id="listaLingue" data-inset="true">
 	</ul>
 	
 	</div>

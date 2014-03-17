@@ -21,113 +21,45 @@
 </head>
 <body>
 
-<!-- PAGE #opzioni -->
-<div data-role="page" id="opzioni">
+<!-- Start of first page -->
+<div data-role="page" id="foo">
 
-	<!-- /HEADER -->
 	<div data-role="header">
-		<h1>Opzioni</h1>
-	</div>
-	<!-- /HEADER -->
-	
-	<!-- CONTENT -->
-	<div role="main" class="ui-content" >
+		<h1>Foo</h1>
+	</div><!-- /header -->
 
-	<script>
-  
-	$( "#opzioni" ).on( "pageshow", function() {	
-	
-	});
-	
-	</script>
+	<div role="main" class="ui-content">
 	
 	<ul data-role="listview" data-inset="true">
-		<li><a href="#social" data-transition="slide"><img src="img/facebookList.png" alt="facebook" class="ui-li-icon ui-corner-none">Social Networks</a></li>
-		<li><a href="#lingua"><img src="img/foursquareList.png" alt="foursquare" class="ui-li-icon">Foursquare</a></li>
-		<li><a href="#"><img src="img/twitterList.png" alt="twitter" class="ui-li-icon">Twitter</a></li>
-	</ul>
-	
-	</div>
-	<!-- /CONTENT -->
-
-	<!-- FOOTER -->
-	<div data-role="footer" data-theme="a" data-position="fixed">
-		<h4>Page Footer</h4>
-	</div>
-	<!-- /FOOTER -->
-</div><!-- /PAGE #opzioni -->
-
-<!-- PAGE #social -->
-<div data-role="page" id="social">
-
-	<!-- /HEADER -->
-	<div data-role="header">
-		<h1>Social</h1>
-	</div>
-	<!-- /HEADER -->
-	
-	<!-- CONTENT -->
-	<div role="main" class="ui-content" >
-	
-	<script>
-  
-	$( "#social" ).on( "pageshow", function() {	
-	
-	});
-	
-	</script>
-	
-	<ul data-role="listview" data-inset="true">
-		<li><a href="#"><img src="img/facebookList.png" alt="facebook" class="ui-li-icon ui-corner-none">Facebook</a></li>
+		<li><a href="#bar"><img src="img/facebookList.png" alt="facebook" class="ui-li-icon ui-corner-none">Facebook</a></li>
 		<li><a href="#"><img src="img/foursquareList.png" alt="foursquare" class="ui-li-icon">Foursquare</a></li>
 		<li><a href="#"><img src="img/twitterList.png" alt="twitter" class="ui-li-icon">Twitter</a></li>
 	</ul>
 	
-	</div>
-	<!-- /CONTENT -->
+		<p>I'm first in the source order so I'm shown as the page.</p>
+		<p>View internal page called <a href="#bar">bar</a></p>
+	</div><!-- /content -->
 
-	<!-- FOOTER -->
-	<div data-role="footer" data-theme="a" data-position="fixed">
+	<div data-role="footer">
 		<h4>Page Footer</h4>
-	</div>
-	<!-- /FOOTER -->
-</div><!-- /PAGE #social -->
+	</div><!-- /footer -->
+</div><!-- /page -->
 
-<!-- PAGE #social -->
-<div data-role="page" id="social">
+<!-- Start of second page -->
+<div data-role="page" id="bar">
 
-	<!-- /HEADER -->
 	<div data-role="header">
-		<h1>Social</h1>
-	</div>
-	<!-- /HEADER -->
-	
-	<!-- CONTENT -->
-	<div role="main" class="ui-content" >
-	
-	<script>
-  
-	$( "#lingua" ).on( "pageshow", function() {	
-	
-	});
-	
-	</script>
-	
-	<ul data-role="listview" data-inset="true">
-		<li><a href="#"><img src="img/facebookList.png" alt="facebook" class="ui-li-icon ui-corner-none">Facebook</a></li>
-		<li><a href="#"><img src="img/foursquareList.png" alt="foursquare" class="ui-li-icon">Foursquare</a></li>
-		<li><a href="#"><img src="img/twitterList.png" alt="twitter" class="ui-li-icon">Twitter</a></li>
-	</ul>
-	
-	</div>
-	<!-- /CONTENT -->
+		<h1>Bar</h1>
+	</div><!-- /header -->
 
-	<!-- FOOTER -->
-	<div data-role="footer" data-theme="a" data-position="fixed">
+	<div role="main" class="ui-content">
+		<p>I'm the second in the source order so I'm hidden when the page loads. I'm just shown if a link that references my id is beeing clicked.</p>
+		<p><a href="#foo">Back to foo</a></p>
+	</div><!-- /content -->
+
+	<div data-role="footer">
 		<h4>Page Footer</h4>
-	</div>
-	<!-- /FOOTER -->
-</div><!-- /PAGE #lingua -->
-
+	</div><!-- /footer -->
+</div><!-- /page -->
 </body>
 </html>

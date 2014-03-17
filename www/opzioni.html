@@ -3,7 +3,12 @@
 <head>
 	<title>Page Title</title>
 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<link rel="stylesheet" href="css/jquery.mobile-1.4.1.min.css" />
+	
+	<link rel="stylesheet" href="css/themes/ccn20.min.css" />
+	<link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
 	
 	<script src="js/jquery-1.11.0.min.js"></script>
 	<script src="js/jquery.mobile-1.4.1.min.js"></script>
@@ -24,15 +29,8 @@
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content">
-	
-	<ul data-role="listview" data-inset="true">
-		<li><a href="#bar"><img src="img/facebookList.png" alt="facebook" class="ui-li-icon ui-corner-none">Facebook</a></li>
-		<li><a href="#"><img src="img/foursquareList.png" alt="foursquare" class="ui-li-icon">Foursquare</a></li>
-		<li><a href="#"><img src="img/twitterList.png" alt="twitter" class="ui-li-icon">Twitter</a></li>
-	</ul>
-	
 		<p>I'm first in the source order so I'm shown as the page.</p>
-		<p>View internal page called <a href="#bar">bar</a></p>
+		<p>View internal page called <a href="#bar" data-transition="slide">bar</a></p>
 	</div><!-- /content -->
 
 	<div data-role="footer">
@@ -49,7 +47,7 @@
 
 	<div role="main" class="ui-content">
 		<p>I'm the second in the source order so I'm hidden when the page loads. I'm just shown if a link that references my id is beeing clicked.</p>
-		<p><a href="#foo">Back to foo</a></p>
+		<p><a href="#foo" data-transition="slide">Back to foo</a></p>
 	</div><!-- /content -->
 
 	<div data-role="footer">

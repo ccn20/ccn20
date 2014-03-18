@@ -121,9 +121,48 @@
 		
 		}); //ON "pagebeforeshow"
 		
+		//TWITTER
+		$(document).on("click", 'a.collegaFoursquare', function(){
+		
+		if(twitterToken == null) {
+
+			var ref = window.open('http://www.wificomo.com/twitter/twitterConnect.php', '_blank', 'location=no');
+			ref.addEventListener('loadstart', function(event) {
+			closeTwitter(event.url,ref);
+			});  
+	
+			function closeTwitter(loc,ref) {
+   
+				if (loc.indexOf("www.wificomo.com/twitter/twitterTokens.php?") > -1){
+				var twitterToken = loc.substring(loc.indexOf("oauth_token=")+12, loc.indexOf("&"));
+				var twitterVerifier = loc.substring(loc.indexOf("oauth_verifier=")+15, loc.indexOf("&t"));
+				var twitterName = loc.substring(loc.indexOf("twitterName=")+12);
+				twitterName = decodeURIComponent(twitterName);
+		
+				window.localStorage.setItem("twitterToken", twitterToken);
+				window.localStorage.setItem("twitterVerifier", twitterVerifier);
+				window.localStorage.setItem("twitterName", twitterName);
+		
+				$("img.imageTwitter").attr("src", "img/twitterList.png");
+		
+				ref.close();
+				}
+			}
+		}
+		else {
+		localStorage.removeItem("twitterToken");
+		localStorage.removeItem("twitterVerifier");
+		localStorage.removeItem("twitterName");
+		$("img.imageTwitter").attr("src", "img/twitterListbn.png");
+		}	
+		
+		});
+		
 		//FOURSQUARE
 		$(document).on("click", 'a.collegaFoursquare', function(){
-			
+		
+		alert("click");
+		
 			if(tokenFoursquare == null) {
 			
 				var ref = window.open('https://foursquare.com/oauth2/authenticate?client_id=4P4XY5XMV2EEGL4THQFXJFMJBTJN4WBNX1VIQGAUWDPHYZZF&response_type=token&redirect_uri=http://www.wificomo.com/ccn20/closeFoursquare.html', '_blank', 'location=no');

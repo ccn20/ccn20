@@ -75,10 +75,33 @@
 		<!-- CONTENT -->
 		<div role="main" class="ui-content" >
 		
+		<script>
+		$( "#socialNetworks" ).on( "pagebeforeshow", function() {	
+		
+		//FOURSQUARE
+		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
+	
+			if(tokenFoursquare == null) {
+			$("img.imageFoursquare").attr("src", "img/facebookListbn.png");
+			}
+		
+		//TWITTER
+		var twitterToken = window.localStorage.getItem("twitterToken");
+	
+			if(twitterToken == null) {
+			$("img.imageTwitter").attr("src", "img/twitterListbn.png");
+			}
+		
+		
+		
+		}); //ON "pagebeforeshow"
+	
+		</script>
+		
 		<ul data-role="listview" data-inset="true">
 			<li><a href="collegaFacebook.html" data-transition="slide"><img src="img/facebookList.png" alt="Facebook" class="ui-li-icon ui-corner-none">Facebook</a></li>
-			<li><a href="collegaFoursquare.html" data-transition="slide"><img src="img/foursquareList.png" alt="Foursquare" class="ui-li-icon ui-corner-none">Foursquare</a></li>
-			<li><a href="collegaTwitter.html" data-transition="slide"><img src="img/twitterList.png" alt="Twitter" class="ui-li-icon ui-corner-none">Twitter</a></li>
+			<li><a href="collegaFoursquare.html" data-transition="slide"><img src="img/foursquareList.png" alt="Foursquare" class="imageFoursquare ui-li-icon ui-corner-none">Foursquare</a></li>
+			<li><a href="collegaTwitter.html" data-transition="slide"><img src="img/twitterList.png" alt="Twitter" class="imageTwitter ui-li-icon ui-corner-none">Twitter</a></li>
 		</ul>
 	
 		</div>

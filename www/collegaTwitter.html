@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Page Title</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.1.min.css" />
+	
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="js/jquery.mobile-1.4.1.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/function_checkConnection.js"></script>
+	<!-- cordova facebook plugin -->
+	<script src="cdv-plugin-fb-connect.js"></script>
+	<!-- facebook js sdk -->
+	<script src="facebook-js-sdk.js"></script>
+</head>
+<body>
+
+<!-- PAGE #collegaTwitter -->
+		<div data-role="page" id="collegaTwitter">
+
+		<!-- /HEADER -->
+		<div data-role="header">
+		<h1>Twitter</h1>
+		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
+		</div>
+		<!-- /HEADER -->
+	
+		<!-- CONTENT -->
+		<div role="main" class="ui-content" >
+		
+		<script>
+		$( "#collegaFoursquare" ).on( "pageshow", function() {
+		
+			//TWITTER
+			var twitterToken = window.localStorage.getItem("twitterToken");
+	
+			if(twitterToken == null) {
+			$("p.twitter").html('<button class="twitterLogin ui-btn ui-shadow">Twitter: Collega Account</button>');
+			}
+			else {
+			$("p.twitter").html('<button class="twitterLogout ui-btn ui-shadow">Twitter: logout</button>');
+			}	
+			
+		}); //ON "pagebeforeshow"
+		
+		//ON "click" button.twitterLogin
+		$(document).on("click", 'button.twitterLogin', function(){
+	
+			var ref = window.open('http://www.wificomo.com/twitter/twitterConnect.php', '_blank', 'location=no');
+			ref.addEventListener('loadstart', function(event) {
+			closeTwitter(event.url,ref);
+			});  
+	
+			function closeTwitter(loc,ref) {
+   
+				if (loc.indexOf("www.wificomo.com/twitter/twitterTokens.php?") > -1){
+				var twitterToken = loc.substring(loc.indexOf("oauth_token=")+12, loc.indexOf("&"));
+				var twitterVerifier = loc.substring(loc.indexOf("oauth_verifier=")+15, loc.indexOf("&t"));
+				var twitterName = loc.substring(loc.indexOf("twitterName=")+12);
+				twitterName = decodeURIComponent(twitterName);
+		
+				window.localStorage.setItem("twitterToken", twitterToken);
+				window.localStorage.setItem("twitterVerifier", twitterVerifier);
+				window.localStorage.setItem("twitterName", twitterName);
+		
+				$("p.twitter").html('<button class="twitterLogout ui-btn ui-shadow">Twitter: logout</button>');
+		
+				ref.close();
+				}
+			}
+	
+		}); //ON "click" button.twitterLogin
+	
+		//ON "click" button.twitterLogout
+		$(document).on("click", 'button.twitterLogout', function(){
+			localStorage.removeItem("twitterToken");
+			localStorage.removeItem("twitterVerifier");
+			localStorage.removeItem("twitterName");
+			$("p.twitter").html('<button class="twitterLogin ui-btn ui-shadow">Twitter: Collega Account</button>');
+		}); //ON "click" button.twitterLogout
+	
+		</script>
+	
+		<p class="twitter"></p>
+	
+		</div>
+		<!-- /CONTENT -->
+
+		<!-- FOOTER -->
+		<div data-role="footer" data-theme="a" data-position="fixed"><h4>Page Footer</h4></div>
+		<!-- /FOOTER -->
+		
+		</div>
+<!-- /PAGE #collegaTwitter -->
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Page Title</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.1.min.css" />
+	
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="js/jquery.mobile-1.4.1.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/function_checkConnection.js"></script>
+	<!-- cordova facebook plugin -->
+	<script src="cdv-plugin-fb-connect.js"></script>
+	<!-- facebook js sdk -->
+	<script src="facebook-js-sdk.js"></script>
+</head>
+<body>
+
+<!-- PAGE #collegaFacebook -->
+		<div data-role="page" id="collegaFacebook">
+
+		<!-- /HEADER -->
+		<div data-role="header">
+		<h1>Facebook</h1>
+		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
+		</div>
+		<!-- /HEADER -->
+	
+		<!-- CONTENT -->
+		<div role="main" class="ui-content" >
+		
+		<div id="fb-root"></div>
+		<script>
+  
+		$( "#collegaFacebook" ).on( "pageshow", function() {	
+	
+			//FACEBOOK
+			FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false });
+			//GET LOGIN STATUS
+			FB.getLoginStatus(function(response) {
+				//CONNESSO
+				if (response.status === 'connected') {
+				$("p.facebook").html('<button class="facebookLogout ui-btn ui-shadow">Facebook: logout</button>');
+				}
+				//APP NON AUTORIZZATA
+				else if (response.status === 'not_authorized') {
+				alert("not authorized")
+				$("p.facebook").html('<button class="facebookLogin ui-btn ui-shadow">Facebook: Collega Account</button>');
+				} 
+				//NON CONNESSO
+				else {
+				$("p.facebook").html('<button class="facebookLogin ui-btn ui-shadow">Facebook: Collega Account</button>');
+				}
+			}, true);
+		}); // ON "pageshow"
+		
+		//ON "click" button.facebookLogin
+		$(document).on("click", 'button.facebookLogin', function(){
+			FB.login(function(response) {      
+				if (response.authResponse) {
+				$("p.facebook").html('<button class="facebookLogout ui-btn ui-shadow">Facebook: logout</button>');
+				}
+				else {
+				alert('not logged in');
+				}
+			},
+			{ scope: "email" }
+			);
+		}); //ON "click" button.facebookLogin
+	
+		//ON "click" button.facebookLogout
+		$(document).on("click", 'button.facebookLogout', function(){
+			FB.logout(function(response) {
+			$("p.facebook").html('<button class="facebookLogin ui-btn ui-shadow">Facebook: Collega Account</button>');
+			});
+		}); //ON "click" button.facebookLogout
+		
+		</script>
+		
+		<p class="facebook"></p>
+		
+		</div>
+		<!-- /CONTENT -->
+
+		<!-- FOOTER -->
+		<div data-role="footer" data-theme="a" data-position="fixed"><h4>Page Footer</h4></div>
+		<!-- /FOOTER -->
+		
+		</div>
+<!-- /PAGE #collegaFacebook -->
+
+</body>
+</html>

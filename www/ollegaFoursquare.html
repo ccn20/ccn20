@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Page Title</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.1.min.css" />
+	
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="js/jquery.mobile-1.4.1.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/function_checkConnection.js"></script>
+	<!-- cordova facebook plugin -->
+	<script src="cdv-plugin-fb-connect.js"></script>
+	<!-- facebook js sdk -->
+	<script src="facebook-js-sdk.js"></script>
+</head>
+<body>
+
+<!-- PAGE #collegaFoursquare -->
+		<div data-role="page" id="collegaFoursquare">
+
+		<!-- /HEADER -->
+		<div data-role="header">
+		<h1>Foursquare</h1>
+		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
+		</div>
+		<!-- /HEADER -->
+	
+		<!-- CONTENT -->
+		<div role="main" class="ui-content" >
+		
+		<script>
+		
+		$( "#collegaFoursquare" ).on( "pageshow", function() {
+		
+			//FOURSQUARE
+			var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
+	
+			if(tokenFoursquare == null) {
+			$("p.foursquare").html('<button class="foursquareLogin ui-btn ui-shadow">Foursquare: Collega Account</button>');
+			}
+			else {
+			$("p.foursquare").html('<button class="foursquareLogout ui-btn ui-shadow">Foursquare: logout</button>');
+			}
+		});
+		
+		//ON "click" button.foursquareLogin
+		$(document).on("click", 'button.foursquareLogin', function(){
+			var ref = window.open('https://foursquare.com/oauth2/authenticate?client_id=4P4XY5XMV2EEGL4THQFXJFMJBTJN4WBNX1VIQGAUWDPHYZZF&response_type=token&redirect_uri=http://www.wificomo.com/ccn20/closeFoursquare.html', '_blank', 'location=no');
+			ref.addEventListener('loadstart', function(event) {
+			closeFoursquare(event.url,ref);
+			}); 
+	
+			function closeFoursquare(loc,ref) {
+   
+				if (loc.indexOf("www.wificomo.com/ccn20/closeFoursquare.html#") > -1){
+				var tokenFoursquare = loc.substring(loc.indexOf("=")+1);
+				window.localStorage.setItem("tokenFoursquare", tokenFoursquare);
+				$("p.foursquare").html('<button class="foursquareLogout ui-btn ui-shadow">Foursquare: logout</button>');
+				ref.close();
+				}
+			}
+		}); //ON "click" button.foursquareLogin
+	
+		//ON "click" button.foursquareLogout
+		$(document).on("click", 'button.foursquareLogout', function(){
+			localStorage.removeItem("tokenFoursquare");
+			$("p.foursquare").html('<button class="foursquareLogin ui-btn ui-shadow">Foursquare: Collega Account</button>');
+		}); ////ON "click" button.foursquareLogout
+	
+		</script>
+
+		<p class="foursquare"></p>
+
+		</div>
+		<!-- /CONTENT -->
+
+		<!-- FOOTER -->
+		<div data-role="footer" data-theme="a" data-position="fixed"><h4>Page Footer</h4></div>
+		<!-- /FOOTER -->
+		
+		</div>
+<!-- /PAGE #collegaFoursquare -->
+
+</body>
+</html>

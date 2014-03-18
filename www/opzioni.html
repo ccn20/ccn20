@@ -78,6 +78,25 @@
 		<script>
 		$( "#socialNetworks" ).on( "pagebeforeshow", function() {	
 		
+		//FACEBOOK
+			FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false });
+			//GET LOGIN STATUS
+			FB.getLoginStatus(function(response) {
+				//CONNESSO
+				if (response.status === 'connected') {
+				$("img.imageFacebook").attr("src", "img/facebookList.png");
+				}
+				//APP NON AUTORIZZATA
+				else if (response.status === 'not_authorized') {
+				$("img.imageFacebook").attr("src", "img/facebookListnb.png");
+				} 
+				//NON CONNESSO
+				else {
+				$("img.imageFacebook").attr("src", "img/facebookListbn.png");
+				}
+			}, true);
+		}); // ON "pageshow"
+		
 		//FOURSQUARE
 		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
 	

@@ -174,25 +174,25 @@
 			localStorage.removeItem("tokenFoursquare");
 			$("img.imageFoursquare").attr("src", "img/foursquareListbn.png");
 			}
-			
-		}); //ON "click" button.foursquareLogin
 		
 		function closeFoursquare(loc,ref) {
    
-				if (loc.indexOf("www.wificomo.com/ccn20/closeFoursquare.html#") > -1){
-				var tokenFoursquare = loc.substring(loc.indexOf("=")+1);
-				window.localStorage.setItem("tokenFoursquare", tokenFoursquare);
-				$("img.imageFoursquare").attr("src", "img/foursquareList.png");
-				ref.close();
-				}
-		}
+			if (loc.indexOf("www.wificomo.com/ccn20/closeFoursquare.html#") > -1){
+			var tokenFoursquare = loc.substring(loc.indexOf("=")+1);
+			window.localStorage.setItem("tokenFoursquare", tokenFoursquare);
+			$("img.imageFoursquare").attr("src", "img/foursquareList.png");
+			ref.close();
+			}
+		}		
+		
+		}); //ON "click" button.foursquareLogin
 	
 		</script>
 		
 		<ul data-role="listview" data-inset="true">
-			<li><a href="collegaFacebook.html" data-transition="slide"><img src="img/facebookList.png" alt="Facebook" class="imageFacebook ui-li-icon ui-corner-none">Facebook</a></li>
+			<li><a href="#" class="collegaFacebook" data-transition="slide"><img src="img/facebookList.png" alt="Facebook" class="imageFacebook ui-li-icon ui-corner-none">Facebook</a></li>
 			<li><a href="#" class="collegaFoursquare" data-transition="slide"><img src="img/foursquareList.png" alt="Foursquare" class="imageFoursquare ui-li-icon ui-corner-none">Foursquare</a></li>
-			<li><a href="collegaTwitter.html" data-transition="slide"><img src="img/twitterList.png" alt="Twitter" class="imageTwitter ui-li-icon ui-corner-none">Twitter</a></li>
+			<li><a href="#" class="collegaTwitter" data-transition="slide"><img src="img/twitterList.png" alt="Twitter" class="imageTwitter ui-li-icon ui-corner-none">Twitter</a></li>
 		</ul>
 	
 		</div>

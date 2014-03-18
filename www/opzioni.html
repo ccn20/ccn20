@@ -120,12 +120,39 @@
 		
 		
 		}); //ON "pagebeforeshow"
+		
+		//FOURSQUARE
+		$(document).on("click", 'a.collegaFoursquare', function(){
+			
+			if(tokenFoursquare == null) {
+			
+				var ref = window.open('https://foursquare.com/oauth2/authenticate?client_id=4P4XY5XMV2EEGL4THQFXJFMJBTJN4WBNX1VIQGAUWDPHYZZF&response_type=token&redirect_uri=http://www.wificomo.com/ccn20/closeFoursquare.html', '_blank', 'location=no');
+				ref.addEventListener('loadstart', function(event) {
+				closeFoursquare(event.url,ref);
+				}); 
+			}
+			else {
+			localStorage.removeItem("tokenFoursquare");
+			$("img.imageFoursquare").attr("src", "img/foursquareListbn.png");
+			}
+			
+		}); //ON "click" button.foursquareLogin
+		
+		function closeFoursquare(loc,ref) {
+   
+				if (loc.indexOf("www.wificomo.com/ccn20/closeFoursquare.html#") > -1){
+				var tokenFoursquare = loc.substring(loc.indexOf("=")+1);
+				window.localStorage.setItem("tokenFoursquare", tokenFoursquare);
+				$("img.imageFoursquare").attr("src", "img/foursquareList.png");
+				ref.close();
+				}
+		}
 	
 		</script>
 		
 		<ul data-role="listview" data-inset="true">
-			<li><a href="collegaFacebook.html" data-transition="slide"><img src="img/facebookList.png" alt="Facebook" class="ui-li-icon ui-corner-none">Facebook</a></li>
-			<li><a href="collegaFoursquare.html" data-transition="slide"><img src="img/foursquareList.png" alt="Foursquare" class="imageFoursquare ui-li-icon ui-corner-none">Foursquare</a></li>
+			<li><a href="collegaFacebook.html" data-transition="slide"><img src="img/facebookList.png" alt="Facebook" class="imageFacebook ui-li-icon ui-corner-none">Facebook</a></li>
+			<li><a href="collegaFoursquare.html" class="collegaFoursquare" data-transition="slide"><img src="img/foursquareList.png" alt="Foursquare" class="imageFoursquare ui-li-icon ui-corner-none">Foursquare</a></li>
 			<li><a href="collegaTwitter.html" data-transition="slide"><img src="img/twitterList.png" alt="Twitter" class="imageTwitter ui-li-icon ui-corner-none">Twitter</a></li>
 		</ul>
 	

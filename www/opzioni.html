@@ -82,7 +82,10 @@
 		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
 	
 			if(tokenFoursquare == null) {
-			$("img.imageFoursquare").attr("src", "img/facebookListbn.png");
+			$("img.imageFoursquare").attr("src", "img/foursquareListbn.png");
+			}
+			else {
+			$("img.imageFoursquare").attr("src", "img/foursquareList.png");
 			}
 		
 		//TWITTER
@@ -90,6 +93,9 @@
 	
 			if(twitterToken == null) {
 			$("img.imageTwitter").attr("src", "img/twitterListbn.png");
+			}
+			else {
+			$("img.imageTwitter").attr("src", "img/twitterList.png");
 			}
 		
 		

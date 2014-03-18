@@ -22,11 +22,29 @@
 		<div data-role="page" id="opzioni">
 
 		<!-- /HEADER -->
-		<div data-role="header"><h1>Opzioni</h1></div>
+		<div data-role="header">
+		<h1>Opzioni</h1>
+		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
+		</div>
 		<!-- /HEADER -->
 	
 		<!-- CONTENT -->
 		<div role="main" class="ui-content" >
+		
+		<script>
+		
+		document.addEventListener("backbutton", function(e){
+    
+		if($.mobile.activePage.is('#index')){
+        e.preventDefault();
+        return false;
+		}
+		else {
+        navigator.app.backHistory()
+		}
+		}, false);
+		
+		</script>
 		
 		<ul data-role="listview" data-inset="true">
 			<li><a href="#socialNetworks" data-transition="slide"><h2>Social Networks</h2><p>Collega/scollega account</p></a></li>

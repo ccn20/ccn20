@@ -202,7 +202,6 @@
 		
 		}); //ON "click" button.foursquareLogin
 		
-		/*
 		//FACEBOOK
 		$(document).on("click", 'a.collegaFacebook', function(){
 		
@@ -220,7 +219,7 @@
 						if (response.authResponse) {
 						
 							FB.api('/me', function(response) {
-							$("a.collegaFacebook").html('<img src="img/facebookList.png" alt="Facebook" class="imageFacebook ui-li-icon ui-corner-none">Facebook (' + response.name + ')');
+							$("img.imageFacebook").attr("src", "img/facebookList.png");
 							});
 							
 						}
@@ -237,7 +236,7 @@
 						if (response.authResponse) {
 							
 							FB.api('/me', function(response) {
-							$("a.collegaFacebook").html('<img src="img/facebookList.png" alt="Facebook" class="imageFacebook ui-li-icon ui-corner-none">Facebook (' + response.name + ')');
+							$("img.imageFacebook").attr("src", "img/facebookList.png");
 							});
 							
 						}
@@ -251,7 +250,6 @@
 			}, true);
 		
 		}); //ON "click" button.facebookLogin
-		*/
 	
 		</script>
 		

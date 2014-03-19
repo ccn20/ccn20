@@ -193,36 +193,41 @@
 		//FACEBOOK
 		$(document).on("click", 'a.collegaFacebook', function(){
 		
-		FB.getLoginStatus(function(response) {
+			//GET LOGIN STATUS
+			FB.getLoginStatus(function(response) {
 				//CONNESSO
 				if (response.status === 'connected') {
-				FB.logout(function(response) {
-				$("img.imageFacebook").attr("src", "img/facebookListbn.png");
-				});
+					FB.logout(function(response) {
+					$("img.imageFacebook").attr("src", "img/facebookListbn.png");
+					});
 				}
 				//APP NON AUTORIZZATA
 				else if (response.status === 'not_authorized') {
-				FB.login(function(response) {      
-				if (response.authResponse) {
-				$("img.imageFacebook").attr("src", "img/facebookList.png");
-				}
-				else {
-				alert('not logged in');
+					FB.login(function(response) {      
+						if (response.authResponse) {
+						$("img.imageFacebook").attr("src", "img/facebookList.png");
+						}
+						else {
+						alert('not logged in');
+						}
+					},
+					{ scope: "email" }
+					);
 				} 
 				//NON CONNESSO
 				else {
-				FB.login(function(response) {      
-				if (response.authResponse) {
-				$("img.imageFacebook").attr("src", "img/facebookList.png");
+					FB.login(function(response) {      
+						if (response.authResponse) {
+						$("img.imageFacebook").attr("src", "img/facebookList.png");
+						}
+						else {
+						alert('not logged in');
+						}
+					},
+					{ scope: "email" }
+					);
 				}
-				else {
-				alert('not logged in');
-				}
-			},
-			{ scope: "email" }
-			);
-				}
-		}, true);
+			}, true);
 		
 		}); //ON "click" button.facebookLogin
 	

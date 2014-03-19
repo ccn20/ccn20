@@ -84,8 +84,11 @@
 			FB.getLoginStatus(function(response) {
 				//CONNESSO
 				if (response.status === 'connected') {
-				alert("facebook connesso");
 				$("img.imageFacebook").attr("src", "img/facebookList.png");
+					
+					FB.api('/me', function(response) {
+					$("p.accountFacebook").html(response.name);
+					});
 				}
 				//APP NON AUTORIZZATA
 				else if (response.status === 'not_authorized') {
@@ -119,11 +122,9 @@
 		var twitterToken = window.localStorage.getItem("twitterToken");
 	
 			if(twitterToken == null) {
-			alert("twitter non connesso");
 			$("img.imageTwitter").attr("src", "img/twitterListbn.png");
 			}
 			else {
-			alert("twitter connesso");
 			$("img.imageTwitter").attr("src", "img/twitterList.png");
 			}
 		
@@ -198,7 +199,7 @@
 				$.getJSON('https://api.foursquare.com/v2/users/self?oauth_token='+tokenFoursquare+'&v=20140304', function(data){
 				var user = data['response']['user']['firstName'];
 				$("img.imageFoursquare").attr("src", "img/foursquareList.png");
-				$("p.accountTwitter").html(user);
+				$("p.accountFoursquare").html(user);
 				});
 				
 			ref.close();
@@ -225,8 +226,8 @@
 						
 							FB.api('/me', function(response) {
 							$("img.imageFacebook").attr("src", "img/facebookList.png");
+							$("p.accountFacebook").html(response.name);
 							});
-							
 						}
 						else {
 						alert('not logged in');
@@ -242,8 +243,8 @@
 							
 							FB.api('/me', function(response) {
 							$("img.imageFacebook").attr("src", "img/facebookList.png");
+							$("p.accountFacebook").html(response.name);
 							});
-							
 						}
 						else {
 						alert('not logged in');

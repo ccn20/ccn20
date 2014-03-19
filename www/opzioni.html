@@ -104,13 +104,13 @@
 		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
 	
 			if(tokenFoursquare == null) {
-			$("img.imageFoursquare").attr("src", "img/foursquareListbn.png");
+			$("a.collegaFoursquare").html('<img src="img/foursquareListListbn.png" alt="Foursquare" class="imageFoursquare ui-li-icon ui-corner-none">Foursquare');
 			}
 			else {
 			
 			$.getJSON('https://api.foursquare.com/v2/users/self?oauth_token='+tokenFoursquare+'&v=20140304', function(data){
 				var user = data['response']['user']['firstName'];
-				$("a.collegaFoursquare").html('<img src="img/foursquareListList.png" alt="Facebook" class="imageFacebook ui-li-icon ui-corner-none">Foursquare (' + user + ')');
+				$("a.collegaFoursquare").html('<img src="img/foursquareListList.png" alt="Foursquare" class="imageFoursquare ui-li-icon ui-corner-none">Foursquare (' + user + ')');
 				});
 			}
 		
@@ -183,7 +183,7 @@
 			else {
 			alert("elimino twitter foursquare");
 			localStorage.removeItem("tokenFoursquare");
-			$("img.imageFoursquare").attr("src", "img/foursquareListbn.png");
+			$("a.collegaFoursquare").html('<img src="img/foursquareListListbn.png" alt="Foursquare" class="imageFoursquare ui-li-icon ui-corner-none">Foursquare');
 			}
 		
 			function closeFoursquare(loc,ref) {
@@ -191,7 +191,12 @@
 			if (loc.indexOf("www.wificomo.com/ccn20/closeFoursquare.html#") > -1){
 			var tokenFoursquare = loc.substring(loc.indexOf("=")+1);
 			window.localStorage.setItem("tokenFoursquare", tokenFoursquare);
-			$("img.imageFoursquare").attr("src", "img/foursquareList.png");
+			
+				$.getJSON('https://api.foursquare.com/v2/users/self?oauth_token='+tokenFoursquare+'&v=20140304', function(data){
+				var user = data['response']['user']['firstName'];
+				$("a.collegaFoursquare").html('<img src="img/foursquareListList.png" alt="Foursquare" class="imageFoursquare ui-li-icon ui-corner-none">Foursquare ('++')');
+				});
+				
 			ref.close();
 			}
 		}		
@@ -213,7 +218,10 @@
 				else if (response.status === 'not_authorized') {
 					FB.login(function(response) {      
 						if (response.authResponse) {
-						$("img.imageFacebook").attr("src", "img/facebookList.png");
+						
+							FB.api('/me', function(response) {
+							$("a.collegaFacebook").html('<img src="img/facebookList.png" alt="Facebook" class="imageFacebook ui-li-icon ui-corner-none">Facebook (' + response.name + ')');
+							});
 						}
 						else {
 						alert('not logged in');
@@ -226,7 +234,9 @@
 				else {
 					FB.login(function(response) {      
 						if (response.authResponse) {
-						$("img.imageFacebook").attr("src", "img/facebookList.png");
+							FB.api('/me', function(response) {
+							$("a.collegaFacebook").html('<img src="img/facebookList.png" alt="Facebook" class="imageFacebook ui-li-icon ui-corner-none">Facebook (' + response.name + ')');
+							});
 						}
 						else {
 						alert('not logged in');

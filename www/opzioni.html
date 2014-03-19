@@ -78,22 +78,23 @@
 		<script>
 		$( "#socialNetworks" ).on( "pagebeforeshow", function() {	
 		
-		alert("pageshow");
-		
 		//FACEBOOK
 			FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false });
 			//GET LOGIN STATUS
 			FB.getLoginStatus(function(response) {
 				//CONNESSO
 				if (response.status === 'connected') {
+				alert("facebook connesso");
 				$("img.imageFacebook").attr("src", "img/facebookList.png");
 				}
 				//APP NON AUTORIZZATA
 				else if (response.status === 'not_authorized') {
+				alert("facebook non connesso");
 				$("img.imageFacebook").attr("src", "img/facebookListbn.png");
 				} 
 				//NON CONNESSO
 				else {
+				alert("facebook non connesso");
 				$("img.imageFacebook").attr("src", "img/facebookListbn.png");
 				}
 			}, true);
@@ -102,9 +103,11 @@
 		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
 	
 			if(tokenFoursquare == null) {
+			alert("foursquare non connesso");
 			$("img.imageFoursquare").attr("src", "img/foursquareListbn.png");
 			}
 			else {
+			alert("foursquare connesso");
 			$("img.imageFoursquare").attr("src", "img/foursquareList.png");
 			}
 		
@@ -112,9 +115,11 @@
 		var twitterToken = window.localStorage.getItem("twitterToken");
 	
 			if(twitterToken == null) {
+			alert("twitter non connesso");
 			$("img.imageTwitter").attr("src", "img/twitterListbn.png");
 			}
 			else {
+			alert("twitter connesso");
 			$("img.imageTwitter").attr("src", "img/twitterList.png");
 			}
 		

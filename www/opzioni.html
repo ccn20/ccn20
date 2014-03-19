@@ -108,11 +108,10 @@
 			$("img.imageFoursquare").attr("src", "img/foursquareListbn.png");
 			}
 			else {
-			$("img.imageFoursquare").attr("src", "img/foursquareList.png");
 			
-				$.getJSON('https://api.foursquare.com/v2/users/self?oauth_token='+tokenFoursquare+'&v=20140304', function(data){
+			$.getJSON('https://api.foursquare.com/v2/users/self?oauth_token='+tokenFoursquare+'&v=20140304', function(data){
 				var user = data['response']['user']['firstName'];
-				$("a.collegaFoursquare").text('Foursquare (' + user + ')');
+				$("a.collegaFoursquare").html('<img src="img/foursquareListList.png" alt="Facebook" class="imageFacebook ui-li-icon ui-corner-none">Foursquare (' + user + ')');
 				});
 			}
 		

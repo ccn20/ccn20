@@ -84,10 +84,11 @@
 			FB.getLoginStatus(function(response) {
 				//CONNESSO
 				if (response.status === 'connected') {
-								
-				FB.api('/me', function(response) {
-				$("a.collegaFacebook").html('<img src="img/facebookList.png" alt="Facebook" class="imageFacebook ui-li-icon ui-corner-none">Facebook (' + response.name + ')');
-				});
+				
+				alert("collegato");				
+				//FB.api('/me', function(response) {
+				//$("a.collegaFacebook").html('<img src="img/facebookList.png" alt="Facebook" class="imageFacebook ui-li-icon ui-corner-none">Facebook (' + response.name + ')');
+				//});
 				
 				}
 				//APP NON AUTORIZZATA

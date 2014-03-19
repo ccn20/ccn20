@@ -85,6 +85,11 @@
 				//CONNESSO
 				if (response.status === 'connected') {
 				$("img.imageFacebook").attr("src", "img/facebookList.png");
+				
+				FB.api('/me', function(response) {
+				$("a.collegaFacebook").html('Facebook (' + response.name + ')');
+				});
+				
 				}
 				//APP NON AUTORIZZATA
 				else if (response.status === 'not_authorized') {

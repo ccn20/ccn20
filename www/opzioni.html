@@ -121,6 +121,7 @@
 		//TWITTER
 		$(document).on("click", 'a.collegaTwitter', function(){
 		
+		twitterToken = window.localStorage.getItem("twitterToken");
 		if(twitterToken == null) {
 
 			alert("token foursquare nullo");
@@ -161,6 +162,7 @@
 		//FOURSQUARE
 		$(document).on("click", 'a.collegaFoursquare', function(){
 		
+			tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
 			if(tokenFoursquare == null) {
 			
 			alert("token foursquare nullo");

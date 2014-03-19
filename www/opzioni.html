@@ -84,12 +84,7 @@
 			FB.getLoginStatus(function(response) {
 				//CONNESSO
 				if (response.status === 'connected') {
-				
-				alert("collegato");				
-				//FB.api('/me', function(response) {
-				//$("a.collegaFacebook").html('<img src="img/facebookList.png" alt="Facebook" class="imageFacebook ui-li-icon ui-corner-none">Facebook (' + response.name + ')');
-				//});
-				
+				$("img.imageFacebook").attr("src", "img/facebookList.png");
 				}
 				//APP NON AUTORIZZATA
 				else if (response.status === 'not_authorized') {
@@ -105,14 +100,10 @@
 		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
 	
 			if(tokenFoursquare == null) {
-			$("a.collegaFoursquare").html('<img src="img/foursquareListListbn.png" alt="Foursquare" class="imageFoursquare ui-li-icon ui-corner-none">Foursquare');
+			$("img.imageFoursquare").attr("src", "img/foursquareListbn.png");
 			}
 			else {
-			
-				$.getJSON('https://api.foursquare.com/v2/users/self?oauth_token='+tokenFoursquare+'&v=20140304', function(data){
-				var user = data['response']['user']['firstName'];
-				$("a.collegaFoursquare").html('<img src="img/foursquareListList.png" alt="Foursquare" class="imageFoursquare ui-li-icon ui-corner-none">Foursquare (' + user + ')');
-				});
+			$("img.imageFoursquare").attr("src", "img/foursquareList.png");
 			}
 		
 		//TWITTER

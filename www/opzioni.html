@@ -88,7 +88,7 @@
 				}
 				//APP NON AUTORIZZATA
 				else if (response.status === 'not_authorized') {
-				$("img.imageFacebook").attr("src", "img/facebookListnb.png");
+				$("img.imageFacebook").attr("src", "img/facebookListbn.png");
 				} 
 				//NON CONNESSO
 				else {
@@ -189,6 +189,42 @@
 		}		
 		
 		}); //ON "click" button.foursquareLogin
+		
+		//FACEBOOK
+		$(document).on("click", 'button.collegaFacebook', function(){
+		
+		FB.getLoginStatus(function(response) {
+				//CONNESSO
+				if (response.status === 'connected') {
+				FB.logout(function(response) {
+				$("img.imageFacebook").attr("src", "img/facebookListbn.png");
+				});
+				}
+				//APP NON AUTORIZZATA
+				else if (response.status === 'not_authorized') {
+				FB.login(function(response) {      
+				if (response.authResponse) {
+				$("img.imageFacebook").attr("src", "img/facebookList.png");
+				}
+				else {
+				alert('not logged in');
+				} 
+				//NON CONNESSO
+				else {
+				FB.login(function(response) {      
+				if (response.authResponse) {
+				$("img.imageFacebook").attr("src", "img/facebookList.png");
+				}
+				else {
+				alert('not logged in');
+				}
+			},
+			{ scope: "email" }
+			);
+				}
+		}, true);
+		
+		}); //ON "click" button.facebookLogin
 	
 		</script>
 		

@@ -107,8 +107,12 @@
 			$("img.imageFoursquare").attr("src", "img/foursquareListbn.png");
 			}
 			else {
-			alert("foursquare connesso");
-			$("img.imageFoursquare").attr("src", "img/foursquareList.png");
+				
+				$.getJSON('https://api.foursquare.com/v2/users/self?oauth_token='+tokenFoursquare+'&v=20140304', function(data){
+				var user = data['response']['user']['firstName'];
+				$("img.imageFoursquare").attr("src", "img/foursquareList.png");
+				$("p.accountFoursquare").html(user);
+				});
 			}
 		
 		//TWITTER
@@ -194,6 +198,7 @@
 				$.getJSON('https://api.foursquare.com/v2/users/self?oauth_token='+tokenFoursquare+'&v=20140304', function(data){
 				var user = data['response']['user']['firstName'];
 				$("img.imageFoursquare").attr("src", "img/foursquareList.png");
+				$("p.accountTwitter").html(user);
 				});
 				
 			ref.close();
@@ -254,9 +259,9 @@
 		</script>
 		
 		<ul data-role="listview" data-inset="true">
-			<li><a href="#" class="collegaFacebook" data-transition="slide"><img src="img/facebookList.png" alt="Facebook" class="imageFacebook ui-li-icon ui-corner-none">Facebook<p>Lorenzo Onofrio</p></a></li>
-			<li><a href="#" class="collegaFoursquare" data-transition="slide"><img src="img/foursquareList.png" alt="Foursquare" class="imageFoursquare ui-li-icon ui-corner-none">Foursquare<p>Lorenzo</p></a></li>
-			<li><a href="#" class="collegaTwitter" data-transition="slide"><img src="img/twitterList.png" alt="Twitter" class="imageTwitter ui-li-icon ui-corner-none">Twitter<span class="ui-li-count">Lorenzo Onofrio</span></a></li>
+			<li><a href="#" class="collegaFacebook" data-transition="slide"><img src="img/facebookList.png" alt="Facebook" class="imageFacebook ui-li-icon ui-corner-none">Facebook<p class="accountFacebook"></p></a></li>
+			<li><a href="#" class="collegaFoursquare" data-transition="slide"><img src="img/foursquareList.png" alt="Foursquare" class="imageFoursquare ui-li-icon ui-corner-none">Foursquare<p class="accountFoursquare"></p></a></li>
+			<li><a href="#" class="collegaTwitter" data-transition="slide"><img src="img/twitterList.png" alt="Twitter" class="imageTwitter ui-li-icon ui-corner-none">Twitter<p class="accountTwitter"></p></a></li>
 		</ul>
 	
 		</div>

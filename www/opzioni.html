@@ -126,6 +126,7 @@
 			}
 			else {
 			$("img.imageTwitter").attr("src", "img/twitterList.png");
+			$("p.accountTwitter").html(localStorage.getItem("twitterName"));
 			}
 		
 		}); //ON "pagebeforeshow"
@@ -168,7 +169,7 @@
 		localStorage.removeItem("twitterVerifier");
 		localStorage.removeItem("twitterName");
 		$("img.imageTwitter").attr("src", "img/twitterListbn.png");
-		$("p.accountTwitter").html();
+		$("p.accountTwitter").html("");
 		}	
 		
 		});
@@ -190,7 +191,7 @@
 			alert("elimino twitter foursquare");
 			localStorage.removeItem("tokenFoursquare");
 			$("img.imageFoursquare").attr("src", "img/foursquareListbn.png");
-			$("p.accountFoursquare").html();
+			$("p.accountFoursquare").html("");
 			}
 		
 			function closeFoursquare(loc,ref) {
@@ -220,7 +221,7 @@
 				if (response.status === 'connected') {
 					FB.logout(function(response) {
 					$("img.imageFacebook").attr("src", "img/facebookListbn.png");
-					$("p.accountFacebook").html();
+					$("p.accountFacebook").html("");
 					});
 				}
 				//APP NON AUTORIZZATA

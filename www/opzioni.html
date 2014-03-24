@@ -363,13 +363,13 @@
 			
 				dirEntry.getFile("categorie.js", {create: true, exclusive: false}, function(fileEntry) {
 										
-					var localPath = fileEntry.fullPath;
+					var dateModified = fileEntry.lastModifiedDate;
 
 					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
 						localPath = localPath.substring(7);
 					}
 					
-					alert(localPath); 
+					alert(dateModified); 
 				}); // end of dirEntry.getFile
 			
 			}); // fileSystem.root.getDirectory

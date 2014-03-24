@@ -363,13 +363,21 @@
 			
 				dirEntry.getFile("categorie.js", {create: true, exclusive: false}, function(fileEntry) {
 										
-					var dateModified = fileEntry.lastModifiedDate;
+					var modifica = fileEntry.lastModifiedDate;
+					var nome = fileEntry.lastModifiedDate;
+					var dimensione = fileEntry.lastModifiedDate;
+					var tipo = fileEntry.lastModifiedDate;
 
 					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
 						localPath = localPath.substring(7);
 					}
 					
-					alert(dateModified); 
+					alert(modifica);
+					alert(nome);
+					alert(dimensione);
+					alert(tipo);
+					
+					 
 				}); // end of dirEntry.getFile
 			
 			}); // fileSystem.root.getDirectory

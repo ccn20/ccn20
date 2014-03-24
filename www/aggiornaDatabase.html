@@ -18,31 +18,30 @@
 </head>
 <body>
 
-<!-- PAGE #database -->
-		<div data-role="page" id="database">
+<!-- PAGE #aggiornaDatabase -->
+		<div data-role="page" id="aggiornaDatabase">
 
 		<!-- /HEADER -->
 		<div data-role="header">
-		<h1>Database</h1>
+		<h1>aggiornaDatabase</h1>
 		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
 		</div>
 		<!-- /HEADER -->
 	
 		<!-- CONTENT -->
 		<div role="main" class="ui-content" >
-		
-		<script>
-		
-		$( "#database" ).on( "pageshow", function() {	
-		
-			sessionStorage.setItem("vetrineOK", 0);
 	
-			var urlCategorie = encodeURI("http://www.wificomo.com/ccn20/JSONcategorie.php?language="+codLingua+"");	
-			var fileNameCategorie = "categorie.js";
+		<script>
+		$( "#aggiornaDatabase" ).on( "pageshow", function() {	
+	
+	sessionStorage.setItem("vetrineOK", 0);
+	
+	var urlCategorie = encodeURI("http://www.wificomo.com/ccn20/JSONcategorie.php?language="+codLingua+"");	
+	var fileNameCategorie = "categorie.js";
 		
-			var fileTransfer = new FileTransfer();
+		var fileTransfer = new FileTransfer();
 			
-			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
 			
 			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
 			
@@ -161,6 +160,23 @@
 	var pClass = "distance";
 	
 	downloadJSON(directory, fileDistance, urldistance, pClass);
+		
+	// TRADUZIONI------------------------------------------------------------------------------
+	
+	// T.Indietro
+	window.localStorage.setItem("indietro", lingue[lingua].indietro);
+	// T.Categories
+	window.localStorage.setItem("Categorie", lingue[lingua].Categorie);
+	// T.filtra
+	window.localStorage.setItem("filtra", lingue[lingua].filtra);
+	// T.ordina
+	window.localStorage.setItem("ordina", lingue[lingua].ordina);
+	// T.salta
+	window.localStorage.setItem("salta", lingue[lingua].salta);
+	
+	// /TRADUZIONI----------------------------------------------------------------------------
+	
+	}); // ON "pageshow"
 	
 	//DOWNLOAD JSON FUNCTION
 	function downloadJSON(directory, fileName, fileURL, pClass) {
@@ -252,7 +268,7 @@
 									$("li.vetrine").html("download vetrine <img src='img/downloadok.png'>");
 									$("li.vetrine").css("color","green");
 									
-									$("p.downloadComplete").html("<a href='#facebook' class='ui-btn' data-transition='slide'>continua</a>");
+									$("p.downloadComplete").html("<a href='#opzioni' class='ui-btn' data-transition='slide'>Fatto</a>");
 									}
 								}
 								else {
@@ -282,32 +298,30 @@
 	function getVetrine() {
 	sessionStorage.setItem("vetrineOK", 1);
 
-		$.ajax({
-			url: "http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php"",
-			dataType: 'json',
-			success: function(data) {
+	$.ajax({
+		url: "http://www.wificomo.com/ccn20/JSONidEsercizi.php",
+		dataType: 'json',
+		success: function(data) {
 		
-			var totaleEsercizi = data.length;
-			window.sessionStorage.setItem("numElementi", totaleEsercizi);
+		var totaleEsercizi = data.length;
+		window.sessionStorage.setItem("numElementi", totaleEsercizi);
 		
-				$.each(data, function(index, info) {
+			$.each(data, function(index, info) {
 		
-					var urlEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONvetrinaEsercizio.php?language="+codLingua+"&idEsercizio="+info.idEsercizio+"");	
-					var fileNameEsercizi = info.idEsercizio+".js";	
-					var directoryEsercizi = "ccn/esercizi";
+			var urlEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONvetrinaEsercizio.php?language="+codLingua+"&idEsercizio="+info.idEsercizio+"");	
+			var fileNameEsercizi = info.idEsercizio+".js";	
+			var directoryEsercizi = "ccn/esercizi";
 		
-					downloadJSONmulti(directoryEsercizi, fileNameEsercizi, urlEsercizi);
-				});
-			}
-		});
-	}
-
+			downloadJSONmulti(directoryEsercizi, fileNameEsercizi, urlEsercizi);
+			});
 		
+		}
 	});
 	
+	}
 		</script>
 		
-	<ul style="list-style-type: none">
+		<ul style="list-style-type: none">
 	<li class="categorie">download categorie...<img src="img/download.gif"></li>
 	<li class="sottocategorie">download sottocategorie...<img src="img/download.gif"></li>
 	<li class="nome">configurazione ricerca per nome... <img src="img/download.gif"></li>
@@ -319,7 +333,7 @@
 	</ul>
 	
 	<p class="downloadComplete">attendere...</p>
-		
+	
 		</div>
 		<!-- /CONTENT -->
 
@@ -328,7 +342,7 @@
 		<!-- /FOOTER -->
 		
 		</div>
-<!-- /PAGE #database -->
+<!-- /PAGE #aggiornaDatabase -->
 
 </body>
 </html>

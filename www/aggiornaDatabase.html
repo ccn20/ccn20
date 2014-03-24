@@ -35,20 +35,14 @@
 		
 		$( "#database" ).on( "pagebeforeshow", function() {	
 		
-		alert("pageshow");
-		
 		var count = 0;
 		window.sessionStorage.setItem("eserciziAggiornati", 0);
-		
 		
 		$.getJSON("http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php", function( data ) {
 		
 			var countUpdates = data.length;
-			alert(countUpdates);
 			
 			$.each(data, function(index, info) {
-			
-			alert(info.idEsercizio);
 			
 			var urlEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONvetrinaEsercizio.php?language=it&idEsercizio="+info.idEsercizio+"");	
 			var fileNameEsercizi = info.idEsercizio+".js";	

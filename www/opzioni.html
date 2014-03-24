@@ -369,11 +369,18 @@
 		});
 		
 		}); //ON pageshow
+		
+	//ON "click"
+	$(document).on("click", 'a.updateDatabase', function(){
+	
+	$.mobile.changePage( "aggiornaDatabase.html", { reloadPage: true, transition: "slide"} );
+	
+	}); //ON "click"
 	
 		</script>
 		
 		<p class="countUpdates"></p>
-		<a href="aggiornaDatabase.html" rel="external" class="updateDatabase"></a>
+		<a href="#" class="updateDatabase"></a>
 		
 		</div>
 		<!-- /CONTENT -->

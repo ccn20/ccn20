@@ -367,8 +367,10 @@
 										
 					fileEntry.getMetadata(function(metadata) {
 					var dataDownload = Date.parse(metadata.modificationTime);
+					var urlJSON = "http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php?language="+localStorage.getItem("codLingua")+"&dataDownload="+dataDownload;
+					alert(urlJSON);
 
-						$.getJSON("http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php?language="+localStorage.getItem("codLingua")+"&dataDownload="+dataDownload+"", function( data ) {
+						$.getJSON(urlJSON, function( data ) {
 		
 							alert("getJson");
 							$.each(data, function(index, info) {

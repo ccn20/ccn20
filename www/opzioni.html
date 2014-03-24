@@ -367,13 +367,14 @@
 										
 					fileEntry.getMetadata(function(metadata) {
 					var dataDownload = Date.parse(metadata.modificationTime);
-					alert(dataDownload);
 
 						$.getJSON("http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php?language="+localStorage.getItem("codLingua")+"&dataDownload="+dataDownload+"", function( data ) {
 		
+							alert("getJson");
 							$.each(data, function(index, info) {
 			
 							var countUpdates = data.length;
+							alert(countUpdates);
 							$("p.countUpdates").html(countUpdates+" esercizi da aggiornare");
 							$("a.updateDatabase").html("aggiorna");
 							});

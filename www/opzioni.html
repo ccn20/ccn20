@@ -340,6 +340,49 @@
 		</div>
 <!-- /PAGE #lingua -->
 
+<!-- PAGE #database -->
+		<div data-role="page" id="database">
+
+		<!-- /HEADER -->
+		<div data-role="header">
+		<h1>pagina</h1>
+		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
+		</div>
+		<!-- /HEADER -->
+	
+		<!-- CONTENT -->
+		<div role="main" class="ui-content" >
+		
+		<script>
+		
+		$( "#database" ).on( "pageshow", function() {	
+		
+		$.getJSON("http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php", function( data ) {
+		
+			$.each(data, function(index, info) {
+			
+				var countUpdates = data.length;
+				$("p.countUpdates").html(countUpdates+" esercizi da aggiornare");
+			
+			});
+		});
+		
+		}); //ON pageshow
+	
+		</script>
+		
+		<p class="countUpdates"></p>
+		
+		</div>
+		<!-- /CONTENT -->
+
+		<!-- FOOTER -->
+		<div data-role="footer" data-theme="a" data-position="fixed"><h4>Page Footer</h4></div>
+		<!-- /FOOTER -->
+		
+		</div>
+<!-- /PAGE #database -->
+
 <!-- PAGE #pagina -->
 		<div data-role="page" id="pagina">
 

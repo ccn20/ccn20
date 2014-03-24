@@ -23,7 +23,7 @@
 
 		<!-- /HEADER -->
 		<div data-role="header">
-		<h1>pagina</h1>
+		<h1>Database</h1>
 		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
 		</div>
 		<!-- /HEADER -->
@@ -35,11 +35,18 @@
 		
 		$( "#database" ).on( "pageshow", function() {	
 		
+		alert("pageshow");
+		
+		/*
 		var count = 0;
 		window.sessionStorage.setItem("eserciziAggiornati", 0);
+		*/
 		
 		$.getJSON("http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php", function( data ) {
 		
+			var countUpdates = data.length;
+			alert(countUpdates);
+			
 			$.each(data, function(index, info) {
 			
 			alert(info.idEsercizio);
@@ -79,10 +86,12 @@
 						
 						alert("download");
 						
+						/*
 						count = sessionStorage.getItem("eserciziAggiornati");
 						alert(count);
 						$("p.eserciziAggiornati").html(count);
-						//sessionStorage.setItem("eserciziAggiornati", parseInt(count)+1);
+						sessionStorage.setItem("eserciziAggiornati", parseInt(count)+1);
+						*/
 						
 						},
 						function(error) {

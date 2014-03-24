@@ -363,7 +363,7 @@
 			
 				dirEntry.getFile("categorie.js", {create: true, exclusive: false}, function(fileEntry) {
 										
-					var modifica = fileEntry.lastModifiedDate;
+					//var modifica = fileEntry.lastModifiedDate;
 					var nome = fileEntry.name;
 					var dimensione = fileEntry.size;
 					var tipo = fileEntry.type;
@@ -372,7 +372,7 @@
 						localPath = localPath.substring(7);
 					}
 					
-					alert(modifica);
+					//alert(modifica);
 					alert(nome);
 					alert(dimensione);
 					alert(tipo);

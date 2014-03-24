@@ -361,7 +361,7 @@
 			
 			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
 			
-				dirEntry.getFile(fileNameCategorie, {create: true, exclusive: false}, function(fileEntry) {
+				dirEntry.getFile("categorie.js", {create: true, exclusive: false}, function(fileEntry) {
 										
 					var localPath = fileEntry.fullPath;
 

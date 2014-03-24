@@ -18,29 +18,106 @@
 </head>
 <body>
 
-<!-- PAGE #pagina -->
-		<div data-role="page" id="pagina">
+<!-- PAGE #database -->
+		<div data-role="page" id="database">
 
 		<!-- /HEADER -->
 		<div data-role="header">
-		<h1>pagina</h1>
+		<h1>Database</h1>
 		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
 		</div>
 		<!-- /HEADER -->
 	
 		<!-- CONTENT -->
 		<div role="main" class="ui-content" >
-	
+		
 		<script>
-	
-		$( "#pagina" ).on( "pagebeforeshow", function() {	
 		
-		alert("test");
+		$( "#database" ).on( "pagebeforeshow", function() {	
 		
+		alert("pageshow");
+		
+		var count = 0;
+		window.sessionStorage.setItem("eserciziAggiornati", 0);
+		
+		
+		$.getJSON("http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php", function( data ) {
+		
+			var countUpdates = data.length;
+			alert(countUpdates);
+			
+			$.each(data, function(index, info) {
+			
+			alert(info.idEsercizio);
+			
+			var urlEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONvetrinaEsercizio.php?language=it&idEsercizio="+info.idEsercizio+"");	
+			var fileNameEsercizi = info.idEsercizio+".js";	
+			var directoryEsercizi = "ccn/esercizi";
+		
+			downloadJSONmulti(directoryEsercizi, fileNameEsercizi, urlEsercizi);
+			
+			});
 		});
+		
+		}); //ON pageshow
+	
+	
+	//DOWNLOAD JSONmulti FUNCTION
+	function downloadJSONmulti(directory, fileName, fileURL) {
+		
+		var fileTransfer = new FileTransfer();
+		
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+			
+			fileSystem.root.getDirectory(directory, {create: true, exclusive: false}, function(dirEntry) {
+			
+				dirEntry.getFile(fileName, {create: true, exclusive: false}, function(fileEntry) {
+										
+					var localPath = fileEntry.fullPath;
+
+					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
+							localPath = localPath.substring(7);
+					}
+					
+					fileTransfer.download(
+						fileURL,
+						localPath,
+						function(entry) {
+						
+						alert("download");
+						
+						
+						count = sessionStorage.getItem("eserciziAggiornati");
+						alert(count);
+						$("p.eserciziAggiornati").html(count);
+						sessionStorage.setItem("eserciziAggiornati", parseInt(count)+1);
+						
+						
+						},
+						function(error) {
+							alert("download error source " + error.source);
+							alert("download error target " + error.target);
+						},
+						false,
+						{
+							headers: {
+								"Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+							}
+						}
+				
+					); // end of fileTransfer.download
+				}); // end of dirEntry.getFile
+			
+			}); // fileSystem.root.getDirectory
+			
+		}); // end of window.requestFileSystem
+		
+	} //FUNCTION downloadJSONmulti
 	
 		</script>
-	
+		
+		<p class="eserciziAggiornati"></p>
+		
 		</div>
 		<!-- /CONTENT -->
 
@@ -49,7 +126,7 @@
 		<!-- /FOOTER -->
 		
 		</div>
-<!-- /PAGE #pagina -->
+<!-- /PAGE #database -->
 
 </body>
 </html>

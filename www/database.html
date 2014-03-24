@@ -35,6 +35,9 @@
 		
 		$( "#database" ).on( "pageshow", function() {	
 		
+		var count = 0;
+		window.sessionStorage.setItem("eserciziAggiornati", 0);
+		
 		$.getJSON("http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php", function( data ) {
 		
 			$.each(data, function(index, info) {
@@ -50,7 +53,7 @@
 		
 		}); //ON pageshow
 	
-		//DOWNLOAD JSONmulti FUNCTION
+	//DOWNLOAD JSONmulti FUNCTION
 	function downloadJSONmulti(directory, fileName, fileURL) {
 		
 		var fileTransfer = new FileTransfer();
@@ -72,26 +75,10 @@
 						localPath,
 						function(entry) {
 						
-						var numElementi = window.sessionStorage.getItem("numElementi");
-						numElementi = parseInt(numElementi)-1;
-													
-								if(numElementi == 0) {
-							
-									if(sessionStorage.getItem("vetrineOK") == 0) {
-									$("li.sottocategorie").html("download sottocategorie <img src='img/downloadok.png'>");
-									$("li.sottocategorie").css("color","green");
-									getVetrine();
-									}
-									else if(sessionStorage.getItem("vetrineOK") == 1) {
-									$("li.vetrine").html("download vetrine <img src='img/downloadok.png'>");
-									$("li.vetrine").css("color","green");
-									
-									$("p.downloadComplete").html("<a href='#opzioni' class='ui-btn' data-transition='slide'>Fatto</a>");
-									}
-								}
-								else {
-								sessionStorage.setItem("numElementi", numElementi);
-								}
+						count = sessionStorage.getItem("eserciziAggiornati");
+						$("p.eserciziAggiornati").html(count);
+						sessionStorage.setItem("eserciziAggiornati", parseInt(count)+1);
+						
 						},
 						function(error) {
 							alert("download error source " + error.source);
@@ -114,6 +101,8 @@
 	} //FUNCTION downloadJSONmulti
 	
 		</script>
+		
+		<p class="eserciziAggiornati"></p>
 		
 		</div>
 		<!-- /CONTENT -->

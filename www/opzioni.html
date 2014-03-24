@@ -368,7 +368,16 @@
 					fileEntry.getMetadata(function(metadata) {
 					var dataDownload = Date.parse(metadata.modificationTime);
 					alert(dataDownload);
-					sessionStorage.setItem("dataDownload", dataDownload);
+
+						$.getJSON("http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php?language="+localStorage.getItem("codLingua")+"&dataDownload="+dataDownload+"", function( data ) {
+		
+							$.each(data, function(index, info) {
+			
+							var countUpdates = data.length;
+							$("p.countUpdates").html(countUpdates+" esercizi da aggiornare");
+							$("a.updateDatabase").html("aggiorna");
+							});
+						});
 					});
 					 
 				}); // end of dirEntry.getFile
@@ -377,20 +386,8 @@
 			
 		}); // end of window.requestFileSystem
 		
-		var dataDownload = sessionStorage.getItem("dataDownload");
-		alert(dataDownload);
 		
 		
-		$.getJSON("http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php?language="+localStorage.getItem("codLingua")+"&dataDownload="+dataDownload+"", function( data ) {
-		
-			$.each(data, function(index, info) {
-			
-				var countUpdates = data.length;
-				$("p.countUpdates").html(countUpdates+" esercizi da aggiornare");
-				$("a.updateDatabase").html("aggiorna");
-			
-			});
-		});
 		
 		}); //ON pageshow
 	

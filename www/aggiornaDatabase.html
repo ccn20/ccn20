@@ -36,7 +36,7 @@
 		$( "#database" ).on( "pagebeforeshow", function() {	
 		
 		var count = 0;
-		window.sessionStorage.setItem("eserciziAggiornati", 0);
+		window.sessionStorage.setItem("eserciziAggiornati", 1);
 		
 		$.getJSON("http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php", function( data ) {
 		
@@ -78,12 +78,8 @@
 						localPath,
 						function(entry) {
 						
-						alert("download");
-						
-						
 						count = sessionStorage.getItem("eserciziAggiornati");
-						alert(count);
-						$("p.eserciziAggiornati").html(count);
+						$("p.eserciziAggiornati").html(count+"/"+countUpdates);
 						sessionStorage.setItem("eserciziAggiornati", parseInt(count)+1);
 						
 						

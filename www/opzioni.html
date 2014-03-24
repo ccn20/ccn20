@@ -365,13 +365,7 @@
 										
 					fileEntry.getMetadata(success, fail);
 					
-					function success(metadata) {
-						console.log("Last Modified: " + metadata.modificationTime);
-					}
-
-					function fail(error) {
-						alert(error.code);
-					}
+					
 
 					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
 						localPath = localPath.substring(7);
@@ -383,6 +377,9 @@
 			}); // fileSystem.root.getDirectory
 			
 		}); // end of window.requestFileSystem
+		
+		
+		
 		
 		$.getJSON("http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php", function( data ) {
 		
@@ -396,7 +393,16 @@
 		});
 		
 		}); //ON pageshow
-		
+	
+
+	function success(metadata) {
+		console.log("Last Modified: " + metadata.modificationTime);
+	}
+
+	function fail(error) {
+		alert(error.code);
+	}
+	
 	//ON "click"
 	$(document).on("click", 'a.updateDatabase', function(){
 	

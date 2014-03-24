@@ -367,6 +367,7 @@
 										
 					fileEntry.getMetadata(function(metadata) {
 					var dataDownload = Date.parse(metadata.modificationTime);
+					alert(dataDownload);
 					sessionStorage.setItem("dataDownload", dataDownload);
 					});
 					 

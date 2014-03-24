@@ -361,21 +361,15 @@
 			
 			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
 			
-				dirEntry.getFile("categorie.js", {create: true, exclusive: false}, function(fileEntry) {
+				dirEntry.getMetadata("categorie.js", {create: true, exclusive: false}, function(fileEntry) {
+				
+				alert(fileEntry.modificationTime);
 										
-					//var modifica = fileEntry.lastModifiedDate;
-					var nome = fileEntry.name;
-					var dimensione = fileEntry.size;
-					var tipo = fileEntry.type;
+
 
 					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
 						localPath = localPath.substring(7);
 					}
-					
-					//alert(modifica);
-					alert(nome);
-					alert(dimensione);
-					alert(tipo);
 					
 					 
 				}); // end of dirEntry.getFile

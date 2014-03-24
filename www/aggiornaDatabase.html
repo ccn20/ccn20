@@ -36,7 +36,7 @@
 	
 	sessionStorage.setItem("vetrineOK", 0);
 	
-	var urlCategorie = encodeURI("http://www.wificomo.com/ccn20/JSONcategorie.php?language="+codLingua+"");	
+	var urlCategorie = encodeURI("http://www.wificomo.com/ccn20/JSONcategorie.php?language="+localStorage.getItem("codLingua")+"");	
 	var fileNameCategorie = "categorie.js";
 		
 		var fileTransfer = new FileTransfer();

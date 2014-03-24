@@ -364,9 +364,9 @@
 				dirEntry.getFile("categorie.js", {create: true, exclusive: false}, function(fileEntry) {
 										
 					var modifica = fileEntry.lastModifiedDate;
-					var nome = fileEntry.lastModifiedDate;
-					var dimensione = fileEntry.lastModifiedDate;
-					var tipo = fileEntry.lastModifiedDate;
+					var nome = fileEntry.name;
+					var dimensione = fileEntry.size;
+					var tipo = fileEntry.type;
 
 					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
 						localPath = localPath.substring(7);

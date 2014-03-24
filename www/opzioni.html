@@ -357,6 +357,8 @@
 		
 		$( "#database" ).on( "pageshow", function() {	
 		
+		var dataDownload;
+		
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
 			
 			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
@@ -364,18 +366,9 @@
 				dirEntry.getFile("categorie.js", {create: true, exclusive: false}, function(fileEntry) {
 										
 					fileEntry.getMetadata(function(metadata) {
-					var dataModifica = Date.parse(metadata.modificationTime);
-					
-					alert(dataModifica);
+					dataDownload = Date.parse(metadata.modificationTime);
 					
 					});
-					
-					
-
-					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
-						localPath = localPath.substring(7);
-					}
-					
 					 
 				}); // end of dirEntry.getFile
 			
@@ -386,7 +379,7 @@
 		
 		
 		
-		$.getJSON("http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php", function( data ) {
+		$.getJSON("http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php?language="+localStorage.getItem("codLingua")+"&dataDownload="+dataDownload+"", function( data ) {
 		
 			$.each(data, function(index, info) {
 			

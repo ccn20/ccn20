@@ -361,11 +361,17 @@
 			
 			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
 			
-				dirEntry.getMetadata("categorie.js", {create: true, exclusive: false}, function(fileEntry) {
-				
-				alert(fileEntry.modificationTime);
+				dirEntry.getFile("categorie.js", {create: true, exclusive: false}, function(fileEntry) {
 										
+					fileEntry.getMetadata(success, fail);
+					
+					function success(metadata) {
+						console.log("Last Modified: " + metadata.modificationTime);
+					}
 
+					function fail(error) {
+						alert(error.code);
+					}
 
 					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
 						localPath = localPath.substring(7);

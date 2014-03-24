@@ -42,6 +42,8 @@
 		
 			$.each(data, function(index, info) {
 			
+			alert(info.idEsercizio);
+			
 			var urlEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONvetrinaEsercizio.php?language=it&idEsercizio="+info.idEsercizio+"");	
 			var fileNameEsercizi = info.idEsercizio+".js";	
 			var directoryEsercizi = "ccn/esercizi";

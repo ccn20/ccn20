@@ -75,7 +75,10 @@
 						localPath,
 						function(entry) {
 						
+						alert("download");
+						
 						count = sessionStorage.getItem("eserciziAggiornati");
+						alert(count);
 						$("p.eserciziAggiornati").html(count);
 						sessionStorage.setItem("eserciziAggiornati", parseInt(count)+1);
 						

@@ -359,9 +359,9 @@
 		
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
 			
-			fileSystem.root.getDirectory("ccn", function(dirEntry) {
+			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
 			
-				dirEntry.getFile("categorie.js", function(fileEntry) {
+				dirEntry.getFile(fileNameCategorie, {create: true, exclusive: false}, function(fileEntry) {
 										
 					var localPath = fileEntry.fullPath;
 
@@ -369,7 +369,7 @@
 						localPath = localPath.substring(7);
 					}
 					
-					alert(localPath);
+					alert(localPath); 
 				}); // end of dirEntry.getFile
 			
 			}); // fileSystem.root.getDirectory

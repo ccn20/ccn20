@@ -355,7 +355,7 @@
 		
 		<script>
 		
-		$( "#database" ).on( "pageshow", function() {	
+		$( "#database" ).on( "pagebeforeshow", function() {	
 		
 		
 		
@@ -370,7 +370,7 @@
 					var urlJSON = "http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php?language="+localStorage.getItem("codLingua")+"&dataDownload="+dataDownload;
 
 						$.getJSON(urlJSON, function( data ) {
-							
+							alert(data);
 							if(data == null) {
 							alert("database aggiornato");
 							}

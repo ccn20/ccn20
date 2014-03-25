@@ -94,7 +94,7 @@
 	function getSottocategorie()
 	{
 	
-		var codlingua = window.localStorage.getItem('codLingua');
+		var codLingua = window.localStorage.getItem('codLingua');
 		var path = window.localStorage.getItem('pathSD');
 		var pathCategorie = path+"/categorie.js";
 		
@@ -106,17 +106,12 @@
 		
 			$.each(data, function(index, info) {
 			
-			alert(info.idCategoria);
-			
-			/*
 			var urlSottocategorie = encodeURI("http://www.wificomo.com/ccn20/JSONsottocategorieNegozi.php?idCategoria="+info.idCategoria+"&language="+codLingua+"");	
-			alert(urlSottocategorie);
 			var fileNameSottocategorie = info.jsonName+".js";
-			alert(fileNameSottocategorie);
 			var directory = "ccn";
 			
 			downloadJSONmulti(directory, fileNameSottocategorie, urlSottocategorie);
-			*/
+
 			});
 		});
 		

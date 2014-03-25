@@ -83,13 +83,17 @@
 	
 	<script type="text/javascript" charset="utf-8">
 	
+
 	$( document ).on( "pageshow", "#vetrinaMappa", function() {
-		
-		var jsonVetrina;		
-		var jsurl = "js/"+idEsercizio+".js";
+	
+// CARICA FILE VETRINA
+	
+		var path = window.localStorage.getItem("pathSD");
+		var jsonPath = path + "/esercizi/"+idEsercizio+".js";
+		var jsonVetrina;
 		
 		$.ajax({
-			url: jsurl,
+			url: jsonPath,
 			dataType: 'json',
 			async: false,
 			success: function(data) {
@@ -97,142 +101,240 @@
 			sessionStorage.setItem('jsonVetrina', JSON.stringify(jsonVetrina));
 			}
 		}); // AJAX END
-		
-	// NOME ESERCIZIO + INDIRIZZO + DESCRIZIONE
+	
+// NOME ESERCIZIO + INDIRIZZO + DESCRIZIONE
 	
 		var esercizioLatitude;
 		var esercizioLongitude;
-		var nomeParcheggioMappa;
-		var parcheggioLatitude;
-		var parcheggioLongitude;
 		var nomeEsercizioMappa;
+		var descrizioneEsercizio;
+		var linguaDescrizioneEsercizio;
+		var parcheggioVicino;
+		var map;
+	
 		$.each(jsonVetrina, function(index, info) {
-				
 				$("h3.nomeEsercizio").html(info.NomeEsercizio);
 				$(".indirizzoEsercizio").html(info.Indirizzo+" "+info.Citta);
+				$(".descrizioneEsercizio").html(""); // SVUOTA DESCRIZIONE PER PREVENIRE DESCRIZIONI NULLE
 				$(".descrizioneEsercizio").html(info.Descrizione);
-				$(".nomeParcheggio").html(""+info.Parcheggio.nomeParcheggio+" "+info.Parcheggio.indirizzoParcheggio+"");
-				
+				 
 				esercizioLatitude = info.Latitudine;
 				esercizioLongitude = info.Longitudine;
 				nomeEsercizioMappa = info.NomeEsercizio;
-				nomeParcheggioMappa = info.Parcheggio.nomeParcheggio;
-				parcheggioLatitude = info.Parcheggio.latitudineParcheggio;
-				parcheggioLongitude = info.Parcheggio.longitudineParcheggio;
-	
+				descrizioneEsercizio = info.Descrizione;
+				linguaDescrizioneEsercizio = info.LinguaDescrizione;
+				if (info.Parcheggio != undefined)
+				{
+				parcheggioVicino = info.Parcheggio.nomeParcheggio+" "+info.Parcheggio.indirizzoParcheggio;
+				}
 		});
 		
+//NAVIGATE BUTTON
 		
-	// /NOME ESERCIZIO + INDIRIZZO + DESCRIZIONE
-	
-	// MAPPA + POSIZIONE UTENTE
-	
-	var map = new L.Map('map');
-	
-	var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-	L.tileLayer(osmUrl, {minZoom: 8, maxZoom: 18}).addTo(map);
-	
-	var controlloZoom = L.control({ position: 'bottomleft' });
+		$( ".navigateEsercizio" ).html("");
+		$( ".navigateEsercizio" ).append("<a href='#' geoPosition='"+esercizioLatitude+","+esercizioLongitude+"'class='directions'>Navigazione</a>");
 
-	controlloZoom.onAdd = function (map) {
-		this._div = L.DomUtil.create('div', 'controlloZoom');
-		this._div.innerHTML = '<button class="groupMarker">Fit to group marker</button><button class="userMarker">Fit to user marker</button>';
-		return this._div;
-	};
+// DESCRIZIONE + TRANSLATE BUTTON
+		var codLingua = localStorage.getItem("codLingua");
+		if(!(codLingua == 'it' || codLingua == 'en')){
+			if(descrizioneEsercizio != undefined)
+			{
+			$( "#box-descrizioneEsercizio" ).show();
+			$( ".traduciDescrizioneEsercizio" ).html("");
+			$( ".traduciDescrizioneEsercizio" ).html( "<button class='translate' codLingua='"+codLingua+"' linguaDescrizione='"+linguaDescrizioneEsercizio+"'>Traduci</button>" );	
+			}
+			else{
+			$( "#box-descrizioneEsercizio" ).hide();
+			}
+		}
 
-	controlloZoom.addTo(map);
+
+// PARCHEGGIO VICINO
+		
+		if (parcheggioVicino == undefined){
+		$( ".parcheggioVicino" ).html("");
+		}
+		else{
+		$( ".parcheggioVicino" ).html("");
+		$( ".parcheggioVicino" ).append( "<li class='immagineParcheggio'><img class='imgParcheggio' src='img/parcheggioVicino.png' style='width: 37px; height: 50px;'><p class='nomeParcheggio'>"+parcheggioVicino+"</p></li>" );
+		}
+		
+		
+// MAPPA + POSIZIONE UTENTE
 	
-	/*
-	L.tileLayer('img/como/{z}/{x}/{y}.png', {
+		//INIZIALIZZAZIONE MAPPA
+		
+		$( "#map" ).remove();
+		var $map = $("<div>", {id: "map", class: "a", style:"width: 1920px; height:400px"});
+		$("#mappa").append($map);
+		
+		map = new L.Map('map');
+	
+		var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+		L.tileLayer(osmUrl, {minZoom: 13, maxZoom: 18}).addTo(map);
+		
+		/*
+		L.tileLayer('img/como/{z}/{x}/{y}.png', {
 		maxZoom: 18
-	}).addTo(map);
-	*/
-	var userLatitude;
-	var userLongitude;
-	var markerUtente;
-	var markerEsercizio;
-	var group;
-	var watchID = null;
-	var options = { maximumAge: 5000, timeout: 30000, enableHighAccuracy: true };
-      
-	watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
-	
-	var parkingIcon = L.icon({
-		iconUrl: 'img/parking.png',
-		iconSize:     [32, 37], // size of the icon
-		popupAnchor:  [0, -20] // point from which the popup should open relative to the iconAnchor
-	});
-	
-	var markerIcon = L.icon({
-		iconUrl: 'img/marker-icon.png',
-		iconSize:     [25, 41], // size of the icon
-		popupAnchor:  [0, -20] // point from which the popup should open relative to the iconAnchor
-	});
+		}).addTo(map);
+		*/
 		
-	
-	markerEsercizio = L.marker([esercizioLatitude, esercizioLongitude], {icon: markerIcon}).addTo(map).bindPopup(nomeEsercizioMappa);
-	//var markerParcheggio = L.marker([esercizioLatitude, esercizioLongitude], {icon: parkingIcon}).addTo(map).bindPopup(nomeParcheggioMappa);
-	
-	
-	function onSuccess(position) {
+		map.setView(new L.LatLng(45.80806, 9.08518),14); //MAPPA SU COMO
+		
+		//BOTTONI CONTROLLO ZOOM
+		var controlloZoom = L.control({ position: 'bottomleft' });
+		controlloZoom.onAdd = function (map) {
+			this._div = L.DomUtil.create('div', 'controlloZoom');
+			this._div.innerHTML = '<button class="groupMarker">Fit to group marker</button><button class="userMarker">Fit to user marker</button>';
+			return this._div;
+		};
+		controlloZoom.addTo(map);
+		
+		
+		var userLatitude;
+		var userLongitude;
+		var markerUtente;
+		var markerEsercizio;
+		var group;
+		var watchID = null;
+		var options = { maximumAge: 1500, timeout: 30000, enableHighAccuracy: true };
+      		
+		var markerIcon = L.icon({
+			iconUrl: 'img/marker-icon.png',
+			iconSize:     [25, 41], // size of the icon
+			popupAnchor:  [0, -20] // point from which the popup should open relative to the iconAnchor
+		});
+		
+		markerEsercizio = L.marker([esercizioLatitude, esercizioLongitude], {icon: markerIcon}).addTo(map).bindPopup(nomeEsercizioMappa);
+		
+		$(".distanzaEsercizio").html("");
+		
+		watchID = navigator.geolocation.watchPosition(onSuccess, onErrorPosition, options);
+		
+// FUNCTION SUCCESS WATCH POSITION
+
+		function onSuccess(position) {
 	 		
-	userLatitude = position.coords.latitude;
-	userLongitude = position.coords.longitude;
-	var userAccuracy = position.coords.accuracy 
+			userLatitude = position.coords.latitude;
+			userLongitude = position.coords.longitude;
+	
+			var distance = 5000;
+			var jsonPositionDir = path + "/position.js";
+			$.getJSON(jsonPositionDir, function( jsonPosition ) {
+				$.each(jsonPosition, function(index, info) {
+					currentDistance = getDistanceFromLatLonInKm(userLatitude,userLongitude,info.latEsercizio,info.lonEsercizio);
+					if(distance > currentDistance && info.idEsercizio != idEsercizio)
+					{
+						distance = currentDistance;
+						nearestEsercizio = info.idEsercizio;
+					}
+				});
+				console.log("Nodo vicino: "+nearestEsercizio);
+				console.log(distance);
+				if(distance < 500)
+				{		
+					var jsonVetrinaSession = JSON.parse(window.sessionStorage.getItem("jsonVetrina"));
+					var obj = jsonVetrinaSession[0];
+						if(nearestEsercizio in obj.Distanze){
+								$.each(obj.Distanze, function(index, infoDistance) {
+									if(infoDistance.idEsercizio == nearestEsercizio){
+										var minutes = Math.floor(infoDistance.time / 60);
+										var seconds = infoDistance.time - minutes * 60;
+										$(".distanzaEsercizio").html(infoDistance.distance+"m - "+minutes+":"+seconds+" min<p class='esercizioVicino'>Ora sei vicino a "+infoDistance.nomeEsercizio+"</p>");
+									}
+								});
+					}
+					else{
+					$(".distanzaEsercizio").html("+200m");
+					}
+				}
+				else
+				{
+				$(".distanzaEsercizio").html("Troppo lontato per calcolare");
+				}
+			}); //END GET JSON POSITION 
+	
+			var userAccuracy = position.coords.accuracy 
 
-	if (!markerUtente) {
-	markerUtente = L.userMarker([userLatitude, userLongitude],{pulsing:true}).bindPopup("Sei qui.").addTo(map);
-	markerUtente.setAccuracy(userAccuracy);
-	map.setView(new L.LatLng(userLatitude, userLongitude),16);
-	//group = new L.featureGroup([markerEsercizio, markerUtente]);
-	}
-	markerUtente.setLatLng([userLatitude, userLongitude],{pulsing:true}).update();
+			if (!markerUtente) {
+			markerUtente = L.userMarker([userLatitude, userLongitude],{pulsing:true}).bindPopup("Sei qui.").addTo(map);
+			markerUtente.setAccuracy(userAccuracy);
+			map.setView(new L.LatLng(userLatitude, userLongitude),16);
+			}
+			markerUtente.setLatLng([userLatitude, userLongitude],{pulsing:true}).update();
+	
+		} // END ON SUCCESS
+	
+		function onErrorPosition(error) {
+			//alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
+		}
+
+// CLICK ZOOM BUTTONS
+	
+		$(document).on("click", 'button.groupMarker', function(){
+			group = new L.featureGroup([markerEsercizio, markerUtente]);
+			map.fitBounds(group.getBounds().pad(0.25));
+		});
 		
+		$(document).on("click", 'button.userMarker', function(){
+			map.setView(new L.LatLng(userLatitude, userLongitude),16);
+		});
 	
-	
-	//group = new L.featureGroup([markerEsercizio, markerUtente]);
+	});
+	// END OF PAGESHOW
 
-	//map.fitBounds(group.getBounds().pad(0.25));
-	
-	} // FINE ON SUCCESS
-	
-	function onError(error) {
-        //alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
-	}
-
-	// /MAPPA + POSIZIONE UTENTE
-	
-	$(document).on("click", 'button.groupMarker', function(){
-		group = new L.featureGroup([markerEsercizio, markerUtente]);
-		map.fitBounds(group.getBounds().pad(0.25));
-	});
-	
-	$(document).on("click", 'button.userMarker', function(){
-		map.setView(new L.LatLng(userLatitude, userLongitude),16);
-	});
-		
-	});
-	// /PAGEBEFORESHOW
-	
+// CLICK DIRECTIONS GOOGLE
 	$(document).on("click", 'a.directions', function(){
-		directions(esercizioLatitude, esercizioLongitude);
+		geoPosition = $(this).attr('geoPosition');
+		directions(geoPosition);
 	});
-		
-	// FUNZIONE DIRECTIONS
 	
-	function directions(esercizioLatitude, esercizioLongitude) {
-		var latLongDirections = ""+esercizioLatitude+","+esercizioLongitude+"";
-		$(".directions").click(function(){
-		navigator.google_navigate.navigate(latLongDirections, function() {
+// CLICK TRANSLATE GOOGLE
+	$(document).on("click", '.translate', function(){
+		var descrizioneTranslate = $(".descrizioneEsercizio").text();
+		var linguaDescrizione = $(this).attr('linguaDescrizione');
+		var codLingua = $(this).attr('codLingua');
+		var urlTranslate = encodeURI("http://translate.google.com/#"+linguaDescrizione+"/"+codLingua+"/"+descrizioneTranslate+"");
+		var ref = window.open(urlTranslate, '_blank', 'location=yes');
+		//ref.addEventListener('loadstart', function() { alert(event.url); });
+	});
+	
+// FUNZIONE DISTANZA NEAREST NODE
+	
+	function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+  
+		var R = 6371; // Radius of the earth in km
+  
+		var dLat = deg2rad(lat2-lat1);  // deg2rad below
+		var dLon = deg2rad(lon2-lon1); 
+  
+		var a = 
+		Math.sin(dLat/2) * Math.sin(dLat/2) +
+		Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+		Math.sin(dLon/2) * Math.sin(dLon/2)
+		; 
+  
+		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+		var d = R * c * 1000; // Distance in km
+		return Math.round(d);
+	}
+
+	function deg2rad(deg) {
+		return deg * (Math.PI/180)
+	}
+		
+// FUNZIONE DIRECTIONS GOOGLE
+	
+	function directions(geoPosition) {
+		navigator.google_navigate.navigate(geoPosition, function() {
 			console.log('Success');
 		}, function(errMsg) {
 			console.log("Failed: " + errMsg);
 		});
-		});
 	}
 	
 	// /FUNZIONE DIRECTIONS
-	
+		
 	</script>
 	
 	<!-- NOME ESERCIZIO -->
@@ -244,11 +346,11 @@
 	<!-- /NOME ESERCIZIO -->
 	
 	<!-- MAPPA + INDIRIZZO + DIRECTIONS + PANORAMICA + DISTANZA -->
-	<div id="map" style="width: 1920px; height:400px"></div>
+	<div id="mappa"></div>
 	<ul class="funzionalitaMappa">
 	<li class="singolaFunzionalitaMappa indirizzoEsercizio"></li>
-	<li class="singolaFunzionalitaMappa"><a href="#" class="directions">Navigazione</a></li>
-	<li class="singolaFunzionalitaMappa">Distance</li>
+	<li class="singolaFunzionalitaMappa navigateEsercizio"></li>
+	<li class="singolaFunzionalitaMappa distanzaEsercizio"></li>
 	</ul>
 	<!-- /MAPPA + INDIRIZZO + DIRECTIONS + PANORAMICA + DISTANZA -->
 	
@@ -256,13 +358,13 @@
 	
 	<div id="box-descrizioneEsercizio">
 	<p class="descrizioneEsercizio"></p>
+	<p class="traduciDescrizioneEsercizio"></p>
 	</div>
 	<!-- /DESCRIZIONE ESERCIZIO -->
 	
 	<!-- PARCHEGGIO VICINO ESERCIZIO -->
 	
 	<ul class="parcheggioVicino">
-	<li class="immagineParcheggio"><img class="imgParcheggio" src="img/parcheggioVicino.png" style="width: 37px; height: 50px;"><p class="nomeParcheggio"></p></li>
 	</ul>
 	<!-- /PARCHEGGIO VICINO ESERCIZIO -->
 		
@@ -271,7 +373,7 @@
 	<div data-role="footer" data-theme="a" data-position="fixed">
 		<div data-role="navbar" data-iconpos="top">
             <ul>
-                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location">Mappa</a></li>
+                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location" class="ui-btn-active ui-state-persist">Mappa</a></li>
                 <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock">Orari</a></li>
                 <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone">Contatti</a></li>
 				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear">Statistiche</a></li>
@@ -343,8 +445,8 @@
 	<div data-role="footer" data-theme="a" data-position="fixed">
 		<div data-role="navbar" data-iconpos="top">
             <ul>
-                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location">Mappa</a></li>
-                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock">Orari</a></li>
+                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location" data-direction="reverse">Mappa</a></li>
+                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock" class="ui-btn-active ui-state-persist">Orari</a></li>
                 <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone">Contatti</a></li>
 				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear">Statistiche</a></li>
 				<!-- <li><a href="#" data-icon="camera">Gallery</a></li> -->
@@ -378,12 +480,12 @@
 		$("h3.nomeEsercizio").html(info.NomeEsercizio);
 		$("ul#contattiEsercizio").append($("<li data-role='list-divider'>Contatti</li>"));
 		$("ul#contattiEsercizio").append($("<li>Indirizzo: "+info.Indirizzo+" "+info.Citta+"</li>"));
-		$("ul#contattiEsercizio").append($("<li>Telefono: "+info.Telefono+"</li>"));
-		$("ul#contattiEsercizio").append($("<li>Website: "+info.Website+"</li>"));
-		$("ul#contattiEsercizio").append($("<li>Email: "+info.Email+"</li>"));
-		$("ul#contattiEsercizio").append($("<li>Facebook: "+info.Facebook+"</li>"));
-		$("ul#contattiEsercizio").append($("<li>Twitter: "+info.Twitter+"</li>"));
-		$("ul#contattiEsercizio").append($("<li>Foursquare: "+info.Foursquare+"</li>"));
+		if (info.Telefono != undefined){$("ul#contattiEsercizio").append($("<li>Telefono: "+info.Telefono+"</li>"))};
+		if (info.Website != undefined){$("ul#contattiEsercizio").append($("<li>Website: "+info.Website+"</li>"))};
+		if (info.Email != undefined){$("ul#contattiEsercizio").append($("<li>Email: "+info.Email+"</li>"))};
+		if (info.Facebook != undefined){$("ul#contattiEsercizio").append($("<li>Facebook: "+info.Facebook+"</li>"))};
+		if (info.Twitter != undefined){$("ul#contattiEsercizio").append($("<li>Twitter: "+info.Twitter+"</li>"))};
+		if (info.Foursquare != undefined){$("ul#contattiEsercizio").append($("<li>Foursquare: "+info.Foursquare+"</li>"))};
 		$("ul#contattiEsercizio").listview("refresh");
 							
 	});
@@ -417,9 +519,9 @@
 	<div data-role="footer" data-theme="a" data-position="fixed">
 		<div data-role="navbar" data-iconpos="top">
             <ul>
-                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location">Mappa</a></li>
-                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock">Orari</a></li>
-                <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone">Contatti</a></li>
+                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location" data-direction="reverse">Mappa</a></li>
+                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock" data-direction="reverse">Orari</a></li>
+                <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone" class="ui-btn-active ui-state-persist">Contatti</a></li>
 				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear">Statistiche</a></li>
 				<!-- <li><a href="#" data-icon="camera">Gallery</a></li> -->
             </ul>
@@ -696,10 +798,10 @@
 	<div data-role="footer" data-theme="a" data-position="fixed">
 		<div data-role="navbar" data-iconpos="top">
             <ul>
-                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location">Mappa</a></li>
-                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock">Orari</a></li>
-                <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone">Contatti</a></li>
-				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear">Statistiche</a></li>
+                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location" data-direction="reverse">Mappa</a></li>
+                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock" data-direction="reverse">Orari</a></li>
+                <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone" data-direction="reverse">Contatti</a></li>
+				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear" class="ui-btn-active ui-state-persist">Statistiche</a></li>
 				<!-- <li><a href="#" data-icon="camera">Gallery</a></li> -->
             </ul>
         </div><!-- /navbar -->

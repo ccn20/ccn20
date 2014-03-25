@@ -75,7 +75,9 @@
 	var userAccuracy;
 	var eserciziSort;
 	
-	navigator.geolocation.getCurrentPosition(onSuccess, onError);
+	var options = { enableHighAccuracy: true };
+	
+	navigator.geolocation.getCurrentPosition(onSuccess, onError, option);
 	
 	function onSuccess(position) {
 	

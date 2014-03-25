@@ -142,7 +142,7 @@
 		$("ul#listaEsercizi").html("");
 
 		$.each(jsonPath, function(index, info) {
-		$("ul#listaEsercizi").append($("<li></li>",{"html":"<a href='#vetrinaEsercizio' class='esercizio' id='"+info.idEsercizio+"' data-transition='slide' >"+info.nomeEsercizio+"</a>" }));
+		$("ul#listaEsercizi").append($("<li></li>",{"html":"<a href='#vetrinaMappa' class='esercizio' idEsercizio='"+info.idEsercizio+"' data-transition='slide' >"+info.nomeEsercizio+"</a>" }));
 		});
 
 		$("ul#listaEsercizi").listview("refresh");
@@ -194,7 +194,6 @@
 	
 	$(document).on("click", 'a.esercizio', function(){
 		idEsercizio = $(this).attr('idEsercizio');
-		alert(idEsercizio);
 	});
 	
 	</script>

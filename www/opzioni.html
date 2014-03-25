@@ -373,14 +373,19 @@
 						$.getJSON(urlJSON, function( data ) {
 		
 							alert("getJson");
-							alert(data);
-							$.each(data, function(index, info) {
+							
+							if(data == 'null') {
+							alert("database aggiornato");
+							}
+							else {
+								$.each(data, function(index, info) {
 			
-							var countUpdates = data.length;
-							alert(countUpdates);
-							$("p.countUpdates").html(countUpdates+" esercizi da aggiornare");
-							$("a.updateDatabase").html("aggiorna");
-							});
+								var countUpdates = data.length;
+								alert(countUpdates);
+								$("p.countUpdates").html(countUpdates+" esercizi da aggiornare");
+								$("a.updateDatabase").html("aggiorna");
+								});
+							}
 						});
 					});
 					 

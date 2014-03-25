@@ -24,7 +24,7 @@
 	<!-- /HEADER -->
 	<div data-role="header">
 		<h1>Index</h1>
-		<a href="" data-icon="gear" class="opzioni ui-btn-right" data-transition="slide">Options</a>
+		<a href="#" data-icon="gear" id="opzioni" class="ui-btn-right" data-transition="slide">Options</a>
 	</div>
 	<!-- /HEADER -->
 	
@@ -61,7 +61,7 @@
 		
 	});
 	
-	$(document).on("click", 'a.opzioni', function(){
+	$(document).on("click", 'a#opzioni', function(){
 	$.mobile.changePage( "opzioni.html", { reloadPage: false, transition: "slide"} );
 	});
 		

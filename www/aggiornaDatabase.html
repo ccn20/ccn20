@@ -107,7 +107,10 @@
 			$.each(data, function(index, info) {
 			
 			alert("each");
+			alert(codLingua);
+			alert(info.idCategoria);
 			
+			/*
 			var urlSottocategorie = encodeURI("http://www.wificomo.com/ccn20/JSONsottocategorieNegozi.php?idCategoria="+info.idCategoria+"&language="+codLingua+"");	
 			alert(urlSottocategorie);
 			var fileNameSottocategorie = info.jsonName+".js";
@@ -115,6 +118,7 @@
 			var directory = "ccn";
 			
 			downloadJSONmulti(directory, fileNameSottocategorie, urlSottocategorie);
+			*/
 			});
 		});
 		

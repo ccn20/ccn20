@@ -5,23 +5,33 @@
 	<link rel="stylesheet" href="css/jquery.mobile-1.4.1.min.css" />
 	<script src="js/jquery-1.11.0.min.js"></script>
 	<script src="js/jquery.mobile-1.4.1.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
 	
 	<link rel="stylesheet" href="css/themes/ccn20.min.css" />
 	<link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
 	
-	<script src="js/highcharts.js"></script>
 	<link rel="stylesheet" href="css/leaflet.css" />
 	<link rel="stylesheet" href="css/leaflet.usermarker.css" />
-	<link rel="stylesheet" href="css/vetrina.css" />
+	<link rel="stylesheet" href="css/eserciziVicini.css" />
 	<script src="js/leaflet.js"></script>
 	<script src="js/leaflet.usermarker.js"></script>
 	<script src="js/function_checkConnection.js"></script>
-	<script type="text/javascript" src="cordova.js"></script>
-	<link rel="stylesheet" href="css/eserciziVicini.css" />
+	
 	<title>Ricerca Brand</title>
 	
 	<style>
-
+	#quadrati{
+    position:absolute;
+	z-index: 1000 !important;
+    top: 0;
+	right: -20%;
+    width: 30%;
+    display: block;
+	}
+	#imgQuadrati{
+    width: 30%;
+	margin: auto;
+	}
 	
 	.ui-listview li { 
     margin: 2px;
@@ -39,12 +49,15 @@
 
 <!-- Start of page: #eserciziViciniMappa -->
 <div data-role="page" id="eserciziViciniMappa">
+
+<div id="quadrati"><img src="img/quadrati.png" id="imgQuadrati"></div>
+
 	<div data-role="header">
 		<h1><img src="img/shopincomo_orizzontale.png" style="height:1.2em"></h1>
 		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse" style="vertical-align: middle; margin: 0.5em; ">indietro</a>
 	</div><!-- /header -->
 
-	<div role="main" id="mapEsercizi" class="ui-content" >
+	<div role="main" id="map" class="ui-content" >
 		
 	<script type="text/javascript" charset="utf-8">
 	
@@ -54,30 +67,42 @@
 	
 	var actualHeight = height.context.activeElement.clientHeight;
 	
-    $('#mapEsercizi').css('height', actualHeight);
+    $('#map').css('height', actualHeight);
 	
-	var mapEsercizi;
+	var map;
 	var userLatitude;
 	var userLongitude;
 	var userAccuracy;
 	var eserciziSort;
-	var watchID = null;
-	var options = { maximumAge: 1500, timeout: 30000, enableHighAccuracy: true };
 	
-	watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+	var options = { enableHighAccuracy: true };
+	
+	navigator.geolocation.getCurrentPosition(onSuccess, onError, option);
 	
 	function onSuccess(position) {
 	
+	alert("success");
+	
 	userLatitude = position.coords.latitude;
 	userLongitude = position.coords.longitude;
+	alert(userLatitude);
+	alert(userLongitude);
 	userAccuracy = position.coords.accuracy;
 	$('a.lista').attr('userLatitude', userLatitude);
 	$('a.lista').attr('userLongitude', userLongitude);
+	}
 	
+	function onError(error) {
+        alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
+	}
 	
-	//CARICA JSON POSITION
+	/*
+	//CARICA JSON CATEGORIE
 	var path = window.localStorage.getItem("pathSD");
 	var jsonPositionDir = path + "/position.js";
+	alert("ciao");
+	alert(path);
+	alert(jsonPositionDir);
 	$.getJSON(jsonPositionDir, function( jsonPosition ) {
 		
 	
@@ -91,7 +116,7 @@
 
 		currentDistance = getDistanceFromLatLonInKm(userLatitude, userLongitude, info.latEsercizio, info.lonEsercizio);
 		currentEsercizio = info.idEsercizio;
-			if(currentDistance < 800) {
+			if(currentDistance < 500) {
 			
 			var time = Math.round(parseInt(currentDistance)/(1.4)/60);
 			
@@ -111,11 +136,12 @@
 	
 	
 	//INIZIALIZZA MAPPA
-	mapEsercizi = new L.Map('mapEsercizi');
+	map = new L.Map('map');
 	
 	
 	var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-	L.tileLayer(osmUrl, {minZoom: 13, maxZoom: 18}).addTo(mapEsercizi);
+	L.tileLayer(osmUrl, {minZoom: 13, maxZoom: 18}).addTo(map);
+	*/
 	
 	/*
 	L.tileLayer('map/{z}/{x}/{y}.jpg', {
@@ -123,6 +149,7 @@
 	}).addTo(map);
 	*/
 	
+	/*
 	var markerUtente;
 	var group;
 	
@@ -137,13 +164,13 @@
 	
 	$.each(eserciziSort, function(index, info) {
 
-	markerEsercizio = L.marker([info.latEsercizio, info.lonEsercizio], {icon: markerIcon}).addTo(mapEsercizi).bindPopup(info.nomeEsercizio);
+	markerEsercizio = L.marker([info.latEsercizio, info.lonEsercizio], {icon: markerIcon}).addTo(map).bindPopup(info.nomeEsercizio);
 	
 	});
 	
 	//SET ICONA UTENTE
 	if (!markerUtente) {
-	markerUtente = L.userMarker([userLatitude, userLongitude],{pulsing:true}).bindPopup("Sei qui.").addTo(mapEsercizi);
+	markerUtente = L.userMarker([userLatitude, userLongitude],{pulsing:true}).bindPopup("Sei qui.").addTo(map);
 	markerUtente.setAccuracy(userAccuracy);
 	
 	//ADATTA LA MAPPA
@@ -155,20 +182,10 @@
 	
 	//RAGGRUPPA MARKER
 	group = new L.featureGroup([markerEsercizio, markerUtente]);
-	mapEsercizi.fitBounds(group.getBounds().pad(0.25));
+	map.fitBounds(group.getBounds().pad(0.25));
 	
 	
 	}); // FINE GET JSON POSITION
-	
-	navigator.geolocation.clearWatch(watchID);
-
-	
-	}
-	
-	function onError(error) {
-        //alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
-	}
-	
 	
 	}); // FINE PAGESHOW
 	
@@ -213,7 +230,7 @@
 		userLongitude = $(this).attr('userLongitude');
 	});
 	
-	
+	*/
 	
 	</script>
 	
@@ -240,7 +257,7 @@
 	<div id="quadrati"></div>
 
 	<div data-role="header">
-		<h1><img src="img/shopincomo_orizzontale.png" style="height:1.2em"></h1>
+		<h1><img src="img/shopincomo_orizzontale.png" style="height:2.5em"></h1>
 		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
 
@@ -250,11 +267,9 @@
 	
 	$( document ).on( "pageshow", "#eserciziViciniLista", function() {
 	
-	
 	var latUser = userLatitude;
-	var lonUser = userLongitude;
+	var lonUser = userLongitude;		
 	
-	//CARICA JSON POSITION
 	var path = window.localStorage.getItem("pathSD");
 	var jsonPositionDir = path + "/position.js";
 	$.getJSON(jsonPositionDir, function( jsonPosition ) {
@@ -270,7 +285,7 @@
 		currentDistance = getDistanceFromLatLonInKm(latUser, lonUser, info.latEsercizio, info.lonEsercizio);
 		currentEsercizio = info.idEsercizio;
 		
-			if(currentDistance < 800) {
+			if(currentDistance < 500) {
 			
 			var time = Math.round(parseInt(currentDistance)/(1.4)/60);
 			
@@ -291,7 +306,7 @@
 		$("ul#listaEsercizi").html("");
 		
 		$.each(eserciziSort, function(index, info) {
-		$("ul#listaEsercizi").append($("<li></li>",{"html":"<a href='#vetrinaMappa' class='esercizio' idEsercizio='" + info.idEsercizio + "' data-transition='slide' ><img src='../_assets/img/album-p.jpg'><h2>"+info.nomeEsercizio+"</h2><p>"+info.time+"</p></a>" }));
+		$("ul#listaEsercizi").append($("<li></li>",{"html":'<a href="#" class="esercizio" idEsercizio='" + info.idEsercizio + "' data-transition="slide" ><img src="../_assets/img/album-p.jpg"><h2>'+info.nomeEsercizio+'</h2><p>'+info.time+'</p></a>' }));
 		});
 		
 		$("ul#listaEsercizi").listview().listview('refresh');
@@ -323,10 +338,6 @@
 	return deg * (Math.PI/180)
 	}
 	
-	$(document).on("click", 'a.esercizio', function(){
-		idEsercizio = $(this).attr('idEsercizio');
-	});
-	
 	</script>
 		
 	<ul data-role="listview" id="listaEsercizi" data-inset="true">
@@ -347,744 +358,6 @@
 	</div>
 	<!-- /FOOTER -->
 </div><!-- /page eserciziViciniLista -->
-
-<!-- Start of page: #vetrinaMappa -->
-<div data-role="page" id="vetrinaMappa">
-
-	<div data-role="header">
-		<h1>Vetrina</h1>
-		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
-	</div><!-- /header -->
-
-	<div role="main" class="ui-content" >
-		
-	
-	<script type="text/javascript" charset="utf-8">
-	
-
-	$( document ).on( "pageshow", "#vetrinaMappa", function() {
-	
-// CARICA FILE VETRINA
-	
-		var path = window.localStorage.getItem("pathSD");
-		var jsonPath = path + "/esercizi/"+idEsercizio+".js";
-		var jsonVetrina;
-		
-		$.ajax({
-			url: jsonPath,
-			dataType: 'json',
-			async: false,
-			success: function(data) {
-			jsonVetrina = data;
-			sessionStorage.setItem('jsonVetrina', JSON.stringify(jsonVetrina));
-			}
-		}); // AJAX END
-	
-// NOME ESERCIZIO + INDIRIZZO + DESCRIZIONE
-	
-		var esercizioLatitude;
-		var esercizioLongitude;
-		var nomeEsercizioMappa;
-		var descrizioneEsercizio;
-		var linguaDescrizioneEsercizio;
-		var parcheggioVicino;
-		var map;
-	
-		$.each(jsonVetrina, function(index, info) {
-				$("h3.nomeEsercizio").html(info.NomeEsercizio);
-				$(".indirizzoEsercizio").html(info.Indirizzo+" "+info.Citta);
-				$(".descrizioneEsercizio").html(""); // SVUOTA DESCRIZIONE PER PREVENIRE DESCRIZIONI NULLE
-				$(".descrizioneEsercizio").html(info.Descrizione);
-				 
-				esercizioLatitude = info.Latitudine;
-				esercizioLongitude = info.Longitudine;
-				nomeEsercizioMappa = info.NomeEsercizio;
-				descrizioneEsercizio = info.Descrizione;
-				linguaDescrizioneEsercizio = info.LinguaDescrizione;
-				if (info.Parcheggio != undefined)
-				{
-				parcheggioVicino = info.Parcheggio.nomeParcheggio+" "+info.Parcheggio.indirizzoParcheggio;
-				}
-		});
-		
-//NAVIGATE BUTTON
-		
-		$( ".navigateEsercizio" ).html("");
-		$( ".navigateEsercizio" ).append("<a href='#' geoPosition='"+esercizioLatitude+","+esercizioLongitude+"'class='directions'>Navigazione</a>");
-
-// DESCRIZIONE + TRANSLATE BUTTON
-		var codLingua = localStorage.getItem("codLingua");
-		if(!(codLingua == 'it' || codLingua == 'en')){
-			if(descrizioneEsercizio != undefined)
-			{
-			$( "#box-descrizioneEsercizio" ).show();
-			$( ".traduciDescrizioneEsercizio" ).html("");
-			$( ".traduciDescrizioneEsercizio" ).html( "<button class='translate' codLingua='"+codLingua+"' linguaDescrizione='"+linguaDescrizioneEsercizio+"'>Traduci</button>" );	
-			}
-			else{
-			$( "#box-descrizioneEsercizio" ).hide();
-			}
-		}
-
-
-// PARCHEGGIO VICINO
-		
-		if (parcheggioVicino == undefined){
-		$( ".parcheggioVicino" ).html("");
-		}
-		else{
-		$( ".parcheggioVicino" ).html("");
-		$( ".parcheggioVicino" ).append( "<li class='immagineParcheggio'><img class='imgParcheggio' src='img/parcheggioVicino.png' style='width: 37px; height: 50px;'><p class='nomeParcheggio'>"+parcheggioVicino+"</p></li>" );
-		}
-		
-		
-// MAPPA + POSIZIONE UTENTE
-	
-		//INIZIALIZZAZIONE MAPPA
-		
-		$( "#map" ).remove();
-		var $map = $("<div>", {id: "map", class: "a", style:"width: 1920px; height:400px"});
-		$("#mappa").append($map);
-		
-		map = new L.Map('map');
-	
-		var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-		L.tileLayer(osmUrl, {minZoom: 13, maxZoom: 18}).addTo(map);
-		
-		/*
-		L.tileLayer('img/como/{z}/{x}/{y}.png', {
-		maxZoom: 18
-		}).addTo(map);
-		*/
-		
-		map.setView(new L.LatLng(45.80806, 9.08518),14); //MAPPA SU COMO
-		
-		//BOTTONI CONTROLLO ZOOM
-		var controlloZoom = L.control({ position: 'bottomleft' });
-		controlloZoom.onAdd = function (map) {
-			this._div = L.DomUtil.create('div', 'controlloZoom');
-			this._div.innerHTML = '<button class="groupMarker">Fit to group marker</button><button class="userMarker">Fit to user marker</button>';
-			return this._div;
-		};
-		controlloZoom.addTo(map);
-		
-		
-		var userLatitude;
-		var userLongitude;
-		var markerUtente;
-		var markerEsercizio;
-		var group;
-		var watchID = null;
-		var options = { maximumAge: 1500, timeout: 30000, enableHighAccuracy: true };
-      		
-		var markerIcon = L.icon({
-			iconUrl: 'img/marker-icon.png',
-			iconSize:     [25, 41], // size of the icon
-			popupAnchor:  [0, -20] // point from which the popup should open relative to the iconAnchor
-		});
-		
-		markerEsercizio = L.marker([esercizioLatitude, esercizioLongitude], {icon: markerIcon}).addTo(map).bindPopup(nomeEsercizioMappa);
-		
-		$(".distanzaEsercizio").html("");
-		
-		watchID = navigator.geolocation.watchPosition(onSuccess, onErrorPosition, options);
-		
-// FUNCTION SUCCESS WATCH POSITION
-
-		function onSuccess(position) {
-	 		
-			userLatitude = position.coords.latitude;
-			userLongitude = position.coords.longitude;
-	
-			var distance = 5000;
-			var jsonPositionDir = path + "/position.js";
-			$.getJSON(jsonPositionDir, function( jsonPosition ) {
-				$.each(jsonPosition, function(index, info) {
-					currentDistance = getDistanceFromLatLonInKm(userLatitude,userLongitude,info.latEsercizio,info.lonEsercizio);
-					if(distance > currentDistance && info.idEsercizio != idEsercizio)
-					{
-						distance = currentDistance;
-						nearestEsercizio = info.idEsercizio;
-					}
-				});
-				console.log("Nodo vicino: "+nearestEsercizio);
-				console.log(distance);
-				if(distance < 500)
-				{		
-					var jsonVetrinaSession = JSON.parse(window.sessionStorage.getItem("jsonVetrina"));
-					var obj = jsonVetrinaSession[0];
-						if(nearestEsercizio in obj.Distanze){
-								$.each(obj.Distanze, function(index, infoDistance) {
-									if(infoDistance.idEsercizio == nearestEsercizio){
-										var minutes = Math.floor(infoDistance.time / 60);
-										var seconds = infoDistance.time - minutes * 60;
-										$(".distanzaEsercizio").html(infoDistance.distance+"m - "+minutes+":"+seconds+" min<p class='esercizioVicino'>Ora sei vicino a "+infoDistance.nomeEsercizio+"</p>");
-									}
-								});
-					}
-					else{
-					$(".distanzaEsercizio").html("+200m");
-					}
-				}
-				else
-				{
-				$(".distanzaEsercizio").html("Troppo lontato per calcolare");
-				}
-			}); //END GET JSON POSITION 
-	
-			var userAccuracy = position.coords.accuracy 
-
-			if (!markerUtente) {
-			markerUtente = L.userMarker([userLatitude, userLongitude],{pulsing:true}).bindPopup("Sei qui.").addTo(map);
-			markerUtente.setAccuracy(userAccuracy);
-			map.setView(new L.LatLng(userLatitude, userLongitude),16);
-			}
-			markerUtente.setLatLng([userLatitude, userLongitude],{pulsing:true}).update();
-	
-		} // END ON SUCCESS
-	
-		function onErrorPosition(error) {
-			//alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
-		}
-
-// CLICK ZOOM BUTTONS
-	
-		$(document).on("click", 'button.groupMarker', function(){
-			group = new L.featureGroup([markerEsercizio, markerUtente]);
-			map.fitBounds(group.getBounds().pad(0.25));
-		});
-		
-		$(document).on("click", 'button.userMarker', function(){
-			map.setView(new L.LatLng(userLatitude, userLongitude),16);
-		});
-	
-	});
-	// END OF PAGESHOW
-
-// CLICK DIRECTIONS GOOGLE
-	$(document).on("click", 'a.directions', function(){
-		geoPosition = $(this).attr('geoPosition');
-		directions(geoPosition);
-	});
-	
-// CLICK TRANSLATE GOOGLE
-	$(document).on("click", '.translate', function(){
-		var descrizioneTranslate = $(".descrizioneEsercizio").text();
-		var linguaDescrizione = $(this).attr('linguaDescrizione');
-		var codLingua = $(this).attr('codLingua');
-		var urlTranslate = encodeURI("http://translate.google.com/#"+linguaDescrizione+"/"+codLingua+"/"+descrizioneTranslate+"");
-		var ref = window.open(urlTranslate, '_blank', 'location=yes');
-		//ref.addEventListener('loadstart', function() { alert(event.url); });
-	});
-	
-// FUNZIONE DISTANZA NEAREST NODE
-	
-	function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
-  
-		var R = 6371; // Radius of the earth in km
-  
-		var dLat = deg2rad(lat2-lat1);  // deg2rad below
-		var dLon = deg2rad(lon2-lon1); 
-  
-		var a = 
-		Math.sin(dLat/2) * Math.sin(dLat/2) +
-		Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
-		Math.sin(dLon/2) * Math.sin(dLon/2)
-		; 
-  
-		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-		var d = R * c * 1000; // Distance in km
-		return Math.round(d);
-	}
-
-	function deg2rad(deg) {
-		return deg * (Math.PI/180)
-	}
-		
-// FUNZIONE DIRECTIONS GOOGLE
-	
-	function directions(geoPosition) {
-		navigator.google_navigate.navigate(geoPosition, function() {
-			console.log('Success');
-		}, function(errMsg) {
-			console.log("Failed: " + errMsg);
-		});
-	}
-	
-	// /FUNZIONE DIRECTIONS
-		
-	</script>
-	
-	<!-- NOME ESERCIZIO -->
-	
-	<div id="box-nomeEsercizio">
-	<h3 class="nomeEsercizio"></h3>
-	</div>
-	
-	<!-- /NOME ESERCIZIO -->
-	
-	<!-- MAPPA + INDIRIZZO + DIRECTIONS + PANORAMICA + DISTANZA -->
-	<div id="mappa"></div>
-	<ul class="funzionalitaMappa">
-	<li class="singolaFunzionalitaMappa indirizzoEsercizio"></li>
-	<li class="singolaFunzionalitaMappa navigateEsercizio"></li>
-	<li class="singolaFunzionalitaMappa distanzaEsercizio"></li>
-	</ul>
-	<!-- /MAPPA + INDIRIZZO + DIRECTIONS + PANORAMICA + DISTANZA -->
-	
-	<!-- DESCRIZIONE ESERCIZIO -->
-	
-	<div id="box-descrizioneEsercizio">
-	<p class="descrizioneEsercizio"></p>
-	<p class="traduciDescrizioneEsercizio"></p>
-	</div>
-	<!-- /DESCRIZIONE ESERCIZIO -->
-	
-	<!-- PARCHEGGIO VICINO ESERCIZIO -->
-	
-	<ul class="parcheggioVicino">
-	</ul>
-	<!-- /PARCHEGGIO VICINO ESERCIZIO -->
-		
-	</div><!-- /content -->
-
-	<div data-role="footer" data-theme="a" data-position="fixed">
-		<div data-role="navbar" data-iconpos="top">
-            <ul>
-                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location" class="ui-btn-active ui-state-persist">Mappa</a></li>
-                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock">Orari</a></li>
-                <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone">Contatti</a></li>
-				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear">Statistiche</a></li>
-				<!-- <li><a href="#" data-icon="camera">Gallery</a></li> -->
-            </ul>
-        </div><!-- /navbar -->
-	</div><!-- /footer -->
-</div><!-- /page vetrinaMappa -->
-
-<!-- Start of page: #vetrinaOrari -->
-<div data-role="page" id="vetrinaOrari">
-
-	<div data-role="header">
-		<h1>Vetrina</h1>
-	</div><!-- /header -->
-
-	<div role="main" class="ui-content" >
-		
-	
-	<script type="text/javascript" charset="utf-8">
-	
-	$( document ).on( "pagebeforeshow", "#vetrinaOrari", function() {
-	
-	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
-	
-	// NOME ESERCIZIO + ORARI ESERCIZIO
-	
-	$("ul#orariEsercizio").html("");
-	
-	$.each(JSON.parse(jsonVetrina), function(index, info) {
-				
-		$("h3.nomeEsercizio").html(info.NomeEsercizio);
-		$("ul#orariEsercizio").append($("<li data-role='list-divider'>Orari di Apertura</li>"));
-		$("ul#orariEsercizio").append($("<li>Lunedi: "+info.Orario.lunedi+"</li>"));
-		$("ul#orariEsercizio").append($("<li>Martedi: "+info.Orario.martedi+"</li>"));
-		$("ul#orariEsercizio").append($("<li>Mercoledi: "+info.Orario.mercoledi+"</li>"));
-		$("ul#orariEsercizio").append($("<li>Giovedi: "+info.Orario.giovedi+"</li>"));
-		$("ul#orariEsercizio").append($("<li>Venerdi: "+info.Orario.venerdi+"</li>"));
-		$("ul#orariEsercizio").append($("<li>Sabato: "+info.Orario.sabato+"</li>"));
-		$("ul#orariEsercizio").append($("<li>Domenica: "+info.Orario.domenica+"</li>"));
-		$("ul#orariEsercizio").listview("refresh");
-							
-	});
-		
-		
-	// /NOME ESERCIZIO + ORARI ESERCIZIO
-	
-	});
-	// /PAGEBEFORESHOW
-	
-	
-	</script>
-	
-	<!-- NOME ESERCIZIO -->
-	
-	<div id="box-nomeEsercizio">
-	<h3 class="nomeEsercizio"></h3>
-	</div>
-	
-	<!-- /NOME ESERCIZIO -->
-	
-	<!-- ORARI -->
-	<ul id="orariEsercizio" data-role="listview" data-inset="true">
-	</ul>
-	<!-- /ORARI -->
-			
-	</div><!-- /content -->
-
-	<div data-role="footer" data-theme="a" data-position="fixed">
-		<div data-role="navbar" data-iconpos="top">
-            <ul>
-                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location" data-direction="reverse">Mappa</a></li>
-                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock" class="ui-btn-active ui-state-persist">Orari</a></li>
-                <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone">Contatti</a></li>
-				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear">Statistiche</a></li>
-				<!-- <li><a href="#" data-icon="camera">Gallery</a></li> -->
-            </ul>
-        </div><!-- /navbar -->
-	</div><!-- /footer -->
-</div><!-- /page vetrinaOrari -->
-
-<!-- Start of page: #vetrinaContatti -->
-<div data-role="page" id="vetrinaContatti">
-
-	<div data-role="header">
-		<h1>Vetrina</h1>
-	</div><!-- /header -->
-
-	<div role="main" class="ui-content" >
-		
-	
-	<script type="text/javascript" charset="utf-8">
-	
-	$( document ).on( "pagebeforeshow", "#vetrinaContatti", function() {
-	
-	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
-	
-	// NOME ESERCIZIO + CONTATTI ESERCIZIO
-	
-	$("ul#contattiEsercizio").html("");
-	
-	$.each(JSON.parse(jsonVetrina), function(index, info) {
-				
-		$("h3.nomeEsercizio").html(info.NomeEsercizio);
-		$("ul#contattiEsercizio").append($("<li data-role='list-divider'>Contatti</li>"));
-		$("ul#contattiEsercizio").append($("<li>Indirizzo: "+info.Indirizzo+" "+info.Citta+"</li>"));
-		if (info.Telefono != undefined){$("ul#contattiEsercizio").append($("<li>Telefono: "+info.Telefono+"</li>"))};
-		if (info.Website != undefined){$("ul#contattiEsercizio").append($("<li>Website: "+info.Website+"</li>"))};
-		if (info.Email != undefined){$("ul#contattiEsercizio").append($("<li>Email: "+info.Email+"</li>"))};
-		if (info.Facebook != undefined){$("ul#contattiEsercizio").append($("<li>Facebook: "+info.Facebook+"</li>"))};
-		if (info.Twitter != undefined){$("ul#contattiEsercizio").append($("<li>Twitter: "+info.Twitter+"</li>"))};
-		if (info.Foursquare != undefined){$("ul#contattiEsercizio").append($("<li>Foursquare: "+info.Foursquare+"</li>"))};
-		$("ul#contattiEsercizio").listview("refresh");
-							
-	});
-		
-		
-	// /NOME ESERCIZIO + CONTATTI ESERCIZIO
-	});
-	// /PAGEBEFORESHOW
-	
-	
-	
-	</script>
-	
-	<!-- NOME ESERCIZIO -->
-	
-	<div id="box-nomeEsercizio">
-	<h3 class="nomeEsercizio"></h3>
-	</div>
-	
-	<!-- /NOME ESERCIZIO -->
-	
-	<!-- CONTATTI ESERCIZIO -->
-	
-	<ul id="contattiEsercizio" data-role="listview" data-inset="true">
-	</ul>
-	
-	<!-- /CONTATTI ESERCIZIO -->
-			
-	</div><!-- /content -->
-
-	<div data-role="footer" data-theme="a" data-position="fixed">
-		<div data-role="navbar" data-iconpos="top">
-            <ul>
-                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location" data-direction="reverse">Mappa</a></li>
-                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock" data-direction="reverse">Orari</a></li>
-                <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone" class="ui-btn-active ui-state-persist">Contatti</a></li>
-				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear">Statistiche</a></li>
-				<!-- <li><a href="#" data-icon="camera">Gallery</a></li> -->
-            </ul>
-        </div><!-- /navbar -->
-	</div><!-- /footer -->
-</div><!-- /page vetrinaContatti -->
-
-<!-- Start of page: #vetrinaStatistiche -->
-<div data-role="page" id="vetrinaStatistiche">
-
-	<div data-role="header">
-		<h1>Vetrina</h1>
-	</div><!-- /header -->
-
-	<div role="main" class="ui-content" >
-		
-	
-	<script type="text/javascript" charset="utf-8">
-	
-	$( document ).on( "pagebeforeshow", "#vetrinaStatistiche", function() {
-	
-	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
-	
-	// NOME ESERCIZIO + STATISTICHE
-	
-	var checkStatistiche;
-	var idEsercizio;
-	
-		$.each(JSON.parse(jsonVetrina), function(index, info) {
-				
-			$("h3.nomeEsercizio").html(info.NomeEsercizio);
-			idEsercizio = info.idEsercizio;
-			checkStatistiche = info.Statistiche;
-			
-			
-		});
-	
-	if(checkStatistiche == "si"){
-	
-		//var checkConnection = checkConnection();
-		//if (checkConnection =! "No_network")
-		//{
-			$(function () {
-			var chart;
-			var perShapeGradient = {
-				x1: 0,
-				y1: 0,
-				x2: 1,
-				y2: 0
-			};
-
-			$(document).ready(function() {
-		
-			$.getJSON("http://www.wificomo.com/ccn20/JSONbarchart.php", {idNegozio: idEsercizio}, function( json ) {
-		
-				jsonFilter = jQuery.grep(json, function (v) {
-				return v.intervallo == "15giorni";
-				console.log("filtro base: ");
-				console.log(jsonFilter);
-				});
-		
-				chart = new Highcharts.Chart({
-					chart: {
-						renderTo: 'barChart',
-						type: 'column',
-						marginRight: 10,
-						marginBottom: 25
-					},
-					colors: [{
-						linearGradient: perShapeGradient,
-						stops: [
-							[0, 'rgb(80, 135, 226)'],
-							[1, 'rgb(25, 70, 148)']
-							]
-						}, {
-						linearGradient: perShapeGradient,
-						stops: [
-							[0, 'rgb(120, 202, 248)'],
-							[1, 'rgb(46, 150, 208)']
-							]
-						}, {
-						linearGradient: perShapeGradient,
-						stops: [
-							[0, 'rgb(136, 219, 5)'],
-							[1, 'rgb(112, 180, 5)']
-							]}, 
-					],
-					title: {
-						text: '',
-						x: -20, //center
-					},
-					subtitle: {
-						text: '',
-						x: -20
-					},
-					xAxis: {
-						startOnTick: false,
-						endOnTick:false,
-						type: 'datetime',
-						tickInterval: 4 * 24 * 3600 * 1000,
-						minTickInterval: 86400000,
-						dateTimeLabelFormats: {
-						day: '%e %m'
-						}
-					},
-					yAxis: {
-						allowDecimals: false,
-						stackLabels: {
-						enabled: true
-						},
-						title: {
-						text: 'Voti'
-						}
-					},
-					tooltip: {
-						enabled: true,
-						xDateFormat: '%d-%m-%Y'
-					},
-					plotOptions: {
-						column: {
-						stacking: 'normal',
-						pointWidth:10,
-						dataLabels: {
-										enabled: false,
-										color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'black'
-									}
-						}
-					},
-					legend: {
-						layout: 'horizontal',
-						align: 'center',
-						verticalAlign: 'top',
-						borderWidth: 0,
-						enabled: true,
-						floating: true
-					},
-					series: jsonFilter
-				});
-
-				
-			$( "button#intervallo" ).click(function() {
-			var intervallo = $(this).attr('value');
-			jsonFilter = jQuery.grep(json, function (v) {
-			return v.intervallo == intervallo;
-			});
-		
-			chart = new Highcharts.Chart({
-					chart: {
-						renderTo: 'barChart',
-						type: 'column',
-						marginRight: 10,
-						marginBottom: 25
-					},
-					colors: [{
-						linearGradient: perShapeGradient,
-						stops: [
-							[0, 'rgb(80, 135, 226)'],
-							[1, 'rgb(25, 70, 148)']
-							]
-						}, {
-						linearGradient: perShapeGradient,
-						stops: [
-							[0, 'rgb(120, 202, 248)'],
-							[1, 'rgb(46, 150, 208)']
-							]
-						}, {
-						linearGradient: perShapeGradient,
-						stops: [
-							[0, 'rgb(136, 219, 5)'],
-							[1, 'rgb(112, 180, 5)']
-							]}, 
-					],
-					title: {
-						text: '',
-						x: -20, //center
-					},
-					subtitle: {
-						text: '',
-						x: -20
-					},
-					xAxis: {
-						startOnTick: false,
-						endOnTick:false,
-						type: 'datetime',
-						tickInterval: 4 * 24 * 3600 * 1000,
-						minTickInterval: 86400000,
-						dateTimeLabelFormats: {
-						day: '%e %m'
-						}
-					},
-					yAxis: {
-						allowDecimals: false,
-						stackLabels: {
-						enabled: true
-						},
-						title: {
-						text: 'Voti'
-						}
-					},
-					tooltip: {
-						enabled: true,
-						xDateFormat: '%d-%m-%Y'
-					},
-					plotOptions: {
-						column: {
-						stacking: 'normal',
-						pointWidth:10,
-						dataLabels: {
-										enabled: false,
-										color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'black'
-									}
-						}
-					},
-					legend: {
-						layout: 'horizontal',
-						align: 'center',
-						verticalAlign: 'top',
-						borderWidth: 0,
-						enabled: true,
-						floating: true
-					},
-					series: jsonFilter
-				});
-
-		
-		
-			});
-		
-			});
-			});
-		
-			});
-		
-		//}
-		//else{
-		//$("#checkStatistiche").html("Questa funzionalità è disponibile solo se collegati alla rete 3G o WiFi");
-		//}
-	
-	}
-	else{
-	$("#checkStatistiche").html("Il negoziante non permette la visualizzazione pubblica delle statistiche");
-	}
-		
-	// /NOME ESERCIZIO + STATISTICHE
-	
-	});
-	// /PAGEBEFORESHOW
-
-	</script>
-	
-	<!-- NOME ESERCIZIO -->
-	
-	<div id="box-nomeEsercizio">
-	<h3 class="nomeEsercizio"></h3>
-	</div>
-	
-	<!-- /NOME ESERCIZIO -->
-	
-	<!-- STATISTICHE -->
-	<div id="box-statisticheEsercizio">
-	<p id="checkStatistiche"></p>
-	<div id="barChart" style="width: 1920px; height:450px"></div>
-	<div>
-	<button id="intervallo" value="7giorni">7 giorni</button>
-	<button id="intervallo"value="15giorni">15 giorni</button>
-	<button id="intervallo" value="30giorni">30 giorni</button>
-	<div>
-	</div>
-	<!-- /STATISTICHE -->
-	
-		
-	</div><!-- /content -->
-
-	<div data-role="footer" data-theme="a" data-position="fixed">
-		<div data-role="navbar" data-iconpos="top">
-            <ul>
-                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location" data-direction="reverse">Mappa</a></li>
-                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock" data-direction="reverse">Orari</a></li>
-                <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone" data-direction="reverse">Contatti</a></li>
-				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear" class="ui-btn-active ui-state-persist">Statistiche</a></li>
-				<!-- <li><a href="#" data-icon="camera">Gallery</a></li> -->
-            </ul>
-        </div><!-- /navbar -->
-	</div><!-- /footer -->
-</div><!-- /page vetrinaStatistiche -->
 
 </body>
 </html>

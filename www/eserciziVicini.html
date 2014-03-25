@@ -79,6 +79,8 @@
 	
 	function onSuccess(position) {
 	
+	alert("success");
+	
 	userLatitude = position.coords.latitude;
 	userLongitude = position.coords.longitude;
 	alert(userLatitude);
@@ -89,9 +91,10 @@
 	}
 	
 	function onError(error) {
-        //alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
+        alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
 	}
 	
+	/*
 	//CARICA JSON CATEGORIE
 	var path = window.localStorage.getItem("pathSD");
 	var jsonPositionDir = path + "/position.js";
@@ -136,6 +139,7 @@
 	
 	var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 	L.tileLayer(osmUrl, {minZoom: 13, maxZoom: 18}).addTo(map);
+	*/
 	
 	/*
 	L.tileLayer('map/{z}/{x}/{y}.jpg', {
@@ -143,6 +147,7 @@
 	}).addTo(map);
 	*/
 	
+	/*
 	var markerUtente;
 	var group;
 	
@@ -223,7 +228,7 @@
 		userLongitude = $(this).attr('userLongitude');
 	});
 	
-	
+	*/
 	
 	</script>
 	

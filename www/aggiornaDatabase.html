@@ -257,7 +257,9 @@
 						
 						var numElementi = window.sessionStorage.getItem("numElementi");
 						numElementi = parseInt(numElementi)-1;
-													
+						
+						alert("numElementi: "+numElementi);							
+						
 								if(numElementi == 0) {
 							
 									if(sessionStorage.getItem("vetrineOK") == 0) {
@@ -298,13 +300,16 @@
 	
 	function getVetrine() {
 	sessionStorage.setItem("vetrineOK", 1);
-
+	
+	alert("getVetrine");	
+	
 	$.ajax({
 		url: "http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php",
 		dataType: 'json',
 		success: function(data) {
 		
 		var totaleEsercizi = data.length;
+		alert("totaleEsercizi: "+totaleEsercizi);	
 		window.sessionStorage.setItem("numElementi", totaleEsercizi);
 		
 			$.each(data, function(index, info) {

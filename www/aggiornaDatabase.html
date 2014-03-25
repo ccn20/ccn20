@@ -99,16 +99,17 @@
 		var pathCategorie = path+"/categorie.js";
 		
 		$.getJSON(pathCategorie, function( data ) {
-		alert("getJSON");
+
 			var numElementi = data.length;
-			alert(numElementi);
 			
 			window.sessionStorage.setItem("numElementi", numElementi);
 		
 			$.each(data, function(index, info) {
-			alert("each");
+
 			var urlSottocategorie = encodeURI("http://www.wificomo.com/ccn20/JSONsottocategorieNegozi.php?idCategoria="+info.idCategoria+"&language="+codLingua+"");	
+			alert(urlSottocategorie);
 			var fileNameSottocategorie = info.jsonName+".js";
+			alert(fileNameSottocategorie);
 			var directory = "ccn";
 			
 			downloadJSONmulti(directory, fileNameSottocategorie, urlSottocategorie);

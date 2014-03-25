@@ -257,7 +257,7 @@
 						
 						var numElementi = window.sessionStorage.getItem("numElementi");
 						numElementi = parseInt(numElementi)-1;	
-						alert(numElementi);
+
 								if(numElementi == 0) {
 							
 									if(sessionStorage.getItem("vetrineOK") == 0) {
@@ -299,9 +299,6 @@
 	function getVetrine() {
 	
 		sessionStorage.setItem("vetrineOK", 1);
-
-		alert("getVetrine");
-		//alert(localStorage.getItem("dataDownload"));
 		
 		$.ajax({
 			url: "http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php?language="+localStorage.getItem("codLingua")+"&dataDownload="+localStorage.getItem("dataDownload")+"",
@@ -322,7 +319,7 @@
 					});
 			}
 		});
-	//window.localStorage.removeItem(dataDownload);
+	window.localStorage.removeItem(dataDownload);
 	}
 	
 	</script>

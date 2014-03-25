@@ -24,7 +24,7 @@
 		<!-- /HEADER -->
 		<div data-role="header">
 		<h1>Opzioni</h1>
-		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
+		<a href="#" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
 		</div>
 		<!-- /HEADER -->
 	
@@ -38,6 +38,12 @@
 		function onBackKeyDown(e) {
 		e.preventDefault();
 		}
+		
+		$(document).on("click", 'a.jqm-navmenu-link', function(){
+		
+		$.mobile.changePage( "index.html", { reloadPage: true, transition: "slide"} );
+	
+		});
 		
 		</script>
 		

@@ -93,24 +93,20 @@
 	//FUNCTION getSottocategorie()
 	function getSottocategorie()
 	{
-	alert("getSottocategorie");
 	
 		var codlingua = window.localStorage.getItem('codLingua');
 		var path = window.localStorage.getItem('pathSD');
 		var pathCategorie = path+"/categorie.js";
 		
-		alert(codlingua);
-		alert(path);
-		alert(pathCategorie);
-		
 		$.getJSON(pathCategorie, function( data ) {
-		
+		alert("getJSON");
 			var numElementi = data.length;
+			alert(numElementi);
 			
 			window.sessionStorage.setItem("numElementi", numElementi);
 		
 			$.each(data, function(index, info) {
-			
+			alert("each");
 			var urlSottocategorie = encodeURI("http://www.wificomo.com/ccn20/JSONsottocategorieNegozi.php?idCategoria="+info.idCategoria+"&language="+codLingua+"");	
 			var fileNameSottocategorie = info.jsonName+".js";
 			var directory = "ccn";

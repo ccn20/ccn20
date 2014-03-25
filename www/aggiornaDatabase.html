@@ -256,9 +256,7 @@
 						function(entry) {
 						
 						var numElementi = window.sessionStorage.getItem("numElementi");
-						numElementi = parseInt(numElementi)-1;
-						
-						alert("numElementi: "+numElementi);							
+						numElementi = parseInt(numElementi)-1;	
 						
 								if(numElementi == 0) {
 							
@@ -309,12 +307,12 @@
 		success: function(data) {
 		
 		var totaleEsercizi = data.length;
-		alert("totaleEsercizi: "+totaleEsercizi);	
+		
 		window.sessionStorage.setItem("numElementi", totaleEsercizi);
 		
 			$.each(data, function(index, info) {
 		
-			var urlEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONvetrinaEsercizio.php?language="+codLingua+"&idEsercizio="+info.idEsercizio+"");	
+			var urlEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONvetrinaEsercizio.php?language="+localStorage.getItem("codLingua")+"&idEsercizio="+info.idEsercizio+"");	
 			var fileNameEsercizi = info.idEsercizio+".js";	
 			var directoryEsercizi = "ccn/esercizi";
 		

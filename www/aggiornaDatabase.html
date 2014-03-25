@@ -93,10 +93,15 @@
 	//FUNCTION getSottocategorie()
 	function getSottocategorie()
 	{
+	alert("getSottocategorie");
 	
 		var codlingua = window.localStorage.getItem('codLingua');
 		var path = window.localStorage.getItem('pathSD');
 		var pathCategorie = path+"/categorie.js";
+		
+		alert(codlingua);
+		alert(path);
+		alert(pathCategorie);
 		
 		$.getJSON(pathCategorie, function( data ) {
 		

@@ -34,24 +34,6 @@
 		<script>
 		$( "#aggiornaDatabase" ).on( "pageshow", function() {	
 	
-		sessionStorage.setItem("vetrineOK", 0);
-		var dataDownload;
-	
-		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-			
-			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
-			
-				dirEntry.getFile("categorie.js", {create: true, exclusive: false}, function(fileEntry) {
-										
-					fileEntry.getMetadata(function(metadata) {
-				
-						dataDownload = Date.parse(metadata.modificationTime) / 1000;
-				
-					});
-				}); // end of dirEntry.getFile
-			}); // fileSystem.root.getDirectory
-		}); // end of window.requestFileSystem
-	
 	var urlCategorie = encodeURI("http://www.wificomo.com/ccn20/JSONcategorie.php?language="+localStorage.getItem("codLingua")+"");	
 	var fileNameCategorie = "categorie.js";
 		
@@ -313,12 +295,11 @@
 	} //FUNCTION downloadJSONmulti
 	
 	function getVetrine() {
-	alert("getVetrina");
-	alert(dataDownload);
+	
 		sessionStorage.setItem("vetrineOK", 1);
 
 		$.ajax({
-			url: "http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php?language="+localStorage.getItem("codLingua")+"&dataDownload="+dataDownload+"",
+			url: "http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php?language="+localStorage.getItem("codLingua")+"&dataDownload="+localStorage.getItem("dataDownload")+"",
 			dataType: 'json',
 			success: function(data) {
 		
@@ -336,6 +317,7 @@
 					});
 			}
 		});
+	window.localStorage.removeItem(dataDownload);
 	}
 	
 	</script>

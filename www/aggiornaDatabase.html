@@ -298,6 +298,8 @@
 	
 		sessionStorage.setItem("vetrineOK", 1);
 
+		alert(localStorage.getItem("dataDownload"));
+		
 		$.ajax({
 			url: "http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php?language="+localStorage.getItem("codLingua")+"&dataDownload="+localStorage.getItem("dataDownload")+"",
 			dataType: 'json',
@@ -317,7 +319,7 @@
 					});
 			}
 		});
-	window.localStorage.removeItem(dataDownload);
+	//window.localStorage.removeItem(dataDownload);
 	}
 	
 	</script>

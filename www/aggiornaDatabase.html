@@ -257,7 +257,7 @@
 						
 						var numElementi = window.sessionStorage.getItem("numElementi");
 						numElementi = parseInt(numElementi)-1;	
-						
+						alert(numElementi);
 								if(numElementi == 0) {
 							
 									if(sessionStorage.getItem("vetrineOK") == 0) {
@@ -297,31 +297,42 @@
 	} //FUNCTION downloadJSONmulti
 	
 	function getVetrine() {
-	sessionStorage.setItem("vetrineOK", 1);
 	
-	alert("getVetrine");	
+		sessionStorage.setItem("vetrineOK", 1);
 	
-	$.ajax({
-		url: "http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php",
-		dataType: 'json',
-		success: function(data) {
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+			
+			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
+			
+				dirEntry.getFile("categorie.js", {create: true, exclusive: false}, function(fileEntry) {
+										
+					fileEntry.getMetadata(function(metadata) {
+				
+						var dataDownload = Date.parse(metadata.modificationTime) / 1000;
+				
+						$.ajax({
+							url: "http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php?language="+localStorage.getItem("codLingua")+"&dataDownload="+dataDownload+"",
+							dataType: 'json',
+							success: function(data) {
 		
-		var totaleEsercizi = data.length;
+							var totaleEsercizi = data.length;
 		
-		window.sessionStorage.setItem("numElementi", totaleEsercizi);
+							window.sessionStorage.setItem("numElementi", totaleEsercizi);
 		
-			$.each(data, function(index, info) {
+								$.each(data, function(index, info) {
 		
-			var urlEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONvetrinaEsercizio.php?language="+localStorage.getItem("codLingua")+"&idEsercizio="+info.idEsercizio+"");	
-			var fileNameEsercizi = info.idEsercizio+".js";	
-			var directoryEsercizi = "ccn/esercizi";
+									var urlEsercizi = encodeURI("http://www.wificomo.com/ccn20/JSONvetrinaEsercizio.php?language="+localStorage.getItem("codLingua")+"&idEsercizio="+info.idEsercizio+"");	
+									var fileNameEsercizi = info.idEsercizio+".js";	
+									var directoryEsercizi = "ccn/esercizi";
 		
-			downloadJSONmulti(directoryEsercizi, fileNameEsercizi, urlEsercizi);
-			});
-		
-		}
-	});
-	
+									downloadJSONmulti(directoryEsercizi, fileNameEsercizi, urlEsercizi);
+								});
+							}
+						});
+					});
+				}); // end of dirEntry.getFile
+			}); // fileSystem.root.getDirectory
+		}); // end of window.requestFileSystem
 	}
 		</script>
 		

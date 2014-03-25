@@ -298,7 +298,8 @@
 	
 		sessionStorage.setItem("vetrineOK", 1);
 
-		alert(localStorage.getItem("dataDownload"));
+		alert("getVetrine");
+		//alert(localStorage.getItem("dataDownload"));
 		
 		$.ajax({
 			url: "http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php?language="+localStorage.getItem("codLingua")+"&dataDownload="+localStorage.getItem("dataDownload")+"",

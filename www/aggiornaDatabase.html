@@ -268,7 +268,7 @@
 									$("li.vetrine").html("download vetrine <img src='img/downloadok.png'>");
 									$("li.vetrine").css("color","green");
 									
-									$("p.downloadComplete").html("<a href='#opzioni' class='ui-btn' data-transition='slide'>Fatto</a>");
+									$.mobile.changePage( "opzioni.html", { reloadPage: true, transition: "slide"} );
 									}
 								}
 								else {

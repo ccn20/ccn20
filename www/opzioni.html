@@ -370,8 +370,8 @@
 					var urlJSON = "http://www.wificomo.com/ccn20/JSONidEserciziUpdate.php?language="+localStorage.getItem("codLingua")+"&dataDownload="+dataDownload;
 
 						$.getJSON(urlJSON, function( data ) {
-							alert(data);
-							if(data == null) {
+
+							if (typeof data == 'undefined') {
 							alert("database aggiornato");
 							}
 							else {

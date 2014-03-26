@@ -41,7 +41,7 @@
 <div data-role="page" id="eserciziViciniMappa">
 	<div data-role="header">
 		<h1><img src="img/shopincomo_orizzontale.png" style="height:1.2em"></h1>
-		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse" style="vertical-align: middle; margin: 0.5em; ">indietro</a>
+		<a href="index.html" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse" style="vertical-align: middle; margin: 0.5em; ">home</a>
 	</div><!-- /header -->
 
 	<div role="main" id="mapEsercizi" class="ui-content" >
@@ -49,6 +49,12 @@
 	<script type="text/javascript" charset="utf-8">
 	
 	$( document ).on( "pageshow", "#eserciziViciniMappa", function() {
+	
+	document.addEventListener("backbutton", onBackKeyDown, false);
+		
+	function onBackKeyDown(e) {
+	e.preventDefault();
+	}
 	
 	var height = $('[data-role="content"]').height(getRealContentHeight());
 	
@@ -241,7 +247,7 @@
 
 	<div data-role="header">
 		<h1><img src="img/shopincomo_orizzontale.png" style="height:1.2em"></h1>
-		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
+		<a href="index.html" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">home</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content" >
@@ -250,6 +256,11 @@
 	
 	$( document ).on( "pageshow", "#eserciziViciniLista", function() {
 	
+	document.addEventListener("backbutton", onBackKeyDown, false);
+		
+	function onBackKeyDown(e) {
+	e.preventDefault();
+	}
 	
 	var latUser = userLatitude;
 	var lonUser = userLongitude;
@@ -353,7 +364,7 @@
 
 	<div data-role="header">
 		<h1>Vetrina</h1>
-		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
+		<a href="#eserciziViciniLista" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">Lista Esercizi</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content" >
@@ -363,6 +374,12 @@
 	
 
 	$( document ).on( "pageshow", "#vetrinaMappa", function() {
+	
+	document.addEventListener("backbutton", onBackKeyDown, false);
+		
+	function onBackKeyDown(e) {
+	e.preventDefault();
+	}
 	
 // CARICA FILE VETRINA
 	
@@ -666,6 +683,7 @@
 
 	<div data-role="header">
 		<h1>Vetrina</h1>
+		<a href="#eserciziViciniLista" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">Lista Esercizi</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content" >
@@ -674,6 +692,12 @@
 	<script type="text/javascript" charset="utf-8">
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaOrari", function() {
+	
+	document.addEventListener("backbutton", onBackKeyDown, false);
+		
+	function onBackKeyDown(e) {
+	e.preventDefault();
+	}
 	
 	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
 	
@@ -738,6 +762,7 @@
 
 	<div data-role="header">
 		<h1>Vetrina</h1>
+		<a href="#eserciziViciniLista" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">Lista Esercizi</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content" >
@@ -746,6 +771,12 @@
 	<script type="text/javascript" charset="utf-8">
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaContatti", function() {
+	
+	document.addEventListener("backbutton", onBackKeyDown, false);
+		
+	function onBackKeyDown(e) {
+	e.preventDefault();
+	}
 	
 	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
 	
@@ -812,6 +843,7 @@
 
 	<div data-role="header">
 		<h1>Vetrina</h1>
+		<a href="#eserciziViciniLista" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">Lista Esercizi</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content" >
@@ -820,6 +852,12 @@
 	<script type="text/javascript" charset="utf-8">
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaStatistiche", function() {
+	
+	document.addEventListener("backbutton", onBackKeyDown, false);
+		
+	function onBackKeyDown(e) {
+	e.preventDefault();
+	}
 	
 	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
 	

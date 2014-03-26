@@ -133,6 +133,7 @@
 		$(document).on("click", 'a.collegaTwitter', function(){
 		
 		twitterToken = window.localStorage.getItem("twitterToken");
+		
 		if(twitterToken == null) {
 			
 			var ref = window.open('http://www.wificomo.com/twitter/twitterConnect.php', '_blank', 'location=no');
@@ -150,13 +151,15 @@
 				
 				alert(twitterToken);
 				
+				if(twitterToken !== "") {
 				window.localStorage.setItem("twitterToken", twitterToken);
 				window.localStorage.setItem("twitterVerifier", twitterVerifier);
 				window.localStorage.setItem("twitterName", twitterName);
 		
 				$("img.imageTwitter").attr("src", "img/twitterList.png");
 				$("p.accountTwitter").html(twitterName);
-		
+				}
+				
 				ref.close();
 				}
 			}

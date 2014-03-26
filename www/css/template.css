@@ -1,0 +1,25 @@
+@media only screen and (max-width: 300px) {
+.ui-page {
+background: url(../img/woman-small.png) no-repeat bottom right fixed;
+}
+
+}
+ 
+ 
+ 
+@media only screen and (min-width:301px) and (max-width:789px){
+ 
+.ui-page {
+background: url(../img/woman-medium.png) no-repeat bottom right fixed;
+}
+
+ 
+}
+ 
+@media only screen and (min-width: 790px) {
+ 
+.ui-page {
+background: url(../img/woman-big.png) no-repeat bottom right fixed;
+}
+ 
+}

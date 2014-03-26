@@ -150,8 +150,6 @@
 				var twitterName = loc.substring(loc.indexOf("twitterName=")+12);
 				twitterName = decodeURIComponent(twitterName);
 				
-				alert(twitterToken);
-				
 				if(twitterToken !== "") {
 				window.localStorage.setItem("twitterToken", twitterToken);
 				window.localStorage.setItem("twitterVerifier", twitterVerifier);

@@ -49,6 +49,8 @@
 		
 	function onBackKeyDown(e) {
 	e.preventDefault();
+	
+	$.mobile.changePage( "index.html", { reloadPage: false, transition: "slide"} );
 	}
 	
 	var scanner = cordova.require("cordova/plugin/BarcodeScanner");
@@ -100,6 +102,7 @@
 		
 	function onBackKeyDown(e) {
 	e.preventDefault();
+	$.mobile.changePage( "index.html", { reloadPage: false, transition: "slide"} );
 	}
 		
 // CARICA FILE VETRINA

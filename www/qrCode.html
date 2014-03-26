@@ -30,9 +30,12 @@
 <!-- Start of page: #QRscanner -->
 <div data-role="page" id="QRscanner">
 
+	<!-- /HEADER -->
 	<div data-role="header">
-		<h1>Scanner</h1>
-	</div><!-- /header -->
+	<h1>Title</h1>
+	<a href="index.html" rel="external" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+	</div>
+	<!-- /HEADER -->
 
 	<div role="main" class="ui-content" >
 		
@@ -41,6 +44,11 @@
 	
 	$( document ).on( "pagecreate", "#QRscanner", function() {
 	
+	document.addEventListener("backbutton", onBackKeyDown, false);
+		
+	function onBackKeyDown(e) {
+	e.preventDefault();
+	}
 	
 	var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 	
@@ -69,23 +77,30 @@
 
 	<div data-role="footer" data-theme="a" data-position="fixed">
 	</div><!-- /footer -->
-</div><!-- /page QRscanner -->
+	</div><!-- /page QRscanner -->
 
 <!-- Start of page: #vetrinaMappa -->
 <div data-role="page" id="vetrinaMappa">
 
+	<!-- /HEADER -->
 	<div data-role="header">
-		<h1>Vetrina</h1>
-	</div><!-- /header -->
+	<h1>Title</h1>
+	<a href="index.html" rel="external" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+	</div>
+	<!-- /HEADER -->
 
 	<div role="main" class="ui-content" >
 		
-	
 	<script type="text/javascript" charset="utf-8">
-	
 
 	$( document ).on( "pageshow", "#vetrinaMappa", function() {
 	
+	document.addEventListener("backbutton", onBackKeyDown, false);
+		
+	function onBackKeyDown(e) {
+	e.preventDefault();
+	}
+		
 // CARICA FILE VETRINA
 	
 		var path = window.localStorage.getItem("pathSD");

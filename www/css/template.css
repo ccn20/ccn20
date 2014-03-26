@@ -3,6 +3,10 @@
 background: url(../img/woman-small.png) no-repeat bottom right fixed, url(../img/quadrati-small.png) no-repeat top right fixed;
 }
 
+.ui-header{
+background: #000000 url(../img/header-small.png) no-repeat center center !important;
+}
+
 }
  
  
@@ -13,6 +17,10 @@ background: url(../img/woman-small.png) no-repeat bottom right fixed, url(../img
 background: url(../img/woman-medium.png) no-repeat bottom right fixed, url(../img/quadrati-medium.png) no-repeat top right fixed;
 }
 
+.ui-header{
+background: #000000 url(../img/header-medium.png) no-repeat center center !important;
+}
+
  
 }
  
@@ -20,6 +28,10 @@ background: url(../img/woman-medium.png) no-repeat bottom right fixed, url(../im
  
 .ui-page {
 background: url(../img/woman-big.png) no-repeat bottom right fixed, url(../img/quadrati-big.png) no-repeat top right fixed;
+}
+
+.ui-header{
+background: #000000 url(../img/header-big.png) no-repeat center center !important;
 }
  
 }

@@ -6,7 +6,7 @@ background-position: bottom right, top right;
 }
 
 .ui-header{
-background: #000000 url(../img/header-small.png) no-repeat center center !important;
+background: url(../img/header-small.png) no-repeat center center !important;
 height: 2.2em !important;
 }
 
@@ -23,7 +23,7 @@ background-position: bottom right, top right;
 }
 
 .ui-header{
-background: #000000 url(../img/header-medium.png) no-repeat center center !important;
+background: url(../img/header-medium.png) no-repeat center center !important;
 height: 3.5em !important;
 }
 
@@ -39,7 +39,7 @@ background-position: bottom right, top right;
 }
 
 .ui-header{
-background: #000000 url(../img/header-big.png) no-repeat center center !important;
+background: url(../img/header-big.png) no-repeat center center !important;
 height: 4em !important;
 }
 

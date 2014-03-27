@@ -36,13 +36,8 @@
 	
 	document.addEventListener("backbutton", function(e){
     
-		if($.mobile.activePage.is('#index')){
-        e.preventDefault();
-        return false;
-		}
-		else {
-        navigator.app.backHistory()
-		}
+		navigator.app.backHistory()
+		
 	}, false);
 	
 	var lingua = window.localStorage.getItem("lingua");
@@ -63,13 +58,11 @@
 		
 	</script>
 
-	<ul>
-	<li><a href="eserciziVicini.html" rel="external" data-transition="slide"></a></li>
-	<li><a href="categorie.html" rel="external" data-transition="slide">Ricerca per Categoria</a></li>
-	<li><a href="nomeEsercizi.html" rel="external" data-transition="slide">Ricerca per Nome</a></li>
-	<li><a href="brandEsercizi.html" rel="external" data-transition="slide">Ricerca per Brand</a></li>
-	<li><a href="qrCode.html" rel="external" data-transition="slide">QR Code Scanner</a></li>
-	</ul>
+	<li><a href="eserciziVicini.html" rel="external" data-transition="slide"><img src="img/opzioni.png"></a></li>
+	<li><a href="categorie.html" rel="external" data-transition="slide"><img src="img/opzioni.png"></a></li>
+	<li><a href="nomeEsercizi.html" rel="external" data-transition="slide"><img src="img/opzioni.png"></a></li>
+	<li><a href="brandEsercizi.html" rel="external" data-transition="slide"><img src="img/opzioni.png"></a></li>
+	<li><a href=""  data-transition="slide"><img src="img/opzioni.png"></a></li>
 	
 	</div>
 	<!-- /CONTENT -->
@@ -78,9 +71,9 @@
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar">
 			<ul>
-			<li><a href="#" data-icon="search">Cerca</a></li>
-			<li><a href="#" data-icon="camera">Scanner</a></li>
-			<li><a href="opzioni.html" rel="external" data-transition="slide"><img src="img/opzioni.png"></a></li>
+			<li><a href="#" data-icon="search"><img src="img/magnify.png"></a></li>
+			<li><a href="qrCode.html" rel="external" data-icon="camera"><img src="img/scanner.png"></a></li>
+			<li><a href="opzioni.html" rel="external" data-transition="slide"><img src="img/gear.png"></a></li>
 			</ul>
 		</div><!-- /navbar -->
 	</div>

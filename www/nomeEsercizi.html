@@ -109,6 +109,12 @@
 
 	$( document ).on( "pageshow", "#vetrinaMappa", function() {
 	
+	document.addEventListener("backbutton", function(e){
+    
+		navigator.app.backHistory()
+		
+	}, false);
+	
 // CARICA FILE VETRINA
 	
 		var path = window.localStorage.getItem("pathSD");
@@ -422,6 +428,12 @@
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaOrari", function() {
 	
+	document.addEventListener("backbutton", function(e){
+    
+		navigator.app.backHistory()
+		
+	}, false);
+	
 	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
 	
 	// NOME ESERCIZIO + ORARI ESERCIZIO
@@ -493,6 +505,12 @@
 	<script type="text/javascript" charset="utf-8">
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaContatti", function() {
+	
+	document.addEventListener("backbutton", function(e){
+    
+		navigator.app.backHistory()
+		
+	}, false);
 	
 	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
 	
@@ -567,6 +585,12 @@
 	<script type="text/javascript" charset="utf-8">
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaStatistiche", function() {
+	
+	document.addEventListener("backbutton", function(e){
+    
+		navigator.app.backHistory()
+		
+	}, false);
 	
 	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
 	

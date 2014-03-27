@@ -54,6 +54,27 @@
 		//}
 	}
 	});
+	
+	//ON "click"
+	$(document).on("click", 'a.qrCode', function(){
+	
+	var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+	
+	scanner.scan( function (result) {
+		
+		var url = result.text;
+		var match = url.match(/it\/content\/(\d+)/);
+		if (match) {
+			idEsercizio = match[1];
+			document.location.href="#vetrinaMappa";
+			
+		} // END MATCH
+		// FINE SUCCESS SCANNER
+	},function (error) { 
+        console.log("Scanning failed: ", error); 
+	}); //END SCANNER
+	
+	}); //ON "click"
 		
 	</script>
 
@@ -70,7 +91,7 @@
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar">
 			<ul>
-			<li><a href="#"><img src="img/qrcode.png"></a></li>
+			<li><a href="#" class="qrCode"><img src="img/qrcode.png"></a></li>
 			<li><a href="opzioni.html" rel="external" data-transition="slide"><img src="img/opzioni.png"></a></li>
 			<li><a href="#"><img src="img/info.png"></a></li>
 			</ul>

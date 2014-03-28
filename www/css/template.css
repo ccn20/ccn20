@@ -10,8 +10,24 @@ background: #000000 url(../img/header-small.png) no-repeat center center !import
 height: 2.5em !important;
 border: 0;
 }
+/*
+.ui-listview .ui-btn{
+background-color:rgba(246,246,246,0.9);
+}
 
+.ui-listview .ui-btn:hover{
+background-color:rgba(237,237,237,0.9);
+}
 
+.ui-listview .ui-btn:active{
+background-color:rgba(232,232,232,0.9);
+}
+
+.ui-listview .ui-icon-carat-r{
+opacity: 1;
+}
+
+*/
 
 }
  
@@ -38,6 +54,25 @@ position: absolute;
 top: .8em;
 }
 
+/*
+
+.ui-listview .ui-btn{
+background-color:rgba(246,246,246,0.9);
+}
+
+.ui-listview .ui-btn:hover{
+background-color:rgba(237,237,237,0.9);
+}
+
+.ui-listview .ui-btn:active{
+background-color:rgba(232,232,232,0.9);
+}
+
+.ui-listview .ui-icon-carat-r{
+opacity: 1;
+}
+
+*/
  
 }
  
@@ -62,6 +97,8 @@ position: absolute;
 top: 1em;
 }
 
+/*
+
 .ui-listview .ui-btn{
 background-color:rgba(246,246,246,0.9);
 }
@@ -78,6 +115,6 @@ background-color:rgba(232,232,232,0.9);
 opacity: 1;
 }
 
-
+*/
 
 }

@@ -100,7 +100,7 @@
 		
 	</div><!-- /content -->
 
-	<div data-role="footer" data-theme="a">
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
 		<h4>Page Footer</h4>
 	</div><!-- /footer -->
 </div><!-- /page brandEsercizi -->
@@ -232,7 +232,7 @@
 	</div><!-- /content -->
 
 	<!-- FOOTER -->
-	<div data-role="footer" data-theme="a" data-position="fixed">
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
 	<!-- NAVBAR -->
 		<div data-role="navbar">
 			<ul>
@@ -368,7 +368,7 @@
 		var controlloZoom = L.control({ position: 'bottomleft' });
 		controlloZoom.onAdd = function (map) {
 			this._div = L.DomUtil.create('div', 'controlloZoom');
-			this._div.innerHTML = '<button class="groupMarker"><img src="img/userShop"></button><button class="userMarker"><img src="img/userPosition"></button>';
+			this._div.innerHTML = '<button class="groupMarker"><img src="img/userShop.png"></button><button class="userMarker"><img src="img/userPosition.png"></button>';
 			return this._div;
 		};
 		controlloZoom.addTo(map);
@@ -555,13 +555,13 @@
 		
 	</div><!-- /content -->
 
-	<div data-role="footer" data-theme="a" data-position="fixed">
-		<div data-role="navbar" data-iconpos="top">
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
+		<div data-role="navbar">
             <ul>
-                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location" class="ui-btn-active ui-state-persist">Mappa</a></li>
-                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock">Orari</a></li>
-                <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone">Contatti</a></li>
-				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear">Statistiche</a></li>
+				<li><a href="#vetrinaMappa" data-transition="slide" class="ui-btn-active ui-state-persist"><img src="img/vetrina.png"></a></li>
+                <li><a href="#vetrinaOrari" data-transition="slide"><img src="img/orari.png"></a></li>
+                <li><a href="#vetrinaContatti" data-transition="slide"><img src="img/contatti.png"></a></li>
+				<li><a href="#vetrinaStatistiche" data-transition="slide"><img src="img/statistiche.png"></a></li>
 				<!-- <li><a href="#" data-icon="camera">Gallery</a></li> -->
             </ul>
         </div><!-- /navbar -->
@@ -635,13 +635,13 @@
 			
 	</div><!-- /content -->
 
-	<div data-role="footer" data-theme="a" data-position="fixed">
-		<div data-role="navbar" data-iconpos="top">
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
+		<div data-role="navbar">
             <ul>
-                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location" data-direction="reverse">Mappa</a></li>
-                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock" class="ui-btn-active ui-state-persist">Orari</a></li>
-                <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone">Contatti</a></li>
-				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear">Statistiche</a></li>
+                <li><a href="#vetrinaMappa" data-transition="slide" class="ui-btn-active ui-state-persist"><img src="img/vetrina.png"></a></li>
+                <li><a href="#vetrinaOrari" data-transition="slide"><img src="img/orari.png"></a></li>
+                <li><a href="#vetrinaContatti" data-transition="slide"><img src="img/contatti.png"></a></li>
+				<li><a href="#vetrinaStatistiche" data-transition="slide"><img src="img/statistiche.png"></a></li>
 				<!-- <li><a href="#" data-icon="camera">Gallery</a></li> -->
             </ul>
         </div><!-- /navbar -->
@@ -717,13 +717,13 @@
 			
 	</div><!-- /content -->
 
-	<div data-role="footer" data-theme="a" data-position="fixed">
-		<div data-role="navbar" data-iconpos="top">
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
+		<div data-role="navbar">
             <ul>
-                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location" data-direction="reverse">Mappa</a></li>
-                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock" data-direction="reverse">Orari</a></li>
-                <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone" class="ui-btn-active ui-state-persist">Contatti</a></li>
-				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear">Statistiche</a></li>
+                <li><a href="#vetrinaMappa" data-transition="slide" class="ui-btn-active ui-state-persist"><img src="img/vetrina.png"></a></li>
+                <li><a href="#vetrinaOrari" data-transition="slide"><img src="img/orari.png"></a></li>
+                <li><a href="#vetrinaContatti" data-transition="slide"><img src="img/contatti.png"></a></li>
+				<li><a href="#vetrinaStatistiche" data-transition="slide"><img src="img/statistiche.png"></a></li>
 				<!-- <li><a href="#" data-icon="camera">Gallery</a></li> -->
             </ul>
         </div><!-- /navbar -->
@@ -1004,13 +1004,13 @@
 		
 	</div><!-- /content -->
 
-	<div data-role="footer" data-theme="a" data-position="fixed">
-		<div data-role="navbar" data-iconpos="top">
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
+		<div data-role="navbar">
             <ul>
-                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location" data-direction="reverse">Mappa</a></li>
-                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock" data-direction="reverse">Orari</a></li>
-                <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone" data-direction="reverse">Contatti</a></li>
-				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear" class="ui-btn-active ui-state-persist">Statistiche</a></li>
+                <li><a href="#vetrinaMappa" data-transition="slide" class="ui-btn-active ui-state-persist"><img src="img/vetrina.png"></a></li>
+                <li><a href="#vetrinaOrari" data-transition="slide"><img src="img/orari.png"></a></li>
+                <li><a href="#vetrinaContatti" data-transition="slide"><img src="img/contatti.png"></a></li>
+				<li><a href="#vetrinaStatistiche" data-transition="slide"><img src="img/statistiche.png"></a></li>
 				<!-- <li><a href="#" data-icon="camera">Gallery</a></li> -->
             </ul>
         </div><!-- /navbar -->

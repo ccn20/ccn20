@@ -34,8 +34,8 @@ opacity: 1;
  
  
 @media only screen and (min-width:301px) and (max-width:789px){
- 
-.ui-page {
+
+body {
 background: url(../img/woman-medium.png), url(../img/quadrati-medium.png);
 background-repeat:no-repeat, no-repeat;
 background-position: bottom right, top right;

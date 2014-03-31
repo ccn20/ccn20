@@ -534,11 +534,13 @@
 		}
 		//APP NON AUTORIZZATA
 		else if (response.status === 'not_authorized') {
-		$("p.facebook").html('<button class="ui-btn ui-shadow">Collega Account</button>');
+		$("h2#h2loginFacebook").html("Login Facebook");
+		$("p#ploginFacebook").html("Login Facebook");
 		} 
 		//NON CONNESSO
 		else {
-		$("p.facebook").html('<button class="facebook ui-btn ui-shadow">Collega Account</button>');
+		$("h2#h2loginFacebook").html("Login Facebook");
+		$("p#ploginFacebook").html("Login Facebook");
 		}
 		
 	}, true);
@@ -552,8 +554,10 @@
 		if (response.authResponse) {
 			
 			FB.api('/me', function(response) {
-			$("p.facebook").html('Benvenuto, ' + response.name + '.');
-			$("a#saltaAFoursquare").html('Avanti');
+			$("h2#h2loginFacebook").html("Account Facebook collegato!");
+			$("p#ploginFacebook").html("Benvenuto, "+response.name+"");
+			$("h2#h2skipFacebook").html("Avanti");
+			$("p#pskipFacebook").html("prosegui con il setup dell'applicazione");
 			});
 		}
 		else {
@@ -574,13 +578,13 @@
 	<ul data-role="listview" data-inset="true">
 		<li><a href="#">
 			<img src="img/collegaFacebook.png">
-			<h2>Login Facebook</h2>
-			<p>collega Shopincomo al mio account Facebook</p></a>
+			<h2 id="h2loginFacebook"></h2>
+			<p id="ploginFacebook"></p></a>
 		</li>
 		<li><a href="#foursquare" id="saltaAFoursquare" data-transition="slide">
 			<img src="img/skip.png">
-			<h2>Prosegui</h2>
-			<p>collega account in un secondo momento</p></a>
+			<h2 id="h2skipFacebook">Prosegui</h2>
+			<p id="pskipFacebook">collega account in un secondo momento</p></a>
 		</li>
 	</ul>
 	

@@ -27,7 +27,7 @@
 	<div data-role="page" id="categorie">
 
 	<!-- /HEADER -->
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 	<h1></h1>
 	<a href="index.html" rel="external" class="ui-btn ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div>
@@ -81,7 +81,7 @@
 		
 	</div><!-- /content -->
 
-	<div data-role="footer" data-theme="a" data-position="fixed">
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
 		<h4></h4>
 	</div><!-- /footer -->
 	</div>
@@ -91,7 +91,7 @@
 	<div data-role="page" id="esercizi">
 
 	<!-- /HEADER -->
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 	<h1></h1>
 	<a href="#categorie" class="ui-btn ui-shadow ui-corner-all ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div>
@@ -103,8 +103,8 @@
 
 	$( "#esercizi" ).on( "pagebeforeshow", function() {
 	
-	var maxLista = 2;
-	var startIn = 2;
+	var maxLista = 10;
+	var startIn = 10;
 	sessionStorage.setItem("start", startIn);
 	
 	$("ul#lista_esercizi").html("");
@@ -209,7 +209,7 @@
 	console.log("filtro:" + filtro);
 	console.log("sottocategoria:" + idCategoria);
 	
-	window.sessionStorage.setItem('start', 2);
+	window.sessionStorage.setItem('start', 10);
 	$("button#bottone").show();
 	
 	window.sessionStorage.setItem('filtro', filtro);
@@ -290,7 +290,7 @@
 	
 	console.log("ordinamento:" + ordinamento)
 	
-	window.sessionStorage.setItem('start', 2);
+	window.sessionStorage.setItem('start', 10);
 	$("button#bottone").show();
 	
 	window.sessionStorage.setItem("ordinamento", ordinamento);
@@ -370,7 +370,7 @@
 	$(document).on("click", 'button#bottone', function(){
 	
 	var start = sessionStorage.getItem("start");
-	var end = parseInt(start)+2;	
+	var end = parseInt(start)+5;	
 	
 	currentJSON = sessionStorage.getItem('currentJSON');
 	
@@ -387,7 +387,7 @@
 	
 	if(end >= stop) {
 	$("button#bottone").hide();
-	end = 2;
+	end = 10;
 	}
 	
 	start = end;
@@ -417,7 +417,7 @@
 	</div><!-- /content -->
 
 	<!-- FOOTER -->
-	<div data-role="footer" data-theme="a" data-position="fixed">
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
 	<button id="bottone" class="ui-btn">+2</button>
 	<!-- NAVBAR -->
 		<div data-role="navbar">

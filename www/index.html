@@ -148,8 +148,6 @@
 	}); //ON "click"
 	
 	</script>
-	
-	<h1>LINGUE</h1>
 
 	<ul data-role="listview" id="listaLingue" data-inset="true">
 	</ul>
@@ -159,7 +157,7 @@
 
 	<!-- FOOTER -->
 	<div data-role="footer" data-theme="a" data-position="fixed">
-		<h4>Page Footer</h4>
+		<h4></h4>
 	</div>
 	<!-- /FOOTER -->
 
@@ -180,6 +178,12 @@
 	
 	<script>   
 	$( "#setup" ).on( "pageshow", function() {	
+	
+	document.addEventListener("backbutton", onBackKeyDown, false);
+		
+	function onBackKeyDown(e) {
+	e.preventDefault();
+	}
 	
 	sessionStorage.setItem("vetrineOK", 0);
 	
@@ -511,7 +515,13 @@
 	<div id="fb-root"></div>
 	<script>
   
-	$( "#facebook" ).on( "pagebeforeshow", function() {	
+	$( "#facebook" ).on( "pageshow", function() {	
+	
+	document.addEventListener("backbutton", onBackKeyDown, false);
+		
+	function onBackKeyDown(e) {
+	e.preventDefault();
+	}
 	
 	FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false });
 	
@@ -557,8 +567,8 @@
 	
 </script>
 	
-	<h1>FACEBOOK</h1>
-
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	
 	<p class="facebook"></p>
 	<a href="#foursquare" id="saltaAFoursquare" data-transition="slide">Salta</a>
 		
@@ -566,8 +576,8 @@
 	<!-- CONTENT -->
 
 	<!-- FOOTER -->
-	<div data-role="footer" data-theme="a" data-position="fixed">
-		<h4>Page Footer</h4>
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
+		<h4></h4>
 	</div>
 	<!-- /FOOTER -->
 
@@ -587,7 +597,13 @@
 	<div role="main" class="ui-content" >
 	
 	<script>   
-	$( "#foursquare" ).on( "pagebeforeshow", function() {	
+	$( "#foursquare" ).on( "pageshow", function() {	
+	
+	document.addEventListener("backbutton", onBackKeyDown, false);
+		
+	function onBackKeyDown(e) {
+	e.preventDefault();
+	}
 	
 	var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
 	
@@ -635,7 +651,8 @@
 		
 	</script>
 	
-	<h1>Foursquare</h1>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	
 	<p class="foursquare"></p>
 	<a href="#twitter" id="saltaATwitter" data-transition="slide">Salta</a>
 	
@@ -643,8 +660,8 @@
 	<!-- CONTENT -->
 
 	<!-- FOOTER -->
-	<div data-role="footer" data-theme="a" data-position="fixed">
-		<h4>Page Footer</h4>
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
+		<h4></h4>
 	</div>
 	<!-- /FOOTER -->
 
@@ -665,6 +682,12 @@
 	
 	<script>   
 	$( "#twitter" ).on( "pagebeforeshow", function() {	
+	
+	document.addEventListener("backbutton", onBackKeyDown, false);
+		
+	function onBackKeyDown(e) {
+	e.preventDefault();
+	}
 	
 	var twitterToken = window.localStorage.getItem("twitterToken");
 	
@@ -714,7 +737,8 @@
 	
 	</script>
 	
-	<h1>Twitter</h1>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	
 	<p class="twitter"></p>
 	<a href="#index" id="saltaAIndex" data-transition="slide">Salta</a>
 	
@@ -722,8 +746,8 @@
 	<!-- CONTENT -->
 
 	<!-- FOOTER -->
-	<div data-role="footer" data-theme="a" data-position="fixed">
-		<h4>Page Footer</h4>
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
+		<h4></h4>
 	</div>
 	<!-- /FOOTER -->
 

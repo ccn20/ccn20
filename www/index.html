@@ -96,7 +96,7 @@
 			<ul>
 			<li><a href="#" class="qrCode"><img src="img/qrcode.png"></a></li>
 			<li><a href="opzioni.html" rel="external" data-transition="slide"><img src="img/opzioni.png"></a></li>
-			<li><a href="#"><img src="img/info.png"></a></li>
+			<li><a href="#credits" data-transition="slide"><img src="img/info.png"></a></li>
 			</ul>
 		</div><!-- /navbar -->
 	</div>
@@ -1562,6 +1562,45 @@
         </div><!-- /navbar -->
 	</div><!-- /footer -->
 </div><!-- /page vetrinaStatistiche -->
+
+<!-- PAGE #credits -->
+<div data-role="page" id="credits">
+
+	<!-- /HEADER -->
+	<div data-role="header">
+		<h1></h1>
+		<a href="#index" class="ui-btn ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+	</div>
+	<!-- /HEADER -->
+	
+	<!-- CONTENT -->
+	<div role="main" class="ui-content" >
+	
+	<script>   
+	$( "#credits" ).on( "pagebeforeshow", function() {	
+	
+	document.addEventListener("backbutton", function(e){
+    
+		navigator.app.backHistory()
+		
+	}, false);
+	
+	});
+		
+	</script>
+	
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+	</div>
+	<!-- /CONTENT -->
+
+	<!-- FOOTER -->
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
+		<h4></h4>
+	</div>
+	<!-- /FOOTER -->
+	
+</div><!-- /PAGE #credits -->
 
 </body>
 </html>

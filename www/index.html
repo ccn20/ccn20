@@ -546,7 +546,7 @@
 		//NON CONNESSO
 		else {
 		$("h2#h2loginFacebook").html("Login Facebook");
-		$("p#ploginFacebook").html("collega Shopincomo al mio account Foursquare");
+		$("p#ploginFacebook").html("collega Shopincomo al mio account Facebook");
 		}
 		
 	}, true);
@@ -562,7 +562,7 @@
 			FB.api('/me', function(response) {
 			$("h2#h2loginFacebook").html("Account Facebook collegato!");
 			$("p#ploginFacebook").html("Benvenuto, "+response.name+"");
-			$("a.facebook").setAttribute("href", "#foursquare")
+			$("a.facebook").attr('href', '#foursquare')
 			$("h2#h2skipFacebook").html("Avanti");
 			$("p#pskipFacebook").html("prosegui con il setup dell'applicazione");
 			});
@@ -685,13 +685,13 @@
 	<ul data-role="listview" data-inset="true">
 		<li><a href="#" class="foursquare" data-transition="slide">
 			<img src="img/collegaFoursquare.png">
-			<h2 class="h2loginFoursquare"></h2>
-			<p class="ploginFoursquare"></p></a>
+			<h2 id="h2loginFoursquare"></h2>
+			<p id="ploginFoursquare"></p></a>
 		</li>
 		<li><a href="#twitter" data-transition="slide">
 			<img src="img/skip.png">
-			<h2 class="h2skipFoursquare">Prosegui</h2>
-			<p class="pskipFoursquare">collega account in un secondo momento</p></a>
+			<h2 id="h2skipFoursquare">Prosegui</h2>
+			<p id="pskipFoursquare">collega account in un secondo momento</p></a>
 		</li>
 	</ul>
 	

@@ -5,26 +5,39 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css" />
+	<link rel="stylesheet" href="css/themes/shopincomo.min.css" />
+	<link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="css/jquery.mobile.structure-1.4.2.min.css" />
+	
+	<link rel="stylesheet" href="css/template.css" />
+	
 	<script src="js/jquery-1.11.0.min.js"></script>
 	<script src="js/jquery.mobile-1.4.2.min.js"></script>
+	
 	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/function_checkConnection.js"></script>
+	<!-- cordova facebook plugin -->
+	<script src="cdv-plugin-fb-connect.js"></script>
+	<!-- facebook js sdk -->
+	<script src="facebook-js-sdk.js"></script>
 </head>
 <body>
 
 <!-- Start of page: #categorie -->
-<div data-role="page" id="categorie">
+	<div data-role="page" id="categorie">
 
+	<!-- /HEADER -->
 	<div data-role="header">
-		<h1 id="titolo">Categorie</h1>
-		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">indietro</a>
-	</div><!-- /header -->
+	<h1></h1>
+	<a href="index.html" rel="external" class="ui-btn ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+	</div>
+	<!-- /HEADER -->
 
 	<div role="main" class="ui-content" >
 	
 	<script type="text/javascript" charset="utf-8">
 	$( "#categorie" ).on( "pagebeforeshow", function() {
-	
+		
 	document.addEventListener("backbutton", function(e){
     
 		navigator.app.backHistory()
@@ -69,19 +82,20 @@
 	</div><!-- /content -->
 
 	<div data-role="footer" data-theme="a" data-position="fixed">
-		<h4>Page Footer</h4>
+		<h4></h4>
 	</div><!-- /footer -->
-</div><!-- /page categorie -->
-
-
+	</div>
+<!-- /page categorie -->
 
 <!-- Start of page: #esercizi -->
-<div data-role="page" id="esercizi">
+	<div data-role="page" id="esercizi">
 
+	<!-- /HEADER -->
 	<div data-role="header">
-		<h1 id="titolo"></h1>
-		<a href="#" data-rel="back" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse"></a>
-	</div><!-- /header -->
+	<h1></h1>
+	<a href="#categorie" class="ui-btn ui-shadow ui-corner-all ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+	</div>
+	<!-- /HEADER -->
 
 	<div role="main" class="ui-content" >
 	

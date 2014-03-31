@@ -515,7 +515,7 @@
 	<div id="fb-root"></div>
 	<script>
   
-	$( "#facebook" ).on( "pageshow", function() {	
+	$( "#facebook" ).on( "pagebeforeshow", function() {	
 	
 	document.addEventListener("backbutton", onBackKeyDown, false);
 		
@@ -562,7 +562,8 @@
 			FB.api('/me', function(response) {
 			$("h2#h2loginFacebook").html("Account Facebook collegato!");
 			$("p#ploginFacebook").html("Benvenuto, "+response.name+"");
-			$("a.facebook").attr('href', '#foursquare')
+			$("a.facebook").attr('href', '#foursquare');
+			$("a.facebook").removeClass('facebook');
 			$("h2#h2skipFacebook").html("Avanti");
 			$("p#pskipFacebook").html("prosegui con il setup dell'applicazione");
 			});
@@ -618,7 +619,7 @@
 	<div role="main" class="ui-content" >
 	
 	<script>   
-	$( "#foursquare" ).on( "pageshow", function() {	
+	$( "#foursquare" ).on( "pagebeforeshow", function() {	
 	
 	document.addEventListener("backbutton", onBackKeyDown, false);
 		
@@ -638,7 +639,8 @@
 		
 		$("h2#h2loginFoursquare").html("Account Foursquare collegato!");
 		$("p#ploginFoursquare").html("Benvenuto, "+user+"");
-		$("a.foursquare").setAttribute("href", "#twitter")
+		$("a.foursquare").setAttribute("href", "#twitter");
+		$("a.foursquare").removeClass('foursquare');
 		$("h2#h2skipFoursquare").html("Avanti");
 		$("p#pskipFoursquare").html("prosegui con il setup dell'applicazione");
 		});
@@ -665,7 +667,8 @@
 		var user = data['response']['user']['firstName'];
 		$("h2#h2loginFoursquare").html("Account Foursquare collegato!");
 		$("p#ploginFoursquare").html("Benvenuto, "+user+"");
-		$("a.foursquare").setAttribute("href", "#twitter")
+		$("a.foursquare").setAttribute("href", "#twitter");
+		$("a.foursquare").removeClass('foursquare');
 		$("h2#h2skipFoursquare").html("Avanti");
 		$("p#pskipFoursquare").html("prosegui con il setup dell'applicazione");
 		});
@@ -731,14 +734,19 @@
 	var twitterToken = window.localStorage.getItem("twitterToken");
 	
 		if(twitterToken == null) {
-		$("p.twitter").html('<button class="twitter ui-btn ui-shadow">Collega Account</button>');
+		$("h2#h2loginTwitter").html("Login Twitter");
+		$("p#ploginTwitter").html("collega Shopincomo al mio account Twitter");
 		}
 		else {
 		
 		var twitterName = window.localStorage.getItem("twitterName");
 		
-		$("p.twitter").html('Benvenuto, ' + twitterName + '.');
-		$("a#saltaAIndex").html('Avanti');
+		$("h2#h2loginTwitter").html("Account Twitter collegato!");
+		$("p#ploginFoursquare").html("Benvenuto, "+twitterName+"");
+		$("a.twitter").setAttribute("href", "#index");
+		$("a.twitter").removeClass('twitter');
+		$("h2#h2skipTwitter").html("Avanti");
+		$("p#pskipTwitter").html("prosegui con il setup dell'applicazione");
 		}
 	
 	}); //ON "pagebeforeshow"
@@ -765,8 +773,12 @@
 		window.localStorage.setItem("twitterVerifier", twitterVerifier);
 		window.localStorage.setItem("twitterName", twitterName);
 		
-		$("p.twitter").html('Benvenuto, ' + twitterName + '.');
-		$("a#saltaAIndex").html('Avanti');
+		$("h2#h2loginTwitter").html("Account Twitter collegato!");
+		$("p#ploginFoursquare").html("Benvenuto, "+twitterName+"");
+		$("a.twitter").setAttribute("href", "#index");
+		$("a.twitter").removeClass('twitter');
+		$("h2#h2skipTwitter").html("Avanti");
+		$("p#pskipTwitter").html("prosegui con il setup dell'applicazione");
 		
 		ref.close();
 		}
@@ -778,18 +790,16 @@
 	
 	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 	
-	<p class="twitter"></p>
-	
 	<ul data-role="listview" data-inset="true">
-		<li><a href="#">
+		<li><a href="#" class="twitter">
 			<img src="img/collegaTwitter.png">
-			<h2>Login Twitter</h2>
-			<p>collega Shopincomo al mio account Twitter</p></a>
+			<h2 id="h2loginTwitter"></h2>
+			<p id="ploginTwitter"></p></a>
 		</li>
 		<li><a href="#index" id="saltaAIndex" data-transition="slide">
 			<img src="img/skip.png">
-			<h2>Prosegui</h2>
-			<p>collega account in un secondo momento</p></a>
+			<h2 id="h2skipTwitter">Prosegui</h2>
+			<p id="pskipTwitter">collega account in un secondo momento</p></a>
 		</li>
 	</ul>
 	

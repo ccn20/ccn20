@@ -244,8 +244,7 @@
 		}); // end of window.requestFileSystem
 		
 	//FUNCTION getSottocategorie()
-	function getSottocategorie()
-	{
+	function getSottocategorie() {
 	
 		var codlingua = window.localStorage.getItem('codLingua');
 		var path = window.localStorage.getItem('pathSD');
@@ -263,6 +262,10 @@
 			var urlSottocategorie = encodeURI("http://www.wificomo.com/ccn20/JSONsottocategorieNegozi.php?idCategoria="+info.idCategoria+"&language="+codLingua+"");	
 			var fileNameSottocategorie = info.jsonName+".js";
 			var directory = "ccn";
+			
+			alert(urlSottocategorie);
+			alert(fileNameSottocategorie);
+			alert(directory);
 			
 			downloadJSONmulti(directory, fileNameSottocategorie, urlSottocategorie);
 			});

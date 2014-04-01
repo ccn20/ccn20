@@ -485,35 +485,35 @@
 	e.preventDefault();
 	}
 	
+	
+	
 	$.ajax({
 		url: "http://www.wificomo.com/ccn20/JSONidEsercizi.php?start=0&end=2000",
 		dataType: 'json',
 		success: function(data) {
 		
 		var totaleEsercizi = data.length;
-		alert(totaleEsercizi);
-		var start = 0;
-		var end = 50;
-	
-		downloadVetrineInterval(start, end, totaleEsercizi)
+		window.sessionStorage.setItem("totaleEsercizi", totaleEsercizi);
+		window.sessionStorage.setItem("start", 0);
+		window.sessionStorage.setItem("iteration", 1);
+		
+		downloadVetrineInterval();
 		}
 	});
 	
 	}); // ON "pageshow"
 	
 	
-	function downloadVetrineInterval(start, end, totaleEsercizi) {
+	function downloadVetrineInterval() {
 	
-	alert(totaleEsercizi);
-	/*
+	var start = window.sessionStorage.getItem('start');
+	
 	$.ajax({	
-		url: "http://www.wificomo.com/ccn20/JSONidEsercizi.php?start="+start+"&end="+end+"",
+		url: "http://www.wificomo.com/ccn20/JSONidEsercizi.php?start="+start+"&end=50",
 		dataType: 'json',
 		success: function(data) {
 		
 		var codLingua = window.localStorage.getItem('codLingua');
-		var totaleEsercizi = data.length;
-		//window.sessionStorage.setItem("numElementi", totaleEsercizi);
 		
 			$.each(data, function(index, info) {
 		
@@ -521,18 +521,16 @@
 			var fileNameEsercizi = info.idEsercizio+".js";	
 			var directoryEsercizi = "ccn/esercizi";
 		
-			downloadVetrine(directoryEsercizi, fileNameEsercizi, urlEsercizi, start, end, totaleEsercizi);
+			downloadVetrine(directoryEsercizi, fileNameEsercizi, urlEsercizi);
 			});
-		
 		}
 	});
 	
-	*/
 	}//FUNCTION
 	
 	
 	//DOWNLOAD JSONmulti FUNCTION
-	function downloadVetrine(directory, fileName, fileURL) {
+	function downloadVetrine(directory, fileName, fileURL, start, totaleEsercizi) {
 		
 		var fileTransfer = new FileTransfer();
 		
@@ -553,17 +551,24 @@
 						localPath,
 						function(entry) {
 						
-						totaleEsercizi = parseInt(totaleEsercizi)-1;
+						var count = window.sessionStorage.getItem("start");
+						var iteration = window.sessionStorage.getItem("iteration");
+						
+						count = parseInt(count)+1;
+						window.sessionStorage.setItem("start", count);
 													
-								if(totaleEsercizi == 0) {
+							if(count == window.sessionStorage.getItem("totaleEsercizi")) {
 							
-									$("li.vetrine").html("download vetrine <img src='img/downloadok.png'>");
-									$("li.vetrine").css("color","green");	
-									$("p.downloadCompleteVetrina").html("<a href='#facebook' class='ui-btn' data-transition='slide'>continua</a>");
-								}
-								else {
-								sessionStorage.setItem("numElementi", numElementi);
-								}
+								$("li.vetrine").html("download vetrine <img src='img/downloadok.png'>");
+								$("li.vetrine").css("color","green");	
+								$("p.downloadCompleteVetrina").html("<a href='#facebook' class='ui-btn' data-transition='slide'>continua</a>");
+							}
+							else if(count == parseInt(iteration)*50) {
+							
+							iteration = parseInt(iteration)+1;
+							window.sessionStorage.setItem("iteration", iteration);
+							downloadVetrineInterval();
+							}
 						},
 						function(error) {
 							alert("error");

@@ -407,7 +407,7 @@
 						function(entry) {
 						
 						var numElementi = window.sessionStorage.getItem("numElementi");
-													
+						numElementi = parseInt(numElementi)-1;							
 								if(numElementi == 0) {
 								
 									$("li.sottocategorie").html("download sottocategorie <img src='img/downloadok.png'>");
@@ -415,7 +415,6 @@
 									$("p.downloadComplete").html("<a href='#setupNegozi' class='ui-btn' data-transition='slide'>continua</a>");			
 								}
 								else {
-								numElementi = parseInt(numElementi)-1;
 								sessionStorage.setItem("numElementi", numElementi);
 								}
 						},

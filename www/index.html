@@ -410,7 +410,8 @@
 						function(entry) {
 						
 						var numElementi = window.sessionStorage.getItem("numElementi");
-											
+						numElementi = parseInt(numElementi)-1;
+													
 								if(numElementi == 0) {
 							
 									if(sessionStorage.getItem("vetrineOK") == 0) {
@@ -426,32 +427,12 @@
 									}
 								}
 								else {
-								numElementi = parseInt(numElementi)-1;
 								sessionStorage.setItem("numElementi", numElementi);
 								}
 						},
 						function(error) {
-							
-							var numElementi = window.sessionStorage.getItem("numElementi");
-											
-								if(numElementi == 0) {
-							
-									if(sessionStorage.getItem("vetrineOK") == 0) {
-									$("li.sottocategorie").html("download sottocategorie <img src='img/downloadok.png'>");
-									$("li.sottocategorie").css("color","green");
-									getVetrine();
-									}
-									else if(sessionStorage.getItem("vetrineOK") == 1) {
-									$("li.vetrine").html("download vetrine <img src='img/downloadok.png'>");
-									$("li.vetrine").css("color","green");
-									
-									$("p.downloadComplete").html("<a href='#facebook' class='ui-btn' data-transition='slide'>continua e vai affanculo</a>");
-									}
-								}
-								else {
-								numElementi = parseInt(numElementi)-1;
-								sessionStorage.setItem("numElementi", numElementi);
-								}
+							alert("download error source " + error.source);
+							alert("download error target " + error.target);
 						},
 						false,
 						{
@@ -515,7 +496,7 @@
 	<!-- CONTENT -->
 
 	<!-- FOOTER -->
-	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
+	<div data-role="footer" data-theme="a" data-position="fixed">
 		<h4></h4>
 	</div>
 	<!-- /FOOTER -->

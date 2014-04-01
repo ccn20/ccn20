@@ -247,7 +247,7 @@
 	//FUNCTION getSottocategorie()
 	function getSottocategorie() {
 	
-		var codlingua = window.localStorage.getItem('codLingua');
+		var codLingua = window.localStorage.getItem('codLingua');
 		var path = window.localStorage.getItem('pathSD');
 		var pathCategorie = path+"/categorie.js";
 		
@@ -484,31 +484,13 @@
 	function onBackKeyDown(e) {
 	e.preventDefault();
 	}
-		
-	// TRADUZIONI------------------------------------------------------------------------------
-	
-	// T.Indietro
-	window.localStorage.setItem("indietro", lingue[lingua].indietro);
-	// T.Categories
-	window.localStorage.setItem("Categorie", lingue[lingua].Categorie);
-	// T.filtra
-	window.localStorage.setItem("filtra", lingue[lingua].filtra);
-	// T.ordina
-	window.localStorage.setItem("ordina", lingue[lingua].ordina);
-	// T.salta
-	window.localStorage.setItem("salta", lingue[lingua].salta);
-	
-	// /TRADUZIONI----------------------------------------------------------------------------
-	
-	//DOWNLOAD VETRINE
-	
 	
 	$.ajax({
 		url: "http://www.wificomo.com/ccn20/JSONidEsercizi.php",
 		dataType: 'json',
 		success: function(data) {
 		
-		var codlingua = window.localStorage.getItem('codLingua');
+		var codLingua = window.localStorage.getItem('codLingua');
 		var totaleEsercizi = data.length;
 		alert(totaleEsercizi);
 		window.sessionStorage.setItem("numElementi", totaleEsercizi);

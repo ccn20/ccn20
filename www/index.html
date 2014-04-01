@@ -189,6 +189,7 @@
 	e.preventDefault();
 	}
 	
+	window.localStorage.setItem('fileMissing', 0);
 	sessionStorage.setItem("vetrineOK", 0);
 	
 	var urlCategorie = encodeURI("http://www.wificomo.com/ccn20/JSONcategorie.php?language="+codLingua+"");	
@@ -227,9 +228,12 @@
 								getSottocategorie();
 						},
 						function(error) {
-							console.log("download error source " + error.source);
-							console.log("download error target " + error.target);
-							console.log("download error code " + error.code);
+							//console.log("download error source " + error.source);
+							//console.log("download error target " + error.target);
+							//console.log("download error code " + error.code);
+							var numError = window.localStorage.getItem('fileMissing');
+							numError = parseInt(numError)+1;
+							window.localStorage.setItem('fileMissing', numError);
 						},
 						false,
 						{
@@ -368,9 +372,12 @@
 							*/
 						},
 						function(error) {
-							alert("download error source " + error.source);
-							alert("download error target " + error.target);
-							alert("download error code " + error.code);
+							//alert("download error source " + error.source);
+							//alert("download error target " + error.target);
+							//alert("download error code " + error.code);
+							var numError = window.localStorage.getItem('fileMissing');
+							numError = parseInt(numError)+1;
+							window.localStorage.setItem('fileMissing', numError);
 						},
 						false,
 						{
@@ -424,6 +431,7 @@
 									$("li.vetrine").html("download vetrine <img src='img/downloadok.png'>");
 									$("li.vetrine").css("color","green");
 									
+									alert(window.localStorage.getItem('fileMissing'));
 									$("p.downloadComplete").html("<a href='#facebook' class='ui-btn' data-transition='slide'>continua</a>");
 									}
 								}
@@ -432,9 +440,12 @@
 								}
 						},
 						function(error) {
-							alert("download error source " + error.source);
-							alert("download error target " + error.target);
-							alert("download error code " + error.code);
+							//alert("download error source " + error.source);
+							//alert("download error target " + error.target);
+							//alert("download error code " + error.code);
+							var numError = window.localStorage.getItem('fileMissing');
+							numError = parseInt(numError)+1;
+							window.localStorage.setItem('fileMissing', numError);
 						},
 						false,
 						{

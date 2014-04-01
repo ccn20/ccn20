@@ -70,12 +70,12 @@
 				value = $input.val(),
 				html = "";
 			$ul.html( "" );
-			if ( value && value.length > 1 ) {
+			if ( value && value.length > 2 ) {
 				$ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
 				$ul.listview( "refresh" );
 				
 				var re = $input.val();
-				var matcher = new RegExp( "^" + re, "i" );
+				var matcher = new RegExp( re, "i" );
 				
 				$.getJSON(jsonPath, function( data ) {
 		

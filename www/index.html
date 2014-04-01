@@ -581,26 +581,26 @@
 							
 							alert("error");
 							
-							var count = window.sessionStorage.getItem("start");
-							var iteration = window.sessionStorage.getItem("iteration");
+							var countError = window.sessionStorage.getItem("start");
+							var iterationError = window.sessionStorage.getItem("iteration");
 						
-							count = parseInt(count)+1;
-							window.sessionStorage.setItem("start", count);
+							countError = parseInt(countError)+1;
+							window.sessionStorage.setItem("start", countError);
 													
-							if(count == window.sessionStorage.getItem("totaleEsercizi")) {
+							if(countError == window.sessionStorage.getItem("totaleEsercizi")) {
 							
 							alert("vaffanculo!!!");
 							$("p.downloadCompleteVetrina").html("<a href='#facebook' class='ui-btn' data-transition='slide'>continua</a>");
 								
 							}
-							else if(count == parseInt(iteration)*50) {
+							else if(countError == parseInt(iterationError)*50) {
 							
-							iteration = parseInt(iteration)+1;
-							alert("iteration: "+iteration);
-							window.sessionStorage.setItem("iteration", iteration);
+							iterationError = parseInt(iterationError)+1;
+							alert("iteration: "+iterationError);
+							window.sessionStorage.setItem("iteration", iterationError);
 							
-							$("li."+iteration+"").html("download vetrine <img src='img/downloadok.png'>");
-							$("li."+iteration+"").css("color","green");	
+							$("li."+iterationError+"").html("download vetrine <img src='img/downloadok.png'>");
+							$("li."+iterationError+"").css("color","green");	
 							
 							downloadVetrineInterval();
 						},

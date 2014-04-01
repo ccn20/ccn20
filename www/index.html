@@ -189,7 +189,6 @@
 	e.preventDefault();
 	}
 	
-	window.localStorage.setItem('fileMissing', 0);
 	sessionStorage.setItem("vetrineOK", 0);
 	
 	var urlCategorie = encodeURI("http://www.wificomo.com/ccn20/JSONcategorie.php?language="+codLingua+"");	
@@ -228,12 +227,9 @@
 								getSottocategorie();
 						},
 						function(error) {
-							//console.log("download error source " + error.source);
-							//console.log("download error target " + error.target);
-							//console.log("download error code " + error.code);
-							var numError = window.localStorage.getItem('fileMissing');
-							numError = parseInt(numError)+1;
-							window.localStorage.setItem('fileMissing', numError);
+							console.log("download error source " + error.source);
+							console.log("download error target " + error.target);
+							console.log("download error code " + error.code);
 						},
 						false,
 						{
@@ -372,12 +368,8 @@
 							*/
 						},
 						function(error) {
-							//alert("download error source " + error.source);
-							//alert("download error target " + error.target);
-							//alert("download error code " + error.code);
-							var numError = window.localStorage.getItem('fileMissing');
-							numError = parseInt(numError)+1;
-							window.localStorage.setItem('fileMissing', numError);
+							console.log("download error source " + error.source);
+							console.log("download error target " + error.target);
 						},
 						false,
 						{
@@ -431,7 +423,6 @@
 									$("li.vetrine").html("download vetrine <img src='img/downloadok.png'>");
 									$("li.vetrine").css("color","green");
 									
-									//alert(window.localStorage.getItem('fileMissing'));
 									$("p.downloadComplete").html("<a href='#facebook' class='ui-btn' data-transition='slide'>continua</a>");
 									}
 								}
@@ -440,35 +431,8 @@
 								}
 						},
 						function(error) {
-							//alert("download error source " + error.source);
-							//alert("download error target " + error.target);
-							//alert("download error code " + error.code);
-							
-							var numElementi = window.sessionStorage.getItem("numElementi");
-							numElementi = parseInt(numElementi)-1;
-													
-								if(numElementi == 0) {
-							
-									if(sessionStorage.getItem("vetrineOK") == 0) {
-									$("li.sottocategorie").html("download sottocategorie <img src='img/downloadok.png'>");
-									$("li.sottocategorie").css("color","green");
-									getVetrine();
-									}
-									else if(sessionStorage.getItem("vetrineOK") == 1) {
-									$("li.vetrine").html("download vetrine <img src='img/downloadok.png'>");
-									$("li.vetrine").css("color","green");
-									
-									//alert(window.localStorage.getItem('fileMissing'));
-									$("p.downloadComplete").html("<a href='#facebook' class='ui-btn' data-transition='slide'>continua</a>");
-									}
-								}
-								else {
-								sessionStorage.setItem("numElementi", numElementi);
-								}
-							
-							var numError = window.localStorage.getItem('fileMissing');
-							numError = parseInt(numError)+1;
-							window.localStorage.setItem('fileMissing', numError);
+							alert("download error source " + error.source);
+							alert("download error target " + error.target);
 						},
 						false,
 						{

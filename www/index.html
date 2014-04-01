@@ -507,7 +507,7 @@
 	function downloadVetrineInterval() {
 	
 	var start = window.sessionStorage.getItem('start');
-	alert(start);
+	alert("start: "+start);
 	
 	$.ajax({	
 		url: "http://www.wificomo.com/ccn20/JSONidEsercizi.php?start="+start+"&end=50",
@@ -532,7 +532,7 @@
 	
 	//DOWNLOAD JSONmulti FUNCTION
 	function downloadVetrine(directory, fileName, fileURL, start, totaleEsercizi) {
-		alert("download");
+
 		var fileTransfer = new FileTransfer();
 		
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
@@ -553,25 +553,28 @@
 						function(entry) {
 						
 						var count = window.sessionStorage.getItem("start");
-						alert("count: "+count);
 						var iteration = window.sessionStorage.getItem("iteration");
-						alert("iteration: "+iteration);
 						
 						count = parseInt(count)+1;
 						window.sessionStorage.setItem("start", count);
 													
 							if(count == window.sessionStorage.getItem("totaleEsercizi")) {
 							
-								$("li.vetrine").html("download vetrine <img src='img/downloadok.png'>");
-								$("li.vetrine").css("color","green");	
-								$("p.downloadCompleteVetrina").html("<a href='#facebook' class='ui-btn' data-transition='slide'>continua</a>");
+							alert("vaffanculo!!!");
+							$("p.downloadCompleteVetrina").html("<a href='#facebook' class='ui-btn' data-transition='slide'>continua</a>");
+								
 							}
 							else if(count == parseInt(iteration)*50) {
 							
 							iteration = parseInt(iteration)+1;
 							alert("iteration: "+iteration);
 							window.sessionStorage.setItem("iteration", iteration);
+							
+							$("li."+iteration+"").html("download vetrine <img src='img/downloadok.png'>");
+							$("li."+iteration+"").css("color","green");	
+							
 							downloadVetrineInterval();
+							
 							}
 						},
 						function(error) {
@@ -596,7 +599,18 @@
 	</script>
 	
 	<ul style="list-style-type: none">
-	<li class="vetrine">download vetrine...<img src="img/download.gif"></li>
+	<li class="1">download vetrine...<img src="img/download.gif"></li>
+	<li class="2">download vetrine...<img src="img/download.gif"></li>
+	<li class="3">download vetrine...<img src="img/download.gif"></li>
+	<li class="4">download vetrine...<img src="img/download.gif"></li>
+	<li class="5">download vetrine...<img src="img/download.gif"></li>
+	<li class="6">download vetrine...<img src="img/download.gif"></li>
+	<li class="7">download vetrine...<img src="img/download.gif"></li>
+	<li class="8">download vetrine...<img src="img/download.gif"></li>
+	<li class="9">download vetrine...<img src="img/download.gif"></li>
+	<li class="10">download vetrine...<img src="img/download.gif"></li>
+	<li class="11">download vetrine...<img src="img/download.gif"></li>
+	<li class="12">download vetrine...<img src="img/download.gif"></li>
 	</ul>
 	
 	<p class="downloadCompleteVetrina">attendere...</p>

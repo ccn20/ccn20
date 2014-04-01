@@ -488,18 +488,16 @@
 	$.ajax({
 		url: "http://www.wificomo.com/ccn20/JSONidEsercizi.php?start=0&end=2000",
 		dataType: 'json',
-		async: false,
 		success: function(data) {
 		
 		var totaleEsercizi = data.length;
-		
+		alert(totaleEsercizi);
+		var start = 0;
+		var end = 50;
+	
+		downloadVetrineInterval(start, end, totaleEsercizi)
 		}
 	});
-	
-	var start = 0;
-	var end = 50;
-	
-	downloadVetrineInterval(start, end, totaleEsercizi)
 	
 	}); // ON "pageshow"
 	

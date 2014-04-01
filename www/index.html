@@ -507,6 +507,7 @@
 	function downloadVetrineInterval() {
 	
 	var start = window.sessionStorage.getItem('start');
+	alert(start);
 	
 	$.ajax({	
 		url: "http://www.wificomo.com/ccn20/JSONidEsercizi.php?start="+start+"&end=50",
@@ -531,7 +532,7 @@
 	
 	//DOWNLOAD JSONmulti FUNCTION
 	function downloadVetrine(directory, fileName, fileURL, start, totaleEsercizi) {
-		
+		alert("download");
 		var fileTransfer = new FileTransfer();
 		
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
@@ -552,7 +553,9 @@
 						function(entry) {
 						
 						var count = window.sessionStorage.getItem("start");
+						alert("count: "+count);
 						var iteration = window.sessionStorage.getItem("iteration");
+						alert("iteration: "+iteration);
 						
 						count = parseInt(count)+1;
 						window.sessionStorage.setItem("start", count);
@@ -566,6 +569,7 @@
 							else if(count == parseInt(iteration)*50) {
 							
 							iteration = parseInt(iteration)+1;
+							alert("iteration: "+iteration);
 							window.sessionStorage.setItem("iteration", iteration);
 							downloadVetrineInterval();
 							}

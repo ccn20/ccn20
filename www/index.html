@@ -410,8 +410,7 @@
 						function(entry) {
 						
 						var numElementi = window.sessionStorage.getItem("numElementi");
-						numElementi = parseInt(numElementi)-1;
-													
+											
 								if(numElementi == 0) {
 							
 									if(sessionStorage.getItem("vetrineOK") == 0) {
@@ -427,12 +426,32 @@
 									}
 								}
 								else {
+								numElementi = parseInt(numElementi)-1;
 								sessionStorage.setItem("numElementi", numElementi);
 								}
 						},
 						function(error) {
-							alert("download error source " + error.source);
-							alert("download error target " + error.target);
+							
+							var numElementi = window.sessionStorage.getItem("numElementi");
+											
+								if(numElementi == 0) {
+							
+									if(sessionStorage.getItem("vetrineOK") == 0) {
+									$("li.sottocategorie").html("download sottocategorie <img src='img/downloadok.png'>");
+									$("li.sottocategorie").css("color","green");
+									getVetrine();
+									}
+									else if(sessionStorage.getItem("vetrineOK") == 1) {
+									$("li.vetrine").html("download vetrine <img src='img/downloadok.png'>");
+									$("li.vetrine").css("color","green");
+									
+									$("p.downloadComplete").html("<a href='#facebook' class='ui-btn' data-transition='slide'>continua</a>");
+									}
+								}
+								else {
+								numElementi = parseInt(numElementi)-1;
+								sessionStorage.setItem("numElementi", numElementi);
+								}
 						},
 						false,
 						{

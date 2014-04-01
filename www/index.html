@@ -501,11 +501,14 @@
 	// /TRADUZIONI----------------------------------------------------------------------------
 	
 	//DOWNLOAD VETRINE
+	
+	
 	$.ajax({
 		url: "http://www.wificomo.com/ccn20/JSONidEsercizi.php",
 		dataType: 'json',
 		success: function(data) {
 		
+		var codlingua = window.localStorage.getItem('codLingua');
 		var totaleEsercizi = data.length;
 		alert(totaleEsercizi);
 		window.sessionStorage.setItem("numElementi", totaleEsercizi);
@@ -549,9 +552,7 @@
 						function(entry) {
 						
 						var numElementi = window.sessionStorage.getItem("numElementi");
-						alert("numElementi");
 						numElementi = parseInt(numElementi)-1;
-						alert("numElementi");
 													
 								if(numElementi == 0) {
 							

@@ -492,7 +492,6 @@
 		
 		var codLingua = window.localStorage.getItem('codLingua');
 		var totaleEsercizi = data.length;
-		alert(totaleEsercizi);
 		window.sessionStorage.setItem("numElementi", totaleEsercizi);
 		
 			$.each(data, function(index, info) {
@@ -511,8 +510,6 @@
 	
 	//DOWNLOAD JSONmulti FUNCTION
 	function downloadVetrine(directory, fileName, fileURL) {
-		
-		alert("download");
 		
 		var fileTransfer = new FileTransfer();
 		

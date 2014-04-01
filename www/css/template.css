@@ -22,7 +22,7 @@ height: 6em !important;
 }
 
 #rigaBorsa{
-height: 6.3em;
+height: 6.5em;
 margin: auto;
 }
 
@@ -57,15 +57,22 @@ opacity: 1;
 
 @media only screen and (min-width:301px) and (max-width:400px){
 .ui-page {
-background: url(../img/woman-small.png), url(../img/quadrati-small.png);
+background: url(../img/woman-medium.png), url(../img/quadrati-medium.png);
 background-repeat:no-repeat, no-repeat;
 background-position: bottom right, top right;
 }
 
 .ui-header{
-background: #000000 url(../img/header-small.png) no-repeat center center !important;
-height: 2.5em !important;
+background: #000000 url(../img/header-medium.png) no-repeat center center !important;
+height: 3.5em !important;
 border: 0;
+}
+
+.ui-header .ui-btn-left, .ui-header .ui-btn-right{
+vertical-align: middle;
+margin: auto !important;
+position: absolute;
+top: .8em;
 }
 
 #manicoBorsa{
@@ -79,7 +86,7 @@ height: 7em !important;
 }
 
 #rigaBorsa{
-height: 7.3em;
+height: 7.5em;
 margin: auto;
 }
 
@@ -148,7 +155,7 @@ height: 10em !important;
 }
 
 #rigaBorsa{
-height: 10.3em;
+height: 10.5em;
 margin: auto;
 }
 
@@ -215,7 +222,7 @@ height: 11em !important;
 }
 
 #rigaBorsa{
-height: 11.3em;
+height: 11.5em;
 margin: auto;
 }
 

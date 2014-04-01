@@ -130,7 +130,7 @@
 		$.getJSON("js/lingue.js", function( data ) {
 		
 			$.each(data, function(index, info) {
-			$("ul#listaLingue").append($("<li></li>",{"html":"<a href='#setup' class='lingua' id='" + info.idLingua + "' codiceLingua='"+info.codiceLingua+"' nomeLingua='"+index+"' data-transition='slide' ><img src='img/lingue/"+info.codiceLingua+".png' alt='Facebook' class='ui-li-icon ui-corner-none'>" + info.nomeLingua + "</a>" }));
+			$("ul#listaLingue").append($("<li></li>",{"html":"<a href='#setupCategorie' class='lingua' id='" + info.idLingua + "' codiceLingua='"+info.codiceLingua+"' nomeLingua='"+index+"' data-transition='slide' ><img src='img/lingue/"+info.codiceLingua+".png' alt='Facebook' class='ui-li-icon ui-corner-none'>" + info.nomeLingua + "</a>" }));
 			});
 	
 			$("ul#listaLingue").listview("refresh");

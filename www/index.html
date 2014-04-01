@@ -507,6 +507,7 @@
 		success: function(data) {
 		
 		var totaleEsercizi = data.length;
+		alert(totaleEsercizi);
 		window.sessionStorage.setItem("numElementi", totaleEsercizi);
 		
 			$.each(data, function(index, info) {
@@ -525,6 +526,8 @@
 	
 	//DOWNLOAD JSONmulti FUNCTION
 	function downloadVetrine(directory, fileName, fileURL) {
+		
+		alert("download");
 		
 		var fileTransfer = new FileTransfer();
 		
@@ -546,13 +549,15 @@
 						function(entry) {
 						
 						var numElementi = window.sessionStorage.getItem("numElementi");
+						alert("numElementi");
 						numElementi = parseInt(numElementi)-1;
+						alert("numElementi");
 													
 								if(numElementi == 0) {
 							
 									$("li.vetrine").html("download vetrine <img src='img/downloadok.png'>");
 									$("li.vetrine").css("color","green");	
-									$("p.downloadComplete").html("<a href='#facebook' class='ui-btn' data-transition='slide'>continua</a>");
+									$("p.downloadCompleteVetrina").html("<a href='#facebook' class='ui-btn' data-transition='slide'>continua</a>");
 								}
 								else {
 								sessionStorage.setItem("numElementi", numElementi);
@@ -583,7 +588,7 @@
 	<li class="vetrine">download vetrine...<img src="img/download.gif"></li>
 	</ul>
 	
-	<p class="downloadComplete">attendere...</p>
+	<p class="downloadCompleteVetrina">attendere...</p>
 	
 	</div>
 	<!-- CONTENT -->

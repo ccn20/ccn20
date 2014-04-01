@@ -368,8 +368,9 @@
 							*/
 						},
 						function(error) {
-							console.log("download error source " + error.source);
-							console.log("download error target " + error.target);
+							alert("download error source " + error.source);
+							alert("download error target " + error.target);
+							alert("download error code " + error.code);
 						},
 						false,
 						{
@@ -433,6 +434,7 @@
 						function(error) {
 							alert("download error source " + error.source);
 							alert("download error target " + error.target);
+							alert("download error code " + error.code);
 						},
 						false,
 						{

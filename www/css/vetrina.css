@@ -43,12 +43,16 @@ li.singolaFunzionalitaMappa{
 	background: #ffffff;
 	min-height: 35px;
 	line-height: 35px;
-	border-bottom: 2px solid #fd613d;
+	margin-bottom: 5px;
 	font-weight: bold;
 }
 
 li.singolaFunzionalitaMappa.distanzaEsercizio{
-	line-height: 30px;
+	line-height: 35px;
+}
+
+.immagineDistanza{
+vertical-align: middle;
 }
 
 p.esercizioVicino{

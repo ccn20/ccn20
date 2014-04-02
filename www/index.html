@@ -420,7 +420,19 @@
 								}
 						},
 						function(error) {
-							alert("error");
+							
+							var numElementiError = window.sessionStorage.getItem("numElementi");
+							numElementiError = parseInt(numElementiError)-1;							
+							
+							if(numElementiError == 0) {
+								
+									$("li.sottocategorie").html("download sottocategorie <img src='img/downloadok.png'>");
+									$("li.sottocategorie").css("color","green");
+									$("p.downloadComplete").html("<a href='#setupNegozi' class='ui-btn' data-transition='slide'>continua</a>");			
+							}
+							else {
+							sessionStorage.setItem("numElementi", numElementiError);
+							}
 						},
 						false,
 						{
@@ -614,7 +626,7 @@
 	
 	</script>
 	
-	<div class="progressBar" style="width: 100%; height: 25px; background:red">
+	<div class="progressBar" style="width: 100%; height: 25px; background:white">
 	<div class="1" style="width:10%; height:25px; float:left"></div>
 	<div class="2" style="width:10%; height:25px; float:left"></div>
 	<div class="3" style="width:10%; height:25px; float:left"></div>

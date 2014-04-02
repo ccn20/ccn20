@@ -38,11 +38,11 @@
 	<script>   
 	$( "#index" ).on( "pagebeforeshow", function() {	
 	
-	document.addEventListener("backbutton", function(e){
-    
-		navigator.app.backHistory()
+	document.addEventListener("backbutton", onBackKeyDown, false);
 		
-	}, false);
+		function onBackKeyDown(e) {
+		e.preventDefault();
+		}
 	
 	var lingua = window.localStorage.getItem("lingua");
 	
@@ -124,6 +124,12 @@
 	<script>
   
 	$( "#lingue" ).on( "pagebeforeshow", function() {	
+	
+	document.addEventListener("backbutton", onBackKeyDown, false);
+		
+		function onBackKeyDown(e) {
+		e.preventDefault();
+		}
 	
 	//LISTA LINGUE
 	$("ul#listaLingue").html("");
@@ -736,7 +742,7 @@
 	
 </script>
 	
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<p>Titolo + breve spiegazione</p>
 	
 	<ul data-role="listview" data-inset="true">
 		<li><a href="#" class="facebook" data-transition="slide">
@@ -839,8 +845,7 @@
 		
 	</script>
 	
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	
+	<p>Titolo + breve spiegazione</p>
 	
 	<ul data-role="listview" data-inset="true">
 		<li><a href="#" class="foursquare" data-transition="slide">
@@ -945,7 +950,7 @@
 	
 	</script>
 	
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<p>Titolo + breve spiegazione</p>
 	
 	<ul data-role="listview" data-inset="true">
 		<li><a href="#" class="twitter">
@@ -975,26 +980,25 @@
 <!-- Start of page: #vetrinaMappa -->
 <div data-role="page" id="vetrinaMappa">
 
-	<!-- /HEADER -->
 	<div data-role="header">
-	<h1></h1>
-	<a href="#index" rel="external" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
-	</div>
-	<!-- /HEADER -->
+		<h1></h1>
+		<a href="#index" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+	</div><!-- /header -->
 
 	<div role="main" class="ui-content" >
 		
+	
 	<script type="text/javascript" charset="utf-8">
+	
 
 	$( document ).on( "pageshow", "#vetrinaMappa", function() {
 	
 	document.addEventListener("backbutton", onBackKeyDown, false);
 		
-	function onBackKeyDown(e) {
-	e.preventDefault();
-	$.mobile.changePage( "index.html", { reloadPage: false, transition: "slide"} );
-	}
-		
+		function onBackKeyDown(e) {
+		e.preventDefault();
+		}
+	
 // CARICA FILE VETRINA
 	
 		var path = window.localStorage.getItem("pathSD");
@@ -1041,7 +1045,7 @@
 //NAVIGATE BUTTON
 		
 		$( ".navigateEsercizio" ).html("");
-		$( ".navigateEsercizio" ).append("<a href='#' geoPosition='"+esercizioLatitude+","+esercizioLongitude+"'class='directions'>Navigazione</a>");
+		$( ".navigateEsercizio" ).append("<a href='#' geoPosition='"+esercizioLatitude+","+esercizioLongitude+"'class='directions'><img src='img/navigation.png'>portami qui</a>");
 
 // DESCRIZIONE + TRANSLATE BUTTON
 		var codLingua = localStorage.getItem("codLingua");
@@ -1141,10 +1145,11 @@
 				console.log("Nodo vicino: "+nearestEsercizio);
 				console.log(distance);
 				if(distance < 500)
-				{		
+				{				
 					var jsonVetrinaSession = JSON.parse(window.sessionStorage.getItem("jsonVetrina"));
 					var obj = jsonVetrinaSession[0];
 						if(nearestEsercizio in obj.Distanze){
+						
 								$.each(obj.Distanze, function(index, infoDistance) {
 									if(infoDistance.idEsercizio == nearestEsercizio){
 										var minutes = Math.floor(infoDistance.time / 60);
@@ -1152,15 +1157,16 @@
 										$(".distanzaEsercizio").html(infoDistance.distance+"m - "+minutes+":"+seconds+" min<p class='esercizioVicino'>Ora sei vicino a "+infoDistance.nomeEsercizio+"</p>");
 									}
 								});
-					}
-					else{
-					$(".distanzaEsercizio").html("+200m");
-					}
+						}
+						else{
+						$(".distanzaEsercizio").html("+200m");
+						}
 				}
 				else
 				{
 				$(".distanzaEsercizio").html("Troppo lontato per calcolare");
 				}
+			
 			}); //END GET JSON POSITION 
 	
 			var userAccuracy = position.coords.accuracy 
@@ -1279,17 +1285,21 @@
 		
 	</div><!-- /content -->
 
-	<div data-role="footer" data-theme="a" data-position="fixed">
-		<div data-role="navbar" data-iconpos="top">
+	<!-- FOOTER -->
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
+		<!-- NAVBAR -->
+		<div data-role="navbar">
             <ul>
-                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location" class="ui-btn-active ui-state-persist">Mappa</a></li>
-                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock">Orari</a></li>
-                <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone">Contatti</a></li>
-				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear">Statistiche</a></li>
-				<!-- <li><a href="#" data-icon="camera">Gallery</a></li> -->
+                <li><a href="#" class="ui-btn-active ui-state-persist"><img src="img/vetrina.png"></a></li>
+                <li><a href="#vetrinaOrari" data-transition="slide"><img src="img/orari.png"></a></li>
+                <li><a href="#vetrinaContatti" data-transition="slide"><img src="img/contatti.png"></a></li>
+				<li><a href="#vetrinaStatistiche" data-transition="slide"><img src="img/statistiche.png"></a></li>
             </ul>
-        </div><!-- /navbar -->
-	</div><!-- /footer -->
+        </div>
+		<!-- /NAVBAR -->
+	</div>
+	<!-- /FOOTER -->
+	
 </div><!-- /page vetrinaMappa -->
 
 <!-- Start of page: #vetrinaOrari -->
@@ -1297,7 +1307,7 @@
 
 	<div data-role="header">
 		<h1></h1>
-		<a href="#index" rel="external" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+		<a href="#index" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content" >
@@ -1306,6 +1316,12 @@
 	<script type="text/javascript" charset="utf-8">
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaOrari", function() {
+	
+	document.addEventListener("backbutton", onBackKeyDown, false);
+		
+		function onBackKeyDown(e) {
+		e.preventDefault();
+		}
 	
 	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
 	
@@ -1352,17 +1368,22 @@
 			
 	</div><!-- /content -->
 
-	<div data-role="footer" data-theme="a" data-position="fixed">
-		<div data-role="navbar" data-iconpos="top">
+	<!-- FOOTER -->
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
+		<!-- NAVBAR -->
+		<div data-role="navbar">
             <ul>
-                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location" data-direction="reverse">Mappa</a></li>
-                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock" class="ui-btn-active ui-state-persist">Orari</a></li>
-                <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone">Contatti</a></li>
-				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear">Statistiche</a></li>
+                <li><a href="#vetrinaMappa" data-transition="slide" data-direction="reverse"><img src="img/vetrina.png"></a></li>
+                <li><a href="#" class="ui-btn-active ui-state-persist"><img src="img/orari.png"></a></li>
+                <li><a href="#vetrinaContatti" data-transition="slide"><img src="img/contatti.png"></a></li>
+				<li><a href="#vetrinaStatistiche" data-transition="slide"><img src="img/statistiche.png"></a></li>
 				<!-- <li><a href="#" data-icon="camera">Gallery</a></li> -->
             </ul>
-        </div><!-- /navbar -->
-	</div><!-- /footer -->
+        </div>
+		<!-- /NAVBAR -->
+	</div>
+	<!-- /FOOTER -->
+	
 </div><!-- /page vetrinaOrari -->
 
 <!-- Start of page: #vetrinaContatti -->
@@ -1370,7 +1391,7 @@
 
 	<div data-role="header">
 		<h1></h1>
-		<a href="#index" rel="external" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+		<a href="#index" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content" >
@@ -1379,6 +1400,12 @@
 	<script type="text/javascript" charset="utf-8">
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaContatti", function() {
+	
+	document.addEventListener("backbutton", onBackKeyDown, false);
+		
+		function onBackKeyDown(e) {
+		e.preventDefault();
+		}
 	
 	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
 	
@@ -1427,17 +1454,21 @@
 			
 	</div><!-- /content -->
 
-	<div data-role="footer" data-theme="a" data-position="fixed">
-		<div data-role="navbar" data-iconpos="top">
+	<!-- FOOTER -->
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
+		<!-- NAVBAR -->
+		<div data-role="navbar">
             <ul>
-                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location" data-direction="reverse">Mappa</a></li>
-                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock" data-direction="reverse">Orari</a></li>
-                <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone" class="ui-btn-active ui-state-persist">Contatti</a></li>
-				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear">Statistiche</a></li>
-				<!-- <li><a href="#" data-icon="camera">Gallery</a></li> -->
+                <li><a href="#vetrinaMappa" data-transition="slide" data-direction="reverse"><img src="img/vetrina.png"></a></li>
+                <li><a href="#vetrinaOrari" data-transition="slide" data-direction="reverse"><img src="img/orari.png"></a></li>
+                <li><a href="#" class="ui-btn-active ui-state-persist"><img src="img/contatti.png"></a></li>
+				<li><a href="#vetrinaStatistiche" data-transition="slide"><img src="img/statistiche.png"></a></li>
             </ul>
-        </div><!-- /navbar -->
-	</div><!-- /footer -->
+        </div>
+		<!-- /NAVBAR -->
+	</div>
+	<!-- /FOOTER -->
+	
 </div><!-- /page vetrinaContatti -->
 
 <!-- Start of page: #vetrinaStatistiche -->
@@ -1445,7 +1476,7 @@
 
 	<div data-role="header">
 		<h1></h1>
-		<a href="#index" rel="external" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+		<a href="#index" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content" >
@@ -1454,6 +1485,12 @@
 	<script type="text/javascript" charset="utf-8">
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaStatistiche", function() {
+	
+	document.addEventListener("backbutton", onBackKeyDown, false);
+		
+		function onBackKeyDown(e) {
+		e.preventDefault();
+		}
 	
 	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
 	
@@ -1537,6 +1574,9 @@
 						minTickInterval: 86400000,
 						dateTimeLabelFormats: {
 						day: '%e %m'
+						},
+						labels: {
+						enabled: false
 						}
 					},
 					yAxis: {
@@ -1555,7 +1595,7 @@
 					plotOptions: {
 						column: {
 						stacking: 'normal',
-						pointWidth:10,
+						pointWidth:5,
 						dataLabels: {
 										enabled: false,
 										color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'black'
@@ -1622,6 +1662,9 @@
 						minTickInterval: 86400000,
 						dateTimeLabelFormats: {
 						day: '%e %m'
+						},
+						labels: {
+						enabled: false
 						}
 					},
 					yAxis: {
@@ -1640,7 +1683,7 @@
 					plotOptions: {
 						column: {
 						stacking: 'normal',
-						pointWidth:10,
+						pointWidth:5,
 						dataLabels: {
 										enabled: false,
 										color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'black'
@@ -1700,24 +1743,28 @@
 	<button id="intervallo" value="7giorni">7 giorni</button>
 	<button id="intervallo"value="15giorni">15 giorni</button>
 	<button id="intervallo" value="30giorni">30 giorni</button>
-	</div>
+	<div>
 	</div>
 	<!-- /STATISTICHE -->
 	
 		
 	</div><!-- /content -->
 
-	<div data-role="footer" data-theme="a" data-position="fixed">
-		<div data-role="navbar" data-iconpos="top">
+	<!-- FOOTER -->
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
+		<!-- NAVBAR -->
+		<div data-role="navbar">
             <ul>
-                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location" data-direction="reverse">Mappa</a></li>
-                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock" data-direction="reverse">Orari</a></li>
-                <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone" data-direction="reverse">Contatti</a></li>
-				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear" class="ui-btn-active ui-state-persist">Statistiche</a></li>
-				<!-- <li><a href="#" data-icon="camera">Gallery</a></li> -->
+                <li><a href="#vetrinaMappa" data-transition="slide" data-direction="reverse"><img src="img/vetrina.png"></a></li>
+                <li><a href="#vetrinaOrari" data-transition="slide" data-direction="reverse"><img src="img/orari.png"></a></li>
+                <li><a href="#vetrinaContatti" data-transition="slide" data-direction="reverse"><img src="img/contatti.png"></a></li>
+				<li><a href="#" class="ui-btn-active ui-state-persist"><img src="img/statistiche.png"></a></li>
             </ul>
-        </div><!-- /navbar -->
-	</div><!-- /footer -->
+        </div>
+		<!-- /NAVBAR -->
+	</div>
+	<!-- /FOOTER -->
+	
 </div><!-- /page vetrinaStatistiche -->
 
 <!-- PAGE #credits -->

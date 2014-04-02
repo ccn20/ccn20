@@ -44,11 +44,11 @@
 	<script type="text/javascript" charset="utf-8">
 	$( "#categorie" ).on( "pagebeforeshow", function() {
 		
-	document.addEventListener("backbutton", function(e){
-    
-		navigator.app.backHistory()
+	document.addEventListener("backbutton", onBackKeyDown, false);
 		
-	}, false);
+		function onBackKeyDown(e) {
+		e.preventDefault();
+		}
 	
 	// T.HEADER
 	//var indietro = window.localStorage.getItem("indietro");
@@ -109,6 +109,12 @@
 	<script type="text/javascript" charset="utf-8">
 
 	$( "#esercizi" ).on( "pagebeforeshow", function() {
+	
+	document.addEventListener("backbutton", onBackKeyDown, false);
+		
+		function onBackKeyDown(e) {
+		e.preventDefault();
+		}
 	
 	var maxLista = 10;
 	var startIn = 10;
@@ -405,7 +411,6 @@
 	$(document).on("click", 'a.esercizio', function(){
 	
 	idEsercizio = $(this).attr('idEsercizio');
-	alert(idEsercizio);
 			
 	});
 	
@@ -474,11 +479,11 @@
 
 	$( document ).on( "pageshow", "#vetrinaMappa", function() {
 	
-	document.addEventListener("backbutton", function(e){
-    
-		navigator.app.backHistory()
+	document.addEventListener("backbutton", onBackKeyDown, false);
 		
-	}, false);
+		function onBackKeyDown(e) {
+		e.preventDefault();
+		}
 	
 // CARICA FILE VETRINA
 	
@@ -799,11 +804,11 @@
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaOrari", function() {
 	
-	document.addEventListener("backbutton", function(e){
-    
-		navigator.app.backHistory()
+	document.addEventListener("backbutton", onBackKeyDown, false);
 		
-	}, false);
+		function onBackKeyDown(e) {
+		e.preventDefault();
+		}
 	
 	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
 	
@@ -884,11 +889,11 @@
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaContatti", function() {
 	
-	document.addEventListener("backbutton", function(e){
-    
-		navigator.app.backHistory()
+	document.addEventListener("backbutton", onBackKeyDown, false);
 		
-	}, false);
+		function onBackKeyDown(e) {
+		e.preventDefault();
+		}
 	
 	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
 	
@@ -970,11 +975,11 @@
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaStatistiche", function() {
 	
-	document.addEventListener("backbutton", function(e){
-    
-		navigator.app.backHistory()
+	document.addEventListener("backbutton", onBackKeyDown, false);
 		
-	}, false);
+		function onBackKeyDown(e) {
+		e.preventDefault();
+		}
 	
 	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
 	

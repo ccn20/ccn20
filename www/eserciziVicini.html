@@ -59,9 +59,9 @@
 	
 	document.addEventListener("backbutton", onBackKeyDown, false);
 		
-	function onBackKeyDown(e) {
-	e.preventDefault();
-	}
+		function onBackKeyDown(e) {
+		e.preventDefault();
+		}
 	
 	var height = $('[data-role="content"]').height(getRealContentHeight());
 	
@@ -384,11 +384,11 @@
 
 	$( document ).on( "pageshow", "#vetrinaMappa", function() {
 	
-	document.addEventListener("backbutton", function(e){
-    
-		navigator.app.backHistory()
+	document.addEventListener("backbutton", onBackKeyDown, false);
 		
-	}, false);
+		function onBackKeyDown(e) {
+		e.preventDefault();
+		}
 	
 // CARICA FILE VETRINA
 		var path = window.localStorage.getItem("pathSD");
@@ -708,11 +708,11 @@
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaOrari", function() {
 	
-	document.addEventListener("backbutton", function(e){
-    
-		navigator.app.backHistory()
+	document.addEventListener("backbutton", onBackKeyDown, false);
 		
-	}, false);
+		function onBackKeyDown(e) {
+		e.preventDefault();
+		}
 	
 	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
 	
@@ -793,11 +793,11 @@
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaContatti", function() {
 	
-	document.addEventListener("backbutton", function(e){
-    
-		navigator.app.backHistory()
+	document.addEventListener("backbutton", onBackKeyDown, false);
 		
-	}, false);
+		function onBackKeyDown(e) {
+		e.preventDefault();
+		}
 	
 	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
 	
@@ -879,11 +879,11 @@
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaStatistiche", function() {
 	
-	document.addEventListener("backbutton", function(e){
-    
-		navigator.app.backHistory()
+	document.addEventListener("backbutton", onBackKeyDown, false);
 		
-	}, false);
+		function onBackKeyDown(e) {
+		e.preventDefault();
+		}
 	
 	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
 	

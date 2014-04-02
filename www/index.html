@@ -493,6 +493,7 @@
 		success: function(data) {
 		
 		var totaleEsercizi = data.length;
+		
 		window.sessionStorage.setItem("totaleEsercizi", totaleEsercizi);
 		window.sessionStorage.setItem("start", 0);
 		window.sessionStorage.setItem("iteration", 1);
@@ -560,26 +561,19 @@
 													
 							if(count == window.sessionStorage.getItem("totaleEsercizi")) {
 							
-							alert("vaffanculo!!!");
+							$("li.downloadVetrine").html("download vetrine <img src='img/downloadok.png'>");
+							$("li.downloadVetrine").css("color","green");	
 							$("p.downloadCompleteVetrina").html("<a href='#facebook' class='ui-btn' data-transition='slide'>continua</a>");
-								
 							}
 							else if(count == parseInt(iteration)*50) {
 							
 							iteration = parseInt(iteration)+1;
-							alert("iteration: "+iteration);
 							window.sessionStorage.setItem("iteration", iteration);
 							
-							$("li."+iteration+"").html("download vetrine <img src='img/downloadok.png'>");
-							$("li."+iteration+"").css("color","green");	
-							
 							downloadVetrineInterval();
-							
 							}
 						},
 						function(error) {
-							
-							alert("error");
 							
 							var countError = window.sessionStorage.getItem("start");
 							var iterationError = window.sessionStorage.getItem("iteration");
@@ -589,18 +583,14 @@
 													
 							if(countError == window.sessionStorage.getItem("totaleEsercizi")) {
 							
-							alert("vaffanculo!!!");
+							$("li.downloadVetrine").html("download vetrine <img src='img/downloadok.png'>");
+							$("li.downloadVetrine").css("color","green");	
 							$("p.downloadCompleteVetrina").html("<a href='#facebook' class='ui-btn' data-transition='slide'>continua</a>");
-								
 							}
 							else if(countError == parseInt(iterationError)*50) {
 							
 							iterationError = parseInt(iterationError)+1;
-							alert("iteration: "+iterationError);
 							window.sessionStorage.setItem("iteration", iterationError);
-							
-							$("li."+iterationError+"").html("download vetrine <img src='img/downloadok.png'>");
-							$("li."+iterationError+"").css("color","green");	
 							
 							downloadVetrineInterval();
 							}
@@ -624,18 +614,7 @@
 	</script>
 	
 	<ul style="list-style-type: none">
-	<li class="1">download vetrine...<img src="img/download.gif"></li>
-	<li class="2">download vetrine...<img src="img/download.gif"></li>
-	<li class="3">download vetrine...<img src="img/download.gif"></li>
-	<li class="4">download vetrine...<img src="img/download.gif"></li>
-	<li class="5">download vetrine...<img src="img/download.gif"></li>
-	<li class="6">download vetrine...<img src="img/download.gif"></li>
-	<li class="7">download vetrine...<img src="img/download.gif"></li>
-	<li class="8">download vetrine...<img src="img/download.gif"></li>
-	<li class="9">download vetrine...<img src="img/download.gif"></li>
-	<li class="10">download vetrine...<img src="img/download.gif"></li>
-	<li class="11">download vetrine...<img src="img/download.gif"></li>
-	<li class="12">download vetrine...<img src="img/download.gif"></li>
+	<li class="downloadVetrine">download vetrine...<img src="img/download.gif"></li>
 	</ul>
 	
 	<p class="downloadCompleteVetrina">attendere...</p>

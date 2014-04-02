@@ -132,11 +132,14 @@
 		var jsonPath = path + "/esercizi/"+idEsercizio+".js";
 		var jsonVetrina;
 		
+		alert(idEsercizio);
+		
 		$.ajax({
 			url: jsonPath,
 			dataType: 'json',
 			async: false,
 			success: function(data) {
+			alert(data.length);
 			jsonVetrina = data;
 			sessionStorage.setItem('jsonVetrina', JSON.stringify(jsonVetrina));
 			}

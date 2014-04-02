@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-	<script src="js/jquery-1.11.0.min.js"></script>
-	<script src="js/jquery.mobile-1.4.1.min.js"></script>
 	
 	<link rel="stylesheet" href="css/themes/shopincomo.min.css" />
 	<link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
 	<link rel="stylesheet" href="css/jquery.mobile.structure-1.4.2.min.css" />
 	
 	<link rel="stylesheet" href="css/template.css" />
+	
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="js/jquery.mobile-1.4.2.min.js"></script>
+	
+	<!-- cordova facebook plugin -->
+	<script src="cdv-plugin-fb-connect.js"></script>
+	<!-- facebook js sdk -->
+	<script src="facebook-js-sdk.js"></script>
 	
 	<script src="js/highcharts.js"></script>
 	<link rel="stylesheet" href="css/leaflet.css" />
@@ -19,8 +24,8 @@
 	<script src="js/leaflet.usermarker.js"></script>
 	<script src="js/function_checkConnection.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
-	<link rel="stylesheet" href="css/eserciziVicini.css" />
-	<title>Ricerca Brand</title>
+	
+	<title>Esercizi Vicini</title>
 	
 	<style>
 
@@ -43,7 +48,7 @@
 <div data-role="page" id="eserciziViciniMappa">
 	<div data-role="header">
 		<h1></h1>
-		<a href="index.html" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse" style="vertical-align: middle; margin: 0.5em; ">home</a>
+		<a href="index.html" rel="external" class="ui-btn ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
 
 	<div role="main" id="mapEsercizi" class="ui-content" >
@@ -99,7 +104,7 @@
 
 		currentDistance = getDistanceFromLatLonInKm(userLatitude, userLongitude, info.latEsercizio, info.lonEsercizio);
 		currentEsercizio = info.idEsercizio;
-			if(currentDistance < 800) {
+			if(currentDistance < 300) {
 			
 			var time = Math.round(parseInt(currentDistance)/(1.4)/60);
 			
@@ -228,7 +233,7 @@
 	</div><!-- /content -->
 
 	<!-- FOOTER -->
-	<div data-role="footer" data-theme="a" data-position="fixed" data-tap-toggle="false">
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
 	<!-- NAVBAR -->
 		<div data-role="navbar">
 		<ul>
@@ -249,7 +254,7 @@
 
 	<div data-role="header">
 		<h1></h1>
-		<a href="index.html" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">home</a>
+		<a href="index.html" rel="external" class="ui-btn ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content" >
@@ -283,7 +288,7 @@
 		currentDistance = getDistanceFromLatLonInKm(latUser, lonUser, info.latEsercizio, info.lonEsercizio);
 		currentEsercizio = info.idEsercizio;
 		
-			if(currentDistance < 800) {
+			if(currentDistance < 300) {
 			
 			var time = Math.round(parseInt(currentDistance)/(1.4)/60);
 			
@@ -348,7 +353,7 @@
 	</div><!-- /content -->
 
 	<!-- FOOTER -->
-	<div data-role="footer" data-theme="a" data-position="fixed">
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
 	<!-- NAVBAR -->
 		<div data-role="navbar">
 			<ul>
@@ -365,8 +370,8 @@
 <div data-role="page" id="vetrinaMappa">
 
 	<div data-role="header">
-		<h1>Vetrina</h1>
-		<a href="#eserciziViciniLista" id="indietro" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">Lista Esercizi</a>
+		<h1></h1>
+		<a href="#eserciziViciniLista" class="jqm-navmenu-link ui-btn ui-corner-all ui-nodisc-icon ui-alt-icon ui-btn-left" data-transition="slide" data-direction="reverse">Lista Esercizi</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content" >

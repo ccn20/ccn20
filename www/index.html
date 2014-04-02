@@ -566,6 +566,7 @@
 							}
 							else if(count == parseInt(iteration)*50) {
 							
+							$("div."+iteration+"").css("background","green");	
 							iteration = parseInt(iteration)+1;
 							window.sessionStorage.setItem("iteration", iteration);
 							
@@ -588,6 +589,7 @@
 							}
 							else if(countError == parseInt(iterationError)*50) {
 							
+							$("div."+iterationError+"").css("background","green");	
 							iterationError = parseInt(iterationError)+1;
 							window.sessionStorage.setItem("iteration", iterationError);
 							
@@ -611,6 +613,20 @@
 	} //FUNCTION downloadJSONmulti
 	
 	</script>
+	
+	<div style="width: 110px, background:white">
+	<div class="1" style="width:10px, height:10px, display:inline"></div>
+	<div class="2" style="width:10px, height:10px, display:inline"></div>
+	<div class="3" style="width:10px, height:10px, display:inline"></div>
+	<div class="4" style="width:10px, height:10px, display:inline"></div>
+	<div class="5" style="width:10px, height:10px, display:inline"></div>
+	<div class="6" style="width:10px, height:10px, display:inline"></div>
+	<div class="7" style="width:10px, height:10px, display:inline"></div>
+	<div class="8" style="width:10px, height:10px, display:inline"></div>
+	<div class="9" style="width:10px, height:10px, display:inline"></div>
+	<div class="10" style="width:10px, height:10px, display:inline"></div>
+	<div class="11" style="width:10px, height:10px, display:inline"></div>
+	</div>
 	
 	<ul style="list-style-type: none">
 	<li class="downloadVetrine">download vetrine...<img src="img/download.gif"></li>

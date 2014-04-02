@@ -391,11 +391,12 @@
 	}, false);
 	
 // CARICA FILE VETRINA
+	alert(idEsercizio);
 	
 		var path = window.localStorage.getItem("pathSD");
 		var jsonPath = path + "/esercizi/"+idEsercizio+".js";
 		var jsonVetrina;
-		
+		alert(path);
 		$.ajax({
 			url: jsonPath,
 			dataType: 'json',

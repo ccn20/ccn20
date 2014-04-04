@@ -1,3 +1,46 @@
+<!--
+#brandEsercizi
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+	- input: "Inserisci un brand o un prodotto..."
+	TO DO:
+	- input: "Inserisci un brand o un prodotto..." (INGLESE)
+	
+#eserciziBrand
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+
+#vetrinaMappa
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+
+#vetrinaOrari
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+
+#vetrinaContatti
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+	- href:tel Telefono
+	- href:mailto Email
+
+#vetrinaStatistiche
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+-->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -810,9 +853,9 @@
 		$("h3.nomeEsercizio").html(info.NomeEsercizio);
 		$("ul#contattiEsercizio").append($("<li data-role='list-divider'>Contatti</li>"));
 		$("ul#contattiEsercizio").append($("<li>Indirizzo: "+info.Indirizzo+" "+info.Citta+"</li>"));
-		if (info.Telefono != undefined){$("ul#contattiEsercizio").append($("<li>Telefono: "+info.Telefono+"</li>"))};
+		if (info.Telefono != undefined){$("ul#contattiEsercizio").append($("<li><a href=tel:"+info.Telefono.replace(/ /g,'')+">Telefono: "+info.Telefono+"</a></li>"))};
 		if (info.Website != undefined){$("ul#contattiEsercizio").append($("<li>Website: "+info.Website+"</li>"))};
-		if (info.Email != undefined){$("ul#contattiEsercizio").append($("<li>Email: "+info.Email+"</li>"))};
+		if (info.Email != undefined){$("ul#contattiEsercizio").append($("<li><a href=mailto:"+info.Email+">Email: "+info.Email+"</a></li>"))};
 		if (info.Facebook != undefined){$("ul#contattiEsercizio").append($("<li>Facebook: "+info.Facebook+"</li>"))};
 		if (info.Twitter != undefined){$("ul#contattiEsercizio").append($("<li>Twitter: "+info.Twitter+"</li>"))};
 		if (info.Foursquare != undefined){$("ul#contattiEsercizio").append($("<li>Foursquare: "+info.Foursquare+"</li>"))};

@@ -1,3 +1,72 @@
+<!--
+#index
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+	
+#lingue
+	DONE:
+	- fixed header
+	- fixed footer
+	
+#setupCategorie:
+	DONE:
+	- fixed header
+	- fixed footer
+	
+#setupNegozi:
+	DONE:
+	- fixed header
+	- fixed footer
+	
+#facebook:
+	DONE:
+	- fixed header
+	- fixed footer
+	
+#foursquare:
+	DONE:
+	- fixed header
+	- fixed footer
+	
+#twitter:
+	DONE:
+	- fixed header
+	- fixed footer
+
+#vetrinaMappa
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+
+#vetrinaOrari
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+
+#vetrinaContatti
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+	- href:tel Telefono
+	- href:mailto Email
+
+#vetrinaStatistiche
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+
+#credits:
+	DONE:
+	- fixed header
+	- fixed footer
+-->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +101,7 @@
 <div data-role="page" id="index">
 
 	<!-- /HEADER -->
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 	<h1></h1>
 	</div>
 	<!-- /HEADER -->
@@ -118,7 +187,7 @@
 	<div data-role="page" id="lingue">
 
 	<!-- /HEADER -->
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1></h1>
 	</div>
 	<!-- /HEADER -->
@@ -172,7 +241,7 @@
 	<!-- CONTENT -->
 
 	<!-- FOOTER -->
-	<div data-role="footer" data-theme="a" data-position="fixed">
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
 		<h4></h4>
 	</div>
 	<!-- /FOOTER -->
@@ -184,7 +253,7 @@
 	<div data-role="page" id="setupCategorie">
 
 	<!-- /HEADER -->
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1></h1>
 	</div>
 	<!-- /HEADER -->
@@ -479,7 +548,7 @@
 	<!-- CONTENT -->
 
 	<!-- FOOTER -->
-	<div data-role="footer" data-theme="a" data-position="fixed">
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
 		<h4></h4>
 	</div>
 	<!-- /FOOTER -->
@@ -491,7 +560,7 @@
 	<div data-role="page" id="setupNegozi">
 
 	<!-- /HEADER -->
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1></h1>
 	</div>
 	<!-- /HEADER -->
@@ -660,7 +729,7 @@
 	<!-- CONTENT -->
 
 	<!-- FOOTER -->
-	<div data-role="footer" data-theme="a" data-position="fixed">
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
 		<h4></h4>
 	</div>
 	<!-- /FOOTER -->
@@ -672,7 +741,7 @@
 	<div data-role="page" id="facebook">
 
 	<!-- /HEADER -->
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1></h1>
 	</div>
 	<!-- /HEADER -->
@@ -778,7 +847,7 @@
 	<div data-role="page" id="foursquare">
 
 	<!-- /HEADER -->
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1></h1>
 	</div>
 	<!-- /HEADER -->
@@ -881,7 +950,7 @@
 	<div data-role="page" id="twitter">
 
 	<!-- /HEADER -->
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1></h1>
 	</div>
 	<!-- /HEADER -->
@@ -985,7 +1054,7 @@
 <!-- Start of page: #vetrinaMappa -->
 <div data-role="page" id="vetrinaMappa">
 
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1></h1>
 		<a href="#index" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
@@ -1310,7 +1379,7 @@
 <!-- Start of page: #vetrinaOrari -->
 <div data-role="page" id="vetrinaOrari">
 
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1></h1>
 		<a href="#index" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
@@ -1394,7 +1463,7 @@
 <!-- Start of page: #vetrinaContatti -->
 <div data-role="page" id="vetrinaContatti">
 
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1></h1>
 		<a href="#index" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
@@ -1423,9 +1492,9 @@
 		$("h3.nomeEsercizio").html(info.NomeEsercizio);
 		$("ul#contattiEsercizio").append($("<li data-role='list-divider'>Contatti</li>"));
 		$("ul#contattiEsercizio").append($("<li>Indirizzo: "+info.Indirizzo+" "+info.Citta+"</li>"));
-		if (info.Telefono != undefined){$("ul#contattiEsercizio").append($("<li>Telefono: "+info.Telefono+"</li>"))};
+		if (info.Telefono != undefined){$("ul#contattiEsercizio").append($("<li><a href=tel:"+info.Telefono.replace(/ /g,'')+">Telefono: "+info.Telefono+"</a></li>"))};
 		if (info.Website != undefined){$("ul#contattiEsercizio").append($("<li>Website: "+info.Website+"</li>"))};
-		if (info.Email != undefined){$("ul#contattiEsercizio").append($("<li>Email: "+info.Email+"</li>"))};
+		if (info.Email != undefined){$("ul#contattiEsercizio").append($("<li><a href=mailto:"+info.Email+">Email: "+info.Email+"</a></li>"))};
 		if (info.Facebook != undefined){$("ul#contattiEsercizio").append($("<li>Facebook: "+info.Facebook+"</li>"))};
 		if (info.Twitter != undefined){$("ul#contattiEsercizio").append($("<li>Twitter: "+info.Twitter+"</li>"))};
 		if (info.Foursquare != undefined){$("ul#contattiEsercizio").append($("<li>Foursquare: "+info.Foursquare+"</li>"))};
@@ -1479,7 +1548,7 @@
 <!-- Start of page: #vetrinaStatistiche -->
 <div data-role="page" id="vetrinaStatistiche">
 
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1></h1>
 		<a href="#index" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
@@ -1776,9 +1845,9 @@
 <div data-role="page" id="credits">
 
 	<!-- /HEADER -->
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1></h1>
-		<a href="#index" class="ui-btn ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="flip" data-direction="reverse">indietro</a>
+		<a href="#index" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="flip" data-direction="reverse">indietro</a>
 	</div>
 	<!-- /HEADER -->
 	

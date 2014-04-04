@@ -607,8 +607,7 @@
 		alert("click");
 		
 		var url = $(this).attr('urlWebsite');
-		alert(url);
-		//var urlTranslate = encodeURI("http://translate.google.com/#"+linguaDescrizione+"/"+codLingua+"/"+descrizioneTranslate+"");
+		var urlTranslate = encodeURI("http://"+url+"");
 		var ref = window.open(url, '_blank', 'location=yes');
 	});
 	

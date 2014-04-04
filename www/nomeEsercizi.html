@@ -1,3 +1,38 @@
+<!--
+#nomeEsercizi
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+	- input: "Inserisci il nome dell'esercizio che stai cercando..."
+	TO DO:
+	- input: "Inserisci il nome dell'esercizio che stai cercando..." (INGLESE)
+
+#vetrinaMappa
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+
+#vetrinaOrari
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+
+#vetrinaContatti
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+
+#vetrinaStatistiche
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+-->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,25 +69,26 @@
 <!-- Start of page: #nomeEsercizi -->
 <div data-role="page" id="nomeEsercizi">
 
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1></h1>
-		<a href="index.html" rel="external" class="ui-btn ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+		<a href="index.html" rel="external" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content" >
 		
-	<ul id="cerca_negozio" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Cerca..." data-filter-theme="a">
+	<ul id="cerca_negozio" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Inserisci il nome dell'esercizio che stai cercando...">
 	</ul>
 	
 	<script type="text/javascript" charset="utf-8">
 	
 	$( document ).on( "pageinit", "#nomeEsercizi", function() {
 	
+	//PREVENT BACK BUTTON
 	document.addEventListener("backbutton", onBackKeyDown, false);
 		
-		function onBackKeyDown(e) {
-		e.preventDefault();
-		}
+	function onBackKeyDown(e) {
+	e.preventDefault();
+	}
 	
 	//CARICA JSON CATEGORIE
 	var path = window.localStorage.getItem("pathSD");
@@ -106,9 +142,9 @@
 <!-- Start of page: #vetrinaMappa -->
 <div data-role="page" id="vetrinaMappa">
 
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1></h1>
-		<a href="#nomeEsercizi" class="ui-btn ui-icon-search ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+		<a href="#nomeEsercizi" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 		<a href="index.html" rel="external" class="ui-btn ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
 
@@ -120,54 +156,53 @@
 
 	$( document ).on( "pageshow", "#vetrinaMappa", function() {
 	
+	//PREVENT BACK BUTTON
 	document.addEventListener("backbutton", onBackKeyDown, false);
 		
-		function onBackKeyDown(e) {
-		e.preventDefault();
-		}
+	function onBackKeyDown(e) {
+	e.preventDefault();
+	}
 	
-// CARICA FILE VETRINA
-	
-		var path = window.localStorage.getItem("pathSD");
-		var jsonPath = path + "/esercizi/"+idEsercizio+".js";
-		var jsonVetrina;
+	// CARICA FILE VETRINA
+	var path = window.localStorage.getItem("pathSD");
+	var jsonPath = path + "/esercizi/"+idEsercizio+".js";
+	var jsonVetrina;
 		
-		$.ajax({
-			url: jsonPath,
-			dataType: 'json',
-			async: false,
-			success: function(data) {
-			jsonVetrina = data;
-			sessionStorage.setItem('jsonVetrina', JSON.stringify(jsonVetrina));
-			}
-		}); // AJAX END
+	$.ajax({
+		url: jsonPath,
+		dataType: 'json',
+		async: false,
+		success: function(data) {
+		jsonVetrina = data;
+		sessionStorage.setItem('jsonVetrina', JSON.stringify(jsonVetrina));
+		}
+	}); // AJAX END
 	
-// NOME ESERCIZIO + INDIRIZZO + DESCRIZIONE
+	// NOME ESERCIZIO + INDIRIZZO + DESCRIZIONE
+	var esercizioLatitude;
+	var esercizioLongitude;
+	var nomeEsercizioMappa;
+	var descrizioneEsercizio;
+	var linguaDescrizioneEsercizio;
+	var parcheggioVicino;
+	var map;
 	
-		var esercizioLatitude;
-		var esercizioLongitude;
-		var nomeEsercizioMappa;
-		var descrizioneEsercizio;
-		var linguaDescrizioneEsercizio;
-		var parcheggioVicino;
-		var map;
-	
-		$.each(jsonVetrina, function(index, info) {
-				$("h3.nomeEsercizio").html(info.NomeEsercizio);
-				$(".indirizzoEsercizio").html(info.Indirizzo+" "+info.Citta);
-				$(".descrizioneEsercizio").html(""); // SVUOTA DESCRIZIONE PER PREVENIRE DESCRIZIONI NULLE
-				$(".descrizioneEsercizio").html(info.Descrizione);
+	$.each(jsonVetrina, function(index, info) {
+		$("h3.nomeEsercizio").html(info.NomeEsercizio);
+		$(".indirizzoEsercizio").html(info.Indirizzo+" "+info.Citta);
+		$(".descrizioneEsercizio").html(""); // SVUOTA DESCRIZIONE PER PREVENIRE DESCRIZIONI NULLE
+		$(".descrizioneEsercizio").html(info.Descrizione);
 				 
-				esercizioLatitude = info.Latitudine;
-				esercizioLongitude = info.Longitudine;
-				nomeEsercizioMappa = info.NomeEsercizio;
-				descrizioneEsercizio = info.Descrizione;
-				linguaDescrizioneEsercizio = info.LinguaDescrizione;
-				if (info.Parcheggio != undefined)
-				{
-				parcheggioVicino = info.Parcheggio.nomeParcheggio+" "+info.Parcheggio.indirizzoParcheggio;
-				}
-		});
+		esercizioLatitude = info.Latitudine;
+		esercizioLongitude = info.Longitudine;
+		nomeEsercizioMappa = info.NomeEsercizio;
+		descrizioneEsercizio = info.Descrizione;
+		linguaDescrizioneEsercizio = info.LinguaDescrizione;
+	
+			if (info.Parcheggio != undefined) {
+			parcheggioVicino = info.Parcheggio.nomeParcheggio+" "+info.Parcheggio.indirizzoParcheggio;
+			}
+	});
 		
 //NAVIGATE BUTTON
 		
@@ -432,9 +467,9 @@
 <!-- Start of page: #vetrinaOrari -->
 <div data-role="page" id="vetrinaOrari">
 
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1></h1>
-		<a href="#nomeEsercizi" class="ui-btn ui-icon-search ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+		<a href="#nomeEsercizi" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 		<a href="index.html" rel="external" class="ui-btn ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
 
@@ -517,9 +552,9 @@
 <!-- Start of page: #vetrinaContatti -->
 <div data-role="page" id="vetrinaContatti">
 
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1></h1>
-		<a href="#nomeEsercizi" class="ui-btn ui-icon-search ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+		<a href="#nomeEsercizi" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 		<a href="index.html" rel="external" class="ui-btn ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
 
@@ -603,9 +638,9 @@
 <!-- Start of page: #vetrinaStatistiche -->
 <div data-role="page" id="vetrinaStatistiche">
 
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1></h1>
-		<a href="#nomeEsercizi" class="ui-btn ui-icon-search ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+		<a href="#nomeEsercizi" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 		<a href="index.html" rel="external" class="ui-btn ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
 

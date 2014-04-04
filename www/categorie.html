@@ -1,3 +1,41 @@
+<!--
+#categorie
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+	- paginazione rimossa
+	
+#esercizi
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+
+#vetrinaMappa
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+
+#vetrinaOrari
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+
+#vetrinaContatti
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+
+#vetrinaStatistiche
+	DONE:
+	- fixed header
+	- fixed footer
+	- back button carat-l
+-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,7 +137,7 @@
 	<!-- /HEADER -->
 	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 	<h1></h1>
-	<a href="#categorie" class="ui-btn ui-icon-bars ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+	<a href="#categorie" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	<a href="index.html" rel="external" class="ui-btn ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div>
 	<!-- /HEADER -->
@@ -112,17 +150,11 @@
 	
 	document.addEventListener("backbutton", onBackKeyDown, false);
 		
-		function onBackKeyDown(e) {
-		e.preventDefault();
-		}
-	
-	var maxLista = 10;
-	var startIn = 10;
-	sessionStorage.setItem("start", startIn);
+	function onBackKeyDown(e) {
+	e.preventDefault();
+	}
 	
 	$("ul#lista_esercizi").html("");
-	
-	$("button#bottone").show();
 	
 	//CARICA JSON CATEGORIE
 	var path = window.localStorage.getItem("pathSD");
@@ -147,6 +179,7 @@
 	var titolo = window.localStorage.getItem("Categorie");
 	$("h1#titolo").text(titolo);
 	
+	
 	var jsonSottocategorie;
 	
 	$.ajax({
@@ -166,10 +199,9 @@
 	
 	//LISTA ESERCIZI
 	$.each(jsonSottocategorie, function(index, info) {
-		if(index < maxLista) {
 		$("ul#lista_esercizi").append($("<li></li>",{"html":"<a href='#vetrinaMappa' class='esercizio' idEsercizio='" + info.idEsercizio + "' data-transition='slide' >" + info.nomeEsercizio + "</a>" }));
-		}
 	});
+	
 	$("ul#lista_esercizi").listview("refresh");
 	
 	sessionStorage.setItem('currentJSON', JSON.stringify(jsonSottocategorie));
@@ -219,12 +251,6 @@
 	filtro = $(this).val();
     var idCategoria = $(this).attr('id');
 	
-	console.log("filtro:" + filtro);
-	console.log("sottocategoria:" + idCategoria);
-	
-	window.sessionStorage.setItem('start', 10);
-	$("button#bottone").show();
-	
 	window.sessionStorage.setItem('filtro', filtro);
 	window.sessionStorage.setItem('sottocategoria', idCategoria);
 	
@@ -245,16 +271,10 @@
 	jsonFiltro = jsonSottocategorie;
 	}
 	
-	if(startIn >= jsonFiltro.length) {
-	$("button#bottone").hide();
-	}
-	
-	
 	//RIORDINA SE SELEZIONATO UN ORDINAMENTO
 	ordinamento = window.sessionStorage.getItem("ordinamento");
 	if(ordinamento != null) {
-	console.log("riordinamento");
-	console.log("ordinamento: " + ordinamento);
+
 		switch (ordinamento)
 		{
 		case "nome":
@@ -274,21 +294,21 @@
 	
 		$("ul#lista_esercizi").html("");
 		$.each(jsonOrdinamento, function(index, info) {
-			if(index < maxLista) {
 			$("ul#lista_esercizi").append($("<li></li>",{"html":"<a href='#vetrinaMappa' class='esercizio' idEsercizio='" + info.idEsercizio + "' data-transition='slide' >" + info.nomeEsercizio + "" }));
-			}
 		});
+		
 		$("ul#lista_esercizi").listview("refresh");
+		
 		sessionStorage.setItem('currentJSON', JSON.stringify(jsonOrdinamento));
-		}
-		else {
+	}
+	else {
 		$("ul#lista_esercizi").html("");
 		$.each(jsonFiltro, function(index, info) {
-			if(index < maxLista) {
 			$("ul#lista_esercizi").append($("<li></li>",{"html":"<a href='#vetrinaMappa' class='esercizio' idEsercizio='" + info.idEsercizio + "' data-transition='slide' >" + info.nomeEsercizio + "" }));
-			}
 		});
+		
 		$("ul#lista_esercizi").listview("refresh");
+		
 		sessionStorage.setItem('currentJSON', JSON.stringify(jsonFiltro));
 		}
 	
@@ -302,9 +322,6 @@
 	ordinamento = $(this).val();
 	
 	console.log("ordinamento:" + ordinamento)
-	
-	window.sessionStorage.setItem('start', 10);
-	$("button#bottone").show();
 	
 	window.sessionStorage.setItem("ordinamento", ordinamento);
 	
@@ -330,12 +347,7 @@
 	
 	if(filtro != null) {
 	
-	console.log("sto rifiltrando");
-	console.log("filtro: " + filtro);
-	
 	idCategoria = window.sessionStorage.getItem("sottocategoria");
-	
-	console.log("sottocategoria: " + idCategoria);
 		
 		if(idCategoria != 'all') {
 		var existSottocategoria = [];
@@ -354,22 +366,24 @@
 		}	
 		
 		$("ul#lista_esercizi").html("");
+		
 		$.each(jsonFiltro, function(index, info) {
-			if(index < maxLista) {
 			$("ul#lista_esercizi").append($("<li></li>",{"html":"<a href='#vetrinaMappa' class='esercizio' idEsercizio='" + info.idEsercizio + "' data-transition='slide' >" + info.nomeEsercizio + "" }));
-			}
 		});
+		
 		$("ul#lista_esercizi").listview("refresh");
+		
 		sessionStorage.setItem('currentJSON', JSON.stringify(jsonFiltro));
 	}
 	else{
 	$("ul#lista_esercizi").html("");
+	
 	$.each(jsonOrdinamento, function(index, info) {
-		if(index < maxLista) {
 		$("ul#lista_esercizi").append($("<li></li>",{"html":"<a href='#vetrinaMappa' class='esercizio' idEsercizio='" + info.idEsercizio + "' data-transition='slide' >" + info.nomeEsercizio + "" }));
-		}
 	});
+
 	$("ul#lista_esercizi").listview("refresh");
+
 	sessionStorage.setItem('currentJSON', JSON.stringify(jsonOrdinamento));
 	}
 	
@@ -378,40 +392,9 @@
 	
 	}); //ON "pagebeforeshow"
 	
-	
-	//SHOW MORE	
-	$(document).on("click", 'button#bottone', function(){
-	
-	var start = sessionStorage.getItem("start");
-	var end = parseInt(start)+5;	
-	
-	currentJSON = sessionStorage.getItem('currentJSON');
-	
-	var stop = JSON.parse(currentJSON).length;
-		
-	$.each(JSON.parse(currentJSON), function(index, info) {
-	
-		if(index >= start && index < end) {
-		$("ul#lista_esercizi").append($("<li></li>",{"html":"<a href='#vetrinaMappa' class='esercizio' idEsercizio='" + info.idEsercizio + "' data-transition='slide' >" + info.nomeEsercizio + "" }));
-		}
-	});
-	
-	$("ul#lista_esercizi").listview("refresh");
-	
-	if(end >= stop) {
-	$("button#bottone").hide();
-	end = 10;
-	}
-	
-	start = end;
-	sessionStorage.setItem("start", start);
-		
-	});
-	
+	// ON 'click' esercizio
 	$(document).on("click", 'a.esercizio', function(){
-	
 	idEsercizio = $(this).attr('idEsercizio');
-			
 	});
 	
 	</script>
@@ -465,9 +448,9 @@
 <!-- Start of page: #vetrinaMappa -->
 <div data-role="page" id="vetrinaMappa">
 
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1></h1>
-		<a href="#esercizi" class="ui-btn ui-icon-bars ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+		<a href="#esercizi" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 		<a href="index.html" rel="external" class="ui-btn ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
 
@@ -791,9 +774,9 @@
 <!-- Start of page: #vetrinaOrari -->
 <div data-role="page" id="vetrinaOrari">
 
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1></h1>
-		<a href="#esercizi" class="ui-btn ui-icon-bars ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+		<a href="#esercizi" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 		<a href="index.html" rel="external" class="ui-btn ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
 
@@ -876,9 +859,9 @@
 <!-- Start of page: #vetrinaContatti -->
 <div data-role="page" id="vetrinaContatti">
 
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1></h1>
-		<a href="#esercizi" class="ui-btn ui-icon-bars ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+		<a href="#esercizi" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 		<a href="index.html" rel="external" class="ui-btn ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
 
@@ -962,9 +945,9 @@
 <!-- Start of page: #vetrinaStatistiche -->
 <div data-role="page" id="vetrinaStatistiche">
 
-	<div data-role="header">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1></h1>
-		<a href="#esercizi" class="ui-btn ui-icon-bars ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+		<a href="#esercizi" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 		<a href="index.html" rel="external" class="ui-btn ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
 	</div><!-- /header -->
 

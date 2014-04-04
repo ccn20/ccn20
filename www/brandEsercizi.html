@@ -33,6 +33,9 @@
 	- back button carat-l
 	- href:tel Telefono
 	- href:mailto Email
+	- link sito web
+	TO DO:
+	- icone
 
 #vetrinaStatistiche
 	DONE:
@@ -735,7 +738,7 @@
 		$("ul#contattiEsercizio").append($("<li data-role='list-divider'>Contatti</li>"));
 		$("ul#contattiEsercizio").append($("<li>Indirizzo: "+info.Indirizzo+" "+info.Citta+"</li>"));
 		if (info.Telefono != undefined){$("ul#contattiEsercizio").append($("<li><a href=tel:"+info.Telefono.replace(/ /g,'')+">Telefono: "+info.Telefono+"</a></li>"))};
-		if (info.Website != undefined){$("ul#contattiEsercizio").append($("<li>Website: "+info.Website+"</li>"))};
+		if (info.Website != undefined){$("ul#contattiEsercizio").append($("<li><a href="+info.Website+">Website: "+info.Website+"</a></li>"))};
 		if (info.Email != undefined){$("ul#contattiEsercizio").append($("<li><a href=mailto:"+info.Email+">Email: "+info.Email+"</a></li>"))};
 		if (info.Facebook != undefined){$("ul#contattiEsercizio").append($("<li>Facebook: "+info.Facebook+"</li>"))};
 		if (info.Twitter != undefined){$("ul#contattiEsercizio").append($("<li>Twitter: "+info.Twitter+"</li>"))};

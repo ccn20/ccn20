@@ -587,9 +587,9 @@
 		$("h3.nomeEsercizio").html(info.NomeEsercizio);
 		$("ul#contattiEsercizio").append($("<li data-role='list-divider'>Contatti</li>"));
 		$("ul#contattiEsercizio").append($("<li>Indirizzo: "+info.Indirizzo+" "+info.Citta+"</li>"));
-		if (info.Telefono != undefined){$("ul#contattiEsercizio").append($("<li><a href=tel:"+info.Telefono.replace(/ /g,'')+">"+info.Telefono+"</a></li>"))};
-		if (info.Website != undefined){$("ul#contattiEsercizio").append($("<li><a href='#' class='website' urlWebsite="+info.Website+">website</a></li>"))};
-		if (info.Email != undefined){$("ul#contattiEsercizio").append($("<li><a href=mailto:"+info.Email+">e-mail</a></li>"))};
+		if (info.Telefono != undefined){$("ul#contattiEsercizio").append($("<li><a href=tel:"+info.Telefono.replace(/ /g,'')+"><img src='img/contattiTelefono.png'><h2>telefono</h2><p>"+info.Telefono+"</p></a></li>"))};
+		if (info.Website != undefined){$("ul#contattiEsercizio").append($("<li><a href='#' class='website' urlWebsite="+info.Website+"><img src='img/contattiWebsite.png'><h2>website</h2><p>"+info.Website+"</p></a></li>"))};
+		if (info.Email != undefined){$("ul#contattiEsercizio").append($("<li><a href=mailto:"+info.Email+"><img src='img/contattiEmail.png'><h2>e-mail</h2><p>"+info.Email+"</p></a></li>"))};
 		if (info.Facebook != undefined){$("ul#contattiEsercizio").append($("<li>Facebook: "+info.Facebook+"</li>"))};
 		if (info.Twitter != undefined){$("ul#contattiEsercizio").append($("<li>Twitter: "+info.Twitter+"</li>"))};
 		if (info.Foursquare != undefined){$("ul#contattiEsercizio").append($("<li>Foursquare: "+info.Foursquare+"</li>"))};

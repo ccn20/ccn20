@@ -1,49 +1,7 @@
-<!--
-#nomeEsercizi
-	DONE:
-	- fixed header
-	- fixed footer
-	- back button carat-l
-	- input: "inserisci il nome del negozio..."
-	TO DO:
-	- input: "inserisci il nome del negozio..." (INGLESE)
-
-#vetrinaMappa
-	DONE:
-	- fixed header
-	- fixed footer
-	- back button carat-l
-
-#vetrinaOrari
-	DONE:
-	- fixed header
-	- fixed footer
-	- back button carat-l
-
-#vetrinaContatti
-	DONE:
-	- fixed header
-	- fixed footer
-	- back button carat-l
-	- href:tel Telefono
-	- href:mailto Email
-	- link sito web
-	TO DO:
-	- icone
-
-#vetrinaStatistiche
-	DONE:
-	- fixed header
-	- fixed footer
-	- back button carat-l
--->
-
 <!DOCTYPE html>
 <html>
 <head>
-
-	<title>Page Title</title>
-
+	<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
 	<link rel="stylesheet" href="css/themes/shopincomo.min.css" />
 	<link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
 	<link rel="stylesheet" href="css/jquery.mobile.structure-1.4.2.min.css" />
@@ -67,90 +25,16 @@
 	<script src="js/function_checkConnection.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
 	
-	<title>Ricerca Negozio</title>
+	
+	<title>Vetrina Esercizio</title>
 </head>
 <body>
-
-<!-- Start of page: #nomeEsercizi -->
-<div data-role="page" id="nomeEsercizi">
-
-	<div data-role="header" data-position="fixed" data-tap-toggle="false">
-		<h1></h1>
-		<a href="index.html" rel="external" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
-	</div><!-- /header -->
-
-	<div role="main" class="ui-content" >
-		
-	<ul id="cerca_negozio" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="inserisci il nome del negozio...">
-	</ul>
-	
-	<script type="text/javascript" charset="utf-8">
-	
-	$( document ).on( "pageinit", "#nomeEsercizi", function() {
-	
-	//PREVENT BACK BUTTON
-	document.addEventListener("backbutton", onBackKeyDown, false);
-		
-	function onBackKeyDown(e) {
-	e.preventDefault();
-	}
-	
-	//CARICA JSON CATEGORIE
-	var path = window.localStorage.getItem("pathSD");
-	var jsonPath = path + "/nomeEsercizi.js";
-	
-		$( "#cerca_negozio" ).on( "filterablebeforefilter", function ( e, data ) {
-			var $ul = $( this ),
-				$input = $( data.input ),
-				value = $input.val(),
-				html = "";
-			$ul.html( "" );
-			if ( value && value.length > 2 ) {
-				$ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
-				$ul.listview( "refresh" );
-				
-				var re = $input.val();
-				var matcher = new RegExp( re, "i" );
-				
-				$.getJSON(jsonPath, function( data ) {
-		
-				json_filter = $.grep(data, function(item){
-				return matcher.test(item.nomeEsercizio); 
-				}) 
-			
-				$.each( json_filter, function (index, info) {
-					 html += "<li><a href='#vetrinaMappa' class='esercizio' idEsercizio='" + info.idEsercizio + "' data-transition='slide' >" + info.nomeEsercizio + "</a></li>";
-				});
-				
-				$ul.html( html );
-				$ul.listview( "refresh" );
-				$ul.trigger( "updatelayout");
-				
-				});
-			}
-		});
-	});
-	
-	$(document).on("click", 'a.esercizio', function(){
-		idEsercizio = $(this).attr('idEsercizio');
-	});
-	</script>
-		
-		
-	</div><!-- /content -->
-
-	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
-		<h4></h4>
-	</div><!-- /footer -->
-</div><!-- /page nomeEsercizi -->
 
 <!-- Start of page: #vetrinaMappa -->
 <div data-role="page" id="vetrinaMappa">
 
-	<div data-role="header" data-position="fixed" data-tap-toggle="false">
-		<h1></h1>
-		<a href="#nomeEsercizi" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
-		<a href="index.html" rel="external" class="ui-btn ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+	<div data-role="header">
+		<h1>Vetrina</h1>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content" >
@@ -161,71 +45,59 @@
 
 	$( document ).on( "pageshow", "#vetrinaMappa", function() {
 	
-	//PREVENT BACK BUTTON
-	document.addEventListener("backbutton", onBackKeyDown, false);
+// CARICA FILE VETRINA
+	
+		var path = window.localStorage.getItem("pathSD");
+		var jsonPath = path + "/esercizi/16.js";
+		var jsonPath = "js/16.js";
+		var jsonVetrina;
+		var idEsercizio = 16;
 		
-	function onBackKeyDown(e) {
-	e.preventDefault();
-	}
-	
-	// CARICA FILE VETRINA
-	var path = window.localStorage.getItem("pathSD");
-	var jsonPath = path + "/esercizi/"+idEsercizio+".js";
-	var jsonVetrina;
-		
-	$.ajax({
-		url: jsonPath,
-		dataType: 'json',
-		async: false,
-		success: function(data) {
-		jsonVetrina = data;
-		sessionStorage.setItem('jsonVetrina', JSON.stringify(jsonVetrina));
-		}
-	}); // AJAX END
-	
-	// NOME ESERCIZIO + INDIRIZZO + DESCRIZIONE
-	var esercizioLatitude;
-	var esercizioLongitude;
-	var nomeEsercizioMappa;
-	var descrizioneEsercizio;
-	var linguaDescrizioneEsercizio;
-	var parcheggioVicino;
-	var map;
-	
-	$.each(jsonVetrina, function(index, info) {
-		$("h3.nomeEsercizio").html(info.NomeEsercizio);
-		$(".indirizzoEsercizio").html(info.Indirizzo+" "+info.Citta);
-		$(".descrizioneEsercizio").html(""); // SVUOTA DESCRIZIONE PER PREVENIRE DESCRIZIONI NULLE
-		$(".descrizioneEsercizio").html(info.Descrizione);
-				 
-		esercizioLatitude = info.Latitudine;
-		esercizioLongitude = info.Longitudine;
-		nomeEsercizioMappa = info.NomeEsercizio;
-		descrizioneEsercizio = info.Descrizione;
-		linguaDescrizioneEsercizio = info.LinguaDescrizione;
-	
-			if (info.Parcheggio != undefined) {
-			parcheggioVicino = info.Parcheggio.nomeParcheggio+" "+info.Parcheggio.indirizzoParcheggio;
+		$.ajax({
+			url: jsonPath,
+			dataType: 'json',
+			async: false,
+			success: function(data) {
+			jsonVetrina = data;
+			sessionStorage.setItem('jsonVetrina', JSON.stringify(jsonVetrina));
 			}
-	});
+		}); // AJAX END
+	
+// NOME ESERCIZIO + INDIRIZZO + DESCRIZIONE
+	
+		var esercizioLatitude;
+		var esercizioLongitude;
+		var nomeEsercizioMappa;
+		var descrizioneEsercizio;
+		var linguaDescrizioneEsercizio;
+		var parcheggioVicino;
+	
+		$.each(jsonVetrina, function(index, info) {
+				
+				$("h3.nomeEsercizio").html(info.NomeEsercizio);
+				$(".indirizzoEsercizio").html(info.Indirizzo+" "+info.Citta);
+				
+				 
+				esercizioLatitude = info.Latitudine;
+				esercizioLongitude = info.Longitudine;
+				nomeEsercizioMappa = info.NomeEsercizio;
+				descrizioneEsercizio = info.Descrizione;
+				linguaDescrizioneEsercizio = info.LinguaDescrizione;
+				if (info.Parcheggio != undefined)
+				{
+				parcheggioVicino = info.Parcheggio.nomeParcheggio+" "+info.Parcheggio.indirizzoParcheggio;
+				}
+		});
 		
 //NAVIGATE BUTTON
 		
 		$( ".navigateEsercizio" ).html("");
-		$( ".navigateEsercizio" ).append("<a href='#' geoPosition='"+esercizioLatitude+","+esercizioLongitude+"'class='directions'><img src='img/navigation.png'>portami qui</a>");
+		$( ".navigateEsercizio" ).append( "<a href='#' geoPosition='"+esercizioLatitude+","+esercizioLongitude+"'class='directions'>Navigazione</a>" );
 
 // DESCRIZIONE + TRANSLATE BUTTON
 		var codLingua = localStorage.getItem("codLingua");
 		if(!(codLingua == 'it' || codLingua == 'en')){
-			if(descrizioneEsercizio != undefined)
-			{
-			$( "#box-descrizioneEsercizio" ).show();
-			$( ".traduciDescrizioneEsercizio" ).html("");
-			$( ".traduciDescrizioneEsercizio" ).html( "<button class='translate' codLingua='"+codLingua+"' linguaDescrizione='"+linguaDescrizioneEsercizio+"'>Traduci</button>" );	
-			}
-			else{
-			$( "#box-descrizioneEsercizio" ).hide();
-			}
+			$( ".descrizioneEsercizio" ).append( "<button class='translate' codLingua='"+codLingua+"' linguaDescrizione='"+linguaDescrizioneEsercizio+"'>Traduci</button>" );	
 		}
 
 
@@ -239,19 +111,13 @@
 		$( ".parcheggioVicino" ).append( "<li class='immagineParcheggio'><img class='imgParcheggio' src='img/parcheggioVicino.png' style='width: 37px; height: 50px;'><p class='nomeParcheggio'>"+parcheggioVicino+"</p></li>" );
 		}
 		
-		
 // MAPPA + POSIZIONE UTENTE
 	
 		//INIZIALIZZAZIONE MAPPA
-		
-		$( "#map" ).remove();
-		var $map = $("<div>", {id: "map", class: "a", style:"width: 1920px; height:400px"});
-		$("#mappa").append($map);
-		
-		map = new L.Map('map');
+		var map = new L.Map('map');
 	
 		var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-		L.tileLayer(osmUrl, {minZoom: 13, maxZoom: 18}).addTo(map);
+		L.tileLayer(osmUrl, {minZoom: 8, maxZoom: 18}).addTo(map);
 		
 		/*
 		L.tileLayer('img/como/{z}/{x}/{y}.png', {
@@ -259,38 +125,41 @@
 		}).addTo(map);
 		*/
 		
-		map.setView(new L.LatLng(45.80806, 9.08518),14); //MAPPA SU COMO
-		
 		//BOTTONI CONTROLLO ZOOM
 		var controlloZoom = L.control({ position: 'bottomleft' });
 		controlloZoom.onAdd = function (map) {
 			this._div = L.DomUtil.create('div', 'controlloZoom');
-			this._div.innerHTML = '<button class="groupMarker"><img src="img/userShop.png"></button><button class="userMarker"><img src="img/userPosition.png"></button>';
+			this._div.innerHTML = '<button class="groupMarker">Fit to group marker</button><button class="userMarker">Fit to user marker</button>';
 			return this._div;
 		};
 		controlloZoom.addTo(map);
-		
-		
+	
+
 		var userLatitude;
 		var userLongitude;
 		var markerUtente;
 		var markerEsercizio;
 		var group;
 		var watchID = null;
-		var options = { maximumAge: 1500, timeout: 30000, enableHighAccuracy: true };
-      		
+		var options = { maximumAge: 5000, timeout: 30000, enableHighAccuracy: true };
+      
+		watchID = navigator.geolocation.watchPosition(onSuccess, onErrorPosition, options);
+	
+		var parkingIcon = L.icon({
+			iconUrl: 'img/parking.png',
+			iconSize:     [32, 37], // size of the icon
+			popupAnchor:  [0, -20] // point from which the popup should open relative to the iconAnchor
+		});
+	
 		var markerIcon = L.icon({
 			iconUrl: 'img/marker-icon.png',
 			iconSize:     [25, 41], // size of the icon
 			popupAnchor:  [0, -20] // point from which the popup should open relative to the iconAnchor
 		});
 		
+	
 		markerEsercizio = L.marker([esercizioLatitude, esercizioLongitude], {icon: markerIcon}).addTo(map).bindPopup(nomeEsercizioMappa);
-		
-		$(".distanzaEsercizio").html("");
-		
-		watchID = navigator.geolocation.watchPosition(onSuccess, onErrorPosition, options);
-		
+
 // FUNCTION SUCCESS WATCH POSITION
 
 		function onSuccess(position) {
@@ -299,8 +168,8 @@
 			userLongitude = position.coords.longitude;
 	
 			var distance = 5000;
-			var jsonPositionDir = path + "/position.js";
-			$.getJSON(jsonPositionDir, function( jsonPosition ) {
+		
+			$.getJSON("js/jsonPosition.js", function( jsonPosition ) {
 				$.each(jsonPosition, function(index, info) {
 					currentDistance = getDistanceFromLatLonInKm(userLatitude,userLongitude,info.latEsercizio,info.lonEsercizio);
 					if(distance > currentDistance && info.idEsercizio != idEsercizio)
@@ -310,40 +179,39 @@
 					}
 				});
 				console.log("Nodo vicino: "+nearestEsercizio);
-				console.log(distance);
-				if(distance < 500)
-				{				
-					var jsonVetrinaSession = JSON.parse(window.sessionStorage.getItem("jsonVetrina"));
-					var obj = jsonVetrinaSession[0];
-						if(nearestEsercizio in obj.Distanze){
-						
-								$.each(obj.Distanze, function(index, infoDistance) {
-									if(infoDistance.idEsercizio == nearestEsercizio){
-										var minutes = Math.floor(infoDistance.time / 60);
-										var seconds = infoDistance.time - minutes * 60;
-										$(".distanzaEsercizio").html(infoDistance.distance+"m - "+minutes+":"+seconds+" min<p class='esercizioVicino'>Ora sei vicino a "+infoDistance.nomeEsercizio+"</p>");
-									}
-								});
-						}
-						else{
-						$(".distanzaEsercizio").html("+200m");
-						}
-				}
-				else
+				
+		
+			var L = jsonVetrina.length;
+			for (var i = 0; i < L; i++)
+			{
+				var obj = jsonVetrina[i];
+				for (var j in obj.Distanze)
 				{
-				$(".distanzaEsercizio").html("Troppo lontato per calcolare");
+					if(nearestEsercizio in obj.Distanze){
+						$.each(obj.Distanze, function(index, info) {
+							if(info.idEsercizio == nearestEsercizio){
+								var minutes = Math.floor(info.time / 60);
+								var seconds = info.time - minutes * 60;
+								$(".distanzaEsercizio").html(info.distance+"m - "+minutes+":"+seconds+" min<p class='esercizioVicino'>Ora sei vicino a "+info.nomeEsercizio+"</p>");
+							}
+						});
+					}
+				else{
+						$(".distanzaEsercizio").html("+200m");
 				}
-			
+				}
+			}
 			}); //END GET JSON POSITION 
 	
 			var userAccuracy = position.coords.accuracy 
 
 			if (!markerUtente) {
-			markerUtente = L.userMarker([userLatitude, userLongitude],{pulsing:true}).bindPopup("Sei qui.").openPopup().addTo(map);
+			markerUtente = L.userMarker([userLatitude, userLongitude],{pulsing:true}).addTo(map);
+			markerUtente.bindPopup("Sei qui!").openPopup();
 			markerUtente.setAccuracy(userAccuracy);
 			map.setView(new L.LatLng(userLatitude, userLongitude),16);
 			}
-			markerUtente.setLatLng([userLatitude, userLongitude],{pulsing:true}).update().bindPopup("Sei qui.").openPopup();
+			markerUtente.setLatLng([userLatitude, userLongitude],{pulsing:true}).update().bindPopup("Sei qui!").openPopup();
 	
 		} // END ON SUCCESS
 	
@@ -367,8 +235,8 @@
 
 // CLICK DIRECTIONS GOOGLE
 	$(document).on("click", 'a.directions', function(){
-		geoPosition = $(this).attr('geoPosition');
-		directions(geoPosition);
+		alert(esercizioLatitude);
+		directions(esercizioLatitude, esercizioLongitude);
 	});
 	
 // CLICK TRANSLATE GOOGLE
@@ -407,11 +275,14 @@
 		
 // FUNZIONE DIRECTIONS GOOGLE
 	
-	function directions(geoPosition) {
-		navigator.google_navigate.navigate(geoPosition, function() {
+	function directions(esercizioLatitude, esercizioLongitude) {
+		var latLongDirections = ""+esercizioLatitude+","+esercizioLongitude+"";
+		$(".directions").click(function(){
+		navigator.google_navigate.navigate(latLongDirections, function() {
 			console.log('Success');
 		}, function(errMsg) {
 			console.log("Failed: " + errMsg);
+		});
 		});
 	}
 	
@@ -421,37 +292,16 @@
 	
 	<ul data-role="listview" data-inset="true" style="background:fd613d">
     <li>
-	<h3 class="nomeEsercizio"></h3>
+	<h2>Enooteca da Gigi</h2>
 	<p>via Della Valle 54</p>
     </li>
 	<li>
-	<!-- DESCRIZIONE ESERCIZIO -->
-		<p class="descrizioneEsercizio" style="white-space:normal"></p>
-		<p class="traduciDescrizioneEsercizio"></p>
-		<!-- /DESCRIZIONE ESERCIZIO -->
+	<p style="white-space:normal">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse accumsan blandit fermentum. Pellentesque cursus mauris purus, auctor commodo mi ullamcorper nec. Donec semper mattis eros, nec condimentum ante sollicitudin quis. Etiam orci sem, porttitor ut tellus nec, blandit posuere urna. Proin a arcu non lacus pretium faucibus. Aliquam sed est porttitor, ullamcorper urna nec, vehicula lorem. Cras porttitor est lorem, non venenatis diam convallis congue.</p>
     </li>
 	<li>
-	<div id="mappa"></div>
+	<div id="map" style="width: 1920px; height:400px"></div>
 	</li>
 	</ul>
-	
-	
-	<div class="ui-corner-all custom-corners">
-		<div class="ui-bar ui-bar-a">
-		<h3>Heading</h3>
-		</div>
-		<div class="ui-body ui-body-a">
-		
-		</div>
-	</div>
-	
-	<!-- NOME ESERCIZIO -->
-	
-	<div id="box-nomeEsercizio">
-	<h3 class="nomeEsercizio"></h3>
-	</div>
-	
-	<!-- /NOME ESERCIZIO -->
 	
 	<!-- MAPPA + INDIRIZZO + DIRECTIONS + PANORAMICA + DISTANZA -->
 	
@@ -462,38 +312,40 @@
 	</ul>
 	<!-- /MAPPA + INDIRIZZO + DIRECTIONS + PANORAMICA + DISTANZA -->
 	
+	<!-- DESCRIZIONE ESERCIZIO -->
+	
+	<div id="box-descrizioneEsercizio">
+	<p class="descrizioneEsercizio"></p>
+	</div>
+	<!-- /DESCRIZIONE ESERCIZIO -->
+	
 	<!-- PARCHEGGIO VICINO ESERCIZIO -->
 	
 	<ul class="parcheggioVicino">
+	<li class="immagineParcheggio"><img class="imgParcheggio" src="images/parcheggioVicino.png" style="width: 37px; height: 50px;"><p class="nomeParcheggio"></p></li>
 	</ul>
 	<!-- /PARCHEGGIO VICINO ESERCIZIO -->
 		
 	</div><!-- /content -->
 
-	<!-- FOOTER -->
-	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
-		<!-- NAVBAR -->
-		<div data-role="navbar">
+	<div data-role="footer" data-theme="a" data-position="fixed">
+		<div data-role="navbar" data-iconpos="top">
             <ul>
-                <li><a href="#" class="ui-btn-active ui-state-persist"><img src="img/vetrina.png"></a></li>
-                <li><a href="#vetrinaOrari" data-transition="slide"><img src="img/orari.png"></a></li>
-                <li><a href="#vetrinaContatti" data-transition="slide"><img src="img/contatti.png"></a></li>
-				<li><a href="#vetrinaStatistiche" data-transition="slide"><img src="img/statistiche.png"></a></li>
+                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location" class="ui-btn-active ui-state-persist">Mappa</a></li>
+                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock">Orari</a></li>
+                <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone">Contatti</a></li>
+				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear">Statistiche</a></li>
+				<!-- <li><a href="#" data-icon="camera">Gallery</a></li> -->
             </ul>
-        </div>
-		<!-- /NAVBAR -->
-	</div>
-	<!-- /FOOTER -->
-	
+        </div><!-- /navbar -->
+	</div><!-- /footer -->
 </div><!-- /page vetrinaMappa -->
 
 <!-- Start of page: #vetrinaOrari -->
 <div data-role="page" id="vetrinaOrari">
 
-	<div data-role="header" data-position="fixed" data-tap-toggle="false">
-		<h1></h1>
-		<a href="#nomeEsercizi" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
-		<a href="index.html" rel="external" class="ui-btn ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+	<div data-role="header">
+		<h1>Vetrina</h1>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content" >
@@ -502,12 +354,6 @@
 	<script type="text/javascript" charset="utf-8">
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaOrari", function() {
-	
-	document.addEventListener("backbutton", onBackKeyDown, false);
-		
-		function onBackKeyDown(e) {
-		e.preventDefault();
-		}
 	
 	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
 	
@@ -539,6 +385,14 @@
 	
 	</script>
 	
+	<!-- NOME ESERCIZIO -->
+	
+	<div id="box-nomeEsercizio">
+	<h3 class="nomeEsercizio"></h3>
+	</div>
+	
+	<!-- /NOME ESERCIZIO -->
+	
 	<!-- ORARI -->
 	<ul id="orariEsercizio" data-role="listview" data-inset="true">
 	</ul>
@@ -546,31 +400,24 @@
 			
 	</div><!-- /content -->
 
-	<!-- FOOTER -->
-	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
-		<!-- NAVBAR -->
-		<div data-role="navbar">
+	<div data-role="footer" data-theme="a" data-position="fixed">
+		<div data-role="navbar" data-iconpos="top">
             <ul>
-                <li><a href="#vetrinaMappa" data-transition="slide" data-direction="reverse"><img src="img/vetrina.png"></a></li>
-                <li><a href="#" class="ui-btn-active ui-state-persist"><img src="img/orari.png"></a></li>
-                <li><a href="#vetrinaContatti" data-transition="slide"><img src="img/contatti.png"></a></li>
-				<li><a href="#vetrinaStatistiche" data-transition="slide"><img src="img/statistiche.png"></a></li>
+                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location" data-direction="reverse">Mappa</a></li>
+                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock" class="ui-btn-active ui-state-persist">Orari</a></li>
+                <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone">Contatti</a></li>
+				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear">Statistiche</a></li>
 				<!-- <li><a href="#" data-icon="camera">Gallery</a></li> -->
             </ul>
-        </div>
-		<!-- /NAVBAR -->
-	</div>
-	<!-- /FOOTER -->
-	
+        </div><!-- /navbar -->
+	</div><!-- /footer -->
 </div><!-- /page vetrinaOrari -->
 
 <!-- Start of page: #vetrinaContatti -->
 <div data-role="page" id="vetrinaContatti">
 
-	<div data-role="header" data-position="fixed" data-tap-toggle="false">
-		<h1></h1>
-		<a href="#nomeEsercizi" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
-		<a href="index.html" rel="external" class="ui-btn ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+	<div data-role="header">
+		<h1>Vetrina</h1>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content" >
@@ -579,12 +426,6 @@
 	<script type="text/javascript" charset="utf-8">
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaContatti", function() {
-	
-	document.addEventListener("backbutton", onBackKeyDown, false);
-		
-		function onBackKeyDown(e) {
-		e.preventDefault();
-		}
 	
 	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
 	
@@ -597,12 +438,12 @@
 		$("h3.nomeEsercizio").html(info.NomeEsercizio);
 		$("ul#contattiEsercizio").append($("<li data-role='list-divider'>Contatti</li>"));
 		$("ul#contattiEsercizio").append($("<li>Indirizzo: "+info.Indirizzo+" "+info.Citta+"</li>"));
-		if (info.Telefono != undefined){$("ul#contattiEsercizio").append($("<li><a href=tel:"+info.Telefono.replace(/ /g,'')+"><img src='img/contattiTelefono.png'><h2>telefono</h2><p>"+info.Telefono+"</p></a></li>"))};
-		if (info.Website != undefined){$("ul#contattiEsercizio").append($("<li><a href='#' class='website' urlWebsite="+info.Website+"><img src='img/contattiWebsite.png'><h2>website</h2><p>"+info.Website+"</p></a></li>"))};
-		if (info.Email != undefined){$("ul#contattiEsercizio").append($("<li><a href=mailto:"+info.Email+"><img src='img/contattiEmail.png'><h2>e-mail</h2><p>"+info.Email+"</p></a></li>"))};
-		if (info.Facebook != undefined){$("ul#contattiEsercizio").append($("<li>Facebook: "+info.Facebook+"</li>"))};
-		if (info.Twitter != undefined){$("ul#contattiEsercizio").append($("<li>Twitter: "+info.Twitter+"</li>"))};
-		if (info.Foursquare != undefined){$("ul#contattiEsercizio").append($("<li>Foursquare: "+info.Foursquare+"</li>"))};
+		$("ul#contattiEsercizio").append($("<li>Telefono: "+info.Telefono+"</li>"));
+		$("ul#contattiEsercizio").append($("<li>Website: "+info.Website+"</li>"));
+		$("ul#contattiEsercizio").append($("<li>Email: "+info.Email+"</li>"));
+		$("ul#contattiEsercizio").append($("<li>Facebook: "+info.Facebook+"</li>"));
+		$("ul#contattiEsercizio").append($("<li>Twitter: "+info.Twitter+"</li>"));
+		$("ul#contattiEsercizio").append($("<li>Foursquare: "+info.Foursquare+"</li>"));
 		$("ul#contattiEsercizio").listview("refresh");
 							
 	});
@@ -612,17 +453,20 @@
 	});
 	// /PAGEBEFORESHOW
 	
-	// CLICK WEBSITE
-	$(document).on("click", '.website', function(){
-		
-		var url = $(this).attr('urlWebsite');
-		var urlTranslate = encodeURI("http://"+url+"");
-		var ref = window.open(urlTranslate, '_blank', 'location=yes');
-	});
+	
 	
 	</script>
-		
+	
+	<!-- NOME ESERCIZIO -->
+	
+	<div id="box-nomeEsercizio">
+	<h3 class="nomeEsercizio"></h3>
+	</div>
+	
+	<!-- /NOME ESERCIZIO -->
+	
 	<!-- CONTATTI ESERCIZIO -->
+	
 	<ul id="contattiEsercizio" data-role="listview" data-inset="true">
 	</ul>
 	
@@ -630,30 +474,24 @@
 			
 	</div><!-- /content -->
 
-	<!-- FOOTER -->
-	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
-		<!-- NAVBAR -->
-		<div data-role="navbar">
+	<div data-role="footer" data-theme="a" data-position="fixed">
+		<div data-role="navbar" data-iconpos="top">
             <ul>
-                <li><a href="#vetrinaMappa" data-transition="slide" data-direction="reverse"><img src="img/vetrina.png"></a></li>
-                <li><a href="#vetrinaOrari" data-transition="slide" data-direction="reverse"><img src="img/orari.png"></a></li>
-                <li><a href="#" class="ui-btn-active ui-state-persist"><img src="img/contatti.png"></a></li>
-				<li><a href="#vetrinaStatistiche" data-transition="slide"><img src="img/statistiche.png"></a></li>
+                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location" data-direction="reverse">Mappa</a></li>
+                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock" data-direction="reverse">Orari</a></li>
+                <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone" class="ui-btn-active ui-state-persist">Contatti</a></li>
+				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear">Statistiche</a></li>
+				<!-- <li><a href="#" data-icon="camera">Gallery</a></li> -->
             </ul>
-        </div>
-		<!-- /NAVBAR -->
-	</div>
-	<!-- /FOOTER -->
-	
+        </div><!-- /navbar -->
+	</div><!-- /footer -->
 </div><!-- /page vetrinaContatti -->
 
 <!-- Start of page: #vetrinaStatistiche -->
 <div data-role="page" id="vetrinaStatistiche">
 
-	<div data-role="header" data-position="fixed" data-tap-toggle="false">
-		<h1></h1>
-		<a href="#nomeEsercizi" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
-		<a href="index.html" rel="external" class="ui-btn ui-icon-home ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" data-transition="slide" data-direction="reverse">indietro</a>
+	<div data-role="header">
+		<h1>Vetrina</h1>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content" >
@@ -662,12 +500,6 @@
 	<script type="text/javascript" charset="utf-8">
 	
 	$( document ).on( "pagebeforeshow", "#vetrinaStatistiche", function() {
-	
-	document.addEventListener("backbutton", onBackKeyDown, false);
-		
-		function onBackKeyDown(e) {
-		e.preventDefault();
-		}
 	
 	var jsonVetrina = window.sessionStorage.getItem("jsonVetrina");
 	
@@ -751,9 +583,6 @@
 						minTickInterval: 86400000,
 						dateTimeLabelFormats: {
 						day: '%e %m'
-						},
-						labels: {
-						enabled: false
 						}
 					},
 					yAxis: {
@@ -772,7 +601,7 @@
 					plotOptions: {
 						column: {
 						stacking: 'normal',
-						pointWidth:5,
+						pointWidth:10,
 						dataLabels: {
 										enabled: false,
 										color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'black'
@@ -839,9 +668,6 @@
 						minTickInterval: 86400000,
 						dateTimeLabelFormats: {
 						day: '%e %m'
-						},
-						labels: {
-						enabled: false
 						}
 					},
 					yAxis: {
@@ -860,7 +686,7 @@
 					plotOptions: {
 						column: {
 						stacking: 'normal',
-						pointWidth:5,
+						pointWidth:10,
 						dataLabels: {
 										enabled: false,
 										color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'black'
@@ -904,6 +730,14 @@
 
 	</script>
 	
+	<!-- NOME ESERCIZIO -->
+	
+	<div id="box-nomeEsercizio">
+	<h3 class="nomeEsercizio"></h3>
+	</div>
+	
+	<!-- /NOME ESERCIZIO -->
+	
 	<!-- STATISTICHE -->
 	<div id="box-statisticheEsercizio">
 	<p id="checkStatistiche"></p>
@@ -912,28 +746,24 @@
 	<button id="intervallo" value="7giorni">7 giorni</button>
 	<button id="intervallo"value="15giorni">15 giorni</button>
 	<button id="intervallo" value="30giorni">30 giorni</button>
-	</div>
+	<div>
 	</div>
 	<!-- /STATISTICHE -->
 	
 		
 	</div><!-- /content -->
 
-	<!-- FOOTER -->
-	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
-		<!-- NAVBAR -->
-		<div data-role="navbar">
+	<div data-role="footer" data-theme="a" data-position="fixed">
+		<div data-role="navbar" data-iconpos="top">
             <ul>
-                <li><a href="#vetrinaMappa" data-transition="slide" data-direction="reverse"><img src="img/vetrina.png"></a></li>
-                <li><a href="#vetrinaOrari" data-transition="slide" data-direction="reverse"><img src="img/orari.png"></a></li>
-                <li><a href="#vetrinaContatti" data-transition="slide" data-direction="reverse"><img src="img/contatti.png"></a></li>
-				<li><a href="#" class="ui-btn-active ui-state-persist"><img src="img/statistiche.png"></a></li>
+                <li><a href="#vetrinaMappa" data-transition="slide" data-icon="location" data-direction="reverse">Mappa</a></li>
+                <li><a href="#vetrinaOrari" data-transition="slide" data-icon="clock" data-direction="reverse">Orari</a></li>
+                <li><a href="#vetrinaContatti" data-transition="slide" data-icon="phone" data-direction="reverse">Contatti</a></li>
+				<li><a href="#vetrinaStatistiche" data-transition="slide" data-icon="gear" class="ui-btn-active ui-state-persist">Statistiche</a></li>
+				<!-- <li><a href="#" data-icon="camera">Gallery</a></li> -->
             </ul>
-        </div>
-		<!-- /NAVBAR -->
-	</div>
-	<!-- /FOOTER -->
-	
+        </div><!-- /navbar -->
+	</div><!-- /footer -->
 </div><!-- /page vetrinaStatistiche -->
 
 

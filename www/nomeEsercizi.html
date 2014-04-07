@@ -339,7 +339,7 @@
 			var userAccuracy = position.coords.accuracy 
 
 			if (!markerUtente) {
-			markerUtente = L.userMarker([userLatitude, userLongitude],{pulsing:true}).bindPopup("Sei qui.").addTo(map);
+			markerUtente = L.userMarker([userLatitude, userLongitude],{pulsing:true}).bindPopup("Sei qui.").openPopup().addTo(map);
 			markerUtente.setAccuracy(userAccuracy);
 			map.setView(new L.LatLng(userLatitude, userLongitude),16);
 			}

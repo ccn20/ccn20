@@ -122,10 +122,22 @@ background: #FFFFFF;
 padding: 10px 10px 5px 10px;
 }
 
+/* ORARI */
+
+ul#orariEsercizio .ui-li-divider{
+    color: #ffffff;
+	border: 0;
+	text-shadow: none !important;
+	background: #fd613d;
+}
+
 /* CONTATTI */
 
-ul#contattiEsercizio .list-divider{
-    color: #fd613d;
+ul#contattiEsercizio .ui-li-divider{
+    color: #ffffff;
+	border: 0;
+	text-shadow: none !important;
+	background: #fd613d;
 }
 
 /* BARCHART */

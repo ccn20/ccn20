@@ -122,6 +122,12 @@ background: #FFFFFF;
 padding: 10px 10px 5px 10px;
 }
 
+/* CONTATTI */
+
+ul#contattiEsercizio .list-divider{
+    color: #fd613d;
+}
+
 /* BARCHART */
 
 #barChart{

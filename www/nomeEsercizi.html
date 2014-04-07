@@ -343,7 +343,7 @@
 			markerUtente.setAccuracy(userAccuracy);
 			map.setView(new L.LatLng(userLatitude, userLongitude),16);
 			}
-			markerUtente.setLatLng([userLatitude, userLongitude],{pulsing:true}).update();
+			markerUtente.setLatLng([userLatitude, userLongitude],{pulsing:true}).update().bindPopup("Sei qui.").openPopup();
 	
 		} // END ON SUCCESS
 	

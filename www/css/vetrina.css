@@ -109,9 +109,10 @@ img.imgParcheggio{
 
 #box-nomeEsercizio{
 margin: 10px 0 10px 0;
-background: #FFFFFF;
-padding: 10px 10px 5px 10px;
-min-height: 30px;
+background: #fd613d;
+color: #ffffff;
+padding: 5px 10px 5px 10px;
+min-height: 25px;
 }
 
 /* DESCRIZIONE */

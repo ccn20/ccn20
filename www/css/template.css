@@ -1,4 +1,7 @@
 @media only screen and (max-width: 300px) {
+
+/*GENERALE*/
+
 .ui-page {
 background: url(../img/woman-small.png), url(../img/quadrati-small.png);
 background-repeat:no-repeat, no-repeat;
@@ -11,6 +14,24 @@ height: 2.5em !important;
 border: 0;
 }
 
+.ui-listview .ui-btn{
+background-color:rgba(246,246,246,0.9);
+}
+
+.ui-listview .ui-btn:hover{
+background-color:rgba(237,237,237,0.9);
+}
+
+.ui-listview .ui-btn:active{
+background-color:rgba(232,232,232,0.9);
+}
+
+.ui-listview .ui-icon-carat-r{
+opacity: 1;
+}
+
+/*INDEX*/
+
 #manicoBorsa{
 height: 6.5em;
 margin: auto;
@@ -35,27 +56,21 @@ float: left;
 margin: 0 10px 0 0;
 }
 
+/*ESERCIZI VICINI*/
 
-
-.ui-listview .ui-btn{
-background-color:rgba(246,246,246,0.9);
-}
-
-.ui-listview .ui-btn:hover{
-background-color:rgba(237,237,237,0.9);
-}
-
-.ui-listview .ui-btn:active{
-background-color:rgba(232,232,232,0.9);
-}
-
-.ui-listview .ui-icon-carat-r{
-opacity: 1;
+button.circleDistance{
+background-color: #FFFFFF;
+padding: 4px;
+text-decoration: none;
+border:1px solid #dcdcdc;
 }
 
 }
 
 @media only screen and (min-width:301px) and (max-width:400px){
+
+/*GENERALE*/
+
 .ui-page {
 background: url(../img/woman-medium.png), url(../img/quadrati-medium.png);
 background-repeat:no-repeat, no-repeat;
@@ -75,6 +90,24 @@ position: absolute;
 top: .8em;
 }
 
+.ui-listview .ui-btn{
+background-color:rgba(246,246,246,0.9);
+}
+
+.ui-listview .ui-btn:hover{
+background-color:rgba(237,237,237,0.9);
+}
+
+.ui-listview .ui-btn:active{
+background-color:rgba(232,232,232,0.9);
+}
+
+.ui-listview .ui-icon-carat-r{
+opacity: 1;
+}
+
+/*INDEX*/
+
 #manicoBorsa{
 height: 6.5em;
 margin: auto;
@@ -99,24 +132,14 @@ float: left;
 margin: 0 10px 0 0;
 }
 
+/*ESERCIZI VICINI*/
 
-
-.ui-listview .ui-btn{
-background-color:rgba(246,246,246,0.9);
+button.circleDistance{
+background-color: #FFFFFF;
+padding: 4px;
+text-decoration: none;
+border:1px solid #dcdcdc;
 }
-
-.ui-listview .ui-btn:hover{
-background-color:rgba(237,237,237,0.9);
-}
-
-.ui-listview .ui-btn:active{
-background-color:rgba(232,232,232,0.9);
-}
-
-.ui-listview .ui-icon-carat-r{
-opacity: 1;
-}
-
 
 
 }
@@ -124,7 +147,9 @@ opacity: 1;
  
  
 @media only screen and (min-width:401px) and (max-width:789px){
- 
+
+/*GENERALE*/
+
 .ui-page {
 background: url(../img/woman-medium.png), url(../img/quadrati-medium.png);
 background-repeat:no-repeat, no-repeat;
@@ -143,6 +168,24 @@ margin: auto !important;
 position: absolute;
 top: .8em;
 }
+
+.ui-listview .ui-btn{
+background-color:rgba(246,246,246,0.9);
+}
+
+.ui-listview .ui-btn:hover{
+background-color:rgba(237,237,237,0.9);
+}
+
+.ui-listview .ui-btn:active{
+background-color:rgba(232,232,232,0.9);
+}
+
+.ui-listview .ui-icon-carat-r{
+opacity: 1;
+}
+
+/*INDEX*/
 
 #manicoBorsa{
 height: 10.5em;
@@ -169,6 +212,40 @@ float: left;
 margin: 0 10px 0 0;
 }
 
+/*ESERCIZI VICINI*/
+
+button.circleDistance{
+background-color: #FFFFFF;
+padding: 4px;
+text-decoration: none;
+border:1px solid #dcdcdc;
+}
+
+ 
+}
+ 
+@media only screen and (min-width: 790px) {
+ 
+/*GENERALE*/
+ 
+.ui-page {
+background: url(../img/woman-big.png), url(../img/quadrati-big.png);
+background-repeat:no-repeat, no-repeat;
+background-position: bottom right, top right;
+}
+
+.ui-header{
+background: #000000 url(../img/header-big.png) no-repeat center center !important;
+height: 5.5em !important;
+border: 0;
+}
+
+.ui-header .ui-btn-left, .ui-header .ui-btn-right{
+vertical-align: middle;
+margin: auto !important;
+position: absolute;
+top: 1em;
+}
 
 .ui-listview .ui-btn{
 background-color:rgba(246,246,246,0.9);
@@ -186,31 +263,7 @@ background-color:rgba(232,232,232,0.9);
 opacity: 1;
 }
 
-
- 
-}
- 
-@media only screen and (min-width: 790px) {
- 
-.ui-page {
-background: url(../img/woman-big.png), url(../img/quadrati-big.png);
-background-repeat:no-repeat, no-repeat;
-background-position: bottom right, top right;
-}
-
-.ui-header{
-background: #000000 url(../img/header-big.png) no-repeat center center !important;
-height: 4em !important;
-border: 0;
-}
-
-.ui-header .ui-btn-left, .ui-header .ui-btn-right{
-vertical-align: middle;
-margin: auto !important;
-position: absolute;
-top: 1em;
-}
-
+/*INDEX*/
 
 #manicoBorsa{
 height: 11.5em;
@@ -237,24 +290,13 @@ float: left;
 margin: 0 10px 0 0;
 }
 
+/*ESERCIZI VICINI*/
 
-
-.ui-listview .ui-btn{
-background-color:rgba(246,246,246,0.9);
+button.circleDistance{
+background-color: #FFFFFF;
+padding: 4px;
+text-decoration: none;
+border:1px solid #dcdcdc;
 }
-
-.ui-listview .ui-btn:hover{
-background-color:rgba(237,237,237,0.9);
-}
-
-.ui-listview .ui-btn:active{
-background-color:rgba(232,232,232,0.9);
-}
-
-.ui-listview .ui-icon-carat-r{
-opacity: 1;
-}
-
-
 
 }

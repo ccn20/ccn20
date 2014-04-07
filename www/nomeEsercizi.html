@@ -607,7 +607,9 @@
 		alert("click");
 		
 		var url = $(this).attr('urlWebsite');
+		alert(url);
 		var urlTranslate = encodeURI("http://"+url+"");
+		alert(urlTranslate);
 		var ref = window.open(url, '_blank', 'location=yes');
 	});
 	

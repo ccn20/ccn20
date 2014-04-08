@@ -181,7 +181,7 @@
 		jsonVetrina = data;
 		sessionStorage.setItem('jsonVetrina', JSON.stringify(jsonVetrina));
 		}
-	}); // AJAX END
+	}); // ajax
 	
 	// NOME ESERCIZIO + INDIRIZZO + DESCRIZIONE
 	var esercizioLatitude;
@@ -204,6 +204,12 @@
 		linguaDescrizioneEsercizio = info.LinguaDescrizione;
 		
 		
+		if (info.Parcheggio == undefined) {
+		$( "h2.nomeParcheggioVicino" ).html("");
+		$( "p.indirizzoParcheggioVicino" ).html("");
+		$( "h2.nomeParcheggioVicino" ).html("-");
+		$( "p.indirizzoParcheggioVicino" ).html("-");
+		}
 		$( "h2.nomeParcheggioVicino" ).html("");
 		$( "p.indirizzoParcheggioVicino" ).html("");
 		$( "h2.nomeParcheggioVicino" ).html(info.Parcheggio.nomeParcheggio);

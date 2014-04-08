@@ -203,15 +203,7 @@
 		descrizioneEsercizio = info.Descrizione;
 		linguaDescrizioneEsercizio = info.LinguaDescrizione;
 		
-		if (parcheggioVicino == undefined){
-		$( "h2.nomeParcheggioVicino" ).html("");
-		$( "p.indirizzoParcheggioVicino" ).html("");
-		$( "h2.nomeParcheggioVicino" ).html("-");
-		$( "p.indirizzoParcheggioVicino" ).html("-");
-		}
-		else{
-		$( "h2.nomeParcheggioVicino" ).html("");
-		$( "p.indirizzoParcheggioVicino" ).html("");
+		
 		$( "h2.nomeParcheggioVicino" ).html(info.Parcheggio.nomeParcheggio);
 		$( "p.indirizzoParcheggioVicino" ).html(info.Parcheggio.indirizzoParcheggio);
 		}
@@ -236,12 +228,6 @@
 			$( "#box-descrizioneEsercizio" ).hide();
 			}
 		}
-
-
-// PARCHEGGIO VICINO
-		
-		
-		
 		
 // MAPPA + POSIZIONE UTENTE
 	

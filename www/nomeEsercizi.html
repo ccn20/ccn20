@@ -200,7 +200,7 @@
 		$("p.descrizioneEsercizio").html(info.Descrizione);
 		
 		if (info.Parcheggio != undefined) {
-		$("p.nomeParcheggioVicino").html(info.Parcheggio.nomeParcheggio);
+		$("h2.nomeParcheggioVicino").html(info.Parcheggio.nomeParcheggio);
 		$("p.indirizzoParcheggioVicino").html(info.Parcheggio.indirizzoParcheggio);
 		}
 		
@@ -463,8 +463,8 @@
 	<!-- PARCHEGGIO -->
 	<li>
 	<img src="img/parcheggio.png">
-	<h2>parcheggio più vicino</h2>
-	<p>via Balduini 16</p>
+	<h2 class="nomeParcheggioVicino"></h2>
+	<p class="indirizzoParcheggioVicino"></p>
 	</li>
 	</ul>
 	

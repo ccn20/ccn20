@@ -199,10 +199,11 @@
 		$("p.descrizioneEsercizio").html(""); // SVUOTA DESCRIZIONE PER PREVENIRE DESCRIZIONI NULLE
 		$("p.descrizioneEsercizio").html(info.Descrizione);
 		
-		if (info.Parcheggio != undefined) {
+		alert(info.Parcheggio.nomeParcheggio);
+		//if (info.Parcheggio != undefined) {
 		$("h2.nomeParcheggioVicino").html(info.Parcheggio.nomeParcheggio);
 		$("p.indirizzoParcheggioVicino").html(info.Parcheggio.indirizzoParcheggio);
-		}
+		//}
 		
 		esercizioLatitude = info.Latitudine;
 		esercizioLongitude = info.Longitudine;

@@ -419,7 +419,17 @@
 	
 	$(document).on("click", '.showDescrizione', function(){
 	
-	 $('p.descrizioneEsercizio').css('white-space', 'normal');
+	$('p.descrizioneEsercizio').css('white-space', 'normal');
+	$('a.showDescrizione').addClass('hideDescrizione').removeClass('showDescrizione');
+	$('a.hideDescrizione').html('show less');
+	
+	});
+	
+	$(document).on("click", '.hideDescrizione', function(){
+	
+	$('p.descrizioneEsercizio').css('white-space', '');
+	$('a.hideDescrizione').addClass('showDescrizione').removeClass('hideDescrizione');
+	$('a.showDescrizione').html('show more');
 	
 	});
 	
@@ -432,7 +442,8 @@
     </li>
 	<li>
 		<!-- DESCRIZIONE ESERCIZIO -->
-		<a href="#" class="showDescrizione"><p class="descrizioneEsercizio"></p></a>
+		<a href="#"><p class="descrizioneEsercizio"></p></a>
+		<p><a href="#" class="showDescrizione">show more</a></p>
 		<p class="traduciDescrizioneEsercizio"></p>
 		<!-- /DESCRIZIONE ESERCIZIO -->
     </li>

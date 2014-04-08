@@ -189,7 +189,6 @@
 	var nomeEsercizioMappa;
 	var descrizioneEsercizio;
 	var linguaDescrizioneEsercizio;
-	var parcheggioVicino;
 	var map;
 	
 	$.each(jsonVetrina, function(index, info) {
@@ -203,11 +202,20 @@
 		nomeEsercizioMappa = info.NomeEsercizio;
 		descrizioneEsercizio = info.Descrizione;
 		linguaDescrizioneEsercizio = info.LinguaDescrizione;
+		
+		if (parcheggioVicino == undefined){
+		$( "h2.nomeParcheggioVicino" ).html("");
+		$( "p.indirizzoParcheggioVicino" ).html("");
+		$( "h2.nomeParcheggioVicino" ).html("-");
+		$( "p.indirizzoParcheggioVicino" ).html("-");
+		}
+		else{
+		$( "h2.nomeParcheggioVicino" ).html("");
+		$( "p.indirizzoParcheggioVicino" ).html("");
+		$( "h2.nomeParcheggioVicino" ).html(info.Parcheggio.nomeParcheggio);
+		$( "p.indirizzoParcheggioVicino" ).html(info.Parcheggio.indirizzoParcheggio);
+		}
 	
-		
-			parcheggioVicino = info.Parcheggio.nomeParcheggio;
-			alert(parcheggioVicino);
-		
 	});
 		
 //NAVIGATE BUTTON
@@ -232,13 +240,7 @@
 
 // PARCHEGGIO VICINO
 		
-		if (parcheggioVicino == undefined){
-		$( ".parcheggioVicino" ).html("");
-		}
-		else{
-		$( ".parcheggioVicino" ).html("");
-		$( ".parcheggioVicino" ).append( "<li class='immagineParcheggio'><img class='imgParcheggio' src='img/parcheggioVicino.png' style='width: 37px; height: 50px;'><p class='nomeParcheggio'>"+parcheggioVicino+"</p></li>" );
-		}
+		
 		
 		
 // MAPPA + POSIZIONE UTENTE

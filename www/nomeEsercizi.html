@@ -193,7 +193,7 @@
 	
 	$.each(jsonVetrina, function(index, info) {
 		$("h3.nomeEsercizio").html(info.NomeEsercizio);
-		$(".indirizzoEsercizio").html(info.Indirizzo+" "+info.Citta);
+		$("p.indirizzoEsercizio").html(info.Indirizzo+" "+info.Citta);
 		$(".descrizioneEsercizio").html(""); // SVUOTA DESCRIZIONE PER PREVENIRE DESCRIZIONI NULLE
 		$(".descrizioneEsercizio").html(info.Descrizione);
 				 
@@ -428,7 +428,7 @@
 	<ul data-role="listview" data-inset="true" style="background:fd613d">
     <li style="background:#fd613d">
 	<h3 class="nomeEsercizio" style="color:white; text-shadow:none"></h3>
-	<p style="color:white; text-shadow:none">via Della Valle 54</p>
+	<p class="indirizzoEsercizio" style="color:white; text-shadow:none">via Della Valle 54</p>
     </li>
 	<li>
 		<!-- DESCRIZIONE ESERCIZIO -->

@@ -189,24 +189,27 @@
 	var nomeEsercizioMappa;
 	var descrizioneEsercizio;
 	var linguaDescrizioneEsercizio;
-	var parcheggioVicino;
+	var nomeParcheggioVicino;
+	var indirizzoParcheggioVicino;
 	var map;
 	
 	$.each(jsonVetrina, function(index, info) {
 		$("h3.nomeEsercizio").html(info.NomeEsercizio);
-		$(".indirizzoEsercizio").html(info.Indirizzo+" "+info.Citta);
-		$(".descrizioneEsercizio").html(""); // SVUOTA DESCRIZIONE PER PREVENIRE DESCRIZIONI NULLE
-		$(".descrizioneEsercizio").html(info.Descrizione);
-				 
+		$("p.indirizzoEsercizio").html(info.Indirizzo+" "+info.Citta);
+		$("p.descrizioneEsercizio").html(""); // SVUOTA DESCRIZIONE PER PREVENIRE DESCRIZIONI NULLE
+		$("p.descrizioneEsercizio").html(info.Descrizione);
+		
+		if (info.Parcheggio != undefined) {
+		$("p.nomeParcheggioVicino").html(info.Parcheggio.nomeParcheggio);
+		$("p.indirizzoParcheggioVicino").html(info.Parcheggio.indirizzoParcheggio);
+		}
+		
 		esercizioLatitude = info.Latitudine;
 		esercizioLongitude = info.Longitudine;
 		nomeEsercizioMappa = info.NomeEsercizio;
 		descrizioneEsercizio = info.Descrizione;
 		linguaDescrizioneEsercizio = info.LinguaDescrizione;
-	
-			if (info.Parcheggio != undefined) {
-			parcheggioVicino = info.Parcheggio.nomeParcheggio+" "+info.Parcheggio.indirizzoParcheggio;
-			}
+		
 	});
 		
 //NAVIGATE BUTTON
@@ -438,24 +441,26 @@
 	<ul data-role="listview" data-inset="true" style="background:fd613d">
     <li style="background:#fd613d">
 	<h3 class="nomeEsercizio" style="color:white; text-shadow:none"></h3>
-	<p style="color:white; text-shadow:none">via Della Valle 54</p>
+	<p class="indirizzoEsercizio" style="color:white; text-shadow:none"></p>
     </li>
-	<li>
-		<!-- DESCRIZIONE ESERCIZIO -->
+	<!-- DESCRIZIONE ESERCIZIO -->
+	<li>	
 		<p class="descrizioneEsercizio"></p>
 		<p><a href="#" class="showDescrizione">show more</a></p>
 		<p class="traduciDescrizioneEsercizio"></p>
-		<!-- /DESCRIZIONE ESERCIZIO -->
     </li>
+	<!-- MAPPA -->
 	<li>
 	<div id="mappa" style="height:200px"></div>
 	</li>
+	<!-- NAVIGAZIONE + DISTANZA -->
 	<li>
 	<a href="#"><img src="img/navigation.png">
 	<h2>portami qui</h2>
 	<p><img width="16px" height="16px" src="img/distanza.png">5 min / 450 m</p>
 	</a>
 	</li>
+	<!-- PARCHEGGIO -->
 	<li>
 	<img src="img/parcheggio.png">
 	<h2>parcheggio più vicino</h2>
@@ -464,18 +469,21 @@
 	</ul>
 	
 	<ul data-role="listview" data-inset="true">
+	<!-- FACEBOOK -->
 	<li>
 	<a href="#"><img src="img/collegaFacebook.png">
 	<h2>Facebook</h2>
 	<p>vota il negozio su Facebook</p>
 	</a>
 	</li>
+	<!-- FOURSQUARE -->
 	<li>
 	<a href="#"><img src="img/collegaFoursquare.png">
 	<h2>Foursquare</h2>
 	<p>vota il negozio su Foursquare</p>
 	</a>
 	</li>
+	<!-- TWITTER -->
 	<li>
 	<a href="#"><img src="img/collegaTwitter.png">
 	<h2>Twitter</h2>

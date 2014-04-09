@@ -454,36 +454,24 @@
 	
 	$(document).on("click", '.votaFacebook', function(){
 	
-	    FB.ui({
-			method: 'feed',
-			name:  $("h3.nomeEsercizio").html(),
-			link: 'http://www.wificomo.com',
-			caption: 'Centro Commerciale Naturale 2.0',
-			description: $("p.descrizioneEsercizio").html()
-			},
-				function(response) {
-					
-					if (response && response.post_id) {
-					
-					alert('Post pubblicato con successo');
-					/*
-					var idUserFacebook = window.localStorage.getItem("idUserFacebook");
-					
-					$.ajax({
-							type: 'POST',
-							url: 'http://www.wificomo.com/json/voto.php',
-							data: { idNegozio: $("p.idNegozioVetrina").html(), socialNetwork: "facebook", latitude: window.localStorage.getItem('latitude'), longitude: window.localStorage.getItem('longitude'), nomeNegozio: $("h2.nomeNegozioVetrina").html(), idUtente: idUserFacebook} 
-					})
-					.done(function( msg ) {
-						alert('Post pubblicato con successo');
-						console.log(msg);
-					});
-					*/					
-					}
-					else {
-					alert('Errore! Post non pubblicato!');
-					}
-				}); //Close FB.ui
+	FB.ui(
+	{
+		method: 'feed',
+		name: $("h3.nomeEsercizio").html(),
+		link: 'http://www.wificomo.com',
+		picture: 'http://fbrell.com/f8.jpg',
+		caption: 'Shopincomo',
+		description: $("p.descrizioneEsercizio").html()
+	},
+	function(response) {
+		if (response && response.post_id) {
+		alert('Post was published.');
+		} 
+		else {
+		alert('Post was not published.');
+		}
+	}
+	);
 	
 	});
 	

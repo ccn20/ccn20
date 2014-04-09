@@ -4,9 +4,9 @@
 	- fixed header
 	- fixed footer
 	- back button carat-l
-	- input: "Inserisci il nome dell'esercizio che stai cercando..."
+	- input: "inserisci il nome del negozio..."
 	TO DO:
-	- input: "Inserisci il nome dell'esercizio che stai cercando..." (INGLESE)
+	- input: "inserisci il nome del negozio..." (INGLESE)
 
 #vetrinaMappa
 	DONE:
@@ -25,6 +25,11 @@
 	- fixed header
 	- fixed footer
 	- back button carat-l
+	- href:tel Telefono
+	- href:mailto Email
+	- link sito web
+	TO DO:
+	- icone
 
 #vetrinaStatistiche
 	DONE:
@@ -76,7 +81,7 @@
 
 	<div role="main" class="ui-content" >
 		
-	<ul id="cerca_negozio" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Inserisci il nome dell'esercizio che stai cercando...">
+	<ul id="cerca_negozio" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="inserisci il nome del negozio...">
 	</ul>
 	
 	<script type="text/javascript" charset="utf-8">
@@ -176,7 +181,7 @@
 		jsonVetrina = data;
 		sessionStorage.setItem('jsonVetrina', JSON.stringify(jsonVetrina));
 		}
-	}); // AJAX END
+	}); // ajax
 	
 	// NOME ESERCIZIO + INDIRIZZO + DESCRIZIONE
 	var esercizioLatitude;
@@ -184,12 +189,11 @@
 	var nomeEsercizioMappa;
 	var descrizioneEsercizio;
 	var linguaDescrizioneEsercizio;
-	var parcheggioVicino;
 	var map;
 	
 	$.each(jsonVetrina, function(index, info) {
 		$("h3.nomeEsercizio").html(info.NomeEsercizio);
-		$(".indirizzoEsercizio").html(info.Indirizzo+" "+info.Citta);
+		$("p.indirizzoEsercizio").html(info.Indirizzo+" "+info.Citta);
 		$(".descrizioneEsercizio").html(""); // SVUOTA DESCRIZIONE PER PREVENIRE DESCRIZIONI NULLE
 		$(".descrizioneEsercizio").html(info.Descrizione);
 				 
@@ -198,10 +202,19 @@
 		nomeEsercizioMappa = info.NomeEsercizio;
 		descrizioneEsercizio = info.Descrizione;
 		linguaDescrizioneEsercizio = info.LinguaDescrizione;
+		
+		
+		if (info.Parcheggio == undefined) {
+		$( "h2.nomeParcheggioVicino" ).html("");
+		$( "p.indirizzoParcheggioVicino" ).html("");
+		$( "h2.nomeParcheggioVicino" ).html("-");
+		$( "p.indirizzoParcheggioVicino" ).html("-");
+		}
+		$( "h2.nomeParcheggioVicino" ).html("");
+		$( "p.indirizzoParcheggioVicino" ).html("");
+		$( "h2.nomeParcheggioVicino" ).html(info.Parcheggio.nomeParcheggio);
+		$( "p.indirizzoParcheggioVicino" ).html(info.Parcheggio.indirizzoParcheggio);
 	
-			if (info.Parcheggio != undefined) {
-			parcheggioVicino = info.Parcheggio.nomeParcheggio+" "+info.Parcheggio.indirizzoParcheggio;
-			}
 	});
 		
 //NAVIGATE BUTTON
@@ -222,18 +235,6 @@
 			$( "#box-descrizioneEsercizio" ).hide();
 			}
 		}
-
-
-// PARCHEGGIO VICINO
-		
-		if (parcheggioVicino == undefined){
-		$( ".parcheggioVicino" ).html("");
-		}
-		else{
-		$( ".parcheggioVicino" ).html("");
-		$( ".parcheggioVicino" ).append( "<li class='immagineParcheggio'><img class='imgParcheggio' src='img/parcheggioVicino.png' style='width: 37px; height: 50px;'><p class='nomeParcheggio'>"+parcheggioVicino+"</p></li>" );
-		}
-		
 		
 // MAPPA + POSIZIONE UTENTE
 	
@@ -334,11 +335,11 @@
 			var userAccuracy = position.coords.accuracy 
 
 			if (!markerUtente) {
-			markerUtente = L.userMarker([userLatitude, userLongitude],{pulsing:true}).bindPopup("Sei qui.").addTo(map);
+			markerUtente = L.userMarker([userLatitude, userLongitude],{pulsing:true}).bindPopup("Sei qui.").openPopup().addTo(map);
 			markerUtente.setAccuracy(userAccuracy);
 			map.setView(new L.LatLng(userLatitude, userLongitude),16);
 			}
-			markerUtente.setLatLng([userLatitude, userLongitude],{pulsing:true}).update();
+			markerUtente.setLatLng([userLatitude, userLongitude],{pulsing:true}).update().bindPopup("Sei qui.").openPopup();
 	
 		} // END ON SUCCESS
 	
@@ -356,6 +357,29 @@
 		$(document).on("click", 'button.userMarker', function(){
 			map.setView(new L.LatLng(userLatitude, userLongitude),16);
 		});
+	
+	
+		//FACEBOOK
+		FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false });
+		//GET LOGIN STATUS
+		FB.getLoginStatus(function(response) {
+			//CONNESSO
+			if (response.status === 'connected') {
+			$("img.imageFacebook").attr("src", "img/facebookList.png");
+					
+				FB.api('/me', function(response) {
+				$("p.accountFacebook").html(response.name);
+				});
+			}
+			//APP NON AUTORIZZATA
+			else if (response.status === 'not_authorized') {
+			$("img.imageFacebook").attr("src", "img/facebookListbn.png");
+			} 
+			//NON CONNESSO
+			else {
+			$("img.imageFacebook").attr("src", "img/facebookListbn.png");
+			}
+		}, true);
 	
 	});
 	// END OF PAGESHOW
@@ -411,39 +435,100 @@
 	}
 	
 	// /FUNZIONE DIRECTIONS
-		
+	
+	$(document).on("click", '.showDescrizione', function(){
+	
+	$('p.descrizioneEsercizio').css('white-space', 'normal');
+	$('a.showDescrizione').addClass('hideDescrizione').removeClass('showDescrizione');
+	$('a.hideDescrizione').html('show less');
+	
+	});
+	
+	$(document).on("click", '.hideDescrizione', function(){
+	
+	$('p.descrizioneEsercizio').css('white-space', '');
+	$('a.hideDescrizione').addClass('showDescrizione').removeClass('hideDescrizione');
+	$('a.showDescrizione').html('show more');
+	
+	});
+	
+	$(document).on("click", '.votaFacebook', function(){
+	
+	FB.ui(
+	{
+		method: 'feed',
+		name: $("h3.nomeEsercizio").html(),
+		link: 'http://www.wificomo.com',
+		picture: 'http://www.wificomo.com/imgs/logoShopincomo.jpg',
+		caption: 'Shopincomo',
+		description: $("p.descrizioneEsercizio").html()
+	},
+	function(response) {
+		if (response) {
+		alert('Post was published.');
+		} 
+		else {
+		alert('Post was not published.');
+		}
+	}
+	);
+	
+	});
+	
+	
+	
+	
+	
 	</script>
 	
-	<!-- NOME ESERCIZIO -->
-	
-	<div id="box-nomeEsercizio">
-	<h3 class="nomeEsercizio"></h3>
-	</div>
-	
-	<!-- /NOME ESERCIZIO -->
-	
-	<!-- MAPPA + INDIRIZZO + DIRECTIONS + PANORAMICA + DISTANZA -->
-	<div id="mappa"></div>
-	<ul class="funzionalitaMappa">
-	<li class="singolaFunzionalitaMappa indirizzoEsercizio"></li>
-	<li class="singolaFunzionalitaMappa navigateEsercizio"></li>
-	<li class="singolaFunzionalitaMappa distanzaEsercizio"></li>
+	<ul data-role="listview" data-inset="true" style="background:fd613d">
+    <li style="background:#fd613d">
+	<h3 class="nomeEsercizio" style="color:white; text-shadow:none"></h3>
+	<p class="indirizzoEsercizio" style="color:white; text-shadow:none"></p>
+    </li>
+	<li>
+		<!-- DESCRIZIONE ESERCIZIO -->
+		<p class="descrizioneEsercizio"></p>
+		<p><a href="#" class="showDescrizione">show more</a></p>
+		<p class="traduciDescrizioneEsercizio"></p>
+		<!-- /DESCRIZIONE ESERCIZIO -->
+    </li>
+	<li>
+	<div id="mappa" style="height:200px"></div>
+	</li>
+	<li>
+	<a href="#"><img src="img/navigation.png">
+	<h2>portami qui</h2>
+	<p><img width="16px" height="16px" src="img/distanza.png">5 min / 450 m</p>
+	</a>
+	</li>
+	<li>
+	<img src="img/parcheggio.png">
+	<h2 class="nomeParcheggioVicino"></h2>
+	<p class="indirizzoParcheggioVicino"></p>
+	</li>
 	</ul>
-	<!-- /MAPPA + INDIRIZZO + DIRECTIONS + PANORAMICA + DISTANZA -->
 	
-	<!-- DESCRIZIONE ESERCIZIO -->
-	
-	<div id="box-descrizioneEsercizio">
-	<p class="descrizioneEsercizio"></p>
-	<p class="traduciDescrizioneEsercizio"></p>
-	</div>
-	<!-- /DESCRIZIONE ESERCIZIO -->
-	
-	<!-- PARCHEGGIO VICINO ESERCIZIO -->
-	
-	<ul class="parcheggioVicino">
+	<ul data-role="listview" data-inset="true">
+	<li>
+	<a href="#" class="votaFacebook"><img src="img/collegaFacebook.png">
+	<h2>Facebook</h2>
+	<p>vota il negozio su Facebook</p>
+	</a>
+	</li>
+	<li>
+	<a href="#"><img src="img/collegaFoursquare.png">
+	<h2>Foursquare</h2>
+	<p>vota il negozio su Foursquare</p>
+	</a>
+	</li>
+	<li>
+	<a href="#"><img src="img/collegaTwitter.png">
+	<h2>Twitter</h2>
+	<p>vota il negozio su Twitter</p>
+	</a>
+	</li>
 	</ul>
-	<!-- /PARCHEGGIO VICINO ESERCIZIO -->
 		
 	</div><!-- /content -->
 
@@ -516,14 +601,6 @@
 	
 	</script>
 	
-	<!-- NOME ESERCIZIO -->
-	
-	<div id="box-nomeEsercizio">
-	<h3 class="nomeEsercizio"></h3>
-	</div>
-	
-	<!-- /NOME ESERCIZIO -->
-	
 	<!-- ORARI -->
 	<ul id="orariEsercizio" data-role="listview" data-inset="true">
 	</ul>
@@ -582,9 +659,9 @@
 		$("h3.nomeEsercizio").html(info.NomeEsercizio);
 		$("ul#contattiEsercizio").append($("<li data-role='list-divider'>Contatti</li>"));
 		$("ul#contattiEsercizio").append($("<li>Indirizzo: "+info.Indirizzo+" "+info.Citta+"</li>"));
-		if (info.Telefono != undefined){$("ul#contattiEsercizio").append($("<li>Telefono: "+info.Telefono+"</li>"))};
-		if (info.Website != undefined){$("ul#contattiEsercizio").append($("<li>Website: "+info.Website+"</li>"))};
-		if (info.Email != undefined){$("ul#contattiEsercizio").append($("<li>Email: "+info.Email+"</li>"))};
+		if (info.Telefono != undefined){$("ul#contattiEsercizio").append($("<li><a href=tel:"+info.Telefono.replace(/ /g,'')+"><img src='img/contattiTelefono.png'><h2>telefono</h2><p>"+info.Telefono+"</p></a></li>"))};
+		if (info.Website != undefined){$("ul#contattiEsercizio").append($("<li><a href='#' class='website' urlWebsite="+info.Website+"><img src='img/contattiWebsite.png'><h2>website</h2><p>"+info.Website+"</p></a></li>"))};
+		if (info.Email != undefined){$("ul#contattiEsercizio").append($("<li><a href=mailto:"+info.Email+"><img src='img/contattiEmail.png'><h2>e-mail</h2><p>"+info.Email+"</p></a></li>"))};
 		if (info.Facebook != undefined){$("ul#contattiEsercizio").append($("<li>Facebook: "+info.Facebook+"</li>"))};
 		if (info.Twitter != undefined){$("ul#contattiEsercizio").append($("<li>Twitter: "+info.Twitter+"</li>"))};
 		if (info.Foursquare != undefined){$("ul#contattiEsercizio").append($("<li>Foursquare: "+info.Foursquare+"</li>"))};
@@ -597,20 +674,17 @@
 	});
 	// /PAGEBEFORESHOW
 	
-	
+	// CLICK WEBSITE
+	$(document).on("click", '.website', function(){
+		
+		var url = $(this).attr('urlWebsite');
+		var urlTranslate = encodeURI("http://"+url+"");
+		var ref = window.open(urlTranslate, '_blank', 'location=yes');
+	});
 	
 	</script>
-	
-	<!-- NOME ESERCIZIO -->
-	
-	<div id="box-nomeEsercizio">
-	<h3 class="nomeEsercizio"></h3>
-	</div>
-	
-	<!-- /NOME ESERCIZIO -->
-	
+		
 	<!-- CONTATTI ESERCIZIO -->
-	
 	<ul id="contattiEsercizio" data-role="listview" data-inset="true">
 	</ul>
 	
@@ -891,14 +965,6 @@
 	// /PAGEBEFORESHOW
 
 	</script>
-	
-	<!-- NOME ESERCIZIO -->
-	
-	<div id="box-nomeEsercizio">
-	<h3 class="nomeEsercizio"></h3>
-	</div>
-	
-	<!-- /NOME ESERCIZIO -->
 	
 	<!-- STATISTICHE -->
 	<div id="box-statisticheEsercizio">

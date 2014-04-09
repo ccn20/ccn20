@@ -358,6 +358,29 @@
 			map.setView(new L.LatLng(userLatitude, userLongitude),16);
 		});
 	
+	
+		//FACEBOOK
+		FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false });
+		//GET LOGIN STATUS
+		FB.getLoginStatus(function(response) {
+			//CONNESSO
+			if (response.status === 'connected') {
+			$("img.imageFacebook").attr("src", "img/facebookList.png");
+					
+				FB.api('/me', function(response) {
+				$("p.accountFacebook").html(response.name);
+				});
+			}
+			//APP NON AUTORIZZATA
+			else if (response.status === 'not_authorized') {
+			$("img.imageFacebook").attr("src", "img/facebookListbn.png");
+			} 
+			//NON CONNESSO
+			else {
+			$("img.imageFacebook").attr("src", "img/facebookListbn.png");
+			}
+		}, true);
+	
 	});
 	// END OF PAGESHOW
 
@@ -431,23 +454,36 @@
 	
 	$(document).on("click", '.votaFacebook', function(){
 	
-	FB.ui({
-    method: 'feed',
-    name: 'Facebook Dialogs',
-    link: 'https://developers.facebook.com/docs/dialogs/',
-    picture: 'http://fbrell.com/f8.jpg',
-    caption: 'Reference Documentation',
-    description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
-	},
-	function(response) {
-		if (response && response.post_id) {
-		alert('Post was published.');
-		} 
-		else {
-		alert('Post was not published.');
-		}
-	}
-	);
+	    FB.ui({
+			method: 'feed',
+			name:  $("h3.nomeEsercizio").html(),
+			link: 'http://www.wificomo.com',
+			caption: 'Centro Commerciale Naturale 2.0',
+			description: $("p.descrizioneEsercizio").html()
+			},
+				function(response) {
+					
+					if (response && response.post_id) {
+					
+					alert('Post pubblicato con successo');
+					/*
+					var idUserFacebook = window.localStorage.getItem("idUserFacebook");
+					
+					$.ajax({
+							type: 'POST',
+							url: 'http://www.wificomo.com/json/voto.php',
+							data: { idNegozio: $("p.idNegozioVetrina").html(), socialNetwork: "facebook", latitude: window.localStorage.getItem('latitude'), longitude: window.localStorage.getItem('longitude'), nomeNegozio: $("h2.nomeNegozioVetrina").html(), idUtente: idUserFacebook} 
+					})
+					.done(function( msg ) {
+						alert('Post pubblicato con successo');
+						console.log(msg);
+					});
+					*/					
+					}
+					else {
+					alert('Errore! Post non pubblicato!');
+					}
+				}); //Close FB.ui
 	
 	});
 	

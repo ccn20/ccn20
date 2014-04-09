@@ -429,6 +429,30 @@
 	
 	});
 	
+	$(document).on("click", '.votaFacebook', function(){
+	
+	FB.ui({
+    method: 'feed',
+    name: 'Facebook Dialogs',
+    link: 'https://developers.facebook.com/docs/dialogs/',
+    picture: 'http://fbrell.com/f8.jpg',
+    caption: 'Reference Documentation',
+    description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
+	},
+	function(response) {
+		if (response && response.post_id) {
+		alert('Post was published.');
+		} 
+		else {
+		alert('Post was not published.');
+		}
+	}
+	);
+	
+	});
+	
+	
+	
 	</script>
 	
 	<ul data-role="listview" data-inset="true" style="background:fd613d">
@@ -461,7 +485,7 @@
 	
 	<ul data-role="listview" data-inset="true">
 	<li>
-	<a href="#"><img src="img/collegaFacebook.png">
+	<a href="#" class="votaFacebook"><img src="img/collegaFacebook.png">
 	<h2>Facebook</h2>
 	<p>vota il negozio su Facebook</p>
 	</a>

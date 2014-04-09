@@ -381,6 +381,10 @@
 			}
 		}, true);
 	
+	alert(jsonVetrina.idEsercizio);
+	alert(jsonVetrina.nomeEsercizio);
+	
+	
 	});
 	// END OF PAGESHOW
 
@@ -459,7 +463,7 @@
 		method: 'feed',
 		name: $("h3.nomeEsercizio").html(),
 		link: 'http://www.wificomo.com',
-		picture: 'http://fbrell.com/f8.jpg',
+		picture: 'http://www.wificomo.com/imgs/logoShopincomo.jpg',
 		caption: 'Shopincomo',
 		description: $("p.descrizioneEsercizio").html()
 	},
@@ -475,7 +479,18 @@
 	
 	});
 	
-	
+	$(document).on("click", '.votaFoursquare', function(){
+				
+		var token = JSON.parse(window.localStorage.getItem("tokenFoursquare"));
+		var idVenue = $(this).attr('id');
+		var idUserFoursquare = window.localStorage.getItem("idUserFoursquare");
+					
+		url = 'https://api.foursquare.com/v2/checkins/add?venueId=' + idVenue +'&v=20121129&oauth_token=' + token;
+		
+		$.post(url, function() {
+		alert("Check In effettuato con successo!");
+		});					
+	});
 	
 	</script>
 	
@@ -515,7 +530,7 @@
 	</a>
 	</li>
 	<li>
-	<a href="#"><img src="img/collegaFoursquare.png">
+	<a href="#" class="votaFoursquare" id=""><img src="img/collegaFoursquare.png">
 	<h2>Foursquare</h2>
 	<p>vota il negozio su Foursquare</p>
 	</a>

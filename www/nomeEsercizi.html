@@ -452,28 +452,7 @@
 	
 	});
 	
-	$(document).on("click", '.votaFacebook', function(){
 	
-	FB.ui(
-	{
-		method: 'feed',
-		name: $("h3.nomeEsercizio").html(),
-		link: 'http://www.wificomo.com',
-		picture: 'http://www.wificomo.com/imgs/logoShopincomo.jpg',
-		caption: 'Shopincomo',
-		description: $("p.descrizioneEsercizio").html()
-	},
-	function(response) {
-		if (response) {
-		alert('Post was published.');
-		} 
-		else {
-		alert('Post was not published.');
-		}
-	}
-	);
-	
-	});
 	
 	
 	

@@ -384,8 +384,7 @@
 		}, true);
 	
 	alert(idEsercizio);
-	alert(jsonVetrina);
-	alert(jsonVetrina.NomeEsercizio);
+
 	});
 	// END OF PAGESHOW
 
@@ -441,20 +440,17 @@
 	
 	// /FUNZIONE DIRECTIONS
 	
+	//SHOW DESCRIZIONE
 	$(document).on("click", '.showDescrizione', function(){
-	
 	$('p.descrizioneEsercizio').css('white-space', 'normal');
 	$('a.showDescrizione').addClass('hideDescrizione').removeClass('showDescrizione');
 	$('a.hideDescrizione').html('show less');
-	
 	});
-	
+	//HIDE DESCRIZIONE
 	$(document).on("click", '.hideDescrizione', function(){
-	
 	$('p.descrizioneEsercizio').css('white-space', '');
 	$('a.hideDescrizione').addClass('showDescrizione').removeClass('hideDescrizione');
 	$('a.showDescrizione').html('show more');
-	
 	});
 	
 	/*

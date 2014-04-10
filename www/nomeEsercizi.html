@@ -198,7 +198,7 @@
 		$(".descrizioneEsercizio").html(""); // SVUOTA DESCRIZIONE PER PREVENIRE DESCRIZIONI NULLE
 		$(".descrizioneEsercizio").html(info.Descrizione);
 				 
-		$("a.votaFacebook").attr("id", info.idEsercizio);
+		//$("a.votaFacebook").attr("id", info.idEsercizio);
 		
 		esercizioLatitude = info.Latitudine;
 		esercizioLongitude = info.Longitudine;
@@ -456,7 +456,7 @@
 	//VOTA FACEBOOK
 	$(document).on("click", '.votaFacebook', function(){
 	
-	idEsercizio = $(this).attr('id');
+	idEsercizio = $(this).attr('idEsercizio');
 	alert(idEsercizio);
 	
 	FB.ui({
@@ -510,7 +510,7 @@
 	
 	<ul data-role="listview" data-inset="true">
 	<li>
-	<a href="#" class="votaFacebook"><img src="img/collegaFacebook.png">
+	<a href="#" class="votaFacebook" idEsercizio="1450"><img src="img/collegaFacebook.png">
 	<h2>Facebook</h2>
 	<p>vota il negozio su Facebook</p>
 	</a>

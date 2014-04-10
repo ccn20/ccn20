@@ -491,7 +491,6 @@
 		var latitude = $(this).attr('latitude');
 		var longitude = $(this).attr('longitude');
 		var nomeEsercizioFoursquare = $(this).attr('nomeEsercizio');
-		alert(nomeEsercizioFoursquare);
 		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");		
 									
 		$.getJSON('https://api.foursquare.com/v2/venues/search?ll='+latitude+','+longitude+'&limit=4&query='+nomeEsercizioFoursquare+'&radius=100&oauth_token='+tokenFoursquare+'&v=20140410',
@@ -517,13 +516,12 @@
 		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");	
 		var idVenue = $(this).attr('idVenue');
 		
-		alert(idVenue);
-		
 		//var idUserFoursquare = window.localStorage.getItem("idUserFoursquare");
 					
 		var urlFoursquare = 'https://api.foursquare.com/v2/checkins/add?venueId=' + idVenue +'&v=20140410&oauth_token=' + tokenFoursquare;
 		$.post(urlFoursquare, function() {
 		alert("Check In effettuato con successo!");
+		$( "#popupCheckin" ).popup( "close" )
 		});
 			
 	});

@@ -522,7 +522,7 @@
 		//var idUserFoursquare = window.localStorage.getItem("idUserFoursquare");
 					
 		var urlFoursquare = 'https://api.foursquare.com/v2/checkins/add?venueId=' + idVenue +'&v=20140410&oauth_token=' + tokenFoursquare;
-		$.post(url, function() {
+		$.post(urlFoursquare, function() {
 		alert("Check In effettuato con successo!");
 		});
 			

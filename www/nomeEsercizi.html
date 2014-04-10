@@ -205,22 +205,28 @@
 		
 		//FACEBOOK
 		$(".votaFacebook").attr("idEsercizio", info.idEsercizio);
+		
 		//FOURSQUARE
 		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
 		if (tokenFoursquare == 'undefined') {
-		$( "img.collegaFoursquare" ).attr('src', 'img/collegaFoursquare_bn.png');
+		alert("token foursquare undefined");
+		$( "img#votaFoursquare" ).attr('src', 'img/collegaFoursquare_bn.png');
 		}
 		else {
-		$( "img.collegaFoursquare" ).attr('src', 'img/collegaFoursquare.png');
+		alert("token foursquare");
+		$( "img.#votaFoursquare" ).attr('src', 'img/collegaFoursquare.png');
 		$(".votaFoursquare").attr("nomeEsercizio", info.NomeEsercizio);
 		}
+		
 		//TWITTER
 		var twitterToken = window.localStorage.getItem("twitterToken");
 		if (twitterToken == 'undefined') {
-		$( "img.collegaTwitter" ).attr('src', 'img/collegaTwitter_bn.png');
+		alert("token twitter undefined");
+		$( "img#votaTwitter" ).attr('src', 'img/collegaTwitter_bn.png');
 		}
 		else {
-		$( "img.collegaTwitter" ).attr('src', 'img/collegaTwitter.png');
+		alert("token twitter");
+		$( "img#votaTwitter" ).attr('src', 'img/collegaTwitter.png');
 		$(".votaTwitter").attr("nomeEsercizio", info.NomeEsercizio);
 		}
 		
@@ -577,19 +583,19 @@
 	
 	<ul data-role="listview" data-inset="true">
 	<li>
-	<a href="#" class="votaFacebook" idEsercizio=""><img src="">
+	<a href="#" class="votaFacebook" idEsercizio=""><img id="votaFacebook" src="">
 	<h2>Facebook</h2>
 	<p>vota il negozio su Facebook</p>
 	</a>
 	</li>
 	<li>
-	<a href="#popupCheckin" data-rel="popup" data-transition="slideup" class="votaFoursquare" nomeEsercizio="" latitude="" longitude=""><img src="">
+	<a href="#popupCheckin" data-rel="popup" data-transition="slideup" class="votaFoursquare" nomeEsercizio="" latitude="" longitude=""><img id="votaFoursquare" src="">
 	<h2>Foursquare</h2>
 	<p>vota il negozio su Foursquare</p>
 	</a>
 	</li>
 	<li>
-	<a href="#"><img src="">
+	<a href="#"><img src="" id="votaTwitter">
 	<h2>Twitter</h2>
 	<p>vota il negozio su Twitter</p>
 	</a>

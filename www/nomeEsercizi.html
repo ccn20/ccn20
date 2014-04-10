@@ -206,7 +206,7 @@
 		//FACEBOOK
 		$(".votaFacebook").attr("idEsercizio", info.idEsercizio);
 		//FOURSQUARE
-		$(".votaFoursquare").attr("idEsercizio", info.idEsercizio);
+		$(".votaFoursquare").attr("nomeEsercizio", info.NomeEsercizio);
 		
 		
 		if (info.Parcheggio == undefined) {
@@ -488,13 +488,13 @@
 	
 	$(document).on("click", '.votaFoursquare', function(){
 		
-		latitude = $(this).attr('latitude');
-		longitude = $(this).attr('longitude');
-		
+		var latitude = $(this).attr('latitude');
+		var longitude = $(this).attr('longitude');
+		var nomeEsercizioFoursquare = $(this).attr('nomeEsercizio');
+		alert(nomeEsercizioFoursquare);
 		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");		
-		//var nomeNegozio = $("h2.nomeNegozioVetrina").html();
 									
-		$.getJSON('https://api.foursquare.com/v2/venues/search?ll='+latitude+','+longitude+'&limit=4&radius=100&oauth_token='+tokenFoursquare+'&v=20140410',
+		$.getJSON('https://api.foursquare.com/v2/venues/search?ll='+latitude+','+longitude+'&limit=4&query='+nomeEsercizioFoursquare+'&radius=100&oauth_token='+tokenFoursquare+'&v=20140410',
 			function(data) {
 			venues = data.response.venues;
 			$("ul#lista_checkin").html("");
@@ -570,7 +570,7 @@
 	</a>
 	</li>
 	<li>
-	<a href="#popupCheckin" data-rel="popup" data-transition="slideup" class="votaFoursquare" idEsercizio="" latitude="" longitude=""><img src="img/collegaFoursquare.png">
+	<a href="#popupCheckin" data-rel="popup" data-transition="slideup" class="votaFoursquare" nomeEsercizio="" latitude="" longitude=""><img src="img/collegaFoursquare.png">
 	<h2>Foursquare</h2>
 	<p>vota il negozio su Foursquare</p>
 	</a>

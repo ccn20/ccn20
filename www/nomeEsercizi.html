@@ -214,11 +214,22 @@
 		}
 		else {
 		alert("token foursquare");
-		$( "img.#votaFoursquare" ).attr('src', 'img/collegaFoursquare.png');
+		$( "img#votaFoursquare" ).attr('src', 'img/collegaFoursquare.png');
 		$(".votaFoursquare").attr("nomeEsercizio", info.NomeEsercizio);
 		}
 		
-
+		//TWITTER
+		var twitterToken = window.localStorage.getItem("twitterToken");
+		alert(twitterToken);
+		if (typeof twitterToken == 'undefined') {
+		alert("token twitter undefined");
+		$( "img#votaTwitter" ).attr('src', 'img/collegaTwitter_bn.png');
+		}
+		else {
+		alert("token twitter");
+		$( "img#votaTwitter" ).attr('src', 'img/collegaTwitter.png');
+		$(".votaTwitter").attr("nomeEsercizio", info.NomeEsercizio);
+		}
 		
 		if (info.Parcheggio == undefined) {
 		$( "h2.nomeParcheggioVicino" ).html("");

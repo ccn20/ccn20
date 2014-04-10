@@ -208,7 +208,7 @@
 		
 		//FOURSQUARE
 		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
-		if (tokenFoursquare == null) {
+		if (tokenFoursquare == 'undefined') {
 		alert("token foursquare undefined");
 		$( "img#votaFoursquare" ).attr('src', 'img/collegaFoursquare_bn.png');
 		}
@@ -220,7 +220,8 @@
 		
 		//TWITTER
 		var twitterToken = window.localStorage.getItem("twitterToken");
-		if (twitterToken == null) {
+		alert(twitterToken);
+		if (twitterToken == 'undefined') {
 		alert("token twitter undefined");
 		$( "img#votaTwitter" ).attr('src', 'img/collegaTwitter_bn.png');
 		}

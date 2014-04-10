@@ -456,13 +456,12 @@
 	$(document).on("click", '.votaFacebook', function(){
 	
 	idEsercizio = $(this).attr('idEsercizio');
-	alert(idEsercizio);
 	
 	FB.ui(
 	{
 		method: 'feed',
 		name: $("h3.nomeEsercizio").html(),
-		link: 'http://www.wificomo.com',
+		link: 'http://www.wificomo.com/it/node/'+idEsercizio,
 		picture: 'http://www.wificomo.com/imgs/logoShopincomo.jpg',
 		caption: 'Shopincomo',
 		description: $("p.descrizioneEsercizio").html()

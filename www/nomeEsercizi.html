@@ -198,7 +198,7 @@
 		$(".descrizioneEsercizio").html(""); // SVUOTA DESCRIZIONE PER PREVENIRE DESCRIZIONI NULLE
 		$(".descrizioneEsercizio").html(info.Descrizione);
 		
-		idEsercizio = info.idEsercizio;
+		idEsercizio = info.NomeEsercizio;
 		esercizioLatitude = info.Latitudine;
 		esercizioLongitude = info.Longitudine;
 		nomeEsercizioMappa = info.NomeEsercizio;
@@ -383,8 +383,6 @@
 			}
 		}, true);
 	
-	alert(jsonVetrina);
-	alert(jsonVetrina.NomeEsercizio);
 	alert(idEsercizio);
 	
 	});

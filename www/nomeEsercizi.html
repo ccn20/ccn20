@@ -504,7 +504,7 @@
 				}
 				else {
 					for (var i = 0; i < venues.length; i++) {
-					$("ul#lista_checkin").append($("<li></li>",{"html":"<a href='#' class='link_ckeckin' id='"+venues[i].id+"'>"+venues[i].name+"</a>" }));
+					$("ul#lista_checkin").append($("<li></li>",{"html":"<a href='#' class='link_ckeckin' idVenue='"+venues[i].id+"'>"+venues[i].name+"</a>" }));
 					}
 				}
 				$("ul#lista_checkin").listview("destroy").listview();
@@ -515,7 +515,7 @@
 	$(document).on("click", '.link_ckeckin', function(){
 				
 		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");	
-		var idVenue = $(this).attr('id');
+		var idVenue = $(this).attr('idVenue');
 		
 		alert(idVenue);
 		

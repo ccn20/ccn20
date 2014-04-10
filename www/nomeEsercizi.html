@@ -190,13 +190,15 @@
 	var descrizioneEsercizio;
 	var linguaDescrizioneEsercizio;
 	var map;
+	var idEsercizio;
 	
 	$.each(jsonVetrina, function(index, info) {
 		$("h3.nomeEsercizio").html(info.NomeEsercizio);
 		$("p.indirizzoEsercizio").html(info.Indirizzo+" "+info.Citta);
 		$(".descrizioneEsercizio").html(""); // SVUOTA DESCRIZIONE PER PREVENIRE DESCRIZIONI NULLE
 		$(".descrizioneEsercizio").html(info.Descrizione);
-				 
+		
+		idEsercizio = info.idEsercizioM	
 		esercizioLatitude = info.Latitudine;
 		esercizioLongitude = info.Longitudine;
 		nomeEsercizioMappa = info.NomeEsercizio;
@@ -381,6 +383,10 @@
 			}
 		}, true);
 	
+	alert(jsonVetrina);
+	alert(jsonVetrina.NomeEsercizio);
+	alert(idEsercizio);
+	
 	});
 	// END OF PAGESHOW
 
@@ -436,20 +442,17 @@
 	
 	// /FUNZIONE DIRECTIONS
 	
+	//SHOW DESCRIZIONE
 	$(document).on("click", '.showDescrizione', function(){
-	
 	$('p.descrizioneEsercizio').css('white-space', 'normal');
 	$('a.showDescrizione').addClass('hideDescrizione').removeClass('showDescrizione');
 	$('a.hideDescrizione').html('show less');
-	
 	});
-	
+	//HIDE DESCRIZIONE
 	$(document).on("click", '.hideDescrizione', function(){
-	
 	$('p.descrizioneEsercizio').css('white-space', '');
 	$('a.hideDescrizione').addClass('showDescrizione').removeClass('hideDescrizione');
 	$('a.showDescrizione').html('show more');
-	
 	});
 	
 	

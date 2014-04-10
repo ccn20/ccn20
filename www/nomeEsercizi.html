@@ -184,6 +184,7 @@
 	}); // ajax
 	
 	// NOME ESERCIZIO + INDIRIZZO + DESCRIZIONE
+	var idEsercizio;
 	var esercizioLatitude;
 	var esercizioLongitude;
 	var nomeEsercizioMappa;
@@ -197,6 +198,7 @@
 		$(".descrizioneEsercizio").html(""); // SVUOTA DESCRIZIONE PER PREVENIRE DESCRIZIONI NULLE
 		$(".descrizioneEsercizio").html(info.Descrizione);
 				 
+		idEsercizio = info.idEsercizio;
 		esercizioLatitude = info.Latitudine;
 		esercizioLongitude = info.Longitudine;
 		nomeEsercizioMappa = info.NomeEsercizio;
@@ -381,6 +383,9 @@
 			}
 		}, true);
 	
+	alert(idEsercizio);
+	alert(jsonVetrina);
+	alert(jsonVetrina.NomeEsercizio);
 	});
 	// END OF PAGESHOW
 
@@ -452,7 +457,30 @@
 	
 	});
 	
+	$(document).on("click", '.votaFacebook', function(){
 	
+	/*
+	FB.ui(
+	{
+		method: 'feed',
+		name: $("h3.nomeEsercizio").html(),
+		link: 'http://www.wificomo.com',
+		picture: 'http://www.wificomo.com/imgs/logoShopincomo.jpg',
+		caption: 'Shopincomo',
+		description: $("p.descrizioneEsercizio").html()
+	},
+	function(response) {
+		if (response) {
+		alert('Post was published.');
+		} 
+		else {
+		alert('Post was not published.');
+		}
+	}
+	);
+	*/
+	
+	});
 	
 	
 	

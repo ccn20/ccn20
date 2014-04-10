@@ -486,10 +486,10 @@
 		
 		alert(tokenFoursquare);		
 		var urlFoursquare = 'https://api.foursquare.com/v2/checkins/add?venueId=' + idEsercizio +'&v=20140410&oauth_token=' + tokenFoursquare;
-		alert(urlFoursquare);
-		//$.post(url, function() {
-		//alert("Check In effettuato con successo!");
-		//});
+		
+		$.post(urlFoursquare, function() {
+		alert("Check In effettuato con successo!");
+		});
 	});
 	
 	

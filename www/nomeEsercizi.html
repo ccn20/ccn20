@@ -190,6 +190,7 @@
 	var descrizioneEsercizio;
 	var linguaDescrizioneEsercizio;
 	var map;
+	var idEsercizio;
 	
 	$.each(jsonVetrina, function(index, info) {
 		$("h3.nomeEsercizio").html(info.NomeEsercizio);
@@ -197,7 +198,7 @@
 		$(".descrizioneEsercizio").html(""); // SVUOTA DESCRIZIONE PER PREVENIRE DESCRIZIONI NULLE
 		$(".descrizioneEsercizio").html(info.Descrizione);
 				 
-		alert(info.idEsercizio);
+		idEsercizio = info.idEsercizio;
 		
 		esercizioLatitude = info.Latitudine;
 		esercizioLongitude = info.Longitudine;
@@ -218,6 +219,8 @@
 		$( "p.indirizzoParcheggioVicino" ).html(info.Parcheggio.indirizzoParcheggio);
 	
 	});
+	
+	alert(idEsercizio);
 		
 //NAVIGATE BUTTON
 		

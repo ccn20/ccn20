@@ -190,15 +190,13 @@
 	var descrizioneEsercizio;
 	var linguaDescrizioneEsercizio;
 	var map;
-	var idEsercizio;
 	
 	$.each(jsonVetrina, function(index, info) {
 		$("h3.nomeEsercizio").html(info.NomeEsercizio);
 		$("p.indirizzoEsercizio").html(info.Indirizzo+" "+info.Citta);
 		$(".descrizioneEsercizio").html(""); // SVUOTA DESCRIZIONE PER PREVENIRE DESCRIZIONI NULLE
 		$(".descrizioneEsercizio").html(info.Descrizione);
-		
-		idEsercizio = info.NomeEsercizio;
+				 
 		esercizioLatitude = info.Latitudine;
 		esercizioLongitude = info.Longitudine;
 		nomeEsercizioMappa = info.NomeEsercizio;
@@ -382,6 +380,7 @@
 			$("img.imageFacebook").attr("src", "img/facebookListbn.png");
 			}
 		}, true);
+	
 	});
 	// END OF PAGESHOW
 
@@ -437,20 +436,44 @@
 	
 	// /FUNZIONE DIRECTIONS
 	
-	//SHOW DESCRIZIONE
 	$(document).on("click", '.showDescrizione', function(){
+	
 	$('p.descrizioneEsercizio').css('white-space', 'normal');
 	$('a.showDescrizione').addClass('hideDescrizione').removeClass('showDescrizione');
 	$('a.hideDescrizione').html('show less');
+	
 	});
-	//HIDE DESCRIZIONE
+	
 	$(document).on("click", '.hideDescrizione', function(){
+	
 	$('p.descrizioneEsercizio').css('white-space', '');
 	$('a.hideDescrizione').addClass('showDescrizione').removeClass('hideDescrizione');
 	$('a.showDescrizione').html('show more');
+	
 	});
 	
+	$(document).on("click", '.votaFacebook', function(){
 	
+	FB.ui(
+	{
+		method: 'feed',
+		name: $("h3.nomeEsercizio").html(),
+		link: 'http://www.wificomo.com',
+		picture: 'http://www.wificomo.com/imgs/logoShopincomo.jpg',
+		caption: 'Shopincomo',
+		description: $("p.descrizioneEsercizio").html()
+	},
+	function(response) {
+		if (response) {
+		alert('Post was published.');
+		} 
+		else {
+		alert('Post was not published.');
+		}
+	}
+	);
+	
+	});
 	
 	
 	

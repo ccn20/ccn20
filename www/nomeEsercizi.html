@@ -196,7 +196,7 @@
 		$("p.indirizzoEsercizio").html(info.Indirizzo+" "+info.Citta);
 		$(".descrizioneEsercizio").html(""); // SVUOTA DESCRIZIONE PER PREVENIRE DESCRIZIONI NULLE
 		$(".descrizioneEsercizio").html(info.Descrizione);
-				 
+				
 		esercizioLatitude = info.Latitudine;
 		esercizioLongitude = info.Longitudine;
 		nomeEsercizioMappa = info.NomeEsercizio;
@@ -206,8 +206,23 @@
 		//FACEBOOK
 		$(".votaFacebook").attr("idEsercizio", info.idEsercizio);
 		//FOURSQUARE
+		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
+		if (tokenFoursquare == 'undefined') {
+		$( "img.collegaFoursquare" ).attr('src', 'img/collegaFoursquare_bn.png');
+		}
+		else {
+		$( "img.collegaFoursquare" ).attr('src', 'img/collegaFoursquare.png');
 		$(".votaFoursquare").attr("nomeEsercizio", info.NomeEsercizio);
-		
+		}
+		//TWITTER
+		var twitterToken = window.localStorage.getItem("twitterToken");
+		if (twitterToken == 'undefined') {
+		$( "img.collegaTwitter" ).attr('src', 'img/collegaTwitter_bn.png');
+		}
+		else {
+		$( "img.collegaTwitter" ).attr('src', 'img/collegaTwitter.png');
+		$(".votaTwitter").attr("nomeEsercizio", info.NomeEsercizio);
+		}
 		
 		if (info.Parcheggio == undefined) {
 		$( "h2.nomeParcheggioVicino" ).html("");

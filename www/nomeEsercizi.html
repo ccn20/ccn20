@@ -204,6 +204,7 @@
 		linguaDescrizioneEsercizio = info.LinguaDescrizione;
 		
 		$(".votaFacebook").attr("idEsercizio", info.idEsercizio);
+		$(".votaFoursquare").attr("idEsercizio", info.idEsercizio);
 		
 		if (info.Parcheggio == undefined) {
 		$( "h2.nomeParcheggioVicino" ).html("");
@@ -478,6 +479,18 @@
 	
 	});
 	
+	$(document).on("click", '.votaFoursquare', function(){
+		
+		idEsercizio = $(this).attr('idEsercizio');
+		var token = JSON.parse(window.localStorage.getItem("tokenFoursquare"));
+					
+		$.ajax({
+		url = 'https://api.foursquare.com/v2/checkins/add?venueId=' + idEsercizio +'&v=20121129&oauth_token=' + token;
+		$.post(url, function() {
+		alert("Check In effettuato con successo!");
+		});
+		});
+	
 	
 	
 	
@@ -514,13 +527,13 @@
 	
 	<ul data-role="listview" data-inset="true">
 	<li>
-	<a href="#" class="votaFacebook" idEsercizio="1450"><img src="img/collegaFacebook.png">
+	<a href="#" class="votaFacebook" idEsercizio=""><img src="img/collegaFacebook.png">
 	<h2>Facebook</h2>
 	<p>vota il negozio su Facebook</p>
 	</a>
 	</li>
 	<li>
-	<a href="#"><img src="img/collegaFoursquare.png">
+	<a href="#" class="votaFoursquare" idEsercizio=""><img src="img/collegaFoursquare.png">
 	<h2>Foursquare</h2>
 	<p>vota il negozio su Foursquare</p>
 	</a>

@@ -220,7 +220,7 @@
 	
 	});
 	
-	alert(idEsercizio);
+	$("a.votaFacebook").attr("id", idEsercizio);
 		
 //NAVIGATE BUTTON
 		
@@ -455,6 +455,10 @@
 	});
 	//VOTA FACEBOOK
 	$(document).on("click", '.votaFacebook', function(){
+	
+	idEsercizio = $(this).attr('id');
+	alert(idEsercizio);
+	
 	FB.ui({
 		method: 'feed',
 		name: $("h3.nomeEsercizio").html(),

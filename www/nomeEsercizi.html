@@ -483,12 +483,12 @@
 		
 		idEsercizio = $(this).attr('idEsercizio');
 		var token = JSON.parse(window.localStorage.getItem("tokenFoursquare"));
-					
-		$.ajax({
+		
+		alert(token);		
 		url = 'https://api.foursquare.com/v2/checkins/add?venueId=' + idEsercizio +'&v=20121129&oauth_token=' + token;
+		alert(url);
 		$.post(url, function() {
 		alert("Check In effettuato con successo!");
-		});
 		});
 	});
 	

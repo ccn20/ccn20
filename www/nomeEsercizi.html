@@ -203,8 +203,12 @@
 		descrizioneEsercizio = info.Descrizione;
 		linguaDescrizioneEsercizio = info.LinguaDescrizione;
 		
+		//FACEBOOK
 		$(".votaFacebook").attr("idEsercizio", info.idEsercizio);
+		//FOURSQUARE
 		$(".votaFoursquare").attr("idEsercizio", info.idEsercizio);
+		$(".votaFoursquare").attr("latitude", esercizioLatitude);
+		$(".votaFoursquare").attr("longitude", esercizioLongitude);
 		
 		if (info.Parcheggio == undefined) {
 		$( "h2.nomeParcheggioVicino" ).html("");
@@ -482,14 +486,41 @@
 	$(document).on("click", '.votaFoursquare', function(){
 		
 		idEsercizio = $(this).attr('idEsercizio');
-		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
+		latitude = $(this).attr('latitude');
+		alert(latitude);
+		longitude = $(this).attr('longitude');
+		alert(longitude);
 		
-		alert(tokenFoursquare);		
+		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");		
+		//var nomeNegozio = $("h2.nomeNegozioVetrina").html();
+									
+		$.getJSON('https://api.foursquare.com/v2/venues/search?ll='+latitude+','+longitude+'&limit=4&radius=100&oauth_token='+tokenFoursquare+'&v=20140410',
+			function(data) {
+			venues = data.response.venues;
+			$("ul#lista_checkin").html("");
+			$("ul#lista_checkin").append($("<li data-role='divider' data-theme='b'>Check In</li>"));
+				if (venues.length == 0) {
+					$("ul#lista_checkin").append($("<li></li>",{"html":"Non sei nelle vicinanze di questo negozio!" }));
+				}
+				else {
+					for (var i = 0; i < venues.length; i++) {
+					$("ul#lista_checkin").append($("<li></li>",{"html":"<a href='#' class='link_ckeckin' id='"+venues[i].id+"'>"+venues[i].name+"</a>" }));
+					}
+				}
+				$("ul#lista_checkin").listview("destroy").listview();
+			});
+		
+		
+		
+		/*
 		var urlFoursquare = 'https://api.foursquare.com/v2/checkins/add?venueId=' + idEsercizio +'&v=20140410&oauth_token=' + tokenFoursquare;
+		
+		
 		
 		$.post(urlFoursquare, function() {
 		alert("Check In effettuato con successo!");
 		});
+		*/
 	});
 	
 	
@@ -534,7 +565,7 @@
 	</a>
 	</li>
 	<li>
-	<a href="#" class="votaFoursquare" idEsercizio=""><img src="img/collegaFoursquare.png">
+	<a href="#popupCheckin" data-rel="popup" data-transition="slideup" class="votaFoursquare" idEsercizio="" latitude="" longitude=""><img src="img/collegaFoursquare.png">
 	<h2>Foursquare</h2>
 	<p>vota il negozio su Foursquare</p>
 	</a>
@@ -546,6 +577,12 @@
 	</a>
 	</li>
 	</ul>
+	
+	<div data-role="popup" id="popupCheckin" data-theme="b">
+		<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+		<ul id="lista_checkin" data-role="listview" style="min-width:210px;" data-theme="d">
+		</ul>
+	</div>
 		
 	</div><!-- /content -->
 

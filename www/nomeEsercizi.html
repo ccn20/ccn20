@@ -211,12 +211,12 @@
 		alert("foursquare token: "+tokenFoursquare);
 		if (tokenFoursquare == null) {
 		alert("foursquare token null");
-		$( "li#buttonFoursquare" ).html("<a href='#popupCheckin' data-rel='popup' data-transition='slideup' class='votaFoursquare' nomeEsercizio='' latitude='' longitude=''><img id='votaFoursquare' src=''><h2>Foursquare</h2><p>vota il negozio su Foursquare</p></a>");
+		$( "li#buttonFoursquare" ).html("<img id='votaFoursquare' src='img/collegaFoursquare_bn.png'><h2>Foursquare</h2><p>vota il negozio su Foursquare</p>");
 		$("ul.listaSocial").listview("refresh");
 		}
 		else {
 		alert("foursquare token: "+tokenFoursquare);
-		$( "img#votaFoursquare" ).attr('src', 'img/collegaFoursquare.png');
+		$( "li#buttonFoursquare" ).html("<a href='#popupCheckin' data-rel='popup' data-transition='slideup' class='votaFoursquare' nomeEsercizio='' latitude='' longitude=''><img id='votaFoursquare' src=''><h2>Foursquare</h2><p>vota il negozio su Foursquare</p></a>");
 		}
 		
 		//TWITTER

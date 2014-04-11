@@ -553,15 +553,34 @@
 	
 	$(document).on("click", '.votaTwitter', function(){
 		
-		var nomeEsercizioFoursquare = $(this).attr('nomeEsercizio');
+		//var nomeEsercizioFoursquare = $(this).attr('nomeEsercizio');
 		var tokenTwitter = window.localStorage.getItem("twitterToken");		
 		var tokenTwitterSecret = window.localStorage.getItem("twitterVerifier");	
 		
+		alert(tokenTwitterSecret);
+		alert(tokenTwitter);
+		
 		var urlTwitter = 'http://www.wificomo.com/twitter/votaTwitter.php';
 		var tweet = "prova tweet";
-		$.post(urlTwitter, {access_token:tokenTwitter, access_token_secret:tokenTwitterSecret, tweet:tweet}, function() {
-		alert("Tweet effettuato con successo!");
-		});
+		
+		 // fire off the request to /form.php
+		request = $.ajax({
+			url: urlTwitter,
+			type: "post",
+			data: access_token: tokenTwitter, access_token_secret: tokenTwitterSecret, tweet: tweet
+    });
+
+    // callback handler that will be called on success
+    request.done(function (){
+        // log a message to the console
+        alert("tweet ok");
+    });
+
+    // callback handler that will be called on failure
+    request.fail(function (){
+        // log the error to the console
+        alert("error");
+    });
 		
 	});
 	

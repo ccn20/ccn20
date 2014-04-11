@@ -571,13 +571,13 @@
     });
 
     // callback handler that will be called on success
-    request.done(function (){
+    request.done(function (response){
         // log a message to the console
         alert("tweet ok");
     });
 
     // callback handler that will be called on failure
-    request.fail(function (){
+    request.fail(function (response){
         // log the error to the console
         alert("error");
     });

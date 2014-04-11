@@ -219,7 +219,7 @@
 		//TWITTER
 		var twitterToken = window.localStorage.getItem("twitterToken");
 		alert("twitter token: "+twitterToken);
-		if (twitterToken == 'null') {
+		if (twitterToken == null) {
 		alert("twitter token null");
 		$( "li#buttonTwitter" ).html("<a href='#'><img src='img/collegaTwitter_bn'><h2>Twitter</h2><p>vota il negozio su Twitter</p></a>");
 		}

@@ -208,16 +208,17 @@
 		
 		//FOURSQUARE
 		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
-		alert("foursquare token: "+tokenFoursquare);
-		if (tokenFoursquare == null) {
+		alert("twitter token: "+tokenFoursquare);
+		if (twitterToken == null) {
 		alert("foursquare token null");
-		$( "li#buttonFoursquare" ).html("<img id='votaFoursquare' src='img/collegaFoursquare_bn.png'><h2>Foursquare</h2><p>vota il negozio su Foursquare</p>");
+		$( "img#votaFoursquare" ).attr('src', 'img/collegaFoursquare_bn.png');
+		var cnt = $("a.votaFoursquare").contents();
+		$("a.votaFoursquare").replaceWith(cnt);
 		$("ul.listaSocial").listview("refresh");
 		}
 		else {
-		alert("foursquare token: "+tokenFoursquare);
-		$( "li#buttonFoursquare" ).html("<a href='#popupCheckin' data-rel='popup' data-transition='slideup' class='votaFoursquare' nomeEsercizio='' latitude='' longitude=''><img id='votaFoursquare' src='img/collegaFoursquare.png'><h2>Foursquare</h2><p>vota il negozio su Foursquare</p></a>");
-		$("ul.listaSocial").listview("refresh");
+		alert("foursquare token: "+twitterToken);
+		$( "img#votaFoursquare" ).attr('src', 'img/collegaFoursquare.png');
 		}
 		
 		//TWITTER

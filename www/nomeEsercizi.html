@@ -564,7 +564,7 @@
 		var tweet = "prova tweet";
 		
 		 // fire off the request to /form.php
-		request = $.ajax({
+		var request = $.ajax({
 			url: urlTwitter,
 			type: "post",
 			data: {access_token: tokenTwitter, access_token_secret: tokenTwitterSecret, tweet: tweet}

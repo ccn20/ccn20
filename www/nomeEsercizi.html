@@ -204,7 +204,28 @@
 		linguaDescrizioneEsercizio = info.LinguaDescrizione;
 		
 		//FACEBOOK
-		$(".votaFacebook").attr("idEsercizio", info.idEsercizio);
+		FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false });
+		//GET LOGIN STATUS
+		FB.getLoginStatus(function(response) {
+			//CONNESSO
+			if (response.status === 'connected') {
+			$( "img#votaFoursquare" ).attr('src', 'img/collegaFacebook.png');		
+			}
+			//APP NON AUTORIZZATA
+			else if (response.status === 'not_authorized') {
+			$( "img#votaFacebook" ).attr('src', 'img/collegaFacebook_bn.png');
+			var cnt = $("a.votaFacebook").contents();
+			$("a.votaFacebook").replaceWith(cnt);
+			$("ul.listaSocial").listview("refresh");
+			} 
+			//NON CONNESSO
+			else {
+			$( "img#votaFacebook" ).attr('src', 'img/collegaFacebook_bn.png');
+			var cnt = $("a.votaFacebook").contents();
+			$("a.votaFacebook").replaceWith(cnt);
+			$("ul.listaSocial").listview("refresh");
+			}
+		}, true);
 		
 		//FOURSQUARE
 		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
@@ -393,29 +414,6 @@
 		$(document).on("click", 'button.userMarker', function(){
 			map.setView(new L.LatLng(userLatitude, userLongitude),16);
 		});
-	
-	
-		//FACEBOOK
-		FB.init({ appId: "1448410138727682", nativeInterface: CDV.FB, useCachedDialogs: false });
-		//GET LOGIN STATUS
-		FB.getLoginStatus(function(response) {
-			//CONNESSO
-			if (response.status === 'connected') {
-			$("img.imageFacebook").attr("src", "img/facebookList.png");
-					
-				FB.api('/me', function(response) {
-				$("p.accountFacebook").html(response.name);
-				});
-			}
-			//APP NON AUTORIZZATA
-			else if (response.status === 'not_authorized') {
-			$("img.imageFacebook").attr("src", "img/facebookListbn.png");
-			} 
-			//NON CONNESSO
-			else {
-			$("img.imageFacebook").attr("src", "img/facebookListbn.png");
-			}
-		}, true);
 	
 	});
 	// END OF PAGESHOW

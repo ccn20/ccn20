@@ -208,13 +208,14 @@
 		
 		//FOURSQUARE
 		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
+		alert(tokenFoursquare);
 		if (tokenFoursquare == null) {
 		alert("foursquare token null");
 		$( "li#buttonFoursquare" ).html("<a href='#'><img src='img/collegaFoursquare_bn.png'><h2>Foursquare</h2><p>vota il negozio su Foursquare</p></a>");
 		}
 		else {
 		alert("foursquare token: "+tokenFoursquare);
-		$( "li#buttonFoursquare" ).html("<a href='#popupCheckin' data-rel='popup' data-transition='slideup' class='votaFoursquare' nomeEsercizio="+info.NomeEsercizio+" latitude="" longitude=""><img src='img/collegaFoursquare.png'><h2>Foursquare</h2><p>vota il negozio su Foursquare</p></a>");
+		$( "li#buttonFoursquare" ).html("<a href='#'><img src='img/collegaFoursquare.png'><h2>Foursquare</h2><p>vota il negozio su Foursquare</p></a>");
 		}
 		
 		//TWITTER

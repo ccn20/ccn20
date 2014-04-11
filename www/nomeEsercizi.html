@@ -567,7 +567,7 @@
 		request = $.ajax({
 			url: urlTwitter,
 			type: "post",
-			data: access_token: tokenTwitter, access_token_secret: tokenTwitterSecret, tweet: tweet
+			data: {access_token: tokenTwitter, access_token_secret: tokenTwitterSecret, tweet: tweet}
     });
 
     // callback handler that will be called on success

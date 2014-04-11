@@ -214,6 +214,7 @@
 		$( "img#votaFoursquare" ).attr('src', 'img/collegaFoursquare_bn.png');
 		var cnt = $("a.votaFoursquare").contents();
 		$("a.votaFoursquare").replaceWith(cnt);
+		$("ul.listaSocial").listview("refresh");
 		}
 		else {
 		alert("foursquare token: "+tokenFoursquare);
@@ -228,6 +229,7 @@
 		$( "img#votaTwitter" ).attr('src', 'img/collegaTwitter_bn.png');
 		var cnt = $("a.votaTwitter").contents();
 		$("a.votaTwitter").replaceWith(cnt);
+		$("ul.listaSocial").listview("refresh");
 		}
 		else {
 		alert("twitter token: "+twitterToken);

@@ -224,13 +224,11 @@
 		alert("twitter token: "+twitterToken);
 		if (twitterToken == null) {
 		alert("twitter token null");
-		$( "li#buttonTwitter" ).html("<a href='#'><img src='img/collegaTwitter_bn.png'><h2>Twitter</h2><p>vota il negozio su Twitter</p></a>");
-		$("ul#listaSocial").listview("refresh");
+		$( "img#votaTwitter" ).attr('src', 'img/collegaTwitter_bn.png');
 		}
 		else {
 		alert("twitter token: "+twitterToken);
-		$( "li#buttonTwitter" ).html("<a href='#' nomeEsercizio="+info.NomeEsercizio+"><img src='img/collegaTwitter.png'><h2>Twitter</h2><p>vota il negozio su Twitter</p></a>");
-		$("ul#listaSocial").listview("refresh");
+		$( "img#votaTwitter" ).attr('src', 'img/collegaTwitter.png');
 		}
 		
 		if (info.Parcheggio == undefined) {
@@ -598,6 +596,10 @@
 	</a>
 	</li>
 	<li id="buttonTwitter">
+	<a href="#" class="votaTwitter" idEsercizio=""><img id="votaTwitter" src="img/collegaTwitter.png">
+	<h2>Twitter</h2>
+	<p>vota il negozio su Twitter</p>
+	</a>
 	</li>
 	</ul>
 	

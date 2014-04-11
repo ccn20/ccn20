@@ -551,7 +551,19 @@
 			
 	});
 	
-	
+	$(document).on("click", '.votaTwitter', function(){
+		
+		var nomeEsercizioFoursquare = $(this).attr('nomeEsercizio');
+		var tokenTwitter = window.localStorage.getItem("twitterToken");		
+		var tokenTwitterSecret = window.localStorage.getItem("twitterVerifier");	
+		
+		var urlFoursquare = 'http://www.wificomo.com/twitter/votaTwitter.php';
+		var tweet = "prova tweet";
+		$.post(urlTwitter, {access_token:tokenTwitter, access_token_secret:tokenTwitterSecret, tweet:tweet}, function() {
+		alert("Tweet effettuato con successo!");
+		});
+		
+	});
 	
 	
 	

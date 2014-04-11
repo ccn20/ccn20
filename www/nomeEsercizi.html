@@ -218,13 +218,14 @@
 		
 		//TWITTER
 		var twitterToken = window.localStorage.getItem("twitterToken");
-		alert(twitterToken);
+		alert("twitter token: "+twitterToken);
 		if (twitterToken == 'null') {
-		$( "li#buttonTwitter" ).html("<img src='img/vollegaTwitter_bn.png' id='votaTwitter'><h2>Twitter</h2><p>vota il negozio su Twitter</p>");
+		alert("twitter token null");
+		$( "li#buttonTwitter" ).html("<a href='#'><img src='img/collegaTwitter_bn'><h2>Twitter</h2><p>vota il negozio su Twitter</p></a>");
 		}
 		else {
-		$( "img#votaTwitter" ).attr('src', 'img/collegaTwitter.png');
-		$(".votaTwitter").attr("nomeEsercizio", info.NomeEsercizio);
+		alert("twitter token: "+twitterToken);
+		$( "li#buttonTwitter" ).html("<a href='#' nomeEsercizio="+info.NomeEsercizio+"><img src='img/collegaTwitter'><h2>Twitter</h2><p>vota il negozio su Twitter</p></a>");
 		}
 		
 		if (info.Parcheggio == undefined) {
@@ -592,10 +593,6 @@
 	</a>
 	</li>
 	<li id="buttonTwitter">
-	<a href="#"><img src="" id="votaTwitter">
-	<h2>Twitter</h2>
-	<p>vota il negozio su Twitter</p>
-	</a>
 	</li>
 	</ul>
 	

@@ -211,9 +211,7 @@
 		alert("foursquare token: "+tokenFoursquare);
 		if (tokenFoursquare == null) {
 		alert("foursquare token null");
-		$( "img#votaFoursquare" ).attr('src', 'img/collegaFoursquare_bn.png');
-		var cnt = $("a.votaFoursquare").contents();
-		$("a.votaFoursquare").replaceWith(cnt);
+		$( "li#buttonFoursquare" ).html("<a href='#popupCheckin' data-rel='popup' data-transition='slideup' class='votaFoursquare' nomeEsercizio='' latitude='' longitude=''><img id='votaFoursquare' src=''><h2>Foursquare</h2><p>vota il negozio su Foursquare</p></a>");
 		$("ul.listaSocial").listview("refresh");
 		}
 		else {
@@ -595,10 +593,6 @@
 	</a>
 	</li>
 	<li id="buttonFoursquare">
-	<a href="#popupCheckin" data-rel="popup" data-transition="slideup" class="votaFoursquare" nomeEsercizio="" latitude="" longitude=""><img id="votaFoursquare" src="">
-	<h2>Foursquare</h2>
-	<p>vota il negozio su Foursquare</p>
-	</a>
 	</li>
 	<li id="buttonTwitter">
 	<a href="#" class="votaTwitter" idEsercizio=""><img id="votaTwitter" src="img/collegaTwitter.png">

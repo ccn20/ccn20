@@ -225,10 +225,12 @@
 		if (twitterToken == null) {
 		alert("twitter token null");
 		$( "li#buttonTwitter" ).html("<a href='#'><img src='img/collegaTwitter_bn.png'><h2>Twitter</h2><p>vota il negozio su Twitter</p></a>");
+		$("ul#listaSocial").listview("refresh");
 		}
 		else {
 		alert("twitter token: "+twitterToken);
 		$( "li#buttonTwitter" ).html("<a href='#' nomeEsercizio="+info.NomeEsercizio+"><img src='img/collegaTwitter.png'><h2>Twitter</h2><p>vota il negozio su Twitter</p></a>");
+		$("ul#listaSocial").listview("refresh");
 		}
 		
 		if (info.Parcheggio == undefined) {
@@ -582,7 +584,7 @@
 	</li>
 	</ul>
 	
-	<ul data-role="listview" data-inset="true">
+	<ul data-role="listview" data-inset="true" class="listaSocial">
 	<li>
 	<a href="#" class="votaFacebook" idEsercizio=""><img id="votaFacebook" src="">
 	<h2>Facebook</h2>

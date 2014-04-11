@@ -212,7 +212,8 @@
 		if (tokenFoursquare == null) {
 		alert("foursquare token null");
 		$( "img#votaFoursquare" ).attr('src', 'img/collegaFoursquare_bn.png');
-		$('a.votaFoursquare').contents().unwrap();
+		var cnt = $("a.votaFoursquare").contents();
+		$("a.votaFoursquare").replaceWith(cnt);
 		}
 		else {
 		alert("foursquare token: "+tokenFoursquare);
@@ -225,7 +226,8 @@
 		if (twitterToken == null) {
 		alert("twitter token null");
 		$( "img#votaTwitter" ).attr('src', 'img/collegaTwitter_bn.png');
-		$('a.votaTwitter').contents().unwrap();
+		var cnt = $("a.votaTwitter").contents();
+		$("a.votaTwitter").replaceWith(cnt);
 		}
 		else {
 		alert("twitter token: "+twitterToken);

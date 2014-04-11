@@ -208,12 +208,13 @@
 		
 		//FOURSQUARE
 		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
-		if (tokenFoursquare == 'null') {
-		$( "img#votaFoursquare" ).attr('src', 'img/collegaFoursquare_bn.png');
+		if (tokenFoursquare == null) {
+		alert("foursquare token null");
+		$( "li#buttonFoursquare" ).html("<a href='#'><img src='img/collegaFoursquare_bn.png'><h2>Foursquare</h2><p>vota il negozio su Foursquare</p></a>");
 		}
 		else {
-		$( "img#votaFoursquare" ).attr('src', 'img/collegaFoursquare.png');
-		$(".votaFoursquare").attr("nomeEsercizio", info.NomeEsercizio);
+		alert("foursquare token: "+tokenFoursquare);
+		$( "li#buttonFoursquare" ).html("<a href='#popupCheckin' data-rel='popup' data-transition='slideup' class='votaFoursquare' nomeEsercizio="+info.NomeEsercizio+" latitude="" longitude=""><img src='img/collegaFoursquare.png'><h2>Foursquare</h2><p>vota il negozio su Foursquare</p></a>");
 		}
 		
 		//TWITTER
@@ -221,11 +222,11 @@
 		alert("twitter token: "+twitterToken);
 		if (twitterToken == null) {
 		alert("twitter token null");
-		$( "li#buttonTwitter" ).html("<a href='#'><img src='img/collegaTwitter_bn'><h2>Twitter</h2><p>vota il negozio su Twitter</p></a>");
+		$( "li#buttonTwitter" ).html("<a href='#'><img src='img/collegaTwitter_bn.png'><h2>Twitter</h2><p>vota il negozio su Twitter</p></a>");
 		}
 		else {
 		alert("twitter token: "+twitterToken);
-		$( "li#buttonTwitter" ).html("<a href='#' nomeEsercizio="+info.NomeEsercizio+"><img src='img/collegaTwitter'><h2>Twitter</h2><p>vota il negozio su Twitter</p></a>");
+		$( "li#buttonTwitter" ).html("<a href='#' nomeEsercizio="+info.NomeEsercizio+"><img src='img/collegaTwitter.png'><h2>Twitter</h2><p>vota il negozio su Twitter</p></a>");
 		}
 		
 		if (info.Parcheggio == undefined) {

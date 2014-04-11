@@ -212,6 +212,7 @@
 		if (tokenFoursquare == null) {
 		alert("foursquare token null");
 		$( "img#votaFoursquare" ).attr('src', 'img/collegaFoursquare_bn.png');
+		$('a.votaFoursquare').contents().unwrap();
 		}
 		else {
 		alert("foursquare token: "+tokenFoursquare);
@@ -224,6 +225,7 @@
 		if (twitterToken == null) {
 		alert("twitter token null");
 		$( "img#votaTwitter" ).attr('src', 'img/collegaTwitter_bn.png');
+		$('a.votaTwitter').contents().unwrap();
 		}
 		else {
 		alert("twitter token: "+twitterToken);

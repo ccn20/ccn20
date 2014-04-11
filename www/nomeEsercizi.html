@@ -224,11 +224,11 @@
 		alert("twitter token: "+twitterToken);
 		if (twitterToken == null) {
 		alert("twitter token null");
-		$( "img#votaTwitter" ).attr('src', 'img/collegaTwitter_bn.png');
+		$( "li#buttonTwitter" ).html("<a href='#'><img src='img/collegaTwitter_bn.png'><h2>Twitter</h2><p>vota il negozio su Twitter</p></a>");
 		}
 		else {
 		alert("twitter token: "+twitterToken);
-		$( "img#votaTwitter" ).attr('src', 'img/collegaTwitter.png');
+		$( "li#buttonTwitter" ).html("<a href='#' nomeEsercizio="+info.NomeEsercizio+"><img src='img/collegaTwitter.png'><h2>Twitter</h2><p>vota il negozio su Twitter</p></a>");
 		}
 		
 		if (info.Parcheggio == undefined) {
@@ -582,9 +582,9 @@
 	</li>
 	</ul>
 	
-	<ul data-role="listview" data-inset="true" class="listaSocial">
-	<li id="buttonFacebook">
-	<a href="#" class="votaFacebook" idEsercizio=""><img id="votaFacebook" src="img/collegaFacebook.png">
+	<ul data-role="listview" data-inset="true">
+	<li>
+	<a href="#" class="votaFacebook" idEsercizio=""><img id="votaFacebook" src="">
 	<h2>Facebook</h2>
 	<p>vota il negozio su Facebook</p>
 	</a>
@@ -596,10 +596,6 @@
 	</a>
 	</li>
 	<li id="buttonTwitter">
-	<a href="#" class="votaTwitter" idEsercizio=""><img id="votaTwitter" src="img/collegaTwitter.png">
-	<h2>Twitter</h2>
-	<p>vota il negozio su Twitter</p>
-	</a>
 	</li>
 	</ul>
 	

@@ -207,7 +207,6 @@
 		$(".votaFacebook").attr("idEsercizio", info.idEsercizio);
 		
 		//FOURSQUARE
-		/*
 		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
 		if (tokenFoursquare == null) {
 		alert("foursquare token null");
@@ -217,18 +216,17 @@
 		alert("foursquare token: "+tokenFoursquare);
 		$( "li#buttonFoursquare" ).html("<a href='#popupCheckin' data-rel='popup' data-transition='slideup' class='votaFoursquare' nomeEsercizio="+info.NomeEsercizio+" latitude="" longitude=""><img src='img/collegaFoursquare.png'><h2>Foursquare</h2><p>vota il negozio su Foursquare</p></a>");
 		}
-		*/
 		
 		//TWITTER
 		var twitterToken = window.localStorage.getItem("twitterToken");
 		alert("twitter token: "+twitterToken);
 		if (twitterToken == null) {
 		alert("twitter token null");
-		$( "li#buttonTwitter" ).html("<a href='#'><img src='img/collegaTwitter_bn.png'><h2>Twitter</h2><p>vota il negozio su Twitter</p></a>");
+		$( "img#votaTwitter" ).attr('src', 'img/collegaTwitter_bn.png');
 		}
 		else {
 		alert("twitter token: "+twitterToken);
-		$( "li#buttonTwitter" ).html("<a href='#' nomeEsercizio="+info.NomeEsercizio+"><img src='img/collegaTwitter.png'><h2>Twitter</h2><p>vota il negozio su Twitter</p></a>");
+		$( "img#votaTwitter" ).attr('src', 'img/collegaTwitter.png');
 		}
 		
 		if (info.Parcheggio == undefined) {
@@ -582,20 +580,24 @@
 	</li>
 	</ul>
 	
-	<ul data-role="listview" data-inset="true">
-	<li>
-	<a href="#" class="votaFacebook" idEsercizio=""><img id="votaFacebook" src="">
+	<ul data-role="listview" data-inset="true" class="listaSocial">
+	<li id="buttonFacebook">
+	<a href="#" class="votaFacebook" idEsercizio=""><img id="votaFacebook" src="img/collegaFacebook.png">
 	<h2>Facebook</h2>
 	<p>vota il negozio su Facebook</p>
 	</a>
 	</li>
-	<li>
+	<li id="buttonFoursquare">
 	<a href="#popupCheckin" data-rel="popup" data-transition="slideup" class="votaFoursquare" nomeEsercizio="" latitude="" longitude=""><img id="votaFoursquare" src="">
 	<h2>Foursquare</h2>
 	<p>vota il negozio su Foursquare</p>
 	</a>
 	</li>
 	<li id="buttonTwitter">
+	<a href="#" class="votaTwitter" idEsercizio=""><img id="votaTwitter" src="img/collegaTwitter.png">
+	<h2>Twitter</h2>
+	<p>vota il negozio su Twitter</p>
+	</a>
 	</li>
 	</ul>
 	

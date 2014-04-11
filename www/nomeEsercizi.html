@@ -208,8 +208,8 @@
 		
 		//FOURSQUARE
 		var tokenFoursquare = window.localStorage.getItem("tokenFoursquare");
-		alert("twitter token: "+tokenFoursquare);
-		if (twitterToken == null) {
+		alert("foursquare token: "+tokenFoursquare);
+		if (tokenFoursquare == null) {
 		alert("foursquare token null");
 		$( "img#votaFoursquare" ).attr('src', 'img/collegaFoursquare_bn.png');
 		var cnt = $("a.votaFoursquare").contents();
@@ -217,7 +217,7 @@
 		$("ul.listaSocial").listview("refresh");
 		}
 		else {
-		alert("foursquare token: "+twitterToken);
+		alert("foursquare token: "+tokenFoursquare);
 		$( "img#votaFoursquare" ).attr('src', 'img/collegaFoursquare.png');
 		}
 		
